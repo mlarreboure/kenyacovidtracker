@@ -9,7 +9,7 @@ title = "Kenya | COVID-19 Economic Tracker"
 
 # The URL of your site.
 # End your URL with a `/` trailing slash, e.g. `https://example.com/`.
-baseurl = "https://kecovid.netlify.org/"
+baseurl = "https://kenyacovidtracker.netlify.org/"
 relativeurls = true
 
 # Enter a copyright notice to display in the site footer.
@@ -25,7 +25,6 @@ theme = "hugo-academic"
 
 # Get last modified date for content from Git?
 enableGitInfo = false
-EnableEmoji = true
 
 # Default language to use (if you setup multilingual support)
 defaultContentLanguage = "en"

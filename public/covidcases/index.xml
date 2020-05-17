@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Covidcases | Kenya | COVID-19 Economic Tracker</title>
+    <link>/covidcases/</link>
+      <atom:link href="/covidcases/index.xml" rel="self" type="application/rss+xml" />
+    <description>Covidcases</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 20 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/gelani-banks-zaunxTcZ3a4-unsplash.jpg</url>
+      <title>Covidcases</title>
+      <link>/covidcases/</link>
+    </image>
+    
+    <item>
+      <title>COVID-19 cases in Kenya</title>
+      <link>/covidcases/cases/</link>
+      <pubDate>Mon, 20 Apr 2020 00:00:00 +0000</pubDate>
+      <guid>/covidcases/cases/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
