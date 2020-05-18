@@ -13,7 +13,6 @@ knitr::opts_chunk$set(echo = FALSE)
 library(haven)
 library(tidyverse)
 library(dygraphs)
-
 covid_weekly <- read_dta("~/Dropbox (Princeton)/GE_Endline2/covid19/data/COVID_AllHHs_outcomes_weekly.dta")
 
 #Grouping vars for graphs
@@ -53,6 +52,7 @@ net5 <- covid_weekly[net5]
 ch <- c("week", "ch1_wins", "ch2_wins", "ch3_wins")
 ch <- covid_weekly[ch]
 
+
 ```
   
 
@@ -76,7 +76,9 @@ c_g <- dygraph(c, main = "", group = "Siaya County Sample") %>%
       dyCrosshair(direction = "vertical") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) 
   c_g
+
 ```
+
 
 ***  
 ### Income  
@@ -93,6 +95,12 @@ c_g <- dygraph(c, main = "", group = "Siaya County Sample") %>%
   dyAxis("x", pixelsPerLabel = 100 , drawGrid = FALSE, label = "Weeks") %>% #grid
   dyAxis("y", label = "USD, PPP", drawGrid = FALSE) %>% 
   dyLegend(width = 250, labelsSeparateLines = TRUE) %>%
+    dyCSS(textConnection("
+.dygraph-legend  { display: all; }
+.highlight {
+  display: inline;
+}
+  ")) %>%
   dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2")) %>%
     dyCrosshair(direction = "vertical") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
