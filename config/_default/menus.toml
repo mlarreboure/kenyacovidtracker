@@ -31,7 +31,7 @@
 
 # Link to a PDF of your resume/CV from the menu.
 # To enable, copy your resume/CV to `static/files/cv.pdf` and uncomment the lines below.
- [[main]]
-    name = "PAP"
-    url = "https://osf.io/tdzr2/?view_only=1c507dd53b254c8d903821d580ff0c55"
-    weight = 70
+# [[main]]
+#    name = "PAP"
+#    url = "https://osf.io/tdzr2/?view_only=1c507dd53b254c8d903821d580ff0c55"
+#    weight = 70
