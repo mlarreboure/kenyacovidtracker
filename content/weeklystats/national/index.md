@@ -1,12 +1,12 @@
 ---
-title: National Sample
-summary: Descriptive statistics for Kenya
+title: Household Rapid Response Phone Survey
+summary: Descriptive statistics for Kenyan and Refugee adults, and micro-enterprises at the national level.
 tags:
-- National Sample
+- National
 date: "2020-04-15T00:00:00Z"
 
 # Optional external URL for project (replaces project detail page).
-external_link: ""
+external_link: "https://dataviz.worldbank.org/views/ResultsDashboardDraft_v1/Dashboard1?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&:embed=y&:isGuestRedirectFromVizportal=y"
 
 image:
   caption: 

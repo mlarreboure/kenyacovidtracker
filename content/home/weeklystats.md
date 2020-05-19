@@ -27,15 +27,11 @@ subtitle = ""
   
   [[content.filter_button]]
     name = "National Sample"
-    tag = "National Sample"
+    tag = "National"
   
   [[content.filter_button]]
-    name = "Siaya"
+    name = "Siaya Sample"
     tag = "Siaya"
-    
-      [[content.filter_button]]
-    name = "Enterprises"
-    tag = "Enterprises"
 
 [design]
   # Choose how many columns the section has. Valid values: 1 or 2.

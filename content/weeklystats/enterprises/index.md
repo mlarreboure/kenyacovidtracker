@@ -1,9 +1,8 @@
 ---
-title: Enterprises Sample
-summary: Descriptive statistics for enterprises in Siaya County
+title: Enterprise Survey - Siaya County
+summary: Descriptive statistics for enterprises in Siaya County.
 tags:
 - Siaya
-- Enterprises
 date: "2020-04-15T00:00:00Z"
 
 # Optional external URL for project (replaces project detail page).

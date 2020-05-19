@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>National | Kenya | COVID-19 Economic Tracker</title>
+    <link>/tags/national/</link>
+      <atom:link href="/tags/national/index.xml" rel="self" type="application/rss+xml" />
+    <description>National</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 15 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/gelani-banks-zaunxTcZ3a4-unsplash.jpg</url>
+      <title>National</title>
+      <link>/tags/national/</link>
+    </image>
+    
+    <item>
+      <title>Household Rapid Response Phone Survey</title>
+      <link>/weeklystats/national/</link>
+      <pubDate>Wed, 15 Apr 2020 00:00:00 +0000</pubDate>
+      <guid>/weeklystats/national/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

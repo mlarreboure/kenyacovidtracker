@@ -18,22 +18,22 @@
   </url>
   
   <url>
-    <loc>/tags/enterprises/</loc>
-    <lastmod>2020-04-15T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/weeklystats/enterprises/</loc>
     <lastmod>2020-04-15T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/national-sample/</loc>
+    <loc>/weeklystats/national/</loc>
     <lastmod>2020-04-15T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/weeklystats/national/</loc>
+    <loc>/weeklystats/siaya/</loc>
+    <lastmod>2020-04-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/national/</loc>
     <lastmod>2020-04-15T00:00:00+00:00</lastmod>
   </url>
   
@@ -44,11 +44,6 @@
   
   <url>
     <loc>/tags/siaya/</loc>
-    <lastmod>2020-04-15T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/weeklystats/siaya/</loc>
     <lastmod>2020-04-15T00:00:00+00:00</lastmod>
   </url>
   
