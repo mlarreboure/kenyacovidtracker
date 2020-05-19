@@ -39,7 +39,7 @@ subtitle = ""
 +++
 <img src="/img/jessica-pamp-QMVvmFFi0Sc-unsplash.jpg"
      alt="World Bank"
-     style="float: left; margin-right: 40px; margin-left: 0px; height:750px;" />
+     style="float: left; margin-right: 40px; margin-left: 0px; height:auto; max-height: 100vh; max-width: 50%;" />
      
 The COVID-19 pandemic has affected Kenya creating an even more urgent need for timely data and evidence to help monitoring and mitigating the impact of the crisis. Our tracker emerges as a response to the lack of real-time data on the spread of COVID-19 and its economic fallout. Its goal is to help policy makers in Kenya to craft both public health and economic responses to the crisis.  
 
