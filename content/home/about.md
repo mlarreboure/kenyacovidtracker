@@ -54,20 +54,3 @@ The Berkeley research team is collecting phone survey data in Siaya County, meas
 
 The different partners involved in this project are The World Bank, UNHCR, KNBS, Berkeley and REMIT. At The World Bank the Team Lead is [Utz Johann Pape](https://blogs.worldbank.org/team/utz-pape). At Berkeley, the research team is lead by [Dennis Egger](https://www.dennisegger.net), [Johannes Haushofer](https://www.princeton.edu/haushofer/), [Edward Miguel](http://emiguel.econ.berkeley.edu/) and [Michael Walker](http://www.michaelwwalker.me/). All the data collection is being carried out by [REMIT Kenya](http://remitkenya.co.ke/).  
 
-
-<img src="/img/logos/Remit logo.png"
-     alt="REMIT"
-     style="float: left; margin-right: 10px;" />
-<img src="/img/logos/UNHCR logo 1.png"
-     alt="UNHCR"
-     style="float: left; margin-right: 10px;" />
-<img src="/img/logos/WB logo 1.png"
-     alt="World Bank"
-     style="float: left; margin-right: 10px;" />
-<img src="/img/logos/KNBS logo.jpg"
-     alt="KNBS"
-     style="float: left; margin-right: 10px;" />
-<img src="/img/logos/Berkeley logo.png"
-     alt="Berkeley"
-     style="float: left; margin-right: 10px;" />
-
