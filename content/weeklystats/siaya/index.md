@@ -1,5 +1,5 @@
 ---
-title: Household Survey - Siaya County
+title: Siaya County - Household Survey
 summary: Descriptive statistics for households in Siaya County.
 tags:
 - Siaya
