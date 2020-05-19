@@ -9,7 +9,7 @@ subtitle = ""
   
 [design]
   # Choose how many columns the section has. Valid values: 1 or 2.
-  columns = "2"
+  columns = "1"
 
 [design.background]
   # Apply a background color, gradient, or image.
@@ -25,20 +25,21 @@ subtitle = ""
   # gradient_end = "SkyBlue"
   
   # Background image.
-  image = "jessica-pamp-QMVvmFFi0Sc-unsplash.jpg"  # Name of image in `static/img/`.
-# image_darken = 0.3  # Darken the image? Range 0-1 where 0 is transparent and 1 is opaque.
-  image_size = "contain"  #  Options are `cover` (default), `contain`, or `actual` size.
-  image_position = "left"  # Options include `left`, `center` (default), or `right`.
- # image_parallax = true  # Use a fun parallax-like fixed background effect? true/false
+ # image = "jessica-pamp-QMVvmFFi0Sc-unsplash.jpg"  # Name of image in `static/img/`.
+ # image_size = "contain"  #  Options are `cover` (default), `contain`, or `actual` size.
+ # image_position = "left"  # Options include `left`, `center` (default), or `right`.
 
   # Text color (true=light or false=dark).
   text_color_light = false
 
 [design.spacing]
   # Customize the section spacing. Order is top, right, bottom, left.
-  padding = ["20px", "0", "20px", "0"]
+  padding = ["0px", "0", "20px", "0"]
 
 +++
+<img src="/img/jessica-pamp-QMVvmFFi0Sc-unsplash.jpg"
+     alt="World Bank"
+     style="float: left; margin-right: 40px; margin-left: 0px; height:750px;" />
      
 The COVID-19 pandemic has affected Kenya creating an even more urgent need for timely data and evidence to help monitoring and mitigating the impact of the crisis. Our tracker emerges as a response to the lack of real-time data on the spread of COVID-19 and its economic fallout. Its goal is to help policy makers in Kenya to craft both public health and economic responses to the crisis.  
 
