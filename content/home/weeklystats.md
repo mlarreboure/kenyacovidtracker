@@ -6,7 +6,7 @@ active = true  # Activate this widget? true/false
 weight = 25  # Order that this section will appear.
 
 title = "Weekly Stats"
-subtitle = ""
+subtitle = "Explore our data in real time by selecting one of the survey activities on the right"
 
 [content]
   # Page type to display. E.g. project.
