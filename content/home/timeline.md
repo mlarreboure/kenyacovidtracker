@@ -19,7 +19,7 @@ date_format = "January 2"
 #   Begin/end multi-line descriptions with 3 quotes `"""`.
 
 [[experience]]
-title = "Government Minister Eugene L. Wamalwa, reports that 237 lives have been lost due to flooding. A total of 161,000 households (over 800,000 people) have now been affected across the country."
+title = "Government Minister Eugene L. Wamalwa, reports that 237 lives have been lost due to flooding. A total of 161,000 households (over 800,000 people) have been affected across the country."
 company=""
 date_start = "2008-05-13" 
 date_end = "2008-05-13"
@@ -33,7 +33,7 @@ company=""
 date_start = "2009-05-06" 
 date_end = "2009-05-06"
  description = """
-Flooding has affected 29 of the country’s 47 counties. Wide areas of land are under water in Busia and Siaya counties, western Kenya, after the Nzoia river overflowed.
+Flooding had affected 29 of the country’s 47 counties. Wide areas of land are under water in Busia and Siaya counties, western Kenya, after the Nzoia river overflowed.
 """
 
 [[experience]]
@@ -63,7 +63,7 @@ company=""
 date_start = "2012-04-26" 
 date_end = "2012-04-26"
 description = """
- Those displaced are either integrated in neighbouring communities or are living in temporary shelters. KRCS said “Amidst the COVID-19 pandemic response, these displacements pose a challenge to maintaining physical distancing and could make victims vulnerable to infection.”
+ Those displaced were either integrated in neighbouring communities or living in temporary shelters. KRCS said “Amidst the COVID-19 pandemic response, these displacements pose a challenge to maintaining physical distancing and could make victims vulnerable to infection.”
 """
 
 [[experience]]
