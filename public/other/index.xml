@@ -5,12 +5,20 @@
     <link>/other/</link>
       <atom:link href="/other/index.xml" rel="self" type="application/rss+xml" />
     <description>Others</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 15 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 13 May 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/gelani-banks-zaunxTcZ3a4-unsplash.jpg</url>
       <title>Others</title>
       <link>/other/</link>
     </image>
+    
+    <item>
+      <title>FloodList</title>
+      <link>/other/flood/</link>
+      <pubDate>Wed, 13 May 2020 00:00:00 +0000</pubDate>
+      <guid>/other/flood/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Tracking the coronavirus</title>

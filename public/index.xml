@@ -5,12 +5,20 @@
     <link>/</link>
       <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <description>Kenya | COVID-19 Economic Tracker</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 20 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 13 May 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/gelani-banks-zaunxTcZ3a4-unsplash.jpg</url>
       <title>Kenya | COVID-19 Economic Tracker</title>
       <link>/</link>
     </image>
+    
+    <item>
+      <title>FloodList</title>
+      <link>/other/flood/</link>
+      <pubDate>Wed, 13 May 2020 00:00:00 +0000</pubDate>
+      <guid>/other/flood/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>COVID-19 cases in Kenya</title>
