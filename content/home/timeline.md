@@ -6,7 +6,7 @@ active = true  # Activate this widget? true/false
 weight = 40  # Order that this section will appear.
 
 title = "Timeline"
-subtitle = "Evolution of events in Kenya while government attempts to contain the spread of COVID-19"
+subtitle = "Evolution of events in Kenya and government measures to contain the spread of COVID-19"
 
 # Date format for experience
 #   Refer to https://sourcethemes.com/academic/docs/customization/#date-format
