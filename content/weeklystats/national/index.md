@@ -6,7 +6,7 @@ tags:
 date: "2020-04-15T00:00:00Z"
 
 # Optional external URL for project (replaces project detail page).
-external_link: "https://worldbankgroup.sharepoint.com/sites/Poverty/Pages/Monitoring-COVID19-Impact-on-Households-and-Firms-in-Kenya-05192020-154742.aspx"
+external_link: "https://dataviz.worldbank.org/views/ResultsDashboardWeek1/Covid-19Week1?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&:embed=y&:isGuestRedirectFromVizportal=y"
 
 image:
   caption: 
