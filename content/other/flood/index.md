@@ -1,6 +1,6 @@
 ---
 title: FloodList
-summary: Hundreds of thousands of households have been displaced by floods in Kenya, leaving more than 200 deaths.
+summary:  In the last month floods in Kenya have caused more than 200 deads and the displacement of thousands of households.
 tags:
 - 
 date: "2020-05-13T00:00:00Z"
