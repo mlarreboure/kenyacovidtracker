@@ -5,30 +5,34 @@
 
 [[main]]
   name = "About"
-  url = "#about"
+  url = "#hero"
   weight = 10
-
-# [[main]]
-#  name = "Methodology"
-#  url = "#demo"
-#  weight = 20
 
 [[main]]
   name = "Weekly Stats"
   url = "#weeklystats"
-  weight = 30
+  weight = 20
 
 
 [[main]]
-  name = "Evolution of COVID-19"
+  name = "Timeline"
   url = "#timeline"
+  weight = 30
+
+ [[main]]
+  name = "Methodology"
+  url = "#about"
   weight = 40
 
 [[main]]
   name = "Other Resources"
   url = "#other"
   weight = 60
-
+[[main]]
+  name = "Contact"
+  url = "#contact"
+  weight = 70
+  
 # Link to a PDF of your resume/CV from the menu.
 # To enable, copy your resume/CV to `static/files/cv.pdf` and uncomment the lines below.
 # [[main]]

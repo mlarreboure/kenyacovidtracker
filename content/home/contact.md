@@ -2,11 +2,11 @@
 # Contact widget.
 widget = "contact"  # See https://sourcethemes.com/academic/docs/page-builder/
 headless = true  # This file represents a page section.
-active = false  # Activate this widget? true/false
+active = true  # Activate this widget? true/false
 weight = 130  # Order that this section will appear.
 
 title = "Contact"
-subtitle = ""
+subtitle = "Are you working in Kenya and would like to contribute your data to our website? Please contact us."
 
 # Automatically link email and phone?
 autolink = true

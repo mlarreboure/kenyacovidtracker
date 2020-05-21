@@ -2,9 +2,9 @@
 widget = "blank"  # See https://sourcethemes.com/academic/docs/page-builder/
 headless = true  # This file represents a page section.
 active = true  # Activate this widget? true/false
-weight = 5  # Order that this section will appear.
+weight = 50  # Order that this section will appear.
 
-title = ""
+title = "Our methodology"
 subtitle = ""
   
 [design]
@@ -37,13 +37,9 @@ subtitle = ""
   padding = ["0px", "0", "20px", "0"]
 
 +++
-<img src="/img/jessica-pamp-QMVvmFFi0Sc-unsplash.jpg"
-     alt="World Bank"
-     style="float: left; margin-right: 40px; margin-left: 0px; height:auto; max-height: 100vh; max-width: 50%;" />
-     
-The COVID-19 pandemic has affected Kenya creating an even more urgent need for timely data and evidence to help monitoring and mitigating the impact of the crisis. Our tracker emerges as a response to the lack of real-time data on the spread of COVID-19 and its economic fallout. Its goal is to help policy makers in Kenya to craft both public health and economic responses to the crisis.  
+The COVID-19 pandemic has affected Kenya creating an even more urgent need for timely data and evidence to help monitoring and mitigating the impact of the crisis.   
 
-How? We are generating descriptive statistics on COVID-19, behavioral adaptations, and local economic activity. **We are collecting information at the household, formal firm and microenterprise level on a wide range of indicators: impact on employment, access to services, travel and recent contacts, knowledge of COVID-19 mitigation measures, mental well-being and food security.** As the epidemic unfolds, news consumption, trust in government and authorities, and social cohesion may also be affected. All of these data are being collected through phone surveys in representative samples of different study areas, and we will be posting weekly updates to disseminate our findings in real time. The preliminary data will be shown in graphs in the links below.
+We are generating descriptive statistics on COVID-19, behavioral adaptations, and local economic activity. We are collecting information at the household, formal firm and microenterprise level on a wide range of indicators: impact on employment, access to services, travel and recent contacts, knowledge of COVID-19 mitigation measures, mental well-being and food security. As the epidemic unfolds, news consumption, trust in government and authorities, and social cohesion may also be affected. All of these data are being collected through phone surveys in representative samples of different study areas, and we will be posting weekly updates to disseminate our findings in real time. The preliminary data will be shown in graphs in the links below.
 
 The World Bank, in collaboration with KNBS and UNHCR, is collecting household data targeting both Kenyan and refugee adults through phone surveys. It is also collecting data at the microenterprise level targeting both micro business owners or job seekers between 18 and 35 years old. In addition, it is collecting data at the firm level in collaboration with KNBS.
 

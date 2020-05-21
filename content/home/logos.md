@@ -6,7 +6,7 @@
 widget = "blank"  # See https://sourcethemes.com/academic/docs/page-builder/
 headless = true  # This file represents a page section.
 active = true  # Activate this widget? true/false
-weight = 8  # Order that this section will appear.
+weight = 51  # Order that this section will appear.
 
 title = ""
 subtitle = ""
@@ -38,19 +38,19 @@ subtitle = ""
 +++
 <img src="/img/logos/WB logo 1.png"
      alt="World Bank"
-     style="float: left; margin-right: 50px; height:50px; width:240px" />
+     style="float: left; margin-right: 50px; height:60px; width:280px" />
 <img src="/img/logos/UNHCR logo 1.png"
      alt="UNHCR"
-     style="float: left; margin-right: 50px; height:50px; width:60px" />
+     style="float: left; margin-right: 50px; height:60px; width:70px" />
 <img src="/img/logos/KNBS logo.jpg"
      alt="KNBS"
-     style="float: left; margin-right: 50px; height:50px; width:70px" />
+     style="float: left; margin-right: 50px; height:60px; width:80px" />
 <img src="/img/logos/Remit logo.png"
      alt="REMIT"
-     style="float: left; margin-right: 50px; height:50px; width:60px" />
+     style="float: left; margin-right: 50px; height:60px; width:70px" />
 <img src="/img/logos/Berkeley logo.png"
      alt="Berkeley"
-     style="float: left; margin-right: 50px; height:50px; width:180px" />
+     style="float: left; margin-right: 50px; height:60px; width:210px" />
 <img src="/img/logos/Busara logo.png"
      alt="Busara Center for Behavioral Economics"
-     style="float: left; margin-right: 50px; height:50px; width:120px" />
+     style="float: left; margin-right: 50px; height:60px; width:140px" />
