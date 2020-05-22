@@ -2,7 +2,6 @@
 title: "Siaya County - Household Sample"
 author: 'Weekly Statistics'
 date: ''
-tags: ["Siaya"]
 output:
   html_document:
     theme: paper
@@ -52,7 +51,11 @@ net5 <- covid_weekly[net5]
 ch <- c("week", "ch1_wins", "ch2_wins", "ch3_wins")
 ch <- covid_weekly[ch]
 
+l <- c("week", "l1_wins", "l2_wins", "l3_wins")
+l <- covid_weekly[l]
 
+e <- c("week", "e3_wins", "e4_wins")
+e <- covid_weekly[e]
 ```
   
 
@@ -124,6 +127,22 @@ f1_d_g  <- dygraph(f1_d, main = "") %>%
   dyLegend(width = 210, labelsSeparateLines = TRUE) 
 f1_d_g
 ```
+    
+***  
+### Household enterprises  
+<font size="5">**Enterprises revenue and profits in the past 14 days**</font>
+```{r enterprises}
+e_g  <- dygraph(e, main = "") %>%
+  dySeries("e3_wins", strokeWidth = 4, label = "Total enterprise revenue") %>%
+  dySeries("e4_wins", strokeWidth = 4, label = "Total enterprise profits") %>%
+  dyAxis("x", pixelsPerLabel = 100 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", drawGrid = FALSE , label = "USD, PPP") %>% 
+  dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2")) %>%
+    dyCrosshair(direction = "vertical") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
+  dyLegend(width = 200, labelsSeparateLines = TRUE) 
+e_g
+``` 
   
   ***  
 
@@ -194,10 +213,28 @@ net5_g
 ```
 
 *** 
-### Children  
-  
-  
-**Children activities**
+### Labor Supply
+
+<font size="5">**Weekly labor supply (hours per household member)**</font>
+``` {r labor}
+l_g <- dygraph(l, main = "", group = "Siaya County Sample") %>%
+  dySeries("l1_wins", strokeWidth = 4, label = "Agricultural labor supply") %>%
+  dySeries("l2_wins", strokeWidth = 4, label = "Own enterprise labor supply") %>%
+  dySeries("l3_wins", strokeWidth = 4, label = "Wage labor supply") %>%
+  dyAxis("x", pixelsPerLabel = 100 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", label = "Hours per HH member", drawGrid = FALSE) %>% 
+  dyLegend(width = 550 , labelsSeparateLines = FALSE) %>%
+    dyCrosshair(direction = "vertical") %>%
+  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2")) %>%
+      dyCrosshair(direction = "vertical") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) 
+  l_g
+
+```
+
+
+***  
+### Children Education
 
 We ask what has each child been doing over the last 15 minutes, whether the child has done any learning-related activities in the past 24 hours, and if so, what kind of activity.  
   
@@ -217,19 +254,20 @@ ch_g
 ```
 
 ***   
-## {-}
-      
-  These data comes from phone survey interviews conducted by [REMIT Kenya](http://remitkenya.co.ke/) in Siaya County, Kenya. We are collecting data for a sample of ~12,000 households in the county, which is representative of the whole population. At the same time, our weekly sampling method assures weekly representativeness of the overall sample.  
 
-So far we have interviewed 6,592 households, with the following distribution per week:  
-  
-| Week:  | Dates  | Number of surveys |
-|------|:------:|:------:|
-| Week 1 | 05 April 2020 - 11 April 2020 | 743 | 
-| Week 2 | 12 April 2020 - 18 April 2020 | 743 | 
-| Week 3 | 19 April 2020 - 25 April 2020 | 1,477 | 
-| Week 4 | 26 April 2020 - 02 May 2020 | 1,145 | 
-| Week 5 | 03 May 2020 - 09 May 2020 | 1,498 | 
-| Week 6 | 10 May 2020 - 14 May 2020 | 986 | 
+## {}
+      
+These data comes from phone survey interviews conducted by [REMIT Kenya](http://remitkenya.co.ke/) in Siaya County, Kenya. We are collecting data for a sample of ~12,000 households in the county, which is representative of the whole population. At the same time, our weekly sampling method assures weekly representativeness of the overall sample.
+
+So far we have interviewed 6,592 households, with the following distribution per week:
+
+| Week	| Dates	| Number of surveys |
+|------|:-----:|:---------:|
+| Week 1 |	05 April 2020 - 11 April 2020	| 743 |
+| Week 2 |	12 April 2020 - 18 April 2020	| 743 |
+| Week 3 |	19 April 2020 - 25 April 2020	| 1,477 |
+| Week 4 |	26 April 2020 - 02 May 2020	| 1,145 |
+| Week 5 |	03 May 2020 - 09 May 2020	| 1,498 |
+| Week 6 |	10 May 2020 - 14 May 2020	| 986 |
 
 
