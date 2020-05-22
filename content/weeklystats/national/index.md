@@ -1,6 +1,6 @@
 ---
-title: Household Rapid Response Phone Survey
-summary: Descriptive statistics for Kenyan and Refugee adults at the national level.
+title: National - Rapid Response Phone Surveys
+summary: Descriptive statistics for households, microenterprises and formal firms.
 tags:
 - National
 date: "2020-04-15T00:00:00Z"
