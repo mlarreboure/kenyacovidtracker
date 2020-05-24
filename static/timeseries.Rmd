@@ -12,6 +12,7 @@ knitr::opts_chunk$set(echo = FALSE)
 library(haven)
 library(tidyverse)
 library(dygraphs)
+
 covid_weekly <- read_dta("~/Dropbox (Princeton)/GE_Endline2/covid19/data/COVID_AllHHs_outcomes_weekly.dta")
 
 #Grouping vars for graphs
@@ -35,6 +36,11 @@ c <- covid_weekly[c]
 
 i <- c("week", "i1_wins", "i2_wins" , "i3_wins") #, "i4_wins", "i5_wins", "i6_wins"  , "i7_wins"
 i <- covid_weekly[i]
+d <- c("week", "i7_wins") 
+d <- covid_weekly[d]
+
+it <- c("week", "i5a_wins", "i5b_wins" , "i5c_wins")
+it <- covid_weekly[it]
 
 f1 <- c("week", "f1_h_shortages_wins", "f1_h_price_wins", "f1_h_income_wins")
 f1 <- covid_weekly[f1]
@@ -56,6 +62,19 @@ l <- covid_weekly[l]
 
 e <- c("week", "e3_wins", "e4_wins")
 e <- covid_weekly[e]
+
+tg <- c("week", "tg1", "tg2", "tg3", "tg4", "tg5")
+tg <- covid_weekly[tg]
+
+tp <- c("week", "tp1", "tp2", "tp3")
+tp <- covid_weekly[tp]
+
+gv <- c("week", "gv1", "gv2", "gv3")
+gv <- covid_weekly[gv]
+
+v <- c("week", "gv4", "gv5")
+v <- covid_weekly[v]
+
 ```
   
 
@@ -75,7 +94,7 @@ c_g <- dygraph(c, main = "", group = "Siaya County Sample") %>%
   dyAxis("y", label = "USD, PPP", drawGrid = FALSE) %>% 
   dyLegend(width = 200 , labelsSeparateLines = TRUE) %>%
     dyCrosshair(direction = "vertical") %>%
-  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2")) %>%
+  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1")) %>%
       dyCrosshair(direction = "vertical") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) 
   c_g
@@ -92,7 +111,7 @@ c_g <- dygraph(c, main = "", group = "Siaya County Sample") %>%
  # dySeries("i6_wins", strokeWidth = 4, label = "Net transfers") %>%
  # dySeries("i5_wins", strokeWidth = 4, label = "Support from gov and other entities") %>%
   dySeries("i3_wins", strokeWidth = 4, label = "Wage earnings") %>%
-  dySeries("i1_wins", strokeWidth = 4, label = "Ag earnings") %>%
+  dySeries("i1_wins", strokeWidth = 4, label = "Agricultural earnings") %>%
   dySeries("i2_wins", strokeWidth = 4, label = "Self-employment earnings") %>%
   #  dySeries("i7_wins", strokeWidth = 4, label = "Dissaving") %>%
   dyAxis("x", pixelsPerLabel = 100 , drawGrid = FALSE, label = "Weeks") %>% #grid
@@ -109,8 +128,39 @@ c_g <- dygraph(c, main = "", group = "Siaya County Sample") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
 i_g
 ```
+<font size="5">**Dissaving per capita (USD, PPP) - past 14 days**</font>  
 
-***  
+```{r dissaving}
+d_g  <- dygraph(d, main = "") %>%
+  dySeries("i7_wins", strokeWidth = 4, label = "Dissaving") %>%
+  dyAxis("x", pixelsPerLabel = 100 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", drawGrid = FALSE , label = "USD, PPP") %>% 
+  dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1")) %>%
+    dyCrosshair(direction = "vertical") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
+  dyLegend(width = 210, labelsSeparateLines = TRUE) 
+d_g
+```
+<font size="5">**Transfers per capita (USD, PPP) - past 14 days**</font>  
+
+We ask whether in the past 14 days anyone in the household received a gift/assistance of money or goods, from (i) the government, (ii) from a non-governmental organization or community group, or (iii) from an individual politican or government official.  
+
+```{r transfers}
+it_g  <- dygraph(it, main = "") %>%
+  dySeries("i5a_wins", strokeWidth = 4, label = "Government") %>%
+  dySeries("i5b_wins", strokeWidth = 4, label = "NGO or community group") %>%
+  dySeries("i5c_wins", strokeWidth = 4, label = "Politicians") %>%
+  dyAxis("x", pixelsPerLabel = 100 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", drawGrid = FALSE , label = "USD, PPP") %>% 
+  dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1")) %>%
+    dyCrosshair(direction = "vertical") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
+  dyLegend(width = 500, labelsSeparateLines = FALSE) 
+it_g
+```
+  
+*** 
+
 ### Food Security  
 <font size="5">**Number of days experiencing food struggles in the past 7 days**</font>
 ```{r struggles}
@@ -121,7 +171,7 @@ f1_d_g  <- dygraph(f1_d, main = "") %>%
 #  dySeries("f1_d_hungrychild", strokeWidth = 4, label = "Children gone to bed hungry") %>%
   dyAxis("x", pixelsPerLabel = 100 , drawGrid = FALSE, label = "Weeks") %>% #grid
   dyAxis("y", drawGrid = FALSE , label = "Number of days") %>% 
-  dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2")) %>%
+  dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1")) %>%
     dyCrosshair(direction = "vertical") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
   dyLegend(width = 210, labelsSeparateLines = TRUE) 
@@ -137,7 +187,7 @@ e_g  <- dygraph(e, main = "") %>%
   dySeries("e4_wins", strokeWidth = 4, label = "Total enterprise profits") %>%
   dyAxis("x", pixelsPerLabel = 100 , drawGrid = FALSE, label = "Weeks") %>% #grid
   dyAxis("y", drawGrid = FALSE , label = "USD, PPP") %>% 
-  dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2")) %>%
+  dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1")) %>%
     dyCrosshair(direction = "vertical") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
   dyLegend(width = 200, labelsSeparateLines = TRUE) 
@@ -208,7 +258,7 @@ net5_g  <- dygraph(net5, main = "") %>%
   dyLegend(width = 500) %>%
      dyCrosshair(direction = "vertical") %>%
  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
-  dyOptions(axisLineWidth = 4, includeZero = TRUE, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2"))
+  dyOptions(axisLineWidth = 4, includeZero = TRUE, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"))
 net5_g
 ```
 
@@ -249,11 +299,93 @@ ch_g  <- dygraph(ch, main = "", group = "Siaya County Sample") %>%
      dyCrosshair(direction = "vertical") %>%
  dyLegend(width = 550) %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
-  dyOptions(axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2"))
+  dyOptions(axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"))
 ch_g
 ```
+***  
+  
+### Household Violence
 
-***   
+
+<font size="5">**Gender violence**</font>
+
+We ask married/cohabitant female respondents whether their husband/partners have (i) threaten to harm them or someone close to them, (ii) hit, slapped, kicked, or physically hurt them, and (iii) forced them to perform sexual acts.*  
+```{r gender}
+gv_g  <- dygraph(gv, main = "", group = "Siaya County Sample") %>%
+  dySeries("gv1", strokeWidth = 4, label = "Threaten to harm them") %>%
+  dySeries("gv2", strokeWidth = 4, label = "Physically hurt them") %>%
+  dySeries("gv3", strokeWidth = 4, label = "Forced them to perform sexual acts") %>%
+  dyAxis("x", pixelsPerLabel = 100 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", drawGrid = FALSE, label = "Percentage of married/cohabitant females") %>% 
+     dyCrosshair(direction = "vertical") %>%
+ dyLegend(width = 580) %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
+  dyOptions(axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"))
+gv_g
+```
+  *This plot shows data only for the share of female respondents that were surveyed by a female field officer, and are currently married or living with a partner. This sub-sample accounts for ~55% of all married/cohabitant females in the study sample, and ~36% of all females.  
+  
+<font size="5">**Violence in the household**</font>  
+We ask: (i) Over the past 14 days, has there been a higher than usual amount of fights with members of your household?, and (ii) In the past 14 days, did you or your partner ever beat any of the children living in this household?  
+```{r violence}
+v_g  <- dygraph(v, main = "", group = "Siaya County Sample") %>%
+  dySeries("gv4", strokeWidth = 4, label = "Children were beaten") %>%
+  dySeries("gv5", strokeWidth = 4, label = "More fights than usual") %>%
+  dyAxis("x", pixelsPerLabel = 100 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", drawGrid = FALSE, label = "Percentage of sample") %>% 
+     dyCrosshair(direction = "vertical") %>%
+ dyLegend(width = 350) %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
+  dyOptions(axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"))
+v_g
+```
+
+
+***  
+
+### Trust
+
+<font size="5">**Trust in government**</font>  
+
+How much do you trust your country’s government to take care of its citizens?  
+``` {r trustgov}
+tg_g <- dygraph(tg, main = "", group = "Siaya County Sample") %>%
+  dySeries("tg1", strokeWidth = 4, label = "Strongly distrust") %>%
+  dySeries("tg2", strokeWidth = 4, label = "Somewhat distrust") %>%
+  dySeries("tg3", strokeWidth = 4, label = "Neither trust nor distrust") %>%
+  dySeries("tg4", strokeWidth = 4, label = "Somewhat trust") %>%
+  dySeries("tg5", strokeWidth = 4, label = "Strongly trust") %>%
+  dyAxis("x", pixelsPerLabel = 100 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", label = "Percentage of sample", drawGrid = FALSE) %>% 
+  dyLegend(width = 450 , labelsSeparateLines = FALSE) %>%
+    dyCrosshair(direction = "vertical") %>%
+  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2")) %>%
+      dyCrosshair(direction = "vertical") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) 
+  tg_g
+
+```
+<font size="5">**Trust in other people**</font>  
+
+Generally speaking, would you say that most people can be trusted or that you need to be very careful in dealing with people?  
+``` {r trustpeople}
+
+tp_g <- dygraph(tp, main = "", group = "Siaya County Sample") %>%
+  dySeries("tp3", strokeWidth = 4, label = "Need to be careful") %>%
+  dySeries("tp2", strokeWidth = 4, label = "Most people can be trusted") %>%
+  dySeries("tp1", strokeWidth = 4, label = "Don't know") %>%
+  dyAxis("x", pixelsPerLabel = 100 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", label = "Percentage of sample", drawGrid = FALSE) %>% 
+  dyLegend(width = 500 , labelsSeparateLines = FALSE) %>%
+    dyCrosshair(direction = "vertical") %>%
+  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set1")) %>%
+      dyCrosshair(direction = "vertical") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) 
+  tp_g
+
+```
+
+***  
 
 ## {}
       
