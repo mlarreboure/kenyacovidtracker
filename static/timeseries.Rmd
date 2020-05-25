@@ -115,8 +115,8 @@ c_g <- dygraph(c, main = "", group = "Siaya County Sample") %>%
  # dySeries("i6_wins", strokeWidth = 4, label = "Net transfers") %>%
  # dySeries("i5_wins", strokeWidth = 4, label = "Support from gov and other entities") %>%
   dySeries("i3_wins", strokeWidth = 4, label = "Wage earnings") %>%
-  dySeries("i1_wins", strokeWidth = 4, label = "Agricultural earnings") %>%
   dySeries("i2_wins", strokeWidth = 4, label = "Self-employment earnings") %>%
+  dySeries("i1_wins", strokeWidth = 4, label = "Agricultural earnings") %>%
   #  dySeries("i7_wins", strokeWidth = 4, label = "Dissaving") %>%
   dyAxis("x", pixelsPerLabel = 100 , drawGrid = FALSE, label = "Weeks") %>% #grid
   dyAxis("y", label = "USD, PPP", drawGrid = FALSE) %>% 
