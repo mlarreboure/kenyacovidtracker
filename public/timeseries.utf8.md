@@ -16,32 +16,38 @@ output:
 ### Consumption
 
 <font size="5">**Weekly consumption per capita (USD, PPP)**</font>
-preservef566326b04767ec9
+preserve08e526960eecb67c
 
 
 ***  
 ### Income  
 <font size="5">**Earnings per capita (USD, PPP) - past 14 days**</font>
-preservedee88af5ffe013ca
+preserve7b37329e25d41fd6
 <font size="5">**Dissaving per capita (USD, PPP) - past 14 days**</font>  
 
-preserveab9dfc05cad246cd
+preserve20ecb421c50375d5
 <font size="5">**Transfers per capita (USD, PPP) - past 14 days**</font>  
 
-We ask whether in the past 14 days anyone in the household received a gift/assistance of money or goods, from (i) the government, (ii) from a non-governmental organization or community group, or (iii) from an individual politican or government official.  
+We ask whether in the past 14 days anyone in the household received a gift/assistance of money or goods, and its value, from (i) the government, (ii) from a non-governmental organization or community group, or (iii) from an individual politican or government official.  
 
-preservef207e2457ca35e01
+preserve94b71f10008284e9
   
 *** 
 
 ### Food Security  
 <font size="5">**Number of days experiencing food struggles in the past 7 days**</font>
-preserve124e8a9b968d2ccd
-    
+preserve428795745a712ca3
+  
+<font size="5">**Percentage of sample unable to buy usual amount of food due to:**</font>
+   
+We ask whether in the past 7 days, any household member was unable to buy the amount of food they usually buy because of: (i) shortages in markets, (ii) price of food being too high, and (iii) household income has dropped.  
+
+preserve8dd493f4db29c9b7
+  
 ***  
 ### Household enterprises  
 <font size="5">**Enterprises revenue and profits in the past 14 days**</font>
-preserve406ac6130a190204
+preserveaa711a72950bd42f
   
   ***  
 
@@ -53,7 +59,7 @@ preserve406ac6130a190204
   We ask respondents whether they have changed their behavior in any way since learning about COVID-19, and if so, how has it changed in the last 14 days.  
   
 <font size="5">**Reported COVID-19 Behavior Changes**</font>
-preserve4ab3c541cfcb0629
+preservea512c3b3a8cb58af
 
 ***  
 **Symptoms**  
@@ -61,7 +67,7 @@ preserve4ab3c541cfcb0629
 We ask respondents whether they have experienced any illnesses or symptoms of a given list in the past 14 days.  
   
 <font size="5">**Reported COVID-19 Symptoms, past 14 days**</font>
-preserve9841b6198a2ca0dc
+preserve9b7129ab39babe28
 
 
 ***  
@@ -70,13 +76,13 @@ preserve9841b6198a2ca0dc
 We ask: "Taken together, how many people outside this household have you interacted with in-person?"   
   
 <font size="5">**Number of in-person interactions (other than HH members)**</font>
-preserve3f959341546f08bb
+preserve5eee14c3a62c31d8
 
 *** 
 ### Labor Supply
 
 <font size="5">**Weekly labor supply (hours per household member)**</font>
-preservef691a9f9650d7902
+preserve6adace1d8778fd98
 
 
 ***  
@@ -85,7 +91,8 @@ preservef691a9f9650d7902
 We ask what has each child been doing over the last 15 minutes, whether the child has done any learning-related activities in the past 24 hours, and if so, what kind of activity.  
   
 <font size="5">**Children educational activities**</font>
-preserve7693fe60533bb773
+preserve21a3d10d15a2b884
+  
 ***  
   
 ### Household Violence
@@ -94,12 +101,12 @@ preserve7693fe60533bb773
 <font size="5">**Gender violence**</font>
 
 We ask married/cohabitant female respondents whether their husband/partners have (i) threaten to harm them or someone close to them, (ii) hit, slapped, kicked, or physically hurt them, and (iii) forced them to perform sexual acts.*  
-preserve7e2a8f7f26920bb8
+preservebaa7fcad280a1f5d
   *This plot shows data only for the share of female respondents that were surveyed by a female field officer, and are currently married or living with a partner. This sub-sample accounts for ~55% of all married/cohabitant females in the study sample, and ~36% of all females.  
   
 <font size="5">**Violence in the household**</font>  
 We ask: (i) Over the past 14 days, has there been a higher than usual amount of fights with members of your household?, and (ii) In the past 14 days, did you or your partner ever beat any of the children living in this household?  
-preserve8f38225e2ca91c7f
+preserved25a6c2e37569648
 
 
 ***  
@@ -109,11 +116,11 @@ preserve8f38225e2ca91c7f
 <font size="5">**Trust in government**</font>  
 
 How much do you trust your country’s government to take care of its citizens?  
-preserve8db159a6b0d4a7ce
+preserve4ecc110bc04deacf
 <font size="5">**Trust in other people**</font>  
 
 Generally speaking, would you say that most people can be trusted or that you need to be very careful in dealing with people?  
-preservea13c8245b8bc78c5
+preserve29a12c38c2440dbd
 
 ***  
 
@@ -121,15 +128,16 @@ preservea13c8245b8bc78c5
       
 These data comes from phone survey interviews conducted by [REMIT Kenya](http://remitkenya.co.ke/) in Siaya County, Kenya. We are collecting data for a sample of ~12,000 households in the county, which is representative of the whole population. At the same time, our weekly sampling method assures weekly representativeness of the overall sample.
 
-So far we have interviewed 6,592 households, with the following distribution per week:
+So far we have interviewed 7,586 households, with the following distribution per week:
 
 | Week	| Dates	| Number of surveys |
 |------|:-----:|:---------:|
-| Week 1 |	05 April 2020 - 11 April 2020	| 743 |
-| Week 2 |	12 April 2020 - 18 April 2020	| 743 |
-| Week 3 |	19 April 2020 - 25 April 2020	| 1,477 |
-| Week 4 |	26 April 2020 - 02 May 2020	| 1,145 |
-| Week 5 |	03 May 2020 - 09 May 2020	| 1,498 |
-| Week 6 |	10 May 2020 - 14 May 2020	| 986 |
+| Week 1 |	05 April 2020 - 11 April 2020	| 745 |
+| Week 2 |	12 April 2020 - 18 April 2020	| 744 |
+| Week 3 |	19 April 2020 - 25 April 2020	| 1,478 |
+| Week 4 |	26 April 2020 - 02 May 2020	| 1,146 |
+| Week 5 |	03 May 2020 - 09 May 2020	| 1,499 |
+| Week 6 |	10 May 2020 - 16 May 2020	| 986 |
+| Week 7 |	17 May 2020 - 23 May 2020	| 988 |
 
 
