@@ -16,32 +16,32 @@ output:
 ### Consumption
 
 <font size="5">**Weekly consumption per capita (USD, PPP)**</font>
-preserve18dbcea629bc70cd
+preservef566326b04767ec9
 
 
 ***  
 ### Income  
 <font size="5">**Earnings per capita (USD, PPP) - past 14 days**</font>
-preserve72fcc64722e41523
+preservedee88af5ffe013ca
 <font size="5">**Dissaving per capita (USD, PPP) - past 14 days**</font>  
 
-preserve5669532fce5dc879
+preserveab9dfc05cad246cd
 <font size="5">**Transfers per capita (USD, PPP) - past 14 days**</font>  
 
 We ask whether in the past 14 days anyone in the household received a gift/assistance of money or goods, from (i) the government, (ii) from a non-governmental organization or community group, or (iii) from an individual politican or government official.  
 
-preserve5e1fcfa1dcc14057
+preservef207e2457ca35e01
   
 *** 
 
 ### Food Security  
 <font size="5">**Number of days experiencing food struggles in the past 7 days**</font>
-preserve99c06aeaf53aa2f7
+preserve124e8a9b968d2ccd
     
 ***  
 ### Household enterprises  
 <font size="5">**Enterprises revenue and profits in the past 14 days**</font>
-preserveb1d958fc37f9e90c
+preserve406ac6130a190204
   
   ***  
 
@@ -53,7 +53,7 @@ preserveb1d958fc37f9e90c
   We ask respondents whether they have changed their behavior in any way since learning about COVID-19, and if so, how has it changed in the last 14 days.  
   
 <font size="5">**Reported COVID-19 Behavior Changes**</font>
-preserveceb1c31f096d3eeb
+preserve4ab3c541cfcb0629
 
 ***  
 **Symptoms**  
@@ -61,7 +61,7 @@ preserveceb1c31f096d3eeb
 We ask respondents whether they have experienced any illnesses or symptoms of a given list in the past 14 days.  
   
 <font size="5">**Reported COVID-19 Symptoms, past 14 days**</font>
-preserved8b9bab506dbdbe4
+preserve9841b6198a2ca0dc
 
 
 ***  
@@ -70,13 +70,13 @@ preserved8b9bab506dbdbe4
 We ask: "Taken together, how many people outside this household have you interacted with in-person?"   
   
 <font size="5">**Number of in-person interactions (other than HH members)**</font>
-preserve437b58f5ff6d9676
+preserve3f959341546f08bb
 
 *** 
 ### Labor Supply
 
 <font size="5">**Weekly labor supply (hours per household member)**</font>
-preservef983faf1a89a157c
+preservef691a9f9650d7902
 
 
 ***  
@@ -85,7 +85,7 @@ preservef983faf1a89a157c
 We ask what has each child been doing over the last 15 minutes, whether the child has done any learning-related activities in the past 24 hours, and if so, what kind of activity.  
   
 <font size="5">**Children educational activities**</font>
-preservea1db6f4cc2b473e2
+preserve7693fe60533bb773
 ***  
   
 ### Household Violence
@@ -94,12 +94,12 @@ preservea1db6f4cc2b473e2
 <font size="5">**Gender violence**</font>
 
 We ask married/cohabitant female respondents whether their husband/partners have (i) threaten to harm them or someone close to them, (ii) hit, slapped, kicked, or physically hurt them, and (iii) forced them to perform sexual acts.*  
-preservee1595024b151f3cc
+preserve7e2a8f7f26920bb8
   *This plot shows data only for the share of female respondents that were surveyed by a female field officer, and are currently married or living with a partner. This sub-sample accounts for ~55% of all married/cohabitant females in the study sample, and ~36% of all females.  
   
 <font size="5">**Violence in the household**</font>  
 We ask: (i) Over the past 14 days, has there been a higher than usual amount of fights with members of your household?, and (ii) In the past 14 days, did you or your partner ever beat any of the children living in this household?  
-preserve342a7f3cdf0abf1e
+preserve8f38225e2ca91c7f
 
 
 ***  
@@ -109,11 +109,11 @@ preserve342a7f3cdf0abf1e
 <font size="5">**Trust in government**</font>  
 
 How much do you trust your country’s government to take care of its citizens?  
-preservebed9eeb1c8a703c0
+preserve8db159a6b0d4a7ce
 <font size="5">**Trust in other people**</font>  
 
 Generally speaking, would you say that most people can be trusted or that you need to be very careful in dealing with people?  
-preservee265d914913f615d
+preservea13c8245b8bc78c5
 
 ***  
 
