@@ -16,38 +16,44 @@ output:
 ### Consumption
 
 <font size="5">**Weekly consumption per capita (USD, PPP)**</font>
-preserve08e526960eecb67c
+preserve9fe763a8fbc90e81
 
 
 ***  
 ### Income  
 <font size="5">**Earnings per capita (USD, PPP) - past 14 days**</font>
-preserve7b37329e25d41fd6
+preservebbd973027850eb4d
 <font size="5">**Dissaving per capita (USD, PPP) - past 14 days**</font>  
 
-preserve20ecb421c50375d5
+preserve4f8c8e7ea053ba50
 <font size="5">**Transfers per capita (USD, PPP) - past 14 days**</font>  
 
 We ask whether in the past 14 days anyone in the household received a gift/assistance of money or goods, and its value, from (i) the government, (ii) from a non-governmental organization or community group, or (iii) from an individual politican or government official.  
 
-preserve94b71f10008284e9
+preserve8db89574cbb8278e
   
 *** 
 
 ### Food Security  
-<font size="5">**Number of days experiencing food struggles in the past 7 days**</font>
-preserve428795745a712ca3
+<font size="5">**Number of days skipping meals in the past 7 days**</font>
+preserve42e048bb41046bcb
   
 <font size="5">**Percentage of sample unable to buy usual amount of food due to:**</font>
    
-We ask whether in the past 7 days, any household member was unable to buy the amount of food they usually buy because of: (i) shortages in markets, (ii) price of food being too high, and (iii) household income has dropped.  
+We ask whether in the past 7 days, any household member was unable to buy the amount of food they usually buy because of: (i) price of food being too high, (ii) household income having dropped, and (iii) shortages in markets.  
 
-preserve8dd493f4db29c9b7
+preservefc1a8228cded912b
+  
+   <font size="5">**Other food hardship experiences, percentage of sample**</font>
+   
+We ask whether in the past 7 days, any household member experienced: (i) having to reduce the number of meals and/or the portion of each meal they would usually eat, (ii) difficulties in going to food markets due to mobility restrictions imposed by government, and (iii) difficulties in buying food due to most food markets being closed.
+
+preservec1a0828f81160675
   
 ***  
 ### Household enterprises  
 <font size="5">**Enterprises revenue and profits in the past 14 days**</font>
-preserveaa711a72950bd42f
+preserve0327f41164b227bc
   
   ***  
 
@@ -59,7 +65,7 @@ preserveaa711a72950bd42f
   We ask respondents whether they have changed their behavior in any way since learning about COVID-19, and if so, how has it changed in the last 14 days.  
   
 <font size="5">**Reported COVID-19 Behavior Changes**</font>
-preservea512c3b3a8cb58af
+preserve76c8542f4d8e2d70
 
 ***  
 **Symptoms**  
@@ -67,7 +73,7 @@ preservea512c3b3a8cb58af
 We ask respondents whether they have experienced any illnesses or symptoms of a given list in the past 14 days.  
   
 <font size="5">**Reported COVID-19 Symptoms, past 14 days**</font>
-preserve9b7129ab39babe28
+preserve4823b3b0894a06f9
 
 
 ***  
@@ -76,13 +82,13 @@ preserve9b7129ab39babe28
 We ask: "Taken together, how many people outside this household have you interacted with in-person?"   
   
 <font size="5">**Number of in-person interactions (other than HH members)**</font>
-preserve5eee14c3a62c31d8
+preserve1d6a31ff42f47ef1
 
 *** 
 ### Labor Supply
 
 <font size="5">**Weekly labor supply (hours per household member)**</font>
-preserve6adace1d8778fd98
+preserve8761ccac666a6f15
 
 
 ***  
@@ -91,7 +97,7 @@ preserve6adace1d8778fd98
 We ask what has each child been doing over the last 15 minutes, whether the child has done any learning-related activities in the past 24 hours, and if so, what kind of activity.  
   
 <font size="5">**Children educational activities**</font>
-preserve21a3d10d15a2b884
+preserve80bcb37fdfc0bc35
   
 ***  
   
@@ -101,12 +107,12 @@ preserve21a3d10d15a2b884
 <font size="5">**Gender violence**</font>
 
 We ask married/cohabitant female respondents whether their husband/partners have (i) threaten to harm them or someone close to them, (ii) hit, slapped, kicked, or physically hurt them, and (iii) forced them to perform sexual acts.*  
-preservebaa7fcad280a1f5d
+preserve687fb9b8c4d8f82c
   *This plot shows data only for the share of female respondents that were surveyed by a female field officer, and are currently married or living with a partner. This sub-sample accounts for ~55% of all married/cohabitant females in the study sample, and ~36% of all females.  
   
 <font size="5">**Violence in the household**</font>  
 We ask: (i) Over the past 14 days, has there been a higher than usual amount of fights with members of your household?, and (ii) In the past 14 days, did you or your partner ever beat any of the children living in this household?  
-preserved25a6c2e37569648
+preserve939f7be834f3c002
 
 
 ***  
@@ -116,11 +122,11 @@ preserved25a6c2e37569648
 <font size="5">**Trust in government**</font>  
 
 How much do you trust your country’s government to take care of its citizens?  
-preserve4ecc110bc04deacf
+preserveddf326aa7029d373
 <font size="5">**Trust in other people**</font>  
 
 Generally speaking, would you say that most people can be trusted or that you need to be very careful in dealing with people?  
-preserve29a12c38c2440dbd
+preserve0f6cafe58254d7eb
 
 ***  
 

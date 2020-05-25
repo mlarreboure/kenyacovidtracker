@@ -92,8 +92,8 @@ v <- covid_weekly[v]
 c_g <- dygraph(c, main = "", group = "Siaya County Sample") %>%
   #dySeries("c4_wins", strokeWidth = 6, label = "Total consumption") %>%
   #dySeries("c2_wins", strokeWidth = 4, label = "Food consumption") %>%
-  dySeries("c1_wins", strokeWidth = 4, label = "Food expenditure") %>%
   dySeries("c3_wins", strokeWidth = 4, label = "Non-food expenditure") %>%
+  dySeries("c1_wins", strokeWidth = 4, label = "Food expenditure") %>%
   dyAxis("x", pixelsPerLabel = 100 , drawGrid = FALSE, label = "Weeks") %>% #grid
   dyAxis("y", label = "USD, PPP", drawGrid = FALSE) %>% 
   dyLegend(width = 200 , labelsSeparateLines = TRUE) %>%
@@ -166,7 +166,7 @@ it_g
 *** 
 
 ### Food Security  
-<font size="5">**Number of days experiencing food struggles in the past 7 days**</font>
+<font size="5">**Number of days skipping meals in the past 7 days**</font>
 ```{r struggles}
 f1_d_g  <- dygraph(f1_d, main = "") %>%
   dySeries("f1_d_skippedadult_wins", strokeWidth = 4, label = "Adults skipped meals") %>%
@@ -196,7 +196,8 @@ f1_g  <- dygraph(f1, main = "") %>%
   dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1")) %>%
     dyCrosshair(direction = "vertical") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
-  dyLegend(width = 450, labelsSeparateLines = FALSE) 
+  dyLegend(width = 450, labelsSeparateLines = FALSE) %>% 
+  dyRangeSelector(dateWindow = c("3", "7"))
 f1_g
 ```   
   
@@ -214,7 +215,8 @@ f1a_g  <- dygraph(f1a, main = "") %>%
   dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2")) %>%
     dyCrosshair(direction = "vertical") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
-  dyLegend(width = 500, labelsSeparateLines = FALSE) 
+  dyLegend(width = 475, labelsSeparateLines = FALSE) %>% 
+  dyRangeSelector(dateWindow = c("3", "7"))
 f1a_g
 ``` 
   
