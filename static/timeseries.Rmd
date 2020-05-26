@@ -434,7 +434,7 @@ tp_g <- dygraph(tp, main = "", group = "Siaya County Sample") %>%
       
 These data comes from phone survey interviews conducted by [REMIT Kenya](http://remitkenya.co.ke/) in Siaya County, Kenya. We are collecting data for a sample of ~12,000 households in the county, which is representative of the whole population. At the same time, our weekly sampling method assures weekly representativeness of the overall sample.
 
-So far we have interviewed 7,586 households, with the following distribution per week:
+So far we have interviewed 7,812 households, with the following distribution per week:
 
 | Week	| Dates	| Number of surveys |
 |------|:-----:|:---------:|
@@ -444,6 +444,6 @@ So far we have interviewed 7,586 households, with the following distribution per
 | Week 4 |	26 April 2020 - 02 May 2020	| 1,146 |
 | Week 5 |	03 May 2020 - 09 May 2020	| 1,499 |
 | Week 6 |	10 May 2020 - 16 May 2020	| 986 |
-| Week 7 |	17 May 2020 - 23 May 2020	| 988 |
+| Week 7 |	17 May 2020 - 23 May 2020	| 1,214 |
 
 
