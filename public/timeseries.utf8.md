@@ -13,59 +13,64 @@ output:
 
 ##  {.tabset}
 
-### Consumption
-
-<font size="5">**Weekly consumption per capita (USD, PPP)**</font>
-preserve9648c191e2044e52
-
-
-***  
 ### Income  
 <font size="5">**Earnings per capita (USD, PPP) - past 14 days**</font>
-preserve119ca4646c87994e
+preservec9aba9a55383bc27
+This plot aggregates income from each of the three earning sources, across all working-age household members, stacking them to add to the average earning per capita, including children, in the past 14 days. If the household does not perceive income from one or more of the sources, those data points are assigned zeros to assure representativeness for the whole population.  
+
 <font size="5">**Dissaving per capita (USD, PPP) - past 14 days**</font>  
 
-preserve2c2c576a533e6d76
-<font size="5">**Transfers per capita (USD, PPP) - past 14 days**</font>  
+preserveba12ac0bdf81cc84
+ The dissaving variable is constructed by adding the value of assets sold and loans taken, and substracting the value of any assets or durables bought.  
+ 
+  <font size="5">**Transfers per capita (USD, PPP) - past 14 days**</font>  
 
 We ask whether in the past 14 days anyone in the household received a gift/assistance of money or goods, and its value, from (i) the government, (ii) from a non-governmental organization or community group, or (iii) from an individual politican or government official.  
 
-preserve8d764a6f5c101924
+preservef04fd88299f78f04
   
+*** 
+
+### Consumption
+
+<font size="5">**Weekly consumption per capita (USD, PPP)**</font>
+preserve5f346886b8709c6d
+
+
 *** 
 
 ### Food Security  
 <font size="5">**Number of days skipping meals in the past 7 days**</font>
-preserve13c8f8408d8eb533
+preserve3d9b2c78e05ec18b
   
 <font size="5">**Percentage of sample unable to buy usual amount of food due to:**</font>
    
 We ask whether in the past 7 days, any household member was unable to buy the amount of food they usually buy because of: (i) price of food being too high, (ii) household income having dropped, and (iii) shortages in markets.  
 
-preservea42e0aee9822e5f2
+preserve41f1506d416f60bf
   
    <font size="5">**Other food hardship experiences, percentage of sample**</font>
    
 We ask whether in the past 7 days, any household member experienced: (i) having to reduce the number of meals and/or the portion of each meal they would usually eat, (ii) difficulties in going to food markets due to mobility restrictions imposed by government, and (iii) difficulties in buying food due to most food markets being closed.
 
-preservef636c4023a7b81b4
+preserve0c546eb036790842
   
 ***  
 ### Household enterprises  
 <font size="5">**Enterprises revenue and profits in the past 14 days**</font>
-preserve20269906ff6d0b3b
+preservea97e29be453fb5f3
   
   ***  
 
 ### COVID-19  
 
-  **Behavior Changes**  
+  **Behavior Adoption**  
     
     
-  We ask respondents whether they have changed their behavior in any way since learning about COVID-19, and if so, how has it changed in the last 14 days.  
+  We ask respondents whether they have changed their behavior in any way since learning about COVID-19, and if so, how has it changed.
   
-<font size="5">**Reported COVID-19 Behavior Changes**</font>
-preserve8ceb70138d33bbbe
+<font size="5">**Reported COVID-19 Behavior Adoption**</font>
+preservec55c69fd008fea24
 
 ***  
 **Symptoms**  
@@ -73,7 +78,7 @@ preserve8ceb70138d33bbbe
 We ask respondents whether they have experienced any illnesses or symptoms of a given list in the past 14 days.  
   
 <font size="5">**Reported COVID-19 Symptoms, past 14 days**</font>
-preserve1f66bfa07d0450b9
+preservecb8b0003fd96e4ee
 
 
 ***  
@@ -82,14 +87,14 @@ preserve1f66bfa07d0450b9
 We ask: "Taken together, how many people outside this household have you interacted with in-person?"   
   
 <font size="5">**Number of in-person interactions (other than HH members)**</font>
-preserve29bf5f1ce27a069d
+preserve1605db15cc7e71a0
 
 *** 
 ### Labor Supply
 
-<font size="5">**Weekly labor supply (hours per household member)**</font>
-preserve9bcde7f3208a45bd
-
+<font size="5">**Weekly labor supply (hours per household adult)**</font>
+preservef77fdd3dfc155b13
+This plot aggregates hours worked on each of the three sources, across all working-age household members, stacking them to add to the average weekly labor supply per household adult. If the household does not work any hours on one or more of the labor categories, those data points are assigned zeros to assure representativeness of the whole population. 
 
 ***  
 ### Children Education
@@ -97,7 +102,7 @@ preserve9bcde7f3208a45bd
 We ask what has each child been doing over the last 15 minutes, whether the child has done any learning-related activities in the past 24 hours, and if so, what kind of activity.  
   
 <font size="5">**Children educational activities**</font>
-preserveb0d7c1e7f1f21c51
+preserve71cfbc1b3302741e
   
 ***  
   
@@ -107,12 +112,12 @@ preserveb0d7c1e7f1f21c51
 <font size="5">**Gender violence**</font>
 
 We ask married/cohabitant female respondents whether their husband/partners have (i) threaten to harm them or someone close to them, (ii) hit, slapped, kicked, or physically hurt them, and (iii) forced them to perform sexual acts.*  
-preservecd0d90b2e0aed978
+preserveda9dcc52cc1f000b
   *This plot shows data only for the share of female respondents that were surveyed by a female field officer, and are currently married or living with a partner. This sub-sample accounts for ~55% of all married/cohabitant females in the study sample, and ~36% of all females.  
   
 <font size="5">**Violence in the household**</font>  
 We ask: (i) Over the past 14 days, has there been a higher than usual amount of fights with members of your household?, and (ii) In the past 14 days, did you or your partner ever beat any of the children living in this household?  
-preserveabfd6f3914797345
+preserve34843e9b86447424
 
 
 ***  
@@ -122,11 +127,11 @@ preserveabfd6f3914797345
 <font size="5">**Trust in government**</font>  
 
 How much do you trust your country’s government to take care of its citizens?  
-preserve312145336d404aaa
+preserve665a9eb4c82392d4
 <font size="5">**Trust in other people**</font>  
 
 Generally speaking, would you say that most people can be trusted or that you need to be very careful in dealing with people?  
-preserve8fb23e8aad7cdae3
+preservef6f69f811d36c4c4
 
 ***  
 
