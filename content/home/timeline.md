@@ -19,6 +19,24 @@ date_format = "January 2"
 #   Begin/end multi-line descriptions with 3 quotes `"""`.
 
 [[experience]]
+title = "President Uhuru Kenyatta announced Sh53.7 billion stimulus packages to help businesses and Kenyans get through the economic upheaval caused by the Covid-19 pandemic."
+company=""
+date_start = "2006-05-23" 
+date_end = ""
+description = """
+Among the sectors to be targeted in the incentives is infrastructure, tourism and SMEs.  
+"""
+
+[[experience]]
+title = "Banning of people movement in and out of Kenya through the Tanzania and Somalia borders."
+company=""
+date_start = "2007-05-16" 
+date_end = ""
+description = """
+Only cargo vehicles are exempted.
+"""
+
+[[experience]]
 title = "Government Minister Eugene L. Wamalwa, reports that 237 lives have been lost due to flooding. A total of 161,000 households (over 800,000 people) have been affected across the country."
 company=""
 date_start = "2008-05-13" 
