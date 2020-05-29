@@ -363,24 +363,23 @@ l_g <- dygraph(l, main = "", group = "Siaya County Sample") %>%
 ### Children Education  
 
 <font size="5">**Children educational activities**</font>  
-  
+     We ask what has each child been doing over the last 15 minutes, whether the child has done any learning-related activities in the past 24 hours, and if so, what kind of activity. From this question we also learn whether the child attended school.
 ```{r children}
 ch_g  <- dygraph(ch, main = "", group = "Siaya County Sample") %>%
-  dySeries("ch2_wins", strokeWidth = 4, label = "In the past 24 hours") %>%
-  dySeries("ch3_wins", strokeWidth = 4, label = "Attended school") %>%
-  dySeries("ch1_wins", strokeWidth = 4, label = "In the past 15 minutes") %>%
+  dySeries("ch3_wins", strokeWidth = 4, label = "Attended school in past 24hrs") %>%
+  dySeries("ch2_wins", strokeWidth = 4, label = "Any learning in past 24hrs") %>%
+  dySeries("ch1_wins", strokeWidth = 4, label = "Any learning in past 15mins") %>%
   dyAxis("x", pixelsPerLabel = 75 , drawGrid = FALSE, label = "Weeks") %>% #grid
   dyAxis("y", drawGrid = FALSE, label = "Percentage of sample") %>% 
      dyCrosshair(direction = "vertical") %>%
- dyLegend(width = 550) %>%
+ dyLegend(width = 600) %>%
   presAnnotation("1", text = "April 11") %>%
   presAnnotation("7", text = "May 23") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
   dyOptions(axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"))
 ch_g
 ```
-   
-   We ask what has each child been doing over the last 15 minutes, whether the child has done any learning-related activities in the past 24 hours, and if so, what kind of activity.  
+
    
    
 ***  
