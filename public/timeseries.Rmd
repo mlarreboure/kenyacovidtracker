@@ -117,6 +117,7 @@ i_g
 ***  
   
 <font size="5">**Dissaving per capita (USD, PPP) - past 14 days**</font>  
+ The dissaving variable is constructed by adding the value of assets sold and loans taken, and substracting the value of any assets or durables bought.  
 
 ```{r dissaving}
 d_g  <- dygraph(d, main = "") %>%
@@ -131,11 +132,12 @@ d_g  <- dygraph(d, main = "") %>%
   dyLegend(width = 210, show="always") 
 d_g
 ```
- The dissaving variable is constructed by adding the value of assets sold and loans taken, and substracting the value of any assets or durables bought.  
+
    
 ***  
    
   <font size="5">**Transfers per capita (USD, PPP) - past 14 days**</font>  
+    We ask whether in the past 14 days anyone in the household received a gift/assistance of money or goods, and its value, from (i) the government, (ii) from a non-governmental organization or community group, or (iii) from an individual politican or government official.  
 
 ```{r transfers}
 it_g  <- dygraph(it, main = "") %>%
@@ -153,7 +155,7 @@ it_g  <- dygraph(it, main = "") %>%
 it_g
 ```
   
-  We ask whether in the past 14 days anyone in the household received a gift/assistance of money or goods, and its value, from (i) the government, (ii) from a non-governmental organization or community group, or (iii) from an individual politican or government official.  
+
   
 *** 
 
@@ -183,7 +185,8 @@ c_g <- dygraph(c, main = "", group = "Siaya County Sample") %>%
 *** 
 
 ### Food Security  
-<font size="5">**Number of days skipping meals in the past 7 days**</font>
+<font size="5">**Number of days skipping meals in the past 7 days**</font>  
+
 ```{r struggles}
 f1_d_g  <- dygraph(f1_d, main = "") %>%
   dySeries("f1_d_skippedadult_wins", strokeWidth = 4, label = "Adults skipped meals") %>%
@@ -203,7 +206,10 @@ f1_d_g
      
 ***  
   
-<font size="5">**Percentage of sample unable to buy usual amount of food due to:**</font>
+<font size="5">**Percentage of sample unable to buy usual amount of food due to:**</font>  
+ We ask whether in the past 7 days, any household member was unable to buy the amount of food they usually buy because of: (i) price of food being too high, (ii) household income having dropped, and (iii) shortages in markets.  
+   
+ 
    
 ```{r struggles2}
 f1_g  <- dygraph(f1, main = "") %>%
@@ -221,12 +227,13 @@ f1_g  <- dygraph(f1, main = "") %>%
   dyRangeSelector(dateWindow = c("2", "8"))
 f1_g
 ```   
- We ask whether in the past 7 days, any household member was unable to buy the amount of food they usually buy because of: (i) price of food being too high, (ii) household income having dropped, and (iii) shortages in markets.  
-  
+ 
      
 ***  
    
-   <font size="5">**Other food hardship experiences, percentage of sample**</font>
+   <font size="5">**Other food hardship experiences, percentage of sample**</font>  
+    We ask whether in the past 7 days, any household member experienced: (i) having to reduce the number of meals and/or the portion of each meal they would usually eat, (ii) difficulties in going to food markets due to mobility restrictions imposed by government, and (iii) difficulties in buying food due to most food markets being closed.  
+    
   
 ```{r struggles3}
 f1a_g  <- dygraph(f1a, main = "") %>%
@@ -244,8 +251,7 @@ f1a_g  <- dygraph(f1a, main = "") %>%
   dyRangeSelector(dateWindow = c("2", "8"))
 f1a_g
 ``` 
- We ask whether in the past 7 days, any household member experienced: (i) having to reduce the number of meals and/or the portion of each meal they would usually eat, (ii) difficulties in going to food markets due to mobility restrictions imposed by government, and (iii) difficulties in buying food due to most food markets being closed.
-  
+ 
    
 ***  
 ### Household enterprises  
@@ -269,7 +275,9 @@ e_g
 
 ### COVID-19  
 
-<font size="5">**Reported COVID-19 Behavior Adoption**</font>
+<font size="5">**Reported COVID-19 Behavior Adoption**</font>    
+We ask respondents whether they have changed their behavior in any way since learning about COVID-19, and if so, how  it has changed.
+
 ```{r behavior_changes}
   ckn6_g <- dygraph(ckn6, main = "") %>%
     dySeries("ckn6_washhands_wins", strokeWidth = 4, label = "Hand Washing") %>%
@@ -288,11 +296,13 @@ e_g
   ckn6_g
 ```
    
-  We ask respondents whether they have changed their behavior in any way since learning about COVID-19, and if so, how has it changed.
     
 ***  
 
-<font size="5">**Reported COVID-19 Symptoms, past 14 days**</font>
+<font size="5">**Reported COVID-19 Symptoms, past 14 days**</font>  
+We ask respondents whether they have experienced any illnesses or symptoms of a given list in the past 14 days.  
+  
+
 ``` {r symptoms}
   cov1_g <- dygraph(cov1, main = "") %>% 
   dySeries("cov1_fever_wins", strokeWidth = 4, label = "Fever") %>%
@@ -311,11 +321,12 @@ e_g
 ```
   
   
-We ask respondents whether they have experienced any illnesses or symptoms of a given list in the past 14 days.  
 
 *** 
 
-<font size="5">**Number of in-person interactions (other than HH members)**</font>
+<font size="5">**Number of in-person interactions (other than HH members)**</font>  
+  We ask: "Taken together, how many people outside this household have you interacted with in-person?"   
+
 ```{r interactions}
 net5_g  <- dygraph(net5, main = "") %>%
   dySeries("net5_last14_wins", strokeWidth = 4, label = "In the past 14 days") %>%
@@ -332,7 +343,6 @@ net5_g  <- dygraph(net5, main = "") %>%
 net5_g
 ```
   
-  We ask: "Taken together, how many people outside this household have you interacted with in-person?"   
 
 *** 
   
@@ -389,7 +399,7 @@ ch_g
 
 <font size="5">**Gender violence**</font>
 
-We ask married/cohabitant female respondents whether their husband/partners have (i) threaten to harm them or someone close to them, (ii) hit, slapped, kicked, or physically hurt them, and (iii) forced them to perform sexual acts.*  
+We ask married/cohabitant female respondents whether their husband/partner has (i) threaten to harm them or someone close to them, (ii) hit, slapped, kicked, or physically hurt them, and (iii) forced them to perform sexual acts.*  
 ```{r gender}
 gv_g  <- dygraph(gv, main = "", group = "Siaya County Sample") %>%
   dySeries("gv1", strokeWidth = 4, label = "Threaten to harm them") %>%
