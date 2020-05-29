@@ -34,7 +34,7 @@ ckn2 <- covid_weekly[ckn2]
 ckn6 <- c("week", "ckn6_washhands_wins", "ckn6_sanitizer_wins", "ckn6_stayhome_wins", "ckn6_mask_wins")
 ckn6 <- covid_weekly[ckn6]
 
-c <- c("week", "c2_wins", "c3_wins") #, "c3_wins", "c4_wins"
+c <- c("week", "c1a_wins", "c1b_wins", "c3_wins") #, "c3_wins", "c4_wins"
 c <- covid_weekly[c]
 
 i <- c("week", "i1_wins", "i2_wins" , "i3_wins") #, "i4_wins", "i5_wins", "i6_wins"  , "i7_wins"
@@ -165,12 +165,13 @@ it_g
 ``` {r consumption}
 c_g <- dygraph(c, main = "", group = "Siaya County Sample") %>%
   #dySeries("c4_wins", strokeWidth = 6, label = "Total consumption") %>%
-  dySeries("c2_wins", strokeWidth = 4, label = "Food consumption") %>%
   dySeries("c3_wins", strokeWidth = 4, label = "Non-food expenditure") %>%
+  dySeries("c1a_wins", strokeWidth = 4, label = "Food expenditure") %>%
+  dySeries("c1b_wins", strokeWidth = 4, label = "Own-food consumption") %>%
   #dySeries("c1_wins", strokeWidth = 4, label = "Food expenditure") %>%
   dyAxis("x", pixelsPerLabel = 75 , drawGrid = FALSE, label = "Weeks") %>% #grid
   dyAxis("y", label = "USD, PPP", drawGrid = FALSE) %>% 
-  dyLegend(width = 200 , labelsSeparateLines = TRUE) %>%
+  dyLegend(width = 250 , labelsSeparateLines = TRUE) %>%
     dyCrosshair(direction = "vertical") %>%
   dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2")) %>%
       dyCrosshair(direction = "vertical") %>%
@@ -180,7 +181,7 @@ c_g <- dygraph(c, main = "", group = "Siaya County Sample") %>%
   c_g
 
 ```
-Food consumption includes own agricultural and pastoral production at market value plus all food expenditure.  
+Own-food consumption accounts for own agricultural and pastoral production at market value.  
 
 *** 
 
@@ -352,8 +353,8 @@ net5_g
 ``` {r labor}
 l_g <- dygraph(l, main = "", group = "Siaya County Sample") %>%
   dySeries("l1_wins", strokeWidth = 4, label = "Agricultural labor supply") %>%
-  dySeries("l2_wins", strokeWidth = 4, label = "Own enterprise labor supply") %>%
   dySeries("l3_wins", strokeWidth = 4, label = "Wage labor supply") %>%
+  dySeries("l2_wins", strokeWidth = 4, label = "Own enterprise labor supply") %>%
   dyAxis("x", pixelsPerLabel = 75 , drawGrid = FALSE, label = "Weeks") %>% #grid
   dyAxis("y", label = "Hours per adult household member", drawGrid = FALSE) %>% 
   dyLegend(width = 550 , labelsSeparateLines = FALSE) %>%
@@ -382,7 +383,7 @@ ch_g  <- dygraph(ch, main = "", group = "Siaya County Sample") %>%
   dyAxis("x", pixelsPerLabel = 75 , drawGrid = FALSE, label = "Weeks") %>% #grid
   dyAxis("y", drawGrid = FALSE, label = "Percentage of sample") %>% 
      dyCrosshair(direction = "vertical") %>%
- dyLegend(width = 600) %>%
+ dyLegend(width = 570) %>%
   presAnnotation("1", text = "April 11") %>%
   presAnnotation("7", text = "May 23") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
