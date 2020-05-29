@@ -34,7 +34,7 @@ ckn2 <- covid_weekly[ckn2]
 ckn6 <- c("week", "ckn6_washhands_wins", "ckn6_sanitizer_wins", "ckn6_stayhome_wins", "ckn6_mask_wins")
 ckn6 <- covid_weekly[ckn6]
 
-c <- c("week", "c1_wins", "c3_wins") #, "c3_wins", "c4_wins"
+c <- c("week", "c2_wins", "c3_wins") #, "c3_wins", "c4_wins"
 c <- covid_weekly[c]
 
 i <- c("week", "i1_wins", "i2_wins" , "i3_wins") #, "i4_wins", "i5_wins", "i6_wins"  , "i7_wins"
@@ -165,9 +165,9 @@ it_g
 ``` {r consumption}
 c_g <- dygraph(c, main = "", group = "Siaya County Sample") %>%
   #dySeries("c4_wins", strokeWidth = 6, label = "Total consumption") %>%
-  #dySeries("c2_wins", strokeWidth = 4, label = "Food consumption") %>%
+  dySeries("c2_wins", strokeWidth = 4, label = "Food consumption") %>%
   dySeries("c3_wins", strokeWidth = 4, label = "Non-food expenditure") %>%
-  dySeries("c1_wins", strokeWidth = 4, label = "Food expenditure") %>%
+  #dySeries("c1_wins", strokeWidth = 4, label = "Food expenditure") %>%
   dyAxis("x", pixelsPerLabel = 75 , drawGrid = FALSE, label = "Weeks") %>% #grid
   dyAxis("y", label = "USD, PPP", drawGrid = FALSE) %>% 
   dyLegend(width = 200 , labelsSeparateLines = TRUE) %>%
