@@ -107,6 +107,23 @@ pf3 <- covid_weekly[pf3]
 pnf <- c("week", "mean_price_13", "mean_price_17", "mean_price_116") #"Bar soap (1)", "Charcoal (2kg)", "Panadol (pair)"
 pnf <- covid_weekly[pnf]
 
+#MENTAL HEALTH
+#nervious, anxious or on edge
+mh1 <- c("week", "s6_q1_1", "s6_q1_2", "s6_q1_3", "s6_q1_4")
+mh1 <- covid_weekly[mh1]
+#depressed
+mh2 <- c("week", "s6_q2_1", "s6_q2_2", "s6_q2_3", "s6_q2_4")
+mh2 <- covid_weekly[mh2]
+#lonely
+mh3 <- c("week", "s6_q3_1", "s6_q3_2", "s6_q3_3", "s6_q3_4")
+mh3 <- covid_weekly[mh3]
+#hopeful about the future
+mh4 <- c("week", "s6_q4_1", "s6_q4_2", "s6_q4_3", "s6_q4_4")
+mh4 <- covid_weekly[mh4]
+#physical reactions due to COVID-19
+mh5 <- c("week", "s6_q5_1", "s6_q5_2", "s6_q5_3", "s6_q5_4")
+mh5 <- covid_weekly[mh5]
+
 presAnnotation <- function(dygraph, x, text) {
   dygraph %>%
     dyAnnotation(x, text, attachAtBottom = TRUE, width = 60, height = 25)
@@ -514,6 +531,130 @@ tp_g <- dygraph(tp, main = "", group = "Siaya County Sample") %>%
 
 
 *** 
+
+### Mental health
+We ask questions 1-5 on core mental health from the John Hopkins Bloomberg School of Public Health (JHSPH) [resource](https://www.elizabethstuart.org/files/MH_survey-items-request_03_20.pdf).  
+
+<font size="5">**Nervious, anxious or on edge**</font>  
+
+In the past 7 days, how often have you felt nervous, anxious, or on edge?  
+``` {r mh1}
+mh1_g <- dygraph(mh1, main = "", group = "Siaya County Sample") %>%
+  dySeries("s6_q1_4", strokeWidth = 4, label = "5-7 days") %>%
+  dySeries("s6_q1_3", strokeWidth = 4, label = "3-4 days") %>%
+  dySeries("s6_q1_2", strokeWidth = 4, label = "1-2 days") %>%
+  dySeries("s6_q1_1", strokeWidth = 4, label = "Not at all or less than one day") %>%
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", label = "Percentage of sample", drawGrid = FALSE, valueRange = c(0, 110)) %>% 
+  dyLegend(width = 450 , labelsSeparateLines = FALSE) %>%
+    dyCrosshair(direction = "vertical") %>%
+  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2")) %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation("8", text = "May 30") %>%
+      dyCrosshair(direction = "vertical") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) 
+  mh1_g
+
+```
+   
+*** 
+<font size="5">**Depressed**</font>    
+
+In the past 7 days, how often have you felt depressed?  
+
+``` {r mh2}
+mh2_g <- dygraph(mh2, main = "", group = "Siaya County Sample") %>%
+  dySeries("s6_q2_4", strokeWidth = 4, label = "5-7 days") %>%
+  dySeries("s6_q2_3", strokeWidth = 4, label = "3-4 days") %>%
+  dySeries("s6_q2_2", strokeWidth = 4, label = "1-2 days") %>%
+  dySeries("s6_q2_1", strokeWidth = 4, label = "Not at all or less than one day") %>%
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", label = "Percentage of sample", drawGrid = FALSE, valueRange = c(0, 110)) %>% 
+  dyLegend(width = 450 , labelsSeparateLines = FALSE) %>%
+    dyCrosshair(direction = "vertical") %>%
+  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2")) %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation("8", text = "May 30") %>%
+      dyCrosshair(direction = "vertical") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) 
+  mh2_g
+
+```
+   
+*** 
+<font size="5">**Lonely**</font>    
+
+In the past 7 days, how often have you felt lonely?  
+
+``` {r mh3}
+mh3_g <- dygraph(mh3, main = "", group = "Siaya County Sample") %>%
+  dySeries("s6_q3_4", strokeWidth = 4, label = "5-7 days") %>%
+  dySeries("s6_q3_3", strokeWidth = 4, label = "3-4 days") %>%
+  dySeries("s6_q3_2", strokeWidth = 4, label = "1-2 days") %>%
+  dySeries("s6_q3_1", strokeWidth = 4, label = "Not at all or less than one day") %>%
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", label = "Percentage of sample", drawGrid = FALSE, valueRange = c(0, 110)) %>% 
+  dyLegend(width = 450 , labelsSeparateLines = FALSE) %>%
+    dyCrosshair(direction = "vertical") %>%
+  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2")) %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation("8", text = "May 30") %>%
+      dyCrosshair(direction = "vertical") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) 
+  mh3_g
+
+```
+   
+*** 
+<font size="5">**Hopeful about the future**</font>  
+    
+In the past 7 days, how often have you felt hopeful about the future?  
+
+``` {r mh4}
+mh4_g <- dygraph(mh4, main = "", group = "Siaya County Sample") %>%
+  dySeries("s6_q4_4", strokeWidth = 4, label = "5-7 days") %>%
+  dySeries("s6_q4_3", strokeWidth = 4, label = "3-4 days") %>%
+  dySeries("s6_q4_2", strokeWidth = 4, label = "1-2 days") %>%
+  dySeries("s6_q4_1", strokeWidth = 4, label = "Not at all or less than one day") %>%
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", label = "Percentage of sample", drawGrid = FALSE, valueRange = c(0, 110)) %>% 
+  dyLegend(width = 450 , labelsSeparateLines = FALSE) %>%
+    dyCrosshair(direction = "vertical") %>%
+  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2")) %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation("8", text = "May 30") %>%
+      dyCrosshair(direction = "vertical") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) 
+  mh4_g
+
+```
+   
+*** 
+<font size="5">**Had physical reactions due to COVID-19**</font>  
+
+  In the past 7 days, how often have you had physical reactions, such as sweating, trouble breathing, nausea, or a pounding heart, when thinking about your experience (e.g., social distancing, loss of income/work, concerns about infection) with the coronavirus/COVID-19 pandemic? 
+  
+``` {r mh5}
+mh5_g <- dygraph(mh5, main = "", group = "Siaya County Sample") %>%
+  dySeries("s6_q5_4", strokeWidth = 4, label = "5-7 days") %>%
+  dySeries("s6_q5_3", strokeWidth = 4, label = "3-4 days") %>%
+  dySeries("s6_q5_2", strokeWidth = 4, label = "1-2 days") %>%
+  dySeries("s6_q5_1", strokeWidth = 4, label = "Not at all or less than one day") %>%
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", label = "Percentage of sample", drawGrid = FALSE, valueRange = c(0, 110)) %>% 
+  dyLegend(width = 450 , labelsSeparateLines = FALSE) %>%
+    dyCrosshair(direction = "vertical") %>%
+  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2")) %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation("8", text = "May 30") %>%
+      dyCrosshair(direction = "vertical") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) 
+  mh5_g
+
+```
+   
+*** 
+
 
 ### Food prices
 
