@@ -82,6 +82,31 @@ gv <- covid_weekly[gv]
 v <- c("week", "gv4", "gv5")
 v <- covid_weekly[v]
 
+#PRICES
+#services
+ps <- c("week", "mean_price_11", "mean_price_111", "mean_price_113") #"Adult head shaving (1)", "Fixing a small hole at a tailor (1)", "Grinding 1kg of maize"
+ps <- covid_weekly[ps]
+
+#livestock
+pl <- c("week", "mean_price_18", "mean_price_16", "mean_price_112") #"Chicken hen (1)", "Calf - local (1)", "Goat (1)"
+pl <- covid_weekly[pl]
+
+#food1
+pf1 <- c("week", "mean_price_12", "mean_price_14", "mean_price_15", "mean_price_119") #"Banana - sweet (bunch)", "Beans (2kg)", "Beef meat (1kg)", "Tilapia fish (whole)"
+pf1 <- covid_weekly[pf1]
+
+#food2
+pf2 <- c("week", "mean_price_19", "mean_price_114", "mean_price_117", "mean_price_118") # "Cooking fat (500g)", "Maize (2kg)", "Rice (1kg)", "Sugar (1kg)"
+pf2 <- covid_weekly[pf2]
+
+#food3
+pf3 <- c("week", "mean_price_110", "mean_price_115", "mean_price_120") # "Egg (one)", "Onions (4)", "Tomatoes (4)"
+pf3 <- covid_weekly[pf3]
+
+#non food
+pnf <- c("week", "mean_price_13", "mean_price_17", "mean_price_116") #"Bar soap (1)", "Charcoal (2kg)", "Panadol (pair)"
+pnf <- covid_weekly[pnf]
+
 presAnnotation <- function(dygraph, x, text) {
   dygraph %>%
     dyAnnotation(x, text, attachAtBottom = TRUE, width = 60, height = 25)
@@ -465,7 +490,7 @@ tg_g <- dygraph(tg, main = "", group = "Siaya County Sample") %>%
 
 ```
    
-***  
+***   
   
   <font size="5">**Trust in other people**</font>  
 
@@ -487,7 +512,151 @@ tp_g <- dygraph(tp, main = "", group = "Siaya County Sample") %>%
 
 ```
 
+
+*** 
+
+### Food prices
+
+<font size="5">**Food 1**</font>  
+``` {r food1}
+
+pf1_g <- dygraph(pf1, main = "", group = "Siaya County Sample") %>%
+  dySeries("mean_price_15", strokeWidth = 4, label = "Beef meat (1kg)") %>%
+  dySeries("mean_price_119", strokeWidth = 4, label = "Tilapia fish (whole)") %>%
+  dySeries("mean_price_14", strokeWidth = 4, label = "Beans (2kg)") %>%
+  dySeries("mean_price_12", strokeWidth = 4, label = "Banana - sweet (bunch)") %>%
+
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", label = "Price - USD, PPP", drawGrid = FALSE) %>% 
+  dyLegend(width = 550 , labelsSeparateLines = FALSE) %>%
+    dyCrosshair(direction = "vertical") %>%
+  dyOptions(includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(9, "Set1")) %>%
+      dyCrosshair(direction = "vertical") %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation("8", text = "May 30") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) 
+  pf1_g
+
+```
+  
+***     
+
+<font size="5">**Food 2**</font>  
+``` {r food2}
+
+pf2_g <- dygraph(pf2, main = "", group = "Siaya County Sample") %>%
+  dySeries("mean_price_114", strokeWidth = 4, label = "Maize (2kg)") %>%
+  dySeries("mean_price_118", strokeWidth = 4, label = "Sugar (1kg)") %>%
+  dySeries("mean_price_117", strokeWidth = 4, label = "Rice (1kg)") %>%
+  dySeries("mean_price_19", strokeWidth = 4, label = "Cooking fat (500g)") %>%
+
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", label = "Price - USD, PPP", drawGrid = FALSE) %>% 
+  dyLegend(width = 500 , labelsSeparateLines = FALSE) %>%
+    dyCrosshair(direction = "vertical") %>%
+  dyOptions(includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2")) %>%
+      dyCrosshair(direction = "vertical") %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation("8", text = "May 30") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) 
+  pf2_g
+
+```
+  
+***       
+
+<font size="5">**Food 3**</font>  
+``` {r food3}
+
+pf3_g <- dygraph(pf3, main = "", group = "Siaya County Sample") %>%
+  dySeries("mean_price_120", strokeWidth = 4, label = "Tomatoes (4)") %>%
+  dySeries("mean_price_115", strokeWidth = 4, label = "Onions (4)") %>%
+  dySeries("mean_price_110", strokeWidth = 4, label = "Egg (1)") %>%
+
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", label = "Price - USD, PPP", drawGrid = FALSE) %>% 
+  dyLegend(width = 300 , labelsSeparateLines = FALSE) %>%
+    dyCrosshair(direction = "vertical") %>%
+  dyOptions(includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(9, "Set1")) %>%
+      dyCrosshair(direction = "vertical") %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation("8", text = "May 30") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) 
+  pf3_g
+
+```
+  
+***    
+
+### Other prices
+
+<font size="5">**Services**</font>  
+``` {r services}
+
+ps_g <- dygraph(ps, main = "", group = "Siaya County Sample") %>%
+  dySeries("mean_price_11", strokeWidth = 4, label = "Adult head shaving (1)") %>%
+  dySeries("mean_price_111", strokeWidth = 4, label = "Fixing a small hole at a tailor (1)") %>%
+  dySeries("mean_price_113", strokeWidth = 4, label = "Grinding 1kg of maize") %>%
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", label = "Price - USD, PPP", drawGrid = FALSE) %>% 
+  dyLegend(width = 250 , labelsSeparateLines = TRUE) %>%
+    dyCrosshair(direction = "vertical") %>%
+  dyOptions(includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2")) %>%
+      dyCrosshair(direction = "vertical") %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation("8", text = "May 30") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) 
+  ps_g
+
+```
+  
 ***  
+
+<font size="5">**Livestock**</font>  
+``` {r livestock}
+
+pl_g <- dygraph(pl, main = "", group = "Siaya County Sample") %>%
+  dySeries("mean_price_16", strokeWidth = 4, label = "Calf - local (1)") %>%
+  dySeries("mean_price_112", strokeWidth = 4, label = "Goat (1)") %>%
+  dySeries("mean_price_18", strokeWidth = 4, label = "Chicken hen (1)") %>%
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", label = "Price - USD, PPP", drawGrid = FALSE) %>% 
+  dyLegend(width = 400 , labelsSeparateLines = FALSE) %>%
+    dyCrosshair(direction = "vertical") %>%
+  dyOptions(includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2")) %>%
+      dyCrosshair(direction = "vertical") %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation("8", text = "May 30") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) 
+  pl_g
+
+```
+  
+  ***   
+    
+
+<font size="5">**Non-food**</font>  
+``` {r nonfood}
+
+pnf_g <- dygraph(pnf, main = "", group = "Siaya County Sample") %>%
+  dySeries("mean_price_13", strokeWidth = 4, label = "Bar soap (1)") %>%
+  dySeries("mean_price_17", strokeWidth = 4, label = "Charcoal (2kg)") %>%
+  dySeries("mean_price_116", strokeWidth = 4, label = "Panadol (pair)") %>%
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", label = "Price - USD, PPP", drawGrid = FALSE) %>% 
+  dyLegend(width = 400 , labelsSeparateLines = FALSE) %>%
+    dyCrosshair(direction = "vertical") %>%
+  dyOptions(includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2")) %>%
+      dyCrosshair(direction = "vertical") %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation("8", text = "May 30") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) 
+  pnf_g
+
+```
+  
+***     
+
 
 ## {}
       
