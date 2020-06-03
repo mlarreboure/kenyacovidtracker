@@ -1,0 +1,189 @@
+---
+title: "Weekly Statistics"
+author: 'Siaya County - Enterprise Sample'
+date: ''
+output:
+  html_document:
+    theme: paper
+    toc: FALSE
+    includes: 
+      before_body: header.html
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(haven)
+library(tidyverse)
+library(dygraphs)
+library(xts)
+ent_weekly <- read_dta("~/Dropbox (Princeton)/GE_Endline2/covid19/data/COVID_AllENTs_outcomes_weekly.dta")
+
+
+#Grouping vars for graphs
+rev <- c("week", "rev_wins")
+rev <- ent_weekly[rev]
+
+profits <- c("week", "profits_wins")
+profits <- ent_weekly[profits]
+
+op <- c("week", "op", "temp_closed", "perm_closed")
+op <- ent_weekly[op]
+
+inv <- c("week", "investment_wins")
+inv <- ent_weekly[inv]
+
+wages <- c("week", "wages_wins")
+wages <- ent_weekly[wages]
+
+cov <- c("week", "ecov_1", "ecov_2", "ecov_3")
+cov <- ent_weekly[cov]
+
+presAnnotation <- function(dygraph, x, text) {
+  dygraph %>%
+    dyAnnotation(x, text, attachAtBottom = TRUE, width = 60, height = 25)
+}
+
+```
+
+  
+##  {.tabset}
+
+### Operations  
+<font size="5">**Enterprise status**</font>
+``` {r op}
+  op_g <- dygraph(op, main = "") %>%
+  dySeries("perm_closed", strokeWidth = 4, label = "Permanently closed") %>%
+  dySeries("temp_closed", strokeWidth = 4, label = "Temporarily closed") %>%
+  dySeries("op", strokeWidth = 4, label = "Operational") %>%
+  dyAxis("x", pixelsPerLabel = 90 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", label = "Percentage of sample", drawGrid = FALSE, valueRange = c(0, 110)) %>% 
+  dyLegend(width = 500, labelsSeparateLines = FALSE) %>%
+  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set1")) %>%
+    dyCrosshair(direction = "vertical") %>%
+  presAnnotation("1", text = "May 10") %>%
+  presAnnotation("4", text = "June 02") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
+op_g
+```
+  
+  
+
+*** 
+### Revenue and profit  
+<font size="5">**Revenue (USD, PPP) - past 14 days**</font>
+``` {r revenue}
+  rev_g <- dygraph(rev, main = "") %>%
+  dySeries("rev_wins", strokeWidth = 4, label = "Revenue") %>%
+  dyAxis("x", pixelsPerLabel = 90 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", label = "USD, PPP", drawGrid = FALSE) %>% 
+  dyLegend(width = 250, labelsSeparateLines = FALSE) %>%
+  dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set1")) %>%
+    dyCrosshair(direction = "vertical") %>%
+  presAnnotation("1", text = "May 10") %>%
+  presAnnotation("4", text = "June 02") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
+rev_g
+```
+  
+  
+
+***  
+
+<font size="5">**Profits (USD, PPP) - past 14 days**</font>
+``` {r profits}
+  profits_g <- dygraph(profits, main = "") %>%
+  dySeries("profits_wins", strokeWidth = 4, label = "Profits") %>%
+  dyAxis("x", pixelsPerLabel = 90 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", label = "USD, PPP", drawGrid = FALSE) %>% 
+  dyLegend(width = 250, labelsSeparateLines = FALSE) %>%
+  dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2")) %>%
+    dyCrosshair(direction = "vertical") %>%
+  presAnnotation("1", text = "May 10") %>%
+  presAnnotation("4", text = "June 02") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
+profits_g
+```
+  
+  
+
+*** 
+
+### Investment and wages
+
+<font size="5">**Investment (USD, PPP) - past 14 days**</font>
+``` {r invest}
+  inv_g <- dygraph(inv, main = "") %>%
+  dySeries("investment_wins", strokeWidth = 4, label = "Investment") %>%
+  dyAxis("x", pixelsPerLabel = 90 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", label = "USD, PPP", drawGrid = FALSE) %>% 
+  dyLegend(width = 250, labelsSeparateLines = FALSE) %>%
+  dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set1")) %>%
+    dyCrosshair(direction = "vertical") %>%
+  presAnnotation("1", text = "May 10") %>%
+  presAnnotation("4", text = "June 02") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
+inv_g
+```
+  
+  ***  
+  
+  
+<font size="5">**Wages (USD, PPP) - past 14 days**</font>
+``` {r wages}
+  wages_g <- dygraph(wages, main = "") %>%
+  dySeries("wages_wins", strokeWidth = 4, label = "Wages") %>%
+  dyAxis("x", pixelsPerLabel = 90 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", label = "USD, PPP", drawGrid = FALSE) %>% 
+  dyLegend(width = 250, labelsSeparateLines = FALSE) %>%
+  dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2")) %>%
+    dyCrosshair(direction = "vertical") %>%
+  presAnnotation("1", text = "May 10") %>%
+  presAnnotation("4", text = "June 02") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
+wages_g
+```
+
+  
+***     
+
+
+### COVID-19  
+<font size="5">**COVID-19 Impact**</font>
+
+How has COVID-19 affected this business?*  
+
+``` {r ecov}
+  ecov_g <- dygraph(cov, main = "") %>%
+  dySeries("ecov_1", strokeWidth = 4, label = "Reduction in demand/customers") %>%
+  dySeries("ecov_2", strokeWidth = 4, label = "Has not affected") %>%
+  dySeries("ecov_3", strokeWidth = 4, label = "Other") %>%
+  dyAxis("x", pixelsPerLabel = 90 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", label = "USD, PPP", drawGrid = FALSE) %>% 
+  dyLegend(width = 500, labelsSeparateLines = FALSE) %>%
+  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set1")) %>%
+    dyCrosshair(direction = "vertical") %>%
+  presAnnotation("0.5", text = "May 10") %>%
+  presAnnotation("4.5", text = "June 02") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
+ecov_g
+```
+    
+*This is for the proportion of enterprises currently operating.  
+
+  ***  
+  
+## {}
+      
+These data comes from phone survey interviews conducted by [REMIT Kenya](http://remitkenya.co.ke/) in Siaya County, Kenya. We are collecting data for a sample of ~5,000 enterprises in the county, which is representative of the whole population of enterprises. At the same time, our weekly sampling method assures weekly representativeness of the overall sample.
+
+So far we have interviewed 1,770 enterprises, with the following distribution per week:
+
+| Week	| Dates	| Number of surveys |
+|------|:-----:|:---------:|
+| Week 1 |	10 May 2020 - 16 May 2020	| 542 |
+| Week 2 |	17 May 2020 - 23 May 2020	| 495 |
+| Week 3 |	24 May 2020 - 30 May 2020	| 464 |
+| Week 4 |	31 May 2020 - 02 Jun 2020	| 269 |
+
+
+

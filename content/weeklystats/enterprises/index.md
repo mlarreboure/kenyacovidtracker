@@ -6,7 +6,7 @@ tags:
 date: "2020-04-15T00:00:00Z"
 
 # Optional external URL for project (replaces project detail page).
-external_link: ""
+external_link: "siaya_enterprises.html"
 
 image:
   caption: 
