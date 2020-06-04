@@ -108,6 +108,9 @@ pnf <- c("week", "mean_price_13", "mean_price_17", "mean_price_116") #"Bar soap 
 pnf <- covid_weekly[pnf]
 
 #MENTAL HEALTH
+#cesd_10
+cesd_10<- c("week", "cesd")
+cesd_10 <- covid_weekly[cesd_10]
 #nervious, anxious or on edge
 mh1 <- c("week", "s6_q1_1", "s6_q1_2", "s6_q1_3", "s6_q1_4")
 mh1 <- covid_weekly[mh1]
@@ -533,7 +536,31 @@ tp_g <- dygraph(tp, main = "", group = "Siaya County Sample") %>%
 *** 
 
 ### Mental health
-We ask questions 1-5 on core mental health from the John Hopkins Bloomberg School of Public Health (JHSPH) [resource](https://www.elizabethstuart.org/files/MH_survey-items-request_03_20.pdf).  
+
+
+<font size="5">**Depression, CES-D-10**</font>  
+
+The Centre for Epidemiological Studies Depression Scale (CES-D-10) is a 10-item Likert scale questionnaire assessing depressive symptoms in the past week. It includes three items on depressed affect, five items on somatic symptoms, and two on positive affect. Options for each item range from “rarely or none of the time” (score of 0) to “all of the time” (score of 3). Scoring is reversed for positive affect statements. Total scores can range from 0 to 30. **Higher scores suggest greater severity of symptoms.**  
+
+``` {r cesd10}
+cesd_g <- dygraph(cesd_10, main = "", group = "Siaya County Sample") %>%
+  dySeries("cesd", strokeWidth = 4, label = "CES-D score") %>%
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", label = "Average score", drawGrid = FALSE) %>% 
+  dyLegend(width = 450 , labelsSeparateLines = FALSE) %>%
+    dyCrosshair(direction = "vertical") %>%
+  dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2")) %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation("8", text = "May 30") %>%
+      dyCrosshair(direction = "vertical") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) 
+  cesd_g
+
+```
+   
+***  
+
+We also ask questions 1-5 on core mental health from the John Hopkins Bloomberg School of Public Health (JHSPH) [resource](https://www.elizabethstuart.org/files/MH_survey-items-request_03_20.pdf).  
 
 <font size="5">**Nervious, anxious or on edge**</font>  
 

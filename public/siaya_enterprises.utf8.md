@@ -17,21 +17,21 @@ output:
 
 ### Operations  
 <font size="5">**Enterprise status**</font>
-preserveddb7e82eae8aae0f
+preserve07ac932da7496c8b
   
   
 
 *** 
 ### Revenue and profit  
 <font size="5">**Revenue (USD, PPP) - past 14 days**</font>
-preserve08d46243c3724b5f
+preserveb7c3333f6432f12b
   
   
 
 ***  
 
 <font size="5">**Profits (USD, PPP) - past 14 days**</font>
-preserve53fd05973c0b4f8f
+preservea7e4725a32b52d88
   
   
 
@@ -40,13 +40,13 @@ preserve53fd05973c0b4f8f
 ### Investment and wages
 
 <font size="5">**Investment (USD, PPP) - past 14 days**</font>
-preserve57fb95a2ffaef5af
+preserve79797bb3b03ad5fe
   
   ***  
   
   
 <font size="5">**Wages (USD, PPP) - past 14 days**</font>
-preserve7bafc1bfc313791c
+preserve5ca97f5dc73a4153
 
   
 ***     
@@ -57,7 +57,7 @@ preserve7bafc1bfc313791c
 
 How has COVID-19 affected this business?*  
 
-preservea781ef7b3bf7eb29
+preserveaa0d016eb7585300
     
 *This is for the proportion of enterprises currently operating.  
 
