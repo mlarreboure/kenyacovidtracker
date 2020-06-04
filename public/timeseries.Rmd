@@ -540,7 +540,7 @@ tp_g <- dygraph(tp, main = "", group = "Siaya County Sample") %>%
 
 <font size="5">**Depression, CES-D-10**</font>  
 
-The Centre for Epidemiological Studies Depression Scale (CES-D-10) is a 10-item Likert scale questionnaire assessing depressive symptoms in the past week. It includes three items on depressed affect, five items on somatic symptoms, and two on positive affect. Options for each item range from “rarely or none of the time” (score of 0) to “all of the time” (score of 3). Scoring is reversed for positive affect statements. Total scores can range from 0 to 30. **Higher scores suggest greater severity of symptoms.**  
+**The Centre for Epidemiological Studies Depression Scale** (CES-D-10) is a 10-item Likert scale questionnaire assessing depressive symptoms in the past week. It includes three items on depressed affect, five items on somatic symptoms, and two on positive affect. Options for each item range from “rarely or none of the time” (score of 0) to “all of the time” (score of 3). Scoring is reversed for positive affect statements. Total scores can range from 0 to 30. **Higher scores suggest greater severity of symptoms.**  
 
 ``` {r cesd10}
 cesd_g <- dygraph(cesd_10, main = "", group = "Siaya County Sample") %>%
