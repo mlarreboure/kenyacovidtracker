@@ -866,7 +866,6 @@ pnf_g <- dygraph(pnf, main = "", group = "Siaya County Sample") %>%
 
 <font size="5">**Price Index**</font>
 
-Price index based on 2018 USD, using KLPS household consumption weights. 
 
 ```{r price_index_heatmap}
 g <- list(
@@ -896,6 +895,8 @@ fig <- fig %>% layout(
   partial_bundle() %>% toWebGL()
 fig
 ```
+
+Price index calculated in 2018 USD using household consumption weights. 
 
  ***   
     
