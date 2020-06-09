@@ -4,7 +4,6 @@ author: 'Siaya County - Household Sample'
 date: ''
 output:
   html_document:
-    self_contained: false
     theme: paper
     toc: FALSE
     includes: 
@@ -18,7 +17,7 @@ output:
 
 ### Income  
 <font size="5">**Earnings per capita (USD, PPP) - past 14 days**</font>
-preserve5a8618763612b853
+preserve5def69da3cb79f4c
   
 
   This plot aggregates income from each of the three earning sources, across all working-age household members, stacking them to add to the average earning per capita, including children, in the past 14 days. If the household does not perceive income from one or more of the sources, those data points are assigned zeros to assure representativeness for the whole population.  
@@ -28,7 +27,7 @@ preserve5a8618763612b853
 <font size="5">**Dissaving per capita (USD, PPP) - past 14 days**</font>  
  The dissaving variable is constructed by adding the value of assets sold and loans taken, and substracting the value of any assets or durables bought.  
 
-preserve00c45789ddf5b20b
+preserve032ef9552d4f8644
 
    
 ***  
@@ -36,7 +35,7 @@ preserve00c45789ddf5b20b
   <font size="5">**Transfers per capita (USD, PPP) - past 14 days**</font>  
     We ask whether in the past 14 days anyone in the household received a gift/assistance of money or goods, and its value, from (i) the government, (ii) from a non-governmental organization or community group, or (iii) from an individual politican or government official.  
 
-preserve17636c25ebb8c855
+preserve8e0242ab3c12f3f5
   
 
   
@@ -45,7 +44,7 @@ preserve17636c25ebb8c855
 ### Consumption
 
 <font size="5">**Weekly consumption per capita (USD, PPP)**</font>
-preserve9bdb2eb0f3097411
+preserve24170c25fbd79470
 Own-food consumption accounts for own agricultural and pastoral production at market value. Pre-covid average uses 2016-2017 data.
 
 *** 
@@ -53,7 +52,7 @@ Own-food consumption accounts for own agricultural and pastoral production at ma
 ### Food Security  
 <font size="5">**Number of days skipping meals in the past 7 days**</font>  
 
-preserveb16ff0470590afe9
+preserve86d3c0a08f627c5e
 Pre-COVID average uses data from 2016-2017.
      
 ***  
@@ -63,7 +62,7 @@ Pre-COVID average uses data from 2016-2017.
    
  
    
-preserve14f4e70aa1dd2325
+preservef6c3cedee11e03ab
  
      
 ***  
@@ -72,13 +71,13 @@ preserve14f4e70aa1dd2325
     We ask whether in the past 7 days, any household member experienced: (i) having to reduce the number of meals and/or the portion of each meal they would usually eat, (ii) difficulties in going to food markets due to mobility restrictions imposed by government, and (iii) difficulties in buying food due to most food markets being closed.  
     
   
-preservea1b2603048444d5b
+preserveccd4d4eee8cc0994
  
    
 ***  
 ### Household enterprises  
 <font size="5">**Enterprises revenue and profits in the past 14 days**</font>
-preservec3f04b95b1ff70dc
+preserveba66ba4151a6fdd0
   
   ***  
 
@@ -87,7 +86,7 @@ preservec3f04b95b1ff70dc
 <font size="5">**Reported COVID-19 Behavior Adoption**</font>    
 We ask respondents whether they have changed their behavior in any way since learning about COVID-19, and if so, how  it has changed.
 
-preserve713563d6ae57461b
+preserve71cc55859b6a4776
    
     
 ***  
@@ -96,7 +95,7 @@ preserve713563d6ae57461b
 We ask respondents whether they have experienced any illnesses or symptoms of a given list in the past 14 days.  
   
 
-preserve1505f7ab3a73d582
+preserve44d9add009b2ab34
   
   
 
@@ -105,7 +104,7 @@ preserve1505f7ab3a73d582
 <font size="5">**Number of in-person interactions (other than HH members)**</font>  
   We ask: "Taken together, how many people outside this household have you interacted with in-person?"   
 
-preservebdf546593a0f15a0
+preserve3afc93c868c5830a
   
 
 *** 
@@ -113,7 +112,7 @@ preservebdf546593a0f15a0
 ### Labor Supply
 
 <font size="5">**Weekly labor supply (hours per household adult)**</font>
-preservefc4f110e021661ca
+preserve60d6b59895107b05
   
   This plot aggregates hours worked on each of the three sources, across all working-age household members, stacking them to add to the average weekly labor supply per household adult. If the household does not work any hours on one or more of the labor categories, those data points are assigned zeros to assure representativeness of the whole population. 
 
@@ -122,7 +121,7 @@ preservefc4f110e021661ca
 
 <font size="5">**Children educational activities**</font>  
      We ask what has each child been doing over the last 15 minutes, whether the child has done any learning-related activities in the past 24 hours, and if so, what kind of activity. From this question we also learn whether the child attended school.
-preserve5ec2507712ef5166
+preserve075e2f631e47f7ea
 
    
    
@@ -134,14 +133,14 @@ preserve5ec2507712ef5166
 <font size="5">**Gender violence**</font>
 
 We ask married/cohabitant female respondents whether their husband/partner has (i) threaten to harm them or someone close to them, (ii) hit, slapped, kicked, or physically hurt them, and (iii) forced them to perform sexual acts.*  
-preservefb718278d4c12c3b
+preservec0cd49f1a305e5e6
   *This plot shows data only for the share of female respondents that were surveyed by a female field officer, and are currently married or living with a partner. This sub-sample accounts for ~55% of all married/cohabitant females in the study sample, and ~36% of all females.  
      
 ***  
   
 <font size="5">**Violence in the household**</font>  
 We ask: (i) Over the past 14 days, has there been a higher than usual amount of fights with members of your household?, and (ii) In the past 14 days, did you or your partner ever beat any of the children living in this household?  
-preserve004ff754caf7eca0
+preserve4c18c2e19fd38bf7
 
 
 ***  
@@ -151,14 +150,14 @@ preserve004ff754caf7eca0
 <font size="5">**Trust in government**</font>  
 
 How much do you trust your country’s government to take care of its citizens?  
-preservef5177543fdeef931
+preserve4029cd97fa2c23b3
    
 ***   
   
   <font size="5">**Trust in other people**</font>  
 
 Generally speaking, would you say that most people can be trusted or that you need to be very careful in dealing with people?  
-preserved7d5915c1debcc34
+preserve4e2a0c61495b9b88
 
 
 *** 
@@ -170,7 +169,7 @@ preserved7d5915c1debcc34
 
 **The Centre for Epidemiological Studies Depression Scale** (CES-D-10) is a 10-item Likert scale questionnaire assessing depressive symptoms in the past week. It includes three items on depressed affect, five items on somatic symptoms, and two on positive affect. Options for each item range from “rarely or none of the time” (score of 0) to “all of the time” (score of 3). Scoring is reversed for positive affect statements. Total scores can range from 0 to 30. **Higher scores suggest greater severity of symptoms.**  
 
-preserve2298cc52f96109ea
+preserve7ba72a182a3cd2d3
    
 ***  
 
@@ -179,35 +178,35 @@ We also ask questions 1-5 on core mental health from the John Hopkins Bloomberg 
 <font size="5">**Nervious, anxious or on edge**</font>  
 
 In the past 7 days, how often have you felt nervous, anxious, or on edge?  
-preserve77f9cba405a3bf65
+preserve53242767f8a4d7bc
    
 *** 
 <font size="5">**Depressed**</font>    
 
 In the past 7 days, how often have you felt depressed?  
 
-preserve1e161d02bf853ad8
+preserve0eabdad3ef8862d0
    
 *** 
 <font size="5">**Lonely**</font>    
 
 In the past 7 days, how often have you felt lonely?  
 
-preserved824149a98b9fa9c
+preserveed3257094ac90348
    
 *** 
 <font size="5">**Hopeful about the future**</font>  
     
 In the past 7 days, how often have you felt hopeful about the future?  
 
-preserve921c73f1250ec5d2
+preserve2a83f174a3fa6626
    
 *** 
 <font size="5">**Had physical reactions due to COVID-19**</font>  
 
   In the past 7 days, how often have you had physical reactions, such as sweating, trouble breathing, nausea, or a pounding heart, when thinking about your experience (e.g., social distancing, loss of income/work, concerns about infection) with the coronavirus/COVID-19 pandemic? 
   
-preserve3df3d937c6a473c8
+preserve89f3259ad4eb4b10
    
 *** 
 
@@ -215,35 +214,35 @@ preserve3df3d937c6a473c8
 ### Food prices
 
 <font size="5">**Food 1**</font>  
-preserve8f02106b7e9294a8
+preserve3017796d4b9d1eac
   
 ***     
 
 <font size="5">**Food 2**</font>  
-preserve5e4c66b8e3501d58
+preserve0e931d5bea30d3a7
   
 ***       
 
 <font size="5">**Food 3**</font>  
-preservef04510cf8211678d
+preserve626596b9b2e59fd2
   
 ***    
 
 ### Other prices
 
 <font size="5">**Services**</font>  
-preserve0111d002cb86a764
+preserveab099bb185de1db8
   
 ***  
 
 <font size="5">**Livestock**</font>  
-preserve6a5f9ceca17a8587
+preserve88b18c5fd252b7f2
   
   ***   
     
 
 <font size="5">**Non-food**</font>  
-preserve3d450240e6280f8c
+preserve98ff9b5792d0b2b1
   
 ***     
 
@@ -252,7 +251,7 @@ preserve3d450240e6280f8c
 <font size="5">**Price Index**</font>
 
 
-preservef473303496e09d7b
+preserve850621d63e8ac997
 
 Price index calculated in 2018 USD using household consumption weights. 
 
@@ -263,14 +262,14 @@ Price index calculated in 2018 USD using household consumption weights.
 
 
 
-preserve6528b44e32e67839
+preserve801d6126a94a0c5b
 
 
  ***   
     
 
 <font size="5">**Face Mask Usage**</font>  
-preserve8f63a3a42d3b4520
+preserve82f19911b937986f
 
 ## {}
       
