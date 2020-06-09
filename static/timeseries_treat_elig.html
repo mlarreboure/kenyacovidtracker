@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Siaya County - Household Sample" />
+
+
+<title>Treatment Villages - Eligible households</title>
+
+<script src="timeseries_treat_elig_files/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="timeseries_treat_elig_files/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
+<script src="timeseries_treat_elig_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="timeseries_treat_elig_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="timeseries_treat_elig_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="timeseries_treat_elig_files/navigation-1.1/tabsets.js"></script>
+<link href="timeseries_treat_elig_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="timeseries_treat_elig_files/highlightjs-9.12.0/highlight.js"></script>
+<script src="timeseries_treat_elig_files/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<link href="timeseries_treat_elig_files/dygraphs-1.1.1/dygraph.css" rel="stylesheet" />
+<script src="timeseries_treat_elig_files/dygraphs-1.1.1/dygraph-combined.js"></script>
+<script src="timeseries_treat_elig_files/dygraphs-1.1.1/shapes.js"></script>
+<script src="timeseries_treat_elig_files/moment-2.8.4/moment.js"></script>
+<script src="timeseries_treat_elig_files/moment-timezone-0.2.5/moment-timezone-with-data.js"></script>
+<script src="timeseries_treat_elig_files/moment-fquarter-1.0.0/moment-fquarter.min.js"></script>
+<script src="timeseries_treat_elig_files/dygraphs-binding-1.1.1.6/dygraphs.js"></script>
+<script src="timeseries_treat_elig_files/Dygraph.Plugins.Crosshair-1.0/crosshair.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+<style>
+.parallax { 
+    /* The image used */
+    background-color: "white.jpg";
+
+    /* Set a specific height */
+    height: 100px; 
+
+}
+
+.myimg{
+    width: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0%;
+}
+</style>
+
+<!-- Container element -->
+<div class="parallax">
+    <a href="https://www.kenyacovidtracker.org/"> <img class="myimg" src="menu.jpg"> </a>
+</div>
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Treatment Villages - Eligible households</h1>
+<h4 class="author">Siaya County - Household Sample</h4>
+
+</div>
+
+
+<div id="section" class="section level2 tabset">
+<h2></h2>
+<div id="income" class="section level3">
+<h3>Income</h3>
+<p><font size="5"><strong>Earnings per capita (USD, PPP) - past 14 days</strong></font> <div id="htmlwidget-7a9adaa1d69bf930acc7" style="width:672px;height:480px;" class="dygraphs html-widget"></div>
+<script type="application/json" data-for="htmlwidget-7a9adaa1d69bf930acc7">{"x":{"attrs":{"axes":{"x":{"pixelsPerLabel":50,"drawGrid":false,"drawAxis":true},"y":{"drawGrid":false,"drawAxis":true}},"series":{"Wage earnings":{"axis":"y","strokeWidth":4},"Self-employment earnings":{"axis":"y","strokeWidth":4},"Agricultural earnings":{"axis":"y","strokeWidth":4}},"title":"","labels":["week","Wage earnings","Self-employment earnings","Agricultural earnings"],"retainDateWindow":false,"xlabel":"Weeks","ylabel":"USD, PPP","legend":"auto","labelsDivWidth":250,"labelsShowZeroValues":true,"labelsSeparateLines":true,"stackedGraph":true,"fillGraph":false,"fillAlpha":0.15,"stepPlot":false,"drawPoints":true,"pointSize":4,"drawGapEdgePoints":false,"connectSeparatedPoints":false,"strokeWidth":1,"strokeBorderColor":"white","colors":["#66C2A5","#FC8D62","#8DA0CB","#E78AC3","#A6D854"],"colorValue":0.5,"colorSaturation":1,"includeZero":true,"drawAxesAtZero":false,"logscale":false,"axisTickSize":3,"axisLineColor":"black","axisLineWidth":4,"axisLabelColor":"black","axisLabelFontSize":14,"axisLabelWidth":60,"drawGrid":true,"gridLineWidth":0.3,"rightGap":5,"digitsAfterDecimal":2,"labelsKMB":false,"labelsKMG2":false,"labelsUTC":false,"maxNumberWidth":6,"animatedZooms":false,"mobileDisableYTouch":true,"disableZoom":false,"highlightCircleSize":3,"highlightSeriesBackgroundAlpha":0.5,"highlightSeriesOpts":{"strokeWidth":3},"hideOverlayOnMouseOut":true},"annotations":[{"x":"1","shortText":"April 11","width":60,"height":25,"attachAtBottom":true,"series":"Agricultural earnings"},{"x":"8","shortText":"May 30","width":60,"height":25,"attachAtBottom":true,"series":"Agricultural earnings"}],"shadings":[],"events":[],"format":"numeric","data":[[0,1,2,3,4,5,6,7,8,9],[null,1.56302559375763,0.433553487062454,0.68493115901947,0.478608697652817,0.855981409549713,1.15213072299957,0.768641948699951,0.413502216339111,null],[null,0.494357645511627,0.802882313728333,0.802960932254791,0.862416446208954,0.87449848651886,0.585092961788177,0.896044671535492,0.726578593254089,null],[null,0.50554096698761,0.310581773519516,0.344471216201782,0.468504935503006,0.298878848552704,0.389931321144104,0.239796087145805,0.0871479660272598,null]],"fixedtz":false,"tzone":"","plugins":{"Crosshair":{"direction":"vertical"}}},"evals":[],"jsHooks":[]}</script></p>
+<p>This plot aggregates income from each of the three earning sources, across all working-age household members, stacking them to add to the average earning per capita, including children, in the past 14 days. If the household does not perceive income from one or more of the sources, those data points are assigned zeros to assure representativeness for the whole population.</p>
+<hr />
+<p><font size="5"><strong>Dissaving per capita (USD, PPP) - past 14 days</strong></font><br />
+The dissaving variable is constructed by adding the value of assets sold and loans taken, and substracting the value of any assets or durables bought.</p>
+<div id="htmlwidget-29e237bcc3492eb528c0" style="width:672px;height:480px;" class="dygraphs html-widget"></div>
+<script type="application/json" data-for="htmlwidget-29e237bcc3492eb528c0">{"x":{"attrs":{"axes":{"x":{"pixelsPerLabel":50,"drawGrid":false,"drawAxis":true},"y":{"drawGrid":false,"drawAxis":true}},"series":{"Dissaving":{"axis":"y","strokeWidth":4}},"title":"","labels":["week","Dissaving"],"retainDateWindow":false,"xlabel":"Weeks","ylabel":"USD, PPP","stackedGraph":false,"fillGraph":false,"fillAlpha":0.15,"stepPlot":false,"drawPoints":true,"pointSize":4,"drawGapEdgePoints":false,"connectSeparatedPoints":false,"strokeWidth":1,"strokeBorderColor":"white","colors":["#E41A1C","#377EB8","#4DAF4A","#984EA3"],"colorValue":0.5,"colorSaturation":1,"includeZero":true,"drawAxesAtZero":false,"logscale":false,"axisTickSize":3,"axisLineColor":"black","axisLineWidth":4,"axisLabelColor":"black","axisLabelFontSize":14,"axisLabelWidth":60,"drawGrid":true,"gridLineWidth":0.3,"rightGap":5,"digitsAfterDecimal":2,"labelsKMB":false,"labelsKMG2":false,"labelsUTC":false,"maxNumberWidth":6,"animatedZooms":false,"mobileDisableYTouch":true,"disableZoom":false,"highlightCircleSize":3,"highlightSeriesBackgroundAlpha":0.5,"highlightSeriesOpts":{"strokeWidth":3},"legend":"always","labelsDivWidth":210,"labelsShowZeroValues":true,"labelsSeparateLines":false,"hideOverlayOnMouseOut":true},"annotations":[{"x":"1","shortText":"April 11","width":60,"height":25,"attachAtBottom":true,"series":"Dissaving"},{"x":"8","shortText":"May 30","width":60,"height":25,"attachAtBottom":true,"series":"Dissaving"}],"shadings":[],"events":[],"format":"numeric","data":[[0,1,2,3,4,5,6,7,8,9],[null,-0.324925124645233,1.52426469326019,1.82018184661865,1.99728012084961,2.43501353263855,1.85316824913025,1.18380677700043,1.24338662624359,null]],"fixedtz":false,"tzone":"","plugins":{"Crosshair":{"direction":"vertical"}}},"evals":[],"jsHooks":[]}</script>
+<hr />
+<p><font size="5"><strong>Transfers per capita (USD, PPP) - past 14 days</strong></font><br />
+We ask whether in the past 14 days anyone in the household received a gift/assistance of money or goods, and its value, from (i) the government, (ii) from a non-governmental organization or community group, or (iii) from an individual politican or government official.</p>
+<div id="htmlwidget-e35840819268b2074a35" style="width:672px;height:480px;" class="dygraphs html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e35840819268b2074a35">{"x":{"attrs":{"axes":{"x":{"pixelsPerLabel":50,"drawGrid":false,"drawAxis":true},"y":{"drawGrid":false,"drawAxis":true}},"series":{"Government":{"axis":"y","strokeWidth":4},"NGO or community group":{"axis":"y","strokeWidth":4},"Politicians":{"axis":"y","strokeWidth":4}},"title":"","labels":["week","Government","NGO or community group","Politicians"],"retainDateWindow":false,"xlabel":"Weeks","ylabel":"USD, PPP","stackedGraph":false,"fillGraph":false,"fillAlpha":0.15,"stepPlot":false,"drawPoints":true,"pointSize":4,"drawGapEdgePoints":false,"connectSeparatedPoints":false,"strokeWidth":1,"strokeBorderColor":"white","colors":["#E41A1C","#377EB8","#4DAF4A","#984EA3"],"colorValue":0.5,"colorSaturation":1,"includeZero":true,"drawAxesAtZero":false,"logscale":false,"axisTickSize":3,"axisLineColor":"black","axisLineWidth":4,"axisLabelColor":"black","axisLabelFontSize":14,"axisLabelWidth":60,"drawGrid":true,"gridLineWidth":0.3,"rightGap":5,"digitsAfterDecimal":2,"labelsKMB":false,"labelsKMG2":false,"labelsUTC":false,"maxNumberWidth":6,"animatedZooms":false,"mobileDisableYTouch":true,"disableZoom":false,"highlightCircleSize":3,"highlightSeriesBackgroundAlpha":0.5,"highlightSeriesOpts":{"strokeWidth":3},"legend":"auto","labelsDivWidth":500,"labelsShowZeroValues":true,"labelsSeparateLines":false,"hideOverlayOnMouseOut":true},"annotations":[{"x":"1","shortText":"April 11","width":60,"height":25,"attachAtBottom":true,"series":"Politicians"},{"x":"8","shortText":"May 30","width":60,"height":25,"attachAtBottom":true,"series":"Politicians"}],"shadings":[],"events":[],"format":"numeric","data":[[0,1,2,3,4,5,6,7,8,9],[null,0.00298282131552696,0.00392860407009721,0.00805989373475313,0.00653347605839372,0.0205240361392498,0.0302249435335398,0.0183895118534565,0.0296183135360479,null],[null,0.0215781070291996,0.0302352271974087,0.0391113832592964,0.0627124011516571,0.0524990931153297,0.11847285181284,0.108365967869759,0.0325199589133263,null],[null,0.0505836792290211,0.0163470413535833,0.012032532133162,0.00371220242232084,0.00859910901635885,0.0349503308534622,0.0261918362230062,0,null]],"fixedtz":false,"tzone":"","plugins":{"Crosshair":{"direction":"vertical"}}},"evals":[],"jsHooks":[]}</script>
+<hr />
+</div>
+<div id="consumption" class="section level3">
+<h3>Consumption</h3>
+<p><font size="5"><strong>Weekly consumption per capita (USD, PPP)</strong></font> <div id="htmlwidget-3c109ff098f20bdd8f22" style="width:672px;height:480px;" class="dygraphs html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3c109ff098f20bdd8f22">{"x":{"attrs":{"axes":{"x":{"pixelsPerLabel":50,"drawGrid":false,"drawAxis":true},"y":{"drawGrid":false,"drawAxis":true}},"series":{"Non-food expenditure":{"axis":"y","strokeWidth":4},"Food expenditure":{"axis":"y","strokeWidth":4},"Own-food consumption":{"axis":"y","strokeWidth":4}},"title":"","labels":["week","Non-food expenditure","Food expenditure","Own-food consumption"],"retainDateWindow":false,"xlabel":"Weeks","ylabel":"USD, PPP","legend":"auto","labelsDivWidth":250,"labelsShowZeroValues":true,"labelsSeparateLines":true,"stackedGraph":true,"fillGraph":false,"fillAlpha":0.15,"stepPlot":false,"drawPoints":true,"pointSize":4,"drawGapEdgePoints":false,"connectSeparatedPoints":false,"strokeWidth":1,"strokeBorderColor":"white","colors":["#66C2A5","#FC8D62","#8DA0CB","#E78AC3"],"colorValue":0.5,"colorSaturation":1,"includeZero":true,"drawAxesAtZero":false,"logscale":false,"axisTickSize":3,"axisLineColor":"black","axisLineWidth":4,"axisLabelColor":"black","axisLabelFontSize":14,"axisLabelWidth":60,"drawGrid":true,"gridLineWidth":0.3,"rightGap":5,"digitsAfterDecimal":2,"labelsKMB":false,"labelsKMG2":false,"labelsUTC":false,"maxNumberWidth":6,"animatedZooms":false,"mobileDisableYTouch":true,"disableZoom":false,"highlightCircleSize":3,"highlightSeriesBackgroundAlpha":0.5,"highlightSeriesOpts":{"strokeWidth":3},"hideOverlayOnMouseOut":true},"group":"Siaya County Sample","annotations":[{"x":"1","shortText":"April 11","width":60,"height":25,"attachAtBottom":true,"series":"Own-food consumption"},{"x":"8","shortText":"May 30","width":60,"height":25,"attachAtBottom":true,"series":"Own-food consumption"}],"shadings":[],"events":[],"format":"numeric","data":[[0,1,2,3,4,5,6,7,8,9],[null,5.09439849853516,3.39861512184143,5.64681386947632,4.28326797485352,3.71495127677917,3.47959303855896,3.24903297424316,3.94151043891907,null],[null,4.36887168884277,3.57114720344543,4.12275552749634,4.90834712982178,4.44330883026123,4.5844292640686,4.18466854095459,4.48288011550903,null],[null,2.48117733001709,2.20012760162354,2.17627120018005,2.52412271499634,1.98510181903839,2.24744033813477,2.17047834396362,1.80035042762756,null]],"plugins":{"Crosshair":{"direction":"vertical"}},"fixedtz":false,"tzone":""},"evals":[],"jsHooks":[]}</script> Own-food consumption accounts for own agricultural and pastoral production at market value.</p>
+<hr />
+</div>
+<div id="food-security" class="section level3">
+<h3>Food Security</h3>
+<p><font size="5"><strong>Number of days skipping meals in the past 7 days</strong></font></p>
+<div id="htmlwidget-302dd8fba69fdeb8d2e0" style="width:672px;height:480px;" class="dygraphs html-widget"></div>
+<script type="application/json" data-for="htmlwidget-302dd8fba69fdeb8d2e0">{"x":{"attrs":{"axes":{"x":{"pixelsPerLabel":50,"drawGrid":false,"drawAxis":true},"y":{"drawGrid":false,"drawAxis":true}},"series":{"Adults skipped meals":{"axis":"y","strokeWidth":4},"Children skipped meals":{"axis":"y","strokeWidth":4}},"title":"","labels":["week","Adults skipped meals","Children skipped meals"],"retainDateWindow":false,"xlabel":"Weeks","ylabel":"Number of days","stackedGraph":false,"fillGraph":false,"fillAlpha":0.15,"stepPlot":false,"drawPoints":true,"pointSize":4,"drawGapEdgePoints":false,"connectSeparatedPoints":false,"strokeWidth":1,"strokeBorderColor":"white","colors":["#E41A1C","#377EB8","#4DAF4A","#984EA3"],"colorValue":0.5,"colorSaturation":1,"includeZero":true,"drawAxesAtZero":false,"logscale":false,"axisTickSize":3,"axisLineColor":"black","axisLineWidth":4,"axisLabelColor":"black","axisLabelFontSize":14,"axisLabelWidth":60,"drawGrid":true,"gridLineWidth":0.3,"rightGap":5,"digitsAfterDecimal":2,"labelsKMB":false,"labelsKMG2":false,"labelsUTC":false,"maxNumberWidth":6,"animatedZooms":false,"mobileDisableYTouch":true,"disableZoom":false,"highlightCircleSize":3,"highlightSeriesBackgroundAlpha":0.5,"highlightSeriesOpts":{"strokeWidth":3},"legend":"auto","labelsDivWidth":210,"labelsShowZeroValues":true,"labelsSeparateLines":true,"hideOverlayOnMouseOut":true},"annotations":[{"x":"1","shortText":"April 11","width":60,"height":25,"attachAtBottom":true,"series":"Children skipped meals"},{"x":"8","shortText":"May 30","width":60,"height":25,"attachAtBottom":true,"series":"Children skipped meals"}],"shadings":[],"events":[],"format":"numeric","data":[[0,1,2,3,4,5,6,7,8,9],[null,1.41354191303253,1.33201324939728,1.88422179222107,1.76177585124969,1.75486624240875,1.86277461051941,1.68882966041565,2.00863575935364,null],[null,1.09534215927124,1.05403673648834,1.30153155326843,1.16915953159332,1.29108273983002,1.25495994091034,1.23694229125977,1.28929424285889,null]],"fixedtz":false,"tzone":"","plugins":{"Crosshair":{"direction":"vertical"}}},"evals":[],"jsHooks":[]}</script>
+<hr />
+<p><font size="5"><strong>Percentage of sample unable to buy usual amount of food due to:</strong></font><br />
+We ask whether in the past 7 days, any household member was unable to buy the amount of food they usually buy because of: (i) price of food being too high, (ii) household income having dropped, and (iii) shortages in markets.</p>
+<div id="htmlwidget-71ec266fd7cfff705351" style="width:672px;height:480px;" class="dygraphs html-widget"></div>
+<script type="application/json" data-for="htmlwidget-71ec266fd7cfff705351">{"x":{"attrs":{"axes":{"x":{"pixelsPerLabel":75,"drawGrid":false,"drawAxis":true},"y":{"drawGrid":false,"drawAxis":true}},"series":{"High food prices":{"axis":"y","strokeWidth":4},"Income drop":{"axis":"y","strokeWidth":4},"Shortages in markets":{"axis":"y","strokeWidth":4}},"title":"","labels":["week","High food prices","Income drop","Shortages in markets"],"retainDateWindow":false,"xlabel":"Weeks","ylabel":"Percentage of sample","stackedGraph":false,"fillGraph":false,"fillAlpha":0.15,"stepPlot":false,"drawPoints":true,"pointSize":4,"drawGapEdgePoints":false,"connectSeparatedPoints":false,"strokeWidth":1,"strokeBorderColor":"white","colors":["#E41A1C","#377EB8","#4DAF4A","#984EA3"],"colorValue":0.5,"colorSaturation":1,"includeZero":true,"drawAxesAtZero":false,"logscale":false,"axisTickSize":3,"axisLineColor":"black","axisLineWidth":4,"axisLabelColor":"black","axisLabelFontSize":14,"axisLabelWidth":60,"drawGrid":true,"gridLineWidth":0.3,"rightGap":5,"digitsAfterDecimal":2,"labelsKMB":false,"labelsKMG2":false,"labelsUTC":false,"maxNumberWidth":6,"animatedZooms":false,"mobileDisableYTouch":true,"disableZoom":false,"highlightCircleSize":3,"highlightSeriesBackgroundAlpha":0.5,"highlightSeriesOpts":{"strokeWidth":3},"legend":"auto","labelsDivWidth":450,"labelsShowZeroValues":true,"labelsSeparateLines":false,"hideOverlayOnMouseOut":true,"showRangeSelector":true,"dateWindow":["2","9"],"rangeSelectorHeight":40,"rangeSelectorPlotFillColor":" #A7B1C4","rangeSelectorPlotStrokeColor":"#808FAB","interactionModel":"Dygraph.Interaction.defaultModel"},"annotations":[{"x":"3","shortText":"April 25","width":60,"height":25,"attachAtBottom":true,"series":"Shortages in markets"},{"x":"8","shortText":"May 30","width":60,"height":25,"attachAtBottom":true,"series":"Shortages in markets"}],"shadings":[],"events":[],"format":"numeric","data":[[0,1,2,3,4,5,6,7,8,9],[null,null,null,70.6506271362305,71.7828369140625,74.0769729614258,79.1922607421875,76.204345703125,75.1546173095703,null],[null,null,null,72.9594497680664,64.1472244262695,74.6779708862305,76.787239074707,72.2406463623047,72.8437728881836,null],[null,null,null,53.350341796875,51.7851715087891,52.1602516174316,46.0406494140625,45.1745223999023,43.2767791748047,null]],"fixedtz":false,"tzone":"","plugins":{"Crosshair":{"direction":"vertical"}}},"evals":["attrs.interactionModel"],"jsHooks":[]}</script>
+<hr />
+<p><font size="5"><strong>Other food hardship experiences, percentage of sample</strong></font><br />
+We ask whether in the past 7 days, any household member experienced: (i) having to reduce the number of meals and/or the portion of each meal they would usually eat, (ii) difficulties in going to food markets due to mobility restrictions imposed by government, and (iii) difficulties in buying food due to most food markets being closed.</p>
+<div id="htmlwidget-812a1b8b411ccf9849e2" style="width:672px;height:480px;" class="dygraphs html-widget"></div>
+<script type="application/json" data-for="htmlwidget-812a1b8b411ccf9849e2">{"x":{"attrs":{"axes":{"x":{"pixelsPerLabel":75,"drawGrid":false,"drawAxis":true},"y":{"drawGrid":false,"drawAxis":true}},"series":{"Had to reduce meals":{"axis":"y","strokeWidth":4},"Mobility restrictions impede going to market":{"axis":"y","strokeWidth":4},"Closed food markets":{"axis":"y","strokeWidth":4}},"title":"","labels":["week","Had to reduce meals","Mobility restrictions impede going to market","Closed food markets"],"retainDateWindow":false,"xlabel":"Weeks","ylabel":"Percentage of sample","stackedGraph":false,"fillGraph":false,"fillAlpha":0.15,"stepPlot":false,"drawPoints":true,"pointSize":4,"drawGapEdgePoints":false,"connectSeparatedPoints":false,"strokeWidth":1,"strokeBorderColor":"white","colors":["#66C2A5","#FC8D62","#8DA0CB","#E78AC3"],"colorValue":0.5,"colorSaturation":1,"includeZero":true,"drawAxesAtZero":false,"logscale":false,"axisTickSize":3,"axisLineColor":"black","axisLineWidth":4,"axisLabelColor":"black","axisLabelFontSize":14,"axisLabelWidth":60,"drawGrid":true,"gridLineWidth":0.3,"rightGap":5,"digitsAfterDecimal":2,"labelsKMB":false,"labelsKMG2":false,"labelsUTC":false,"maxNumberWidth":6,"animatedZooms":false,"mobileDisableYTouch":true,"disableZoom":false,"highlightCircleSize":3,"highlightSeriesBackgroundAlpha":0.5,"highlightSeriesOpts":{"strokeWidth":3},"legend":"auto","labelsDivWidth":475,"labelsShowZeroValues":true,"labelsSeparateLines":false,"hideOverlayOnMouseOut":true,"showRangeSelector":true,"dateWindow":["2","9"],"rangeSelectorHeight":40,"rangeSelectorPlotFillColor":" #A7B1C4","rangeSelectorPlotStrokeColor":"#808FAB","interactionModel":"Dygraph.Interaction.defaultModel"},"annotations":[{"x":"3","shortText":"April 25","width":60,"height":25,"attachAtBottom":true,"series":"Closed food markets"},{"x":"8","shortText":"May 30","width":60,"height":25,"attachAtBottom":true,"series":"Closed food markets"}],"shadings":[],"events":[],"format":"numeric","data":[[0,1,2,3,4,5,6,7,8,9],[null,null,null,49.1098327636719,46.6667251586914,54.984260559082,48.4770812988281,49.8399047851562,60.6513977050781,null],[null,null,null,47.4548149108887,49.2675590515137,45.5992393493652,44.362606048584,47.404354095459,42.5888824462891,null],[null,null,null,46.7664947509766,45.1317901611328,43.2057456970215,45.8674354553223,40.9169464111328,36.6492881774902,null]],"fixedtz":false,"tzone":"","plugins":{"Crosshair":{"direction":"vertical"}}},"evals":["attrs.interactionModel"],"jsHooks":[]}</script>
+<hr />
+</div>
+<div id="covid-19" class="section level3">
+<h3>COVID-19</h3>
+<p><font size="5"><strong>Reported COVID-19 Behavior Adoption</strong></font><br />
+We ask respondents whether they have changed their behavior in any way since learning about COVID-19, and if so, how it has changed.</p>
+<div id="htmlwidget-6c89da6dfc48b205de2c" style="width:672px;height:480px;" class="dygraphs html-widget"></div>
+<script type="application/json" data-for="htmlwidget-6c89da6dfc48b205de2c">{"x":{"attrs":{"axes":{"x":{"pixelsPerLabel":50,"drawGrid":false,"drawAxis":true},"y":{"drawGrid":false,"drawAxis":true}},"series":{"Hand Washing":{"axis":"y","strokeWidth":4},"Face Mask":{"axis":"y","strokeWidth":4},"Stay Home":{"axis":"y","strokeWidth":4},"Hand Sanitizer":{"axis":"y","strokeWidth":4}},"title":"","labels":["week","Hand Washing","Face Mask","Stay Home","Hand Sanitizer"],"retainDateWindow":false,"xlabel":"Weeks","ylabel":"Percentage of sample","legend":"auto","labelsDivWidth":580,"labelsShowZeroValues":true,"labelsSeparateLines":false,"stackedGraph":false,"fillGraph":false,"fillAlpha":0.15,"stepPlot":false,"drawPoints":true,"pointSize":4,"drawGapEdgePoints":false,"connectSeparatedPoints":false,"strokeWidth":1,"strokeBorderColor":"white","colors":["#66C2A5","#FC8D62","#8DA0CB","#E78AC3"],"colorValue":0.5,"colorSaturation":1,"includeZero":true,"drawAxesAtZero":false,"logscale":false,"axisTickSize":3,"axisLineColor":"black","axisLineWidth":4,"axisLabelColor":"black","axisLabelFontSize":14,"axisLabelWidth":60,"drawGrid":true,"gridLineWidth":0.3,"rightGap":5,"digitsAfterDecimal":2,"labelsKMB":false,"labelsKMG2":false,"labelsUTC":false,"maxNumberWidth":6,"animatedZooms":false,"mobileDisableYTouch":true,"disableZoom":false,"highlightCircleSize":3,"highlightSeriesBackgroundAlpha":0.5,"highlightSeriesOpts":{"strokeWidth":3},"hideOverlayOnMouseOut":true},"annotations":[{"x":"1","shortText":"April 11","width":60,"height":25,"attachAtBottom":true,"series":"Hand Sanitizer"},{"x":"8","shortText":"May 30","width":60,"height":25,"attachAtBottom":true,"series":"Hand Sanitizer"}],"shadings":[],"events":[{"pos":1.7,"label":"Face masks mandatory","labelLoc":"bottom","color":"black","strokePattern":[7,3],"axis":"x"}],"format":"numeric","data":[[0,1,2,3,4,5,6,7,8,9],[null,84.7409973144531,89.3836822509766,83.6991958618164,84.4693908691406,88.2388229370117,87.5232238769531,88.8625564575195,92.1420364379883,null],[null,8.43404102325439,28.6422996520996,45.4381637573242,59.7357330322266,70.1484985351562,70.6527709960938,82.3527221679688,72.8067855834961,null],[null,37.8529624938965,41.0170364379883,35.6665534973145,32.6438980102539,31.930980682373,40.0582389831543,41.7446441650391,29.1259136199951,null],[null,22.5670642852783,23.8241710662842,21.296028137207,22.5312824249268,16.5976886749268,19.4247245788574,16.0826511383057,17.021390914917,null]],"fixedtz":false,"tzone":"","plugins":{"Crosshair":{"direction":"vertical"}}},"evals":[],"jsHooks":[]}</script>
+<hr />
+<p><font size="5"><strong>Reported COVID-19 Symptoms, past 14 days</strong></font><br />
+We ask respondents whether they have experienced any illnesses or symptoms of a given list in the past 14 days.</p>
+<div id="htmlwidget-66886bda94e026e10402" style="width:672px;height:480px;" class="dygraphs html-widget"></div>
+<script type="application/json" data-for="htmlwidget-66886bda94e026e10402">{"x":{"attrs":{"axes":{"x":{"pixelsPerLabel":50,"drawGrid":false,"drawAxis":true},"y":{"drawGrid":false,"drawAxis":true}},"series":{"Fever":{"axis":"y","strokeWidth":4},"Tired":{"axis":"y","strokeWidth":4},"Cough":{"axis":"y","strokeWidth":4},"Fever+Cough":{"axis":"y","strokeWidth":4}},"title":"","labels":["week","Fever","Tired","Cough","Fever+Cough"],"retainDateWindow":false,"xlabel":"Weeks","ylabel":"Percentage of sample","legend":"auto","labelsDivWidth":500,"labelsShowZeroValues":true,"labelsSeparateLines":false,"stackedGraph":false,"fillGraph":false,"fillAlpha":0.15,"stepPlot":false,"drawPoints":true,"pointSize":4,"drawGapEdgePoints":false,"connectSeparatedPoints":false,"strokeWidth":1,"strokeBorderColor":"white","colors":["#66C2A5","#FC8D62","#8DA0CB","#E78AC3"],"colorValue":0.5,"colorSaturation":1,"includeZero":true,"drawAxesAtZero":false,"logscale":false,"axisTickSize":3,"axisLineColor":"black","axisLineWidth":4,"axisLabelColor":"black","axisLabelFontSize":14,"axisLabelWidth":60,"drawGrid":true,"gridLineWidth":0.3,"rightGap":5,"digitsAfterDecimal":2,"labelsKMB":false,"labelsKMG2":false,"labelsUTC":false,"maxNumberWidth":6,"animatedZooms":false,"mobileDisableYTouch":true,"disableZoom":false,"highlightCircleSize":3,"highlightSeriesBackgroundAlpha":0.5,"highlightSeriesOpts":{"strokeWidth":3},"hideOverlayOnMouseOut":true},"annotations":[{"x":"1","shortText":"April 11","width":60,"height":25,"attachAtBottom":true,"series":"Fever+Cough"},{"x":"8","shortText":"May 30","width":60,"height":25,"attachAtBottom":true,"series":"Fever+Cough"}],"shadings":[],"events":[],"format":"numeric","data":[[0,1,2,3,4,5,6,7,8,9],[null,15.0459718704224,14.6030712127686,12.4927434921265,13.3201580047607,12.8931121826172,17.641357421875,14.2283067703247,15.6359329223633,null],[null,8.03249454498291,7.512451171875,2.42268490791321,4.49235343933105,3.60284638404846,5.01928329467773,4.45985221862793,2.18132638931274,null],[null,10.3602867126465,5.00862503051758,1.71152710914612,2.0826780796051,7.10077524185181,3.08152985572815,1.28688514232635,2.17023110389709,null],[null,2.93076300621033,1.79572904109955,1.32443499565125,0.886962652206421,3.96395444869995,2.61910128593445,0.577916979789734,1.10508692264557,null]],"fixedtz":false,"tzone":"","plugins":{"Crosshair":{"direction":"vertical"}}},"evals":[],"jsHooks":[]}</script>
+<hr />
+<p><font size="5"><strong>Number of in-person interactions (other than HH members)</strong></font><br />
+We ask: “Taken together, how many people outside this household have you interacted with in-person?”</p>
+<div id="htmlwidget-c7b932ca3a5aba23a261" style="width:672px;height:480px;" class="dygraphs html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c7b932ca3a5aba23a261">{"x":{"attrs":{"axes":{"x":{"pixelsPerLabel":50,"drawGrid":false,"drawAxis":true},"y":{"drawGrid":false,"drawAxis":true}},"series":{"In the past 14 days":{"axis":"y","strokeWidth":4},"In the past 7 days":{"axis":"y","strokeWidth":4},"Today":{"axis":"y","strokeWidth":4}},"title":"","labels":["week","In the past 14 days","In the past 7 days","Today"],"retainDateWindow":false,"xlabel":"Weeks","ylabel":"Number of people","legend":"auto","labelsDivWidth":500,"labelsShowZeroValues":true,"labelsSeparateLines":false,"highlightCircleSize":3,"highlightSeriesBackgroundAlpha":0.5,"highlightSeriesOpts":{"strokeWidth":3},"hideOverlayOnMouseOut":true,"stackedGraph":false,"fillGraph":false,"fillAlpha":0.15,"stepPlot":false,"drawPoints":true,"pointSize":4,"drawGapEdgePoints":false,"connectSeparatedPoints":false,"strokeWidth":1,"strokeBorderColor":"white","colors":["#E41A1C","#377EB8","#4DAF4A","#984EA3"],"colorValue":0.5,"colorSaturation":1,"includeZero":true,"drawAxesAtZero":false,"logscale":false,"axisTickSize":3,"axisLineColor":"black","axisLineWidth":4,"axisLabelColor":"black","axisLabelFontSize":14,"axisLabelWidth":60,"drawGrid":true,"gridLineWidth":0.3,"rightGap":5,"digitsAfterDecimal":2,"labelsKMB":false,"labelsKMG2":false,"labelsUTC":false,"maxNumberWidth":6,"animatedZooms":false,"mobileDisableYTouch":true,"disableZoom":false},"annotations":[{"x":"1","shortText":"April 11","width":60,"height":25,"attachAtBottom":true,"series":"Today"},{"x":"8","shortText":"May 30","width":60,"height":25,"attachAtBottom":true,"series":"Today"}],"shadings":[],"events":[],"format":"numeric","data":[[0,1,2,3,4,5,6,7,8,9],[null,10.8028039932251,11.5434694290161,12.9963474273682,14.1159181594849,13.5901546478271,14.9857978820801,14.0865592956543,17.9291973114014,null],[null,8.52245807647705,8.87246227264404,10.1295948028564,10.7105979919434,11.1864585876465,11.869514465332,11.6890077590942,14.6808061599731,null],[null,3.18575310707092,3.01866483688354,2.88494563102722,3.30444359779358,3.00526189804077,3.05654716491699,3.00977683067322,3.29037117958069,null]],"plugins":{"Crosshair":{"direction":"vertical"}},"fixedtz":false,"tzone":""},"evals":[],"jsHooks":[]}</script>
+<hr />
+</div>
+<div id="labor-supply" class="section level3">
+<h3>Labor Supply</h3>
+<p><font size="5"><strong>Weekly labor supply (hours per household adult)</strong></font> <div id="htmlwidget-926b863e7f2d5bb823da" style="width:672px;height:480px;" class="dygraphs html-widget"></div>
+<script type="application/json" data-for="htmlwidget-926b863e7f2d5bb823da">{"x":{"attrs":{"axes":{"x":{"pixelsPerLabel":50,"drawGrid":false,"drawAxis":true},"y":{"drawGrid":false,"drawAxis":true}},"series":{"Agricultural labor supply":{"axis":"y","strokeWidth":4},"Wage labor supply":{"axis":"y","strokeWidth":4},"Own enterprise labor supply":{"axis":"y","strokeWidth":4}},"title":"","labels":["week","Agricultural labor supply","Wage labor supply","Own enterprise labor supply"],"retainDateWindow":false,"xlabel":"Weeks","ylabel":"Hours per adult household member","legend":"auto","labelsDivWidth":550,"labelsShowZeroValues":true,"labelsSeparateLines":false,"stackedGraph":true,"fillGraph":false,"fillAlpha":0.15,"stepPlot":false,"drawPoints":true,"pointSize":4,"drawGapEdgePoints":false,"connectSeparatedPoints":false,"strokeWidth":1,"strokeBorderColor":"white","colors":["#66C2A5","#FC8D62","#8DA0CB","#E78AC3"],"colorValue":0.5,"colorSaturation":1,"includeZero":true,"drawAxesAtZero":false,"logscale":false,"axisTickSize":3,"axisLineColor":"black","axisLineWidth":4,"axisLabelColor":"black","axisLabelFontSize":14,"axisLabelWidth":60,"drawGrid":true,"gridLineWidth":0.3,"rightGap":5,"digitsAfterDecimal":2,"labelsKMB":false,"labelsKMG2":false,"labelsUTC":false,"maxNumberWidth":6,"animatedZooms":false,"mobileDisableYTouch":true,"disableZoom":false,"highlightCircleSize":3,"highlightSeriesBackgroundAlpha":0.5,"highlightSeriesOpts":{"strokeWidth":3},"hideOverlayOnMouseOut":true},"group":"Siaya County Sample","annotations":[{"x":"1","shortText":"April 11","width":60,"height":25,"attachAtBottom":true,"series":"Own enterprise labor supply"},{"x":"8","shortText":"May 30","width":60,"height":25,"attachAtBottom":true,"series":"Own enterprise labor supply"}],"shadings":[],"events":[],"format":"numeric","data":[[0,1,2,3,4,5,6,7,8,9],[null,15.4078016281128,18.4411544799805,18.5461521148682,19.201343536377,18.8299102783203,17.5974140167236,17.9711990356445,16.6770496368408,null],[null,1.10347330570221,0.687610685825348,1.47062468528748,0.99830162525177,1.11063599586487,1.39587378501892,1.5570513010025,1.3612607717514,null],[null,1.49260866641998,2.86584830284119,3.7396411895752,3.2979302406311,3.56481194496155,2.39488220214844,3.98506617546082,2.80776143074036,null]],"plugins":{"Crosshair":{"direction":"vertical"}},"fixedtz":false,"tzone":""},"evals":[],"jsHooks":[]}</script></p>
+<p>This plot aggregates hours worked on each of the three sources, across all working-age household members, stacking them to add to the average weekly labor supply per household adult. If the household does not work any hours on one or more of the labor categories, those data points are assigned zeros to assure representativeness of the whole population.</p>
+<hr />
+</div>
+<div id="children-education" class="section level3">
+<h3>Children Education</h3>
+<p><font size="5"><strong>Children educational activities</strong></font><br />
+We ask what has each child been doing over the last 15 minutes, whether the child has done any learning-related activities in the past 24 hours, and if so, what kind of activity. From this question we also learn whether the child attended school. <div id="htmlwidget-d93d9747420015d1b05c" style="width:672px;height:480px;" class="dygraphs html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d93d9747420015d1b05c">{"x":{"attrs":{"axes":{"x":{"pixelsPerLabel":50,"drawGrid":false,"drawAxis":true},"y":{"drawGrid":false,"drawAxis":true}},"series":{"Attended school in past 24hrs":{"axis":"y","strokeWidth":4},"Any learning in past 24hrs":{"axis":"y","strokeWidth":4},"Any learning in past 15mins":{"axis":"y","strokeWidth":4}},"title":"","labels":["week","Attended school in past 24hrs","Any learning in past 24hrs","Any learning in past 15mins"],"retainDateWindow":false,"xlabel":"Weeks","ylabel":"Percentage of sample","legend":"auto","labelsDivWidth":570,"labelsShowZeroValues":true,"labelsSeparateLines":false,"highlightCircleSize":3,"highlightSeriesBackgroundAlpha":0.5,"highlightSeriesOpts":{"strokeWidth":3},"hideOverlayOnMouseOut":true,"stackedGraph":false,"fillGraph":false,"fillAlpha":0.15,"stepPlot":false,"drawPoints":true,"pointSize":4,"drawGapEdgePoints":false,"connectSeparatedPoints":false,"strokeWidth":1,"strokeBorderColor":"white","colors":["#E41A1C","#377EB8","#4DAF4A","#984EA3"],"colorValue":0.5,"colorSaturation":1,"includeZero":false,"drawAxesAtZero":false,"logscale":false,"axisTickSize":3,"axisLineColor":"black","axisLineWidth":4,"axisLabelColor":"black","axisLabelFontSize":14,"axisLabelWidth":60,"drawGrid":true,"gridLineWidth":0.3,"rightGap":5,"digitsAfterDecimal":2,"labelsKMB":false,"labelsKMG2":false,"labelsUTC":false,"maxNumberWidth":6,"animatedZooms":false,"mobileDisableYTouch":true,"disableZoom":false},"group":"Siaya County Sample","annotations":[{"x":"1","shortText":"April 11","width":60,"height":25,"attachAtBottom":true,"series":"Any learning in past 15mins"},{"x":"8","shortText":"May 30","width":60,"height":25,"attachAtBottom":true,"series":"Any learning in past 15mins"}],"shadings":[],"events":[],"format":"numeric","data":[[0,1,2,3,4,5,6,7,8,9],[null,25.211296081543,32.4708290100098,28.9974327087402,29.0617027282715,31.3329486846924,33.059741973877,33.5579452514648,30.9527397155762,null],[null,72.365608215332,66.0940322875977,68.998176574707,67.4165496826172,66.9119567871094,66.7434844970703,63.8107299804688,67.9222030639648,null],[null,6.33577108383179,2.27788805961609,3.65414500236511,2.9028480052948,4.13324975967407,2.63301563262939,2.4998140335083,0,null]],"plugins":{"Crosshair":{"direction":"vertical"}},"fixedtz":false,"tzone":""},"evals":[],"jsHooks":[]}</script></p>
+<hr />
+</div>
+<div id="household-violence" class="section level3">
+<h3>Household Violence</h3>
+<p><font size="5"><strong>Gender violence</strong></font></p>
+<p>We ask married/cohabitant female respondents whether their husband/partner has (i) threaten to harm them or someone close to them, (ii) hit, slapped, kicked, or physically hurt them, and (iii) forced them to perform sexual acts.*<br />
+<div id="htmlwidget-21af15a69fd5e211295e" style="width:672px;height:480px;" class="dygraphs html-widget"></div>
+<script type="application/json" data-for="htmlwidget-21af15a69fd5e211295e">{"x":{"attrs":{"axes":{"x":{"pixelsPerLabel":50,"drawGrid":false,"drawAxis":true},"y":{"drawGrid":false,"drawAxis":true}},"series":{"Threaten to harm them":{"axis":"y","strokeWidth":4},"Physically hurt them":{"axis":"y","strokeWidth":4},"Forced them to perform sexual acts":{"axis":"y","strokeWidth":4}},"title":"","labels":["week","Threaten to harm them","Physically hurt them","Forced them to perform sexual acts"],"retainDateWindow":false,"xlabel":"Weeks","ylabel":"Percentage of married/cohabitant females","legend":"auto","labelsDivWidth":580,"labelsShowZeroValues":true,"labelsSeparateLines":false,"highlightCircleSize":3,"highlightSeriesBackgroundAlpha":0.5,"highlightSeriesOpts":{"strokeWidth":3},"hideOverlayOnMouseOut":true,"stackedGraph":false,"fillGraph":false,"fillAlpha":0.15,"stepPlot":false,"drawPoints":true,"pointSize":4,"drawGapEdgePoints":false,"connectSeparatedPoints":false,"strokeWidth":1,"strokeBorderColor":"white","colors":["#E41A1C","#377EB8","#4DAF4A","#984EA3"],"colorValue":0.5,"colorSaturation":1,"includeZero":false,"drawAxesAtZero":false,"logscale":false,"axisTickSize":3,"axisLineColor":"black","axisLineWidth":4,"axisLabelColor":"black","axisLabelFontSize":14,"axisLabelWidth":60,"drawGrid":true,"gridLineWidth":0.3,"rightGap":5,"digitsAfterDecimal":2,"labelsKMB":false,"labelsKMG2":false,"labelsUTC":false,"maxNumberWidth":6,"animatedZooms":false,"mobileDisableYTouch":true,"disableZoom":false},"group":"Siaya County Sample","annotations":[{"x":"1","shortText":"April 11","width":60,"height":25,"attachAtBottom":true,"series":"Forced them to perform sexual acts"},{"x":"8","shortText":"May 30","width":60,"height":25,"attachAtBottom":true,"series":"Forced them to perform sexual acts"}],"shadings":[],"events":[],"format":"numeric","data":[[0,1,2,3,4,5,6,7,8,9],[null,1.10865640640259,3.10610747337341,5.66948938369751,7.84325456619263,11.5280780792236,5.12263107299805,9.58884334564209,9.08101844787598,null],[null,3.90623092651367,4.93361330032349,5.51496028900146,3.05113959312439,1.79863202571869,1.0034019947052,0.791276335716248,1.96889340877533,null],[null,0.842838287353516,4.19198226928711,0,1.46454703807831,0.854357600212097,0,7.66313505172729,11.1570625305176,null]],"plugins":{"Crosshair":{"direction":"vertical"}},"fixedtz":false,"tzone":""},"evals":[],"jsHooks":[]}</script> *This plot shows data only for the share of female respondents that were surveyed by a female field officer, and are currently married or living with a partner. This sub-sample accounts for ~55% of all married/cohabitant females in the study sample, and ~36% of all females.</p>
+<hr />
+<p><font size="5"><strong>Violence in the household</strong></font><br />
+We ask: (i) Over the past 14 days, has there been a higher than usual amount of fights with members of your household?, and (ii) In the past 14 days, did you or your partner ever beat any of the children living in this household?<br />
+<div id="htmlwidget-b6c59c15fdb44b1cfefa" style="width:672px;height:480px;" class="dygraphs html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b6c59c15fdb44b1cfefa">{"x":{"attrs":{"axes":{"x":{"pixelsPerLabel":50,"drawGrid":false,"drawAxis":true},"y":{"drawGrid":false,"drawAxis":true}},"series":{"Children were beaten":{"axis":"y","strokeWidth":4},"More fights than usual":{"axis":"y","strokeWidth":4}},"title":"","labels":["week","Children were beaten","More fights than usual"],"retainDateWindow":false,"xlabel":"Weeks","ylabel":"Percentage of sample","legend":"auto","labelsDivWidth":350,"labelsShowZeroValues":true,"labelsSeparateLines":false,"highlightCircleSize":3,"highlightSeriesBackgroundAlpha":0.5,"highlightSeriesOpts":{"strokeWidth":3},"hideOverlayOnMouseOut":true,"stackedGraph":false,"fillGraph":false,"fillAlpha":0.15,"stepPlot":false,"drawPoints":true,"pointSize":4,"drawGapEdgePoints":false,"connectSeparatedPoints":false,"strokeWidth":1,"strokeBorderColor":"white","colors":["#E41A1C","#377EB8","#4DAF4A","#984EA3"],"colorValue":0.5,"colorSaturation":1,"includeZero":false,"drawAxesAtZero":false,"logscale":false,"axisTickSize":3,"axisLineColor":"black","axisLineWidth":4,"axisLabelColor":"black","axisLabelFontSize":14,"axisLabelWidth":60,"drawGrid":true,"gridLineWidth":0.3,"rightGap":5,"digitsAfterDecimal":2,"labelsKMB":false,"labelsKMG2":false,"labelsUTC":false,"maxNumberWidth":6,"animatedZooms":false,"mobileDisableYTouch":true,"disableZoom":false},"group":"Siaya County Sample","annotations":[{"x":"1","shortText":"April 11","width":60,"height":25,"attachAtBottom":true,"series":"More fights than usual"},{"x":"8","shortText":"May 30","width":60,"height":25,"attachAtBottom":true,"series":"More fights than usual"}],"shadings":[],"events":[],"format":"numeric","data":[[0,1,2,3,4,5,6,7,8,9],[null,null,21.2420616149902,23.0441837310791,26.7562351226807,23.1181297302246,25.5592670440674,26.9867172241211,29.5283851623535,null],[null,5.94799709320068,4.60954141616821,6.2290153503418,6.07728862762451,9.4780330657959,10.1654996871948,7.13798332214355,12.1993942260742,null]],"plugins":{"Crosshair":{"direction":"vertical"}},"fixedtz":false,"tzone":""},"evals":[],"jsHooks":[]}</script></p>
+<hr />
+</div>
+<div id="trust" class="section level3">
+<h3>Trust</h3>
+<p><font size="5"><strong>Trust in government</strong></font></p>
+<p>How much do you trust your country’s government to take care of its citizens?<br />
+<div id="htmlwidget-29d3a63276597bfa8356" style="width:672px;height:480px;" class="dygraphs html-widget"></div>
+<script type="application/json" data-for="htmlwidget-29d3a63276597bfa8356">{"x":{"attrs":{"axes":{"x":{"pixelsPerLabel":50,"drawGrid":false,"drawAxis":true},"y":{"valueRange":[0,110],"drawGrid":false,"drawAxis":true}},"series":{"Strongly distrust":{"axis":"y","strokeWidth":4},"Somewhat distrust":{"axis":"y","strokeWidth":4},"Neither trust nor distrust":{"axis":"y","strokeWidth":4},"Somewhat trust":{"axis":"y","strokeWidth":4},"Strongly trust":{"axis":"y","strokeWidth":4}},"title":"","labels":["week","Strongly distrust","Somewhat distrust","Neither trust nor distrust","Somewhat trust","Strongly trust"],"retainDateWindow":false,"xlabel":"Weeks","ylabel":"Percentage of sample","legend":"auto","labelsDivWidth":450,"labelsShowZeroValues":true,"labelsSeparateLines":false,"stackedGraph":true,"fillGraph":false,"fillAlpha":0.15,"stepPlot":false,"drawPoints":true,"pointSize":4,"drawGapEdgePoints":false,"connectSeparatedPoints":false,"strokeWidth":1,"strokeBorderColor":"white","colors":["#66C2A5","#FC8D62","#8DA0CB","#E78AC3","#A6D854"],"colorValue":0.5,"colorSaturation":1,"includeZero":true,"drawAxesAtZero":false,"logscale":false,"axisTickSize":3,"axisLineColor":"black","axisLineWidth":4,"axisLabelColor":"black","axisLabelFontSize":14,"axisLabelWidth":60,"drawGrid":true,"gridLineWidth":0.3,"rightGap":5,"digitsAfterDecimal":2,"labelsKMB":false,"labelsKMG2":false,"labelsUTC":false,"maxNumberWidth":6,"animatedZooms":false,"mobileDisableYTouch":true,"disableZoom":false,"highlightCircleSize":3,"highlightSeriesBackgroundAlpha":0.5,"highlightSeriesOpts":{"strokeWidth":3},"hideOverlayOnMouseOut":true},"group":"Siaya County Sample","annotations":[{"x":"1","shortText":"April 11","width":60,"height":25,"attachAtBottom":true,"series":"Strongly trust"},{"x":"8","shortText":"May 30","width":60,"height":25,"attachAtBottom":true,"series":"Strongly trust"}],"shadings":[],"events":[],"format":"numeric","data":[[0,1,2,3,4,5,6,7,8,9],[null,3.74988913536072,2.71481323242188,5.02290534973145,2.93886709213257,4.15013456344604,3.32460021972656,9.45348739624023,8.08773899078369,null],[null,7.41757440567017,6.79365396499634,6.15456485748291,4.65741014480591,3.99455046653748,5.81718921661377,4.93887710571289,2.87225794792175,null],[null,6.82697677612305,4.30166673660278,8.27661228179932,7.30208921432495,8.22310256958008,4.32018661499023,6.23874378204346,10.1258935928345,null],[null,34.1615943908691,35.6298332214355,26.3030433654785,26.1630058288574,31.0016193389893,28.341854095459,27.2488269805908,29.8547267913818,null],[null,47.8439674377441,50.5600318908691,54.2428741455078,58.9386291503906,52.6305923461914,58.1961708068848,52.1200637817383,49.059383392334,null]],"plugins":{"Crosshair":{"direction":"vertical"}},"fixedtz":false,"tzone":""},"evals":[],"jsHooks":[]}</script></p>
+<hr />
+<p><font size="5"><strong>Trust in other people</strong></font></p>
+<p>Generally speaking, would you say that most people can be trusted or that you need to be very careful in dealing with people?<br />
+<div id="htmlwidget-e1a2cdf4cad28e2fc659" style="width:672px;height:480px;" class="dygraphs html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e1a2cdf4cad28e2fc659">{"x":{"attrs":{"axes":{"x":{"pixelsPerLabel":50,"drawGrid":false,"drawAxis":true},"y":{"valueRange":[0,110],"drawGrid":false,"drawAxis":true}},"series":{"Need to be careful":{"axis":"y","strokeWidth":4},"Most people can be trusted":{"axis":"y","strokeWidth":4},"Don't know":{"axis":"y","strokeWidth":4}},"title":"","labels":["week","Need to be careful","Most people can be trusted","Don't know"],"retainDateWindow":false,"xlabel":"Weeks","ylabel":"Percentage of sample","legend":"auto","labelsDivWidth":500,"labelsShowZeroValues":true,"labelsSeparateLines":false,"stackedGraph":true,"fillGraph":false,"fillAlpha":0.15,"stepPlot":false,"drawPoints":true,"pointSize":4,"drawGapEdgePoints":false,"connectSeparatedPoints":false,"strokeWidth":1,"strokeBorderColor":"white","colors":["#E41A1C","#377EB8","#4DAF4A","#984EA3","#FF7F00"],"colorValue":0.5,"colorSaturation":1,"includeZero":true,"drawAxesAtZero":false,"logscale":false,"axisTickSize":3,"axisLineColor":"black","axisLineWidth":4,"axisLabelColor":"black","axisLabelFontSize":14,"axisLabelWidth":60,"drawGrid":true,"gridLineWidth":0.3,"rightGap":5,"digitsAfterDecimal":2,"labelsKMB":false,"labelsKMG2":false,"labelsUTC":false,"maxNumberWidth":6,"animatedZooms":false,"mobileDisableYTouch":true,"disableZoom":false,"highlightCircleSize":3,"highlightSeriesBackgroundAlpha":0.5,"highlightSeriesOpts":{"strokeWidth":3},"hideOverlayOnMouseOut":true},"group":"Siaya County Sample","annotations":[],"shadings":[],"events":[],"format":"numeric","data":[[0,1,2,3,4,5,6,7,8,9],[null,94.9024353027344,95.3830413818359,93.9597091674805,93.1927108764648,93.8841171264648,93.2766036987305,95.5109100341797,96.177131652832,null],[null,4.66904067993164,4.61695671081543,5.49059152603149,6.48081159591675,6.11588335037231,6.19629526138306,3.44678282737732,3.04398226737976,null],[null,0.428523302078247,0,0.549700021743774,0.326477825641632,0,0.527104258537292,1.04230773448944,0.778886616230011,null]],"plugins":{"Crosshair":{"direction":"vertical"}},"fixedtz":false,"tzone":""},"evals":[],"jsHooks":[]}</script></p>
+<hr />
+</div>
+<div id="mental-health" class="section level3">
+<h3>Mental health</h3>
+<p><font size="5"><strong>Depression, CES-D-10</strong></font></p>
+<p><strong>The Centre for Epidemiological Studies Depression Scale</strong> (CES-D-10) is a 10-item Likert scale questionnaire assessing depressive symptoms in the past week. It includes three items on depressed affect, five items on somatic symptoms, and two on positive affect. Options for each item range from “rarely or none of the time” (score of 0) to “all of the time” (score of 3). Scoring is reversed for positive affect statements. Total scores can range from 0 to 30. <strong>Higher scores suggest greater severity of symptoms.</strong></p>
+<div id="htmlwidget-6e67a1af9cd76e113d96" style="width:672px;height:480px;" class="dygraphs html-widget"></div>
+<script type="application/json" data-for="htmlwidget-6e67a1af9cd76e113d96">{"x":{"attrs":{"axes":{"x":{"pixelsPerLabel":50,"drawGrid":false,"drawAxis":true},"y":{"drawGrid":false,"drawAxis":true}},"series":{"CES-D score":{"axis":"y","strokeWidth":4}},"title":"","labels":["week","CES-D score"],"retainDateWindow":false,"xlabel":"Weeks","ylabel":"Average score","legend":"auto","labelsDivWidth":450,"labelsShowZeroValues":true,"labelsSeparateLines":false,"stackedGraph":false,"fillGraph":false,"fillAlpha":0.15,"stepPlot":false,"drawPoints":true,"pointSize":4,"drawGapEdgePoints":false,"connectSeparatedPoints":false,"strokeWidth":1,"strokeBorderColor":"white","colors":["#66C2A5","#FC8D62","#8DA0CB","#E78AC3","#A6D854"],"colorValue":0.5,"colorSaturation":1,"includeZero":true,"drawAxesAtZero":false,"logscale":false,"axisTickSize":3,"axisLineColor":"black","axisLineWidth":4,"axisLabelColor":"black","axisLabelFontSize":14,"axisLabelWidth":60,"drawGrid":true,"gridLineWidth":0.3,"rightGap":5,"digitsAfterDecimal":2,"labelsKMB":false,"labelsKMG2":false,"labelsUTC":false,"maxNumberWidth":6,"animatedZooms":false,"mobileDisableYTouch":true,"disableZoom":false,"highlightCircleSize":3,"highlightSeriesBackgroundAlpha":0.5,"highlightSeriesOpts":{"strokeWidth":3},"hideOverlayOnMouseOut":true},"group":"Siaya County Sample","annotations":[{"x":"1","shortText":"April 11","width":60,"height":25,"attachAtBottom":true,"series":"CES-D score"},{"x":"8","shortText":"May 30","width":60,"height":25,"attachAtBottom":true,"series":"CES-D score"}],"shadings":[],"events":[],"format":"numeric","data":[[0,1,2,3,4,5,6,7,8,9],[null,10.6042289733887,11.1191854476929,11.6560821533203,9.09587001800537,10.0281190872192,9.71574020385742,9.26282501220703,10.7255182266235,null]],"plugins":{"Crosshair":{"direction":"vertical"}},"fixedtz":false,"tzone":""},"evals":[],"jsHooks":[]}</script>
+<hr />
+<p>We also ask questions 1-5 on core mental health from the John Hopkins Bloomberg School of Public Health (JHSPH) <a href="https://www.elizabethstuart.org/files/MH_survey-items-request_03_20.pdf">resource</a>.</p>
+<p><font size="5"><strong>Nervious, anxious or on edge</strong></font></p>
+<p>In the past 7 days, how often have you felt nervous, anxious, or on edge?<br />
+<div id="htmlwidget-00a1cde6ef345dadc513" style="width:672px;height:480px;" class="dygraphs html-widget"></div>
+<script type="application/json" data-for="htmlwidget-00a1cde6ef345dadc513">{"x":{"attrs":{"axes":{"x":{"pixelsPerLabel":50,"drawGrid":false,"drawAxis":true},"y":{"valueRange":[0,110],"drawGrid":false,"drawAxis":true}},"series":{"5-7 days":{"axis":"y","strokeWidth":4},"3-4 days":{"axis":"y","strokeWidth":4},"1-2 days":{"axis":"y","strokeWidth":4},"Not at all or less than one day":{"axis":"y","strokeWidth":4}},"title":"","labels":["week","5-7 days","3-4 days","1-2 days","Not at all or less than one day"],"retainDateWindow":false,"xlabel":"Weeks","ylabel":"Percentage of sample","legend":"auto","labelsDivWidth":450,"labelsShowZeroValues":true,"labelsSeparateLines":false,"stackedGraph":true,"fillGraph":false,"fillAlpha":0.15,"stepPlot":false,"drawPoints":true,"pointSize":4,"drawGapEdgePoints":false,"connectSeparatedPoints":false,"strokeWidth":1,"strokeBorderColor":"white","colors":["#66C2A5","#FC8D62","#8DA0CB","#E78AC3","#A6D854"],"colorValue":0.5,"colorSaturation":1,"includeZero":true,"drawAxesAtZero":false,"logscale":false,"axisTickSize":3,"axisLineColor":"black","axisLineWidth":4,"axisLabelColor":"black","axisLabelFontSize":14,"axisLabelWidth":60,"drawGrid":true,"gridLineWidth":0.3,"rightGap":5,"digitsAfterDecimal":2,"labelsKMB":false,"labelsKMG2":false,"labelsUTC":false,"maxNumberWidth":6,"animatedZooms":false,"mobileDisableYTouch":true,"disableZoom":false,"highlightCircleSize":3,"highlightSeriesBackgroundAlpha":0.5,"highlightSeriesOpts":{"strokeWidth":3},"hideOverlayOnMouseOut":true},"group":"Siaya County Sample","annotations":[{"x":"1","shortText":"April 11","width":60,"height":25,"attachAtBottom":true,"series":"Not at all or less than one day"},{"x":"8","shortText":"May 30","width":60,"height":25,"attachAtBottom":true,"series":"Not at all or less than one day"}],"shadings":[],"events":[],"format":"numeric","data":[[0,1,2,3,4,5,6,7,8,9],[null,20.4400367736816,22.7318325042725,21.73024559021,14.0018892288208,27.5676460266113,24.8712768554688,16.2213096618652,24.9826812744141,null],[null,11.7018852233887,21.9867458343506,26.1409702301025,25.4361248016357,17.4287700653076,21.5775203704834,27.0775566101074,29.6972045898438,null],[null,29.4415950775146,26.3742122650146,24.8066349029541,21.8648204803467,25.6918106079102,28.5015468597412,28.2885608673096,21.7798137664795,null],[null,38.4164848327637,28.9072093963623,27.3221492767334,38.6971664428711,29.3117733001709,25.0496559143066,28.4125747680664,23.54030418396,null]],"plugins":{"Crosshair":{"direction":"vertical"}},"fixedtz":false,"tzone":""},"evals":[],"jsHooks":[]}</script></p>
+<hr />
+<p><font size="5"><strong>Depressed</strong></font></p>
+<p>In the past 7 days, how often have you felt depressed?</p>
+<div id="htmlwidget-a8cc690ce77fbe958a47" style="width:672px;height:480px;" class="dygraphs html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a8cc690ce77fbe958a47">{"x":{"attrs":{"axes":{"x":{"pixelsPerLabel":50,"drawGrid":false,"drawAxis":true},"y":{"valueRange":[0,110],"drawGrid":false,"drawAxis":true}},"series":{"5-7 days":{"axis":"y","strokeWidth":4},"3-4 days":{"axis":"y","strokeWidth":4},"1-2 days":{"axis":"y","strokeWidth":4},"Not at all or less than one day":{"axis":"y","strokeWidth":4}},"title":"","labels":["week","5-7 days","3-4 days","1-2 days","Not at all or less than one day"],"retainDateWindow":false,"xlabel":"Weeks","ylabel":"Percentage of sample","legend":"auto","labelsDivWidth":450,"labelsShowZeroValues":true,"labelsSeparateLines":false,"stackedGraph":true,"fillGraph":false,"fillAlpha":0.15,"stepPlot":false,"drawPoints":true,"pointSize":4,"drawGapEdgePoints":false,"connectSeparatedPoints":false,"strokeWidth":1,"strokeBorderColor":"white","colors":["#66C2A5","#FC8D62","#8DA0CB","#E78AC3","#A6D854"],"colorValue":0.5,"colorSaturation":1,"includeZero":true,"drawAxesAtZero":false,"logscale":false,"axisTickSize":3,"axisLineColor":"black","axisLineWidth":4,"axisLabelColor":"black","axisLabelFontSize":14,"axisLabelWidth":60,"drawGrid":true,"gridLineWidth":0.3,"rightGap":5,"digitsAfterDecimal":2,"labelsKMB":false,"labelsKMG2":false,"labelsUTC":false,"maxNumberWidth":6,"animatedZooms":false,"mobileDisableYTouch":true,"disableZoom":false,"highlightCircleSize":3,"highlightSeriesBackgroundAlpha":0.5,"highlightSeriesOpts":{"strokeWidth":3},"hideOverlayOnMouseOut":true},"group":"Siaya County Sample","annotations":[{"x":"1","shortText":"April 11","width":60,"height":25,"attachAtBottom":true,"series":"Not at all or less than one day"},{"x":"8","shortText":"May 30","width":60,"height":25,"attachAtBottom":true,"series":"Not at all or less than one day"}],"shadings":[],"events":[],"format":"numeric","data":[[0,1,2,3,4,5,6,7,8,9],[null,19.5529499053955,26.2092418670654,27.3994007110596,17.6203212738037,28.2379570007324,21.3455963134766,21.4929599761963,18.1044807434082,null],[null,27.6214065551758,20.2964401245117,19.4507694244385,23.2650108337402,19.6405448913574,22.4635982513428,21.219165802002,24.7660121917725,null],[null,22.0169792175293,27.3587379455566,28.6366558074951,25.53786277771,23.7631149291992,21.4035549163818,29.1614570617676,28.0569286346436,null],[null,30.8086624145508,26.1355819702148,24.5131740570068,33.5768013000488,28.3583869934082,34.7872505187988,28.1264190673828,29.0725765228271,null]],"plugins":{"Crosshair":{"direction":"vertical"}},"fixedtz":false,"tzone":""},"evals":[],"jsHooks":[]}</script>
+<hr />
+<p><font size="5"><strong>Lonely</strong></font></p>
+<p>In the past 7 days, how often have you felt lonely?</p>
+<div id="htmlwidget-58ad334b7b877139a72a" style="width:672px;height:480px;" class="dygraphs html-widget"></div>
+<script type="application/json" data-for="htmlwidget-58ad334b7b877139a72a">{"x":{"attrs":{"axes":{"x":{"pixelsPerLabel":50,"drawGrid":false,"drawAxis":true},"y":{"valueRange":[0,110],"drawGrid":false,"drawAxis":true}},"series":{"5-7 days":{"axis":"y","strokeWidth":4},"3-4 days":{"axis":"y","strokeWidth":4},"1-2 days":{"axis":"y","strokeWidth":4},"Not at all or less than one day":{"axis":"y","strokeWidth":4}},"title":"","labels":["week","5-7 days","3-4 days","1-2 days","Not at all or less than one day"],"retainDateWindow":false,"xlabel":"Weeks","ylabel":"Percentage of sample","legend":"auto","labelsDivWidth":450,"labelsShowZeroValues":true,"labelsSeparateLines":false,"stackedGraph":true,"fillGraph":false,"fillAlpha":0.15,"stepPlot":false,"drawPoints":true,"pointSize":4,"drawGapEdgePoints":false,"connectSeparatedPoints":false,"strokeWidth":1,"strokeBorderColor":"white","colors":["#66C2A5","#FC8D62","#8DA0CB","#E78AC3","#A6D854"],"colorValue":0.5,"colorSaturation":1,"includeZero":true,"drawAxesAtZero":false,"logscale":false,"axisTickSize":3,"axisLineColor":"black","axisLineWidth":4,"axisLabelColor":"black","axisLabelFontSize":14,"axisLabelWidth":60,"drawGrid":true,"gridLineWidth":0.3,"rightGap":5,"digitsAfterDecimal":2,"labelsKMB":false,"labelsKMG2":false,"labelsUTC":false,"maxNumberWidth":6,"animatedZooms":false,"mobileDisableYTouch":true,"disableZoom":false,"highlightCircleSize":3,"highlightSeriesBackgroundAlpha":0.5,"highlightSeriesOpts":{"strokeWidth":3},"hideOverlayOnMouseOut":true},"group":"Siaya County Sample","annotations":[{"x":"1","shortText":"April 11","width":60,"height":25,"attachAtBottom":true,"series":"Not at all or less than one day"},{"x":"8","shortText":"May 30","width":60,"height":25,"attachAtBottom":true,"series":"Not at all or less than one day"}],"shadings":[],"events":[],"format":"numeric","data":[[0,1,2,3,4,5,6,7,8,9],[null,6.25920391082764,7.72722816467285,13.3080377578735,5.46801376342773,8.4371919631958,7.70776414871216,6.28339815139771,5.43294095993042,null],[null,14.9327735900879,7.80402183532715,13.3648557662964,13.316234588623,13.0520181655884,15.2797040939331,13.5007362365723,12.4336910247803,null],[null,21.3552894592285,24.2908458709717,19.724781036377,16.9335880279541,18.493465423584,18.0133590698242,19.7137222290039,20.3392391204834,null],[null,57.4527320861816,60.177906036377,53.6023254394531,64.2821578979492,60.0173225402832,58.9991760253906,60.502140045166,61.794132232666,null]],"plugins":{"Crosshair":{"direction":"vertical"}},"fixedtz":false,"tzone":""},"evals":[],"jsHooks":[]}</script>
+<hr />
+<p><font size="5"><strong>Hopeful about the future</strong></font></p>
+<p>In the past 7 days, how often have you felt hopeful about the future?</p>
+<div id="htmlwidget-61ba706ff95e06bdf6c0" style="width:672px;height:480px;" class="dygraphs html-widget"></div>
+<script type="application/json" data-for="htmlwidget-61ba706ff95e06bdf6c0">{"x":{"attrs":{"axes":{"x":{"pixelsPerLabel":50,"drawGrid":false,"drawAxis":true},"y":{"valueRange":[0,110],"drawGrid":false,"drawAxis":true}},"series":{"5-7 days":{"axis":"y","strokeWidth":4},"3-4 days":{"axis":"y","strokeWidth":4},"1-2 days":{"axis":"y","strokeWidth":4},"Not at all or less than one day":{"axis":"y","strokeWidth":4}},"title":"","labels":["week","5-7 days","3-4 days","1-2 days","Not at all or less than one day"],"retainDateWindow":false,"xlabel":"Weeks","ylabel":"Percentage of sample","legend":"auto","labelsDivWidth":450,"labelsShowZeroValues":true,"labelsSeparateLines":false,"stackedGraph":true,"fillGraph":false,"fillAlpha":0.15,"stepPlot":false,"drawPoints":true,"pointSize":4,"drawGapEdgePoints":false,"connectSeparatedPoints":false,"strokeWidth":1,"strokeBorderColor":"white","colors":["#66C2A5","#FC8D62","#8DA0CB","#E78AC3","#A6D854"],"colorValue":0.5,"colorSaturation":1,"includeZero":true,"drawAxesAtZero":false,"logscale":false,"axisTickSize":3,"axisLineColor":"black","axisLineWidth":4,"axisLabelColor":"black","axisLabelFontSize":14,"axisLabelWidth":60,"drawGrid":true,"gridLineWidth":0.3,"rightGap":5,"digitsAfterDecimal":2,"labelsKMB":false,"labelsKMG2":false,"labelsUTC":false,"maxNumberWidth":6,"animatedZooms":false,"mobileDisableYTouch":true,"disableZoom":false,"highlightCircleSize":3,"highlightSeriesBackgroundAlpha":0.5,"highlightSeriesOpts":{"strokeWidth":3},"hideOverlayOnMouseOut":true},"group":"Siaya County Sample","annotations":[{"x":"1","shortText":"April 11","width":60,"height":25,"attachAtBottom":true,"series":"Not at all or less than one day"},{"x":"8","shortText":"May 30","width":60,"height":25,"attachAtBottom":true,"series":"Not at all or less than one day"}],"shadings":[],"events":[],"format":"numeric","data":[[0,1,2,3,4,5,6,7,8,9],[null,32.9750175476074,32.6310768127441,43.3461608886719,38.0468978881836,44.7971954345703,44.3170890808105,43.7095184326172,49.6147117614746,null],[null,17.4369258880615,25.4064044952393,21.0836849212646,25.1816177368164,27.110179901123,26.1154613494873,29.7584438323975,36.870662689209,null],[null,27.6854610443115,19.1051177978516,18.9292163848877,19.7361106872559,14.8409576416016,16.9924621582031,16.2389698028564,6.86251354217529,null],[null,21.9025936126709,22.8574028015137,16.6409358978271,17.0353717803955,13.2516670227051,12.5749855041504,10.2930660247803,6.65210723876953,null]],"plugins":{"Crosshair":{"direction":"vertical"}},"fixedtz":false,"tzone":""},"evals":[],"jsHooks":[]}</script>
+<hr />
+<p><font size="5"><strong>Had physical reactions due to COVID-19</strong></font></p>
+<p>In the past 7 days, how often have you had physical reactions, such as sweating, trouble breathing, nausea, or a pounding heart, when thinking about your experience (e.g., social distancing, loss of income/work, concerns about infection) with the coronavirus/COVID-19 pandemic?</p>
+<div id="htmlwidget-0fba71af5c5274192d3b" style="width:672px;height:480px;" class="dygraphs html-widget"></div>
+<script type="application/json" data-for="htmlwidget-0fba71af5c5274192d3b">{"x":{"attrs":{"axes":{"x":{"pixelsPerLabel":50,"drawGrid":false,"drawAxis":true},"y":{"valueRange":[0,110],"drawGrid":false,"drawAxis":true}},"series":{"5-7 days":{"axis":"y","strokeWidth":4},"3-4 days":{"axis":"y","strokeWidth":4},"1-2 days":{"axis":"y","strokeWidth":4},"Not at all or less than one day":{"axis":"y","strokeWidth":4}},"title":"","labels":["week","5-7 days","3-4 days","1-2 days","Not at all or less than one day"],"retainDateWindow":false,"xlabel":"Weeks","ylabel":"Percentage of sample","legend":"auto","labelsDivWidth":450,"labelsShowZeroValues":true,"labelsSeparateLines":false,"stackedGraph":true,"fillGraph":false,"fillAlpha":0.15,"stepPlot":false,"drawPoints":true,"pointSize":4,"drawGapEdgePoints":false,"connectSeparatedPoints":false,"strokeWidth":1,"strokeBorderColor":"white","colors":["#66C2A5","#FC8D62","#8DA0CB","#E78AC3","#A6D854"],"colorValue":0.5,"colorSaturation":1,"includeZero":true,"drawAxesAtZero":false,"logscale":false,"axisTickSize":3,"axisLineColor":"black","axisLineWidth":4,"axisLabelColor":"black","axisLabelFontSize":14,"axisLabelWidth":60,"drawGrid":true,"gridLineWidth":0.3,"rightGap":5,"digitsAfterDecimal":2,"labelsKMB":false,"labelsKMG2":false,"labelsUTC":false,"maxNumberWidth":6,"animatedZooms":false,"mobileDisableYTouch":true,"disableZoom":false,"highlightCircleSize":3,"highlightSeriesBackgroundAlpha":0.5,"highlightSeriesOpts":{"strokeWidth":3},"hideOverlayOnMouseOut":true},"group":"Siaya County Sample","annotations":[{"x":"1","shortText":"April 11","width":60,"height":25,"attachAtBottom":true,"series":"Not at all or less than one day"},{"x":"8","shortText":"May 30","width":60,"height":25,"attachAtBottom":true,"series":"Not at all or less than one day"}],"shadings":[],"events":[],"format":"numeric","data":[[0,1,2,3,4,5,6,7,8,9],[null,5.84919023513794,8.10798645019531,9.57828712463379,2.39583778381348,3.1902060508728,4.04669713973999,3.40714406967163,1.66428756713867,null],[null,12.4036178588867,6.92308712005615,10.229284286499,6.45787191390991,6.1449728012085,4.81833124160767,7.29228925704956,1.28704917430878,null],[null,10.2654571533203,8.06278133392334,10.3969249725342,9.66246032714844,11.3343563079834,13.1337537765503,12.107964515686,13.9531354904175,null],[null,71.4817352294922,76.9061431884766,69.7955017089844,81.4838256835938,79.3304595947266,78.001220703125,77.1925964355469,83.0955276489258,null]],"plugins":{"Crosshair":{"direction":"vertical"}},"fixedtz":false,"tzone":""},"evals":[],"jsHooks":[]}</script>
+<hr />
+</div>
+</div>
+<div id="section-1" class="section level2">
+<h2></h2>
+<p>These data comes from phone survey interviews conducted by <a href="http://remitkenya.co.ke/">REMIT Kenya</a> in Siaya County, Kenya. We are collecting data for a sample of ~12,000 households in the county, which is representative of the whole population. At the same time, our weekly sampling method assures weekly representativeness of the overall sample.</p>
+<p>So far we have interviewed 8,293 households, with the following distribution per week:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Week</th>
+<th align="center">Dates</th>
+<th align="center">Number of surveys</th>
+<th align="center">Treat-Eligible</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Week 1</td>
+<td align="center">05 April 2020 - 11 April 2020</td>
+<td align="center">745</td>
+<td align="center">187</td>
+</tr>
+<tr class="even">
+<td>Week 2</td>
+<td align="center">12 April 2020 - 18 April 2020</td>
+<td align="center">744</td>
+<td align="center">191</td>
+</tr>
+<tr class="odd">
+<td>Week 3</td>
+<td align="center">19 April 2020 - 25 April 2020</td>
+<td align="center">1,478</td>
+<td align="center">389</td>
+</tr>
+<tr class="even">
+<td>Week 4</td>
+<td align="center">26 April 2020 - 02 May 2020</td>
+<td align="center">1,146</td>
+<td align="center">283</td>
+</tr>
+<tr class="odd">
+<td>Week 5</td>
+<td align="center">03 May 2020 - 09 May 2020</td>
+<td align="center">1,499</td>
+<td align="center">392</td>
+</tr>
+<tr class="even">
+<td>Week 6</td>
+<td align="center">10 May 2020 - 16 May 2020</td>
+<td align="center">986</td>
+<td align="center">289</td>
+</tr>
+<tr class="odd">
+<td>Week 7</td>
+<td align="center">17 May 2020 - 23 May 2020</td>
+<td align="center">1,217</td>
+<td align="center">305</td>
+</tr>
+<tr class="even">
+<td>Week 8</td>
+<td align="center">24 May 2020 - 30 May 2020</td>
+<td align="center">478</td>
+<td align="center">137</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

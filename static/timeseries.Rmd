@@ -176,9 +176,9 @@ presAnnotation <- function(dygraph, x, text) {
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
   presAnnotation("8", text = "May 30") %>%
-#      dyLimit(limit = el1$i1_EL1[1], "Pre-Covid average, agricultural earnings",
+#      dyLimit(limit = el1$i1_EL1[1], "Pre-COVID average, agricultural earnings",
 #    strokePattern = "dotted", color = "blue") %>%
-#      dyLimit(limit = el1$i3_EL1[1], "Pre-Covid average, wage earnings",
+#      dyLimit(limit = el1$i3_EL1[1], "Pre-COVID average, wage earnings",
 #    strokePattern = "dotted", color = "green") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
 i_g
@@ -250,9 +250,9 @@ c_g <- dygraph(c, main = "", group = "Siaya County Sample") %>%
       dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
   presAnnotation("8", text = "May 30") %>%
-      dyLimit(limit = el1_m$c1_EL1[1], "Pre-Covid average, food expenditure", 
+      dyLimit(limit = el1_m$c1_EL1[1], "Pre-COVID average, food expenditure", 
     strokePattern = "dotted", color = "orange") %>%
-#      dyLimit(limit = el1_m$c3_EL1[1], "Pre-Covid average, non-food expenditure",
+#      dyLimit(limit = el1_m$c3_EL1[1], "Pre-COVID average, non-food expenditure",
 #    strokePattern = "dotted", color = "green") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) 
   c_g
@@ -279,13 +279,13 @@ f1_d_g  <- dygraph(f1_d, main = "") %>%
   presAnnotation("8", text = "May 30") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
   dyLegend(width = 210, labelsSeparateLines = TRUE) %>%
-    dyLimit(limit = el1$h9_1_skippedadult[1], "Pre-Covid average",
+    dyLimit(limit = el1$h9_1_skippedadult[1], "Pre-COVID average",
     strokePattern = "dotted", color = "red") %>%
-    dyLimit(limit = el1$h9_2_skippedchild[1], "Pre-Covid average",
+    dyLimit(limit = el1$h9_2_skippedchild[1], "Pre-COVID average",
     strokePattern = "dotted", color = "cornflowerblue")
 f1_d_g
 ```
-Pre-Covid average uses data from 2016-2017.
+Pre-COVID average uses data from 2016-2017.
      
 ***  
   
