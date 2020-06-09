@@ -4,7 +4,6 @@ author: 'Siaya County - Household Sample'
 date: ''
 output:
   html_document:
-    self_contained: false
     theme: paper
     toc: FALSE
     includes:
@@ -861,112 +860,6 @@ pnf_g <- dygraph(pnf, main = "", group = "Siaya County Sample") %>%
 ```
   
 ***     
-
-### Heat Maps
-
-<font size="5">**Price Index**</font>
-
-
-```{r price_index_heatmap}
-g <- list(
-  fitbounds = "locations",
-  visible = FALSE
-)
-fig <- covid_price_index %>% plot_ly() 
-fig <- fig %>% add_trace(
-    type="choropleth",
-    geojson=json_file,
-    locations= ~subloc_name,
-    z= ~`Price Index`,
-    colorscale="Blues",
-    reversescale= TRUE,
-    featureidkey="properties.sublocat_1",
-    frame = ~week,
-    zmin=2.2,
-    zmax=2.6
-  )
-fig <- fig %>% layout(
-    geo = g
-  )
-fig <- fig %>% colorbar(title = "Price Index")
-fig <- fig %>% layout(
-    title = "Price Index - USD, PPP"
-) %>% animation_opts(frame = 2000, transition = 500) %>%
-  partial_bundle() %>% toWebGL()
-fig
-```
-
-Price index calculated in 2018 USD using household consumption weights. 
-
- ***   
-    
-
-<font size="5">**Total Weekly Consumption**</font>  
-
-
-
-```{r total_consumption_heatmap}
-g <- list(
-  fitbounds = "locations",
-  visible = FALSE
-)
-fig <- covid_subloc %>% plot_ly() 
-fig <- fig %>% add_trace(
-    type="choropleth",
-    geojson=json_file,
-    locations= ~subloc_name,
-    z= ~`Total Consumption`,
-    colorscale="Blues",
-    reversescale= TRUE,
-    featureidkey="properties.sublocat_1",
-    frame = ~week,
-    zmin=4,
-    zmax=20
-  )
-fig <- fig %>% layout(
-    geo = g
-  )
-fig <- fig %>% colorbar(title = "Total Consumption")
-fig <- fig %>% layout(
-    title = "Total Weekly Consumption - USD, PPP"
-) %>% animation_opts(frame = 2000, transition = 500) %>%
-  partial_bundle() %>% toWebGL()
-fig
-```
-
-
- ***   
-    
-
-<font size="5">**Face Mask Usage**</font>  
-```{r face_mask}
-g <- list(
-  fitbounds = "locations",
-  visible = FALSE
-)
-fig <- covid_subloc %>% plot_ly() 
-fig <- fig %>% add_trace(
-    type="choropleth",
-    geojson=json_file,
-    locations= ~subloc_name,
-    z= ~`Face mask usage`,
-    colorscale="Blues",
-    reversescale= TRUE,
-    featureidkey="properties.sublocat_1",
-    frame = ~week,
-    zmin=0,
-    zmax=100
-  )
-fig <- fig %>% layout(
-    geo = g
-  )
-fig <- fig %>% colorbar(title = "Face mask usage")
-fig <- fig %>% layout(
-    title = "Percentage of respondents who reported using a face mask"
-) %>% animation_opts(frame = 2000, transition = 500)%>%
-  partial_bundle() %>% toWebGL()
-fig
-```
 
 ## {}
       
