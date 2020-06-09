@@ -38,6 +38,8 @@ covid_subloc$`Face mask usage` <- covid_subloc$ckn6_mask_wins
 
 json_file <- rjson::fromJSON(file="../../GE_Endline2/covid19/covid_map/SampleAreaSublocations_clean.geojson")
 
+el1 <- read_dta("../../GE_Endline2/covid19/data/GE_EL1_Avg_HH_outcomes.dta")
+
 #Grouping vars for graphs
 cov <- c("week", "cov1_wins", "cov3_wins", "cov4_wins")
 cov <- covid_weekly[cov]
@@ -242,6 +244,8 @@ c_g <- dygraph(c, main = "", group = "Siaya County Sample") %>%
       dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
   presAnnotation("8", text = "May 30") %>%
+#      dyLimit(limit = el1$c1_EL1[1], "Pre-Covid average, food expenditure",
+#    strokePattern = "dotted", color = "orange") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) 
   c_g
 
@@ -266,9 +270,14 @@ f1_d_g  <- dygraph(f1_d, main = "") %>%
   presAnnotation("1", text = "April 11") %>%
   presAnnotation("8", text = "May 30") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
-  dyLegend(width = 210, labelsSeparateLines = TRUE) 
+  dyLegend(width = 210, labelsSeparateLines = TRUE) %>%
+    dyLimit(limit = el1$h9_1_skippedadult[1], "Pre-Covid average",
+    strokePattern = "dotted", color = "red") %>%
+    dyLimit(limit = el1$h9_2_skippedchild[1], "Pre-Covid average",
+    strokePattern = "dotted", color = "cornflowerblue")
 f1_d_g
 ```
+Pre-Covid average uses data from 2016-2017.
      
 ***  
   
@@ -866,7 +875,8 @@ fig <- fig %>% add_trace(
     geojson=json_file,
     locations= ~subloc_name,
     z= ~`Price Index`,
-    colorscale="Viridis",
+    colorscale="Blues",
+    reversescale= TRUE,
     featureidkey="properties.sublocat_1",
     frame = ~week,
     zmin=2.2,
@@ -904,7 +914,8 @@ fig <- fig %>% add_trace(
     geojson=json_file,
     locations= ~subloc_name,
     z= ~`Total Consumption`,
-    colorscale="Viridis",
+    colorscale="Blues",
+    reversescale= TRUE,
     featureidkey="properties.sublocat_1",
     frame = ~week,
     zmin=4,
@@ -940,7 +951,8 @@ fig <- fig %>% add_trace(
     geojson=json_file,
     locations= ~subloc_name,
     z= ~`Face mask usage`,
-    colorscale="Viridis",
+    colorscale="Blues",
+    reversescale= TRUE,
     featureidkey="properties.sublocat_1",
     frame = ~week,
     zmin=0,
