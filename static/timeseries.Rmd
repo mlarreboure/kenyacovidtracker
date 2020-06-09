@@ -589,11 +589,15 @@ cesd_g <- dygraph(cesd_10, main = "", group = "Siaya County Sample") %>%
   presAnnotation("1", text = "April 11") %>%
   presAnnotation("8", text = "May 30") %>%
       dyCrosshair(direction = "vertical") %>%
+      dyLimit(limit = 10.67273, "Pre-COVID average",
+    strokePattern = "dotted", color = "green") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) 
   cesd_g
 
-```
-   
+``` 
+
+Pre-COVID average computed with data from 2016-2017
+
 ***  
 
 We also ask questions 1-5 on core mental health from the John Hopkins Bloomberg School of Public Health (JHSPH) [resource](https://www.elizabethstuart.org/files/MH_survey-items-request_03_20.pdf).  
