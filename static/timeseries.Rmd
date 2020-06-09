@@ -40,6 +40,7 @@ covid_subloc$`Face mask usage` <- covid_subloc$ckn6_mask_wins
 json_file <- rjson::fromJSON(file="../../GE_Endline2/covid19/covid_map/SampleAreaSublocations_clean.geojson")
 
 el1 <- read_dta("../../GE_Endline2/covid19/data/GE_EL1_Avg_HH_outcomes.dta")
+el1_m <- read_dta("../../GE_Endline2/covid19/data/GE_EL1_Avg_HH_monthly_outcomes.dta")
 
 #Grouping vars for graphs
 cov <- c("week", "cov1_wins", "cov3_wins", "cov4_wins")
@@ -175,6 +176,10 @@ presAnnotation <- function(dygraph, x, text) {
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
   presAnnotation("8", text = "May 30") %>%
+#      dyLimit(limit = el1$i1_EL1[1], "Pre-Covid average, agricultural earnings",
+#    strokePattern = "dotted", color = "blue") %>%
+#      dyLimit(limit = el1$i3_EL1[1], "Pre-Covid average, wage earnings",
+#    strokePattern = "dotted", color = "green") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
 i_g
 ```
@@ -245,13 +250,15 @@ c_g <- dygraph(c, main = "", group = "Siaya County Sample") %>%
       dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
   presAnnotation("8", text = "May 30") %>%
-#      dyLimit(limit = el1$c1_EL1[1], "Pre-Covid average, food expenditure",
-#    strokePattern = "dotted", color = "orange") %>%
+      dyLimit(limit = el1_m$c1_EL1[1], "Pre-Covid average, food expenditure", 
+    strokePattern = "dotted", color = "orange") %>%
+#      dyLimit(limit = el1_m$c3_EL1[1], "Pre-Covid average, non-food expenditure",
+#    strokePattern = "dotted", color = "green") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) 
   c_g
 
 ```
-Own-food consumption accounts for own agricultural and pastoral production at market value.  
+Own-food consumption accounts for own agricultural and pastoral production at market value. Pre-covid average uses 2016-2017 data.
 
 *** 
 
