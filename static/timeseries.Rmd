@@ -4,9 +4,10 @@ author: 'Siaya County - Household Sample'
 date: ''
 output:
   html_document:
+    self_contained: false
     theme: paper
     toc: FALSE
-    includes: 
+    includes:
       before_body: header.html
 ---
 
