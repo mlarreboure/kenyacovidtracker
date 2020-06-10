@@ -64,7 +64,7 @@ date_end = ""
 title = "Cessation of movement in and out of Eastleigh in Nairobi, and Old Town area in Mombasa."
 company=""
 date_start = "2010-05-06" 
-date_end = ""
+date_end = "2010-06-06"
  description = """
 + Closure of markets, restaurants and eateries within those areas.
 """
@@ -91,11 +91,18 @@ date_start = "2013-04-22"
 date_end = ""
 
 [[experience]]
-title = "Cessation of movement in and out of Mombasa, Kilifi and Kwale counties."
+title = "Cessation of movement in and out of Kilifi and Kwale counties."
+company=""
+date_start = "2014-04-08" 
+date_end = "2014-06-07"
+
+[[experience]]
+title = "Cessation of movement in and out of Mombasa county."
 company=""
 date_start = "2014-04-08" 
 date_end = ""
-
+  
+  
 [[experience]]
 title = "Cessation of movement in and out of The Nairobi Metropolitan Area."
 company=""
@@ -113,6 +120,11 @@ date_end = "2016-03-28"
   company=""
 date_start = "2017-03-27" 
 date_end = ""
+  description = """
+
+This curfew took place from 7pm-5am until June 07, when the schedule changed to 9pm-4am. It is still in place.
+
+"""
 
   [[experience]]
   title = "All national and international flights banned."
