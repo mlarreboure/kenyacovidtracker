@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Border | Kenya | COVID-19 Economic Tracker</title>
+    <link>/tags/border/</link>
+      <atom:link href="/tags/border/index.xml" rel="self" type="application/rss+xml" />
+    <description>Border</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 15 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/gelani-banks-zaunxTcZ3a4-unsplash.jpg</url>
+      <title>Border</title>
+      <link>/tags/border/</link>
+    </image>
+    
+    <item>
+      <title>Border Counties - Traders Survey</title>
+      <link>/weeklystats/busia/</link>
+      <pubDate>Wed, 15 Apr 2020 00:00:00 +0000</pubDate>
+      <guid>/weeklystats/busia/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
