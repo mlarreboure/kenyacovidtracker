@@ -45,5 +45,17 @@ The World Bank, in collaboration with KNBS and UNHCR, is collecting household da
 
 A joint research team at Berkeley and Busara is analyzing phone survey data from Siaya County, measuring outcomes for households and enterprises targeted in [Egger et al (2019)](http://emiguel.econ.berkeley.edu/research/general-equilibrium-effects-of-cash-transfers-experimental-evidence-from-kenya), and bringing in an additional sample based on a recent census activity to ensure the sample is representative for the entire study area.
 
-The different partners collaborating in this project are The World Bank, UNHCR, KNBS, Berkeley, Busara, and REMIT. At The World Bank the Team Lead is [Utz Johann Pape](https://blogs.worldbank.org/team/utz-pape). At Berkeley, the research team is led by [Dennis Egger](https://www.dennisegger.net), [Layna Lowe](https://cega.berkeley.edu/user-type/staff/#layna-lowe), [Edward Miguel](http://emiguel.econ.berkeley.edu/), Carlos Paramo, and [Michael Walker](http://www.michaelwwalker.me/). At Busara, the team comprises [Tilman Graff](https://tilmangraff.github.io/), [Johannes Haushofer](https://www.princeton.edu/haushofer/), and [Magdalena Larreboure](https://mlarreboure.com/). All the data collection is being carried out by [REMIT Kenya](http://remitkenya.co.ke/), with a team led by Carol Nekesa, Eric Owino, and Andrew Wabwire.  
 
+Collaborators on this project are:   
+[Dennis Egger](https://www.dennisegger.net) - University of California, Berkeley;   
+[Tilman Graff](https://tilmangraff.github.io/) - Busara Center, Nairobi;  
+[Johannes Haushofer](https://www.princeton.edu/haushofer/) - Princeton University;   
+[Magdalena Larreboure](https://mlarreboure.com/) - Busara Center, Nairobi;   
+[Layna Lowe](https://cega.berkeley.edu/user-type/staff/#layna-lowe) - University of California, Berkeley;   
+[Edward Miguel](http://emiguel.econ.berkeley.edu/) - University of California, Berkeley;  
+Carol Nekesa - REMIT Kenya;  
+Eric Owino - REMIT Kenya;  
+[Utz Johann Pape](https://blogs.worldbank.org/team/utz-pape) - The World Bank;   
+Carlos Paramo - University of California, Berkeley;   
+Andrew Wabwire - REMIT Kenya;  
+[Michael Walker](http://www.michaelwwalker.me/) - University of California, Berkeley.
