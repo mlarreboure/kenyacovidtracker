@@ -1,5 +1,5 @@
 ---
-title: Siaya County - Enterprise Survey
+title: Enterprise Survey - Siaya County
 summary: Descriptive statistics for enterprises in Siaya County.
 tags:
 - Siaya

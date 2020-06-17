@@ -29,23 +29,7 @@
     </item>
     
     <item>
-      <title>Border Counties - Traders Survey</title>
-      <link>/weeklystats/busia/</link>
-      <pubDate>Wed, 15 Apr 2020 00:00:00 +0000</pubDate>
-      <guid>/weeklystats/busia/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>National - Rapid Response Phone Surveys</title>
-      <link>/weeklystats/national/</link>
-      <pubDate>Wed, 15 Apr 2020 00:00:00 +0000</pubDate>
-      <guid>/weeklystats/national/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Siaya County - Enterprise Survey</title>
+      <title>Enterprise Survey - Siaya County</title>
       <link>/weeklystats/enterprises/</link>
       <pubDate>Wed, 15 Apr 2020 00:00:00 +0000</pubDate>
       <guid>/weeklystats/enterprises/</guid>
@@ -53,7 +37,7 @@
     </item>
     
     <item>
-      <title>Siaya County - Household Survey</title>
+      <title>Household Survey - Siaya County</title>
       <link>/weeklystats/siaya/</link>
       <pubDate>Wed, 15 Apr 2020 00:00:00 +0000</pubDate>
       <guid>/weeklystats/siaya/</guid>
@@ -105,10 +89,26 @@
     </item>
     
     <item>
+      <title>Rapid Response Phone Surveys - National Sample</title>
+      <link>/weeklystats/national/</link>
+      <pubDate>Wed, 15 Apr 2020 00:00:00 +0000</pubDate>
+      <guid>/weeklystats/national/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Tracking the coronavirus</title>
       <link>/other/tracker/</link>
       <pubDate>Wed, 15 Apr 2020 00:00:00 +0000</pubDate>
       <guid>/other/tracker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Traders Survey - Border Counties</title>
+      <link>/weeklystats/busia/</link>
+      <pubDate>Wed, 15 Apr 2020 00:00:00 +0000</pubDate>
+      <guid>/weeklystats/busia/</guid>
       <description></description>
     </item>
     

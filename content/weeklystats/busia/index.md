@@ -1,5 +1,5 @@
 ---
-title: Border Counties - Traders Survey
+title: Traders Survey - Border Counties
 summary: Descriptive statistics for border trading in Busia, Bungoma, and Kakamega Counties.
 tags:
 - Border
