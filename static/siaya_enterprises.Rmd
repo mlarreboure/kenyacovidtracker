@@ -130,8 +130,10 @@ wages_r <- rbind(c(-2,NA), wages_r)
   
 ##  {.tabset}
 
-### Operations  
-<font size="5">**Enterprise status**</font>
+### Operations
+
+<font size="5">**Enterprise Status**</font> 
+
 ``` {r op}
   op_g <- dygraph(op, main = "") %>%
   dySeries("perm_closed", strokeWidth = 4, label = "Permanently closed") %>%
@@ -283,7 +285,7 @@ ecov_g
 *This is for the proportion of enterprises currently operating.  
 
   ***  
-### Layoffs and closures
+### Layoffs
 
 <font size="5">**Temporal distribution of layoffs relative to February's employment level**</font>
 ```{r}
@@ -311,22 +313,6 @@ layoffs$Month <- factor(layoffs$Month, levels = c("January", "February", "March"
 ggplot(layoffs, aes(Month, Frequency)) + geom_col(aes(fill = Status)) + ylab("% Layoffs") + theme_classic()
 ```
 
-
-*** 
-
-<font size="5">**Temporal distribution of business closures relative to February's operating level**</font>
-
-```{r}
-closed <- data.frame("Month" = c("January", "February", "March", "April", "May",
-                                 "January", "February", "March", "April", "May"),
-                  "Proportion" = c((47/2797)*100, (43/2797)*100, (230/2797)*100, (168/2797)*100, ((45+39)/2797)*100,
-                                   (15/2797)*100, (3/2797)*100, (6/2797)*100, (1/2797)*100, ((0)/2797)*100),
-                  "Closed" = c("Temporarily", "Temporarily", "Temporarily","Temporarily","Temporarily",
-                                "Permanently", "Permanently","Permanently", "Permanently", "Permanently"))
-closed$Month <- factor(closed$Month, levels = c("January", "February", "March", "April", "May"))
-
-ggplot(closed, aes(Month, Proportion)) + geom_col(aes(fill = Closed)) + ylab("% Business closures")+ theme_classic()
-```
 
 *** 
 
