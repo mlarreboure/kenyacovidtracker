@@ -23,7 +23,7 @@ ent_outcomes <- read_dta("../../GE_Endline2/covid19/data/COVID_AllENTs_outcomes.
 ent_weekly_sector <- read_dta("../../GE_Endline2/covid19/data/COVID_AllENTs_outcomes_weekly_sector.dta")
 ent_weekly_sector_n <- read_dta("../../GE_Endline2/covid19/data/COVID_AllENTs_outcomes_weekly_sector_normalized.dta")
 ent_weekly_subsector <- read_dta("../../GE_Endline2/covid19/data/COVID_AllENTs_outcomes_weekly_subsector.dta")
-covid_weekly <- read_dta("../../GE_Endline2/covid19/data/COVID_AllHHs_outcomes_weekly.dta")
+covid_weekly <- read_dta("../../GE_Endline2/covid19/data/COVID_AllHHs_outcomes_weekly_c.dta")
 
 
 #Grouping vars for graphs
@@ -64,7 +64,7 @@ tmp <- data.frame("week" = c(-11,-10,-9,-7,-6,-3),
 rev_prof <- rbind(tmp, rev_prof)
 rev_prof[13,] <- c(6, NA, NA)
 
-##### Create dataframe of revenues by sector
+############ Create dataframe of revenues by sector ###############
 ## Re-shape data for graphs
 ag <- covid_weekly[c("week", "i1_wins")]
 ag$week <- ag$week -5
@@ -97,17 +97,17 @@ tmp <- rbind(tmp, rev_prof_s[c(17,18),])
 rev_prof_s <- tmp
 
 
-##### Create DF for Investment / Wages
+############## Create DF for Investment / Wages ################
 i_feb <- weighted.mean(ent_outcomes[ent_outcomes$week != 5,][,"investment_feb_wins"],ent_outcomes[ent_outcomes$week != 5,][,"ent_weight"],na.rm = TRUE)
 w_feb <- weighted.mean(ent_outcomes[ent_outcomes$week != 5,][,"wages_feb_wins"],ent_outcomes[ent_outcomes$week != 5,][,"ent_weight"],na.rm = TRUE)
-tmp <- data.frame("week" = c(-10),
-                  "investment_wins" = c(i_feb)) #2.291782 before
+tmp <- data.frame("week" = c(-1),
+                  "investment_wins" = c(i_feb)) #alternatively, 2.291782 if we restrict for first weeks only.
 inv_r <- rbind(tmp,inv)
-inv_r <- rbind(c(-11,NA), inv_r)
-tmp <- data.frame("week" = c(-10),
-                  "wages_wins" = c(w_feb)) #28.96816
+inv_r <- rbind(c(-2,NA), inv_r)
+tmp <- data.frame("week" = c(-1),
+                  "wages_wins" = c(w_feb)) #alternatively, 28.96816 if we restrict for first weeks only.
 wages_r <- rbind(tmp,wages)
-wages_r <- rbind(c(-11,NA), wages_r)
+wages_r <- rbind(c(-2,NA), wages_r)
 ```
 
   
@@ -155,7 +155,7 @@ e_g
 ```
 
 *** 
-<font size="3">**Revenue by sector in the past 14 days (2 week average)**</font>
+<font size="5">**Revenue by sector in the past 14 days (2 week average)**</font>
 ```{r}
 e_g  <- dygraph(rev_prof_s, main = "") %>%
   dySeries("rev_wins_wins_wins", strokeWidth = 4, label = "Services", color = "rgb(78,125,219)") %>%
@@ -193,9 +193,10 @@ e_g
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "May 10") %>%
   presAnnotation("4", text = "June 13") %>%
-  presAnnotation("-10", text = "February") %>%
-    dyEvent(-7 , "Lockdown begins", labelLoc = "top") %>%
-    dyEvent(-5 , "Dusk-to-dawn curfew imposed", labelLoc = "top") %>%
+#  presAnnotation("-10", text = "February") %>%
+  dyEvent(-1 , "February", labelLoc = "bottom", color = "gray", strokePattern = "solid") %>%
+    dyEvent(-0.5 , "Lockdown begins March 15", labelLoc = "bottom") %>%
+#    dyEvent(-5 , "Dusk-to-dawn curfew imposed", labelLoc = "top") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
 inv_g
 ```
@@ -215,6 +216,8 @@ inv_g
   presAnnotation("1", text = "May 10") %>%
   presAnnotation("5", text = "June 13") %>%
   presAnnotation("-10", text = "February") %>%
+    dyEvent(-1 , "February", labelLoc = "bottom", color = "gray", strokePattern = "solid") %>%
+    dyEvent(-0.5 , "Lockdown begins March 15", labelLoc = "bottom") %>%
     dyEvent(-7 , "Lockdown begins", labelLoc = "top") %>%
     dyEvent(-5 , "Dusk-to-dawn curfew imposed", labelLoc = "top") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
