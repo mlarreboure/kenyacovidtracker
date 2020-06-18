@@ -53,9 +53,9 @@ Collaborators on this project are:
 [Magdalena Larreboure](https://mlarreboure.com/) - Busara Center, Nairobi;   
 [Layna Lowe](https://cega.berkeley.edu/user-type/staff/#layna-lowe) - University of California, Berkeley;   
 [Edward Miguel](http://emiguel.econ.berkeley.edu/) - University of California, Berkeley;  
-Carol Nekesa - REMIT Kenya;  
+[Carol Nekesa](https://www.linkedin.com/in/carolyne-nekesa-khagondi-99b42466) - REMIT Kenya;  
 Eric Owino - REMIT Kenya;  
 [Utz Johann Pape](https://blogs.worldbank.org/team/utz-pape) - The World Bank;   
-Carlos Paramo - University of California, Berkeley;   
+[Carlos Paramo](https://www.linkedin.com/in/carlosparamob) - University of California, Berkeley;   
 Andrew Wabwire - REMIT Kenya;  
 [Michael Walker](http://www.michaelwwalker.me/) - University of California, Berkeley.
