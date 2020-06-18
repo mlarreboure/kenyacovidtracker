@@ -271,14 +271,27 @@ ecov_g
 <font size="5">**Temporal distribution of layoffs relative to February's employment level**</font>
 ```{r}
 total <- sum(as.numeric(ent_outcomes$s3_q7_num_paid_feb), na.rm = TRUE) + 197 + 107 +8 +107 + 8 + 98
-layoffs <- data.frame("Month" = c("January", "February", "March", "April", "May"),
-                  "Frequency" = c((sum(ent_outcomes$s3_q8_laidoff_jan, na.rm = TRUE)+42)*100/total,
-                                  (sum(ent_outcomes$s3_q8_laidoff_feb, na.rm = TRUE)+50)*100/total,
-                                  (sum(ent_outcomes$s3_q8_laidoff_mar, na.rm = TRUE)+197)*100/total,
-                                  (sum(ent_outcomes$s3_q8_laidoff_apr, na.rm = TRUE)+8+ 107)*100/total,
-                                  (sum(ent_outcomes$s3_q8_laidoff_may, na.rm = TRUE)+8 +98)*100/total))
-layoffs$Month <- factor(layoffs$Month, levels = layoffs$Month)
-ggplot(layoffs, aes(Month, Frequency)) + geom_col(fill="dodgerblue3", colour="dodgerblue3") + ylab("% Layoffs") + theme_classic()
+layoffs <- data.frame("Month" = c("January", "February", "March", "April", "May",
+                                  "January", "February", "March", "April", "May"),
+                  "Frequency" = c((sum(ent_outcomes$s3_q8_laidoff_jan, na.rm = TRUE))*100/total,
+                                  (sum(ent_outcomes$s3_q8_laidoff_feb, na.rm = TRUE))*100/total,
+                                  (sum(ent_outcomes$s3_q8_laidoff_mar, na.rm = TRUE))*100/total,
+                                  (sum(ent_outcomes$s3_q8_laidoff_apr, na.rm = TRUE)+8)*100/total,
+                                  (sum(ent_outcomes$s3_q8_laidoff_may, na.rm = TRUE)+8)*100/total,
+                                  (sum(ent_outcomes[ent_outcomes$s2_q2_whenclose == 1,][,"s2_q5_num_employees"], 
+                                       na.rm = TRUE))*100/total,
+                                  (sum(ent_outcomes[ent_outcomes$s2_q2_whenclose == 2,][,"s2_q5_num_employees"], 
+                                       na.rm = TRUE))*100/total,
+                                  (sum(ent_outcomes[ent_outcomes$s2_q2_whenclose == 3,][,"s2_q5_num_employees"], 
+                                      na.rm = TRUE))*100/total,
+                                  (sum(ent_outcomes[ent_outcomes$s2_q2_whenclose == 4,][,"s2_q5_num_employees"], 
+                                       na.rm = TRUE))*100/total,
+                                  (sum(ent_outcomes[(ent_outcomes$s2_q2_whenclose == 8 | ent_outcomes$s2_q2_whenclose == 9),][,"s2_q5_num_employees"], 
+                                       na.rm = TRUE))*100/total),
+                  "Status" = c("Enterprise operating","Enterprise operating","Enterprise operating","Enterprise operating","Enterprise operating",
+                                          "Enterprise closed","Enterprise closed","Enterprise closed","Enterprise closed","Enterprise closed"))
+layoffs$Month <- factor(layoffs$Month, levels = c("January", "February", "March", "April", "May"))
+ggplot(layoffs, aes(Month, Frequency)) + geom_col(aes(fill = Status)) + ylab("% Layoffs") + theme_classic()
 ```
 
 
@@ -287,11 +300,15 @@ ggplot(layoffs, aes(Month, Frequency)) + geom_col(fill="dodgerblue3", colour="do
 <font size="5">**Temporal distribution of business closures relative to February's operating level**</font>
 
 ```{r}
-closed <- data.frame("Month" = c("January", "February", "March", "April", "May"),
-                  "Proportion" = c((62/2797)*100, (46/2797)*100, (236/2797)*100, (169/2797)*100, ((45+39)/2797)*100))
-closed$Month <- factor(closed$Month, levels = closed$Month)
+closed <- data.frame("Month" = c("January", "February", "March", "April", "May",
+                                 "January", "February", "March", "April", "May"),
+                  "Proportion" = c((47/2797)*100, (43/2797)*100, (230/2797)*100, (168/2797)*100, ((45+39)/2797)*100,
+                                   (15/2797)*100, (3/2797)*100, (6/2797)*100, (1/2797)*100, ((0)/2797)*100),
+                  "Closed" = c("Temporarily", "Temporarily", "Temporarily","Temporarily","Temporarily",
+                                "Permanently", "Permanently","Permanently", "Permanently", "Permanently"))
+closed$Month <- factor(closed$Month, levels = c("January", "February", "March", "April", "May"))
 
-ggplot(closed, aes(Month, Proportion)) + geom_col(fill="dodgerblue3", colour="dodgerblue3") + ylab("% Business closures")+ theme_classic()
+ggplot(closed, aes(Month, Proportion)) + geom_col(aes(fill = Closed)) + ylab("% Business closures")+ theme_classic()
 ```
 
 *** 
