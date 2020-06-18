@@ -130,8 +130,22 @@ wages_r <- rbind(c(-2,NA), wages_r)
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
 op_g
 ```
-  
-  
+
+*** 
+
+<font size="5">**Status by month relative to February's operation levels**</font> 
+
+```{r}
+closed <- data.frame("Month" = c("January", "February", "March", "April", "May",
+                                 "January", "February", "March", "April", "May"),
+                  "Proportion" = c((47/2797)*100, (43/2797)*100, (230/2797)*100, (168/2797)*100, ((45+39)/2797)*100,
+                                   (15/2797)*100, (3/2797)*100, (6/2797)*100, (1/2797)*100, ((0)/2797)*100),
+                  "Closed" = c("Temporarily", "Temporarily", "Temporarily","Temporarily","Temporarily",
+                                "Permanently", "Permanently","Permanently", "Permanently", "Permanently"))
+closed$Month <- factor(closed$Month, levels = c("January", "February", "March", "April", "May"))
+
+ggplot(closed, aes(Month, Proportion)) + geom_col(aes(fill = Closed)) + ylab("% Business closures")+ theme_classic()
+```
 
 *** 
 ### Revenue and profit  
