@@ -16,7 +16,14 @@ library(haven)
 library(tidyverse)
 library(dygraphs)
 library(xts)
-ent_weekly <- read_dta("~/Dropbox (Princeton)/GE_Endline2/covid19/data/COVID_AllENTs_outcomes_weekly.dta")
+
+
+ent_weekly <- read_dta("../../GE_Endline2/covid19/data/COVID_AllENTs_outcomes_weekly.dta")
+ent_outcomes <- read_dta("../../GE_Endline2/covid19/data/COVID_AllENTs_outcomes.dta") #to get retrospective vars
+ent_weekly_sector <- read_dta("../../GE_Endline2/covid19/data/COVID_AllENTs_outcomes_weekly_sector.dta")
+ent_weekly_sector_n <- read_dta("../../GE_Endline2/covid19/data/COVID_AllENTs_outcomes_weekly_sector_normalized.dta")
+ent_weekly_subsector <- read_dta("../../GE_Endline2/covid19/data/COVID_AllENTs_outcomes_weekly_subsector.dta")
+covid_weekly <- read_dta("../../GE_Endline2/covid19/data/COVID_AllHHs_outcomes_weekly.dta")
 
 
 #Grouping vars for graphs
@@ -43,6 +50,64 @@ presAnnotation <- function(dygraph, x, text) {
     dyAnnotation(x, text, attachAtBottom = TRUE, width = 60, height = 25)
 }
 
+##### Create dataframe with retrospective data on profits and revenues
+rev_prof <- ent_weekly[c("week", "rev_wins", "profits_wins")]
+r_feb <- weighted.mean(ent_outcomes$rev_feb_wins,ent_outcomes$ent_weight,na.rm = TRUE) # Weighted average of feb vars
+r_mar <- weighted.mean(ent_outcomes$rev_mar_wins,ent_outcomes$ent_weight,na.rm = TRUE)
+r_apr <- weighted.mean(ent_outcomes$rev_apr_wins,ent_outcomes$ent_weight,na.rm = TRUE)
+p_feb <- weighted.mean(ent_outcomes$profits_feb_wins,ent_outcomes$ent_weight,na.rm = TRUE)
+p_mar <- weighted.mean(ent_outcomes$profits_mar_wins,ent_outcomes$ent_weight,na.rm = TRUE)
+p_apr <- weighted.mean(ent_outcomes$profits_apr_wins,ent_outcomes$ent_weight,na.rm = TRUE)
+tmp <- data.frame("week" = c(-11,-10,-9,-7,-6,-3),
+                  "rev_wins" = c(NA,r_feb,NA, r_mar,NA, r_apr),
+                  "profits_wins" = c(NA,p_feb,NA, p_mar,NA, p_apr))
+rev_prof <- rbind(tmp, rev_prof)
+rev_prof[13,] <- c(6, NA, NA)
+
+##### Create dataframe of revenues by sector
+## Re-shape data for graphs
+ag <- covid_weekly[c("week", "i1_wins")]
+ag$week <- ag$week -5
+ag <- ag[ag$week < 5,]
+rt <- ent_weekly_sector[ent_weekly_sector$sector == 1,][c("week", "rev_wins_wins_wins")]
+mf <- ent_weekly_sector[ent_weekly_sector$sector == 2,][c("week", "rev_wins_wins_wins")]
+sr <- ent_weekly_sector[ent_weekly_sector$sector == 3,][c("week", "rev_wins_wins_wins")]
+tmp <- merge(rt,mf, by = "week", all = TRUE, suffixes = c("_rt","_mf"))
+tmp <- merge(tmp, sr, by = "week", all = TRUE)
+tmp <- merge(tmp, ag, by = "week", all = TRUE)
+# Add retrospective averages from the first 4 weeks of the survey
+rev_prof_s <- data.frame("week" = c(-11,-10,-9,-7,-6,-3),
+                  "rev_wins_wins_wins_rt" = c(NA,223.6966,NA,162.1954,NA,138.2139),
+                  "rev_wins_wins_wins_mf" = c(NA,208.973,NA,128.6016,NA,109.5862),
+                  "rev_wins_wins_wins" = c(NA,137.3485,NA, 89.91359,NA,79.15799),
+                  "i1_wins" = c(NA, NA, NA,NA,NA,NA))
+rev_prof_s <- rbind(rev_prof_s, tmp)
+rev_prof_s$rev_wins_wins_wins_rt <- rev_prof_s$rev_wins_wins_wins_rt*100/223.6966
+rev_prof_s$rev_wins_wins_wins_mf <- rev_prof_s$rev_wins_wins_wins_mf*100/208.973
+rev_prof_s$rev_wins_wins_wins <- rev_prof_s$rev_wins_wins_wins*100/137.3485
+rev_prof_s$i1_wins <- rev_prof_s$i1_wins*100/.8220776
+rev_prof_s <- rbind(rev_prof_s, c(6, NA, NA, NA,NA,NA))
+# Take two week averages (reduce noise)
+tmp <- rev_prof_s[1:8,]
+tmp <- rbind(tmp,(rev_prof_s[9,]+rev_prof_s[10,])/2)
+tmp <- rbind(tmp,(rev_prof_s[11,]+rev_prof_s[12,])/2)
+tmp <- rbind(tmp,(rev_prof_s[13,]+rev_prof_s[14,])/2)
+tmp <- rbind(tmp,(rev_prof_s[15,]+rev_prof_s[16,])/2)
+tmp <- rbind(tmp, rev_prof_s[c(17,18),])
+rev_prof_s <- tmp
+
+
+##### Create DF for Investment / Wages
+i_feb <- weighted.mean(ent_outcomes[ent_outcomes$week != 5,][,"investment_feb_wins"],ent_outcomes[ent_outcomes$week != 5,][,"ent_weight"],na.rm = TRUE)
+w_feb <- weighted.mean(ent_outcomes[ent_outcomes$week != 5,][,"wages_feb_wins"],ent_outcomes[ent_outcomes$week != 5,][,"ent_weight"],na.rm = TRUE)
+tmp <- data.frame("week" = c(-10),
+                  "investment_wins" = c(i_feb)) #2.291782 before
+inv_r <- rbind(tmp,inv)
+inv_r <- rbind(c(-11,NA), inv_r)
+tmp <- data.frame("week" = c(-10),
+                  "wages_wins" = c(w_feb)) #28.96816
+wages_r <- rbind(tmp,wages)
+wages_r <- rbind(c(-11,NA), wages_r)
 ```
 
   
@@ -70,41 +135,48 @@ op_g
 
 *** 
 ### Revenue and profit  
-<font size="5">**Revenue (USD, PPP) - past 14 days**</font>
-``` {r revenue}
-  rev_g <- dygraph(rev, main = "") %>%
-  dySeries("rev_wins", strokeWidth = 4, label = "Revenue") %>%
-  dyAxis("x", pixelsPerLabel = 90 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "USD, PPP", drawGrid = FALSE) %>% 
-  dyLegend(width = 250, labelsSeparateLines = FALSE) %>%
-  dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set1")) %>%
+<font size="5">**Enterprises revenue and profits in the past 14 days**</font>
+```{r enter}
+e_g  <- dygraph(rev_prof, main = "") %>%
+  dySeries("rev_wins", strokeWidth = 4, label = "Total enterprise revenue" , color = "rgb(78,125,219)") %>%
+  dySeries("profits_wins", strokeWidth = 4, label = "Total enterprise profits" , color = "rgb(204,0,0)") %>%
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Survey Week") %>% #grid
+  dyAxis("y", drawGrid = FALSE , label = "USD, PPP") %>% 
+  dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, connectSeparatedPoints = TRUE) %>%
     dyCrosshair(direction = "vertical") %>%
-  presAnnotation("1", text = "May 10") %>%
-  presAnnotation("5", text = "June 13") %>%
-  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
-rev_g
+  dyEvent(-0.2 , "May", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+    dyEvent(-4.5 , "April", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+    dyEvent(-8.8 , "March", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+      dyEvent(4.1 , "June", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+    dyEvent(-7 , "Lockdown begins", labelLoc = "top") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
+  dyLegend(width = 200, labelsSeparateLines = TRUE) 
+e_g
 ```
-  
-  
 
-***  
-
-<font size="5">**Profits (USD, PPP) - past 14 days**</font>
-``` {r profits}
-  profits_g <- dygraph(profits, main = "") %>%
-  dySeries("profits_wins", strokeWidth = 4, label = "Profits") %>%
-  dyAxis("x", pixelsPerLabel = 90 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "USD, PPP", drawGrid = FALSE) %>% 
-  dyLegend(width = 250, labelsSeparateLines = FALSE) %>%
-  dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2")) %>%
+*** 
+<font size="3">**Revenue by sector in the past 14 days (2 week average)**</font>
+```{r}
+e_g  <- dygraph(rev_prof_s, main = "") %>%
+  dySeries("rev_wins_wins_wins", strokeWidth = 4, label = "Services", color = "rgb(78,125,219)") %>%
+  dySeries("rev_wins_wins_wins_rt", strokeWidth = 4, label = "Retail", color = "darkgreen") %>%
+  dySeries("rev_wins_wins_wins_mf", strokeWidth = 4, label = "Manufacturing", color = "rgb(204,0,0)") %>%
+  dySeries("i1_wins", strokeWidth = 4, label = "Agriculture*", color = "rgb(102,0,204)") %>%
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Survey Week") %>% #grid
+  dyAxis("y", drawGrid = FALSE , label = "Normalized revenue") %>% 
+  dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, connectSeparatedPoints = TRUE) %>%
     dyCrosshair(direction = "vertical") %>%
-  presAnnotation("1", text = "May 10") %>%
-  presAnnotation("5", text = "June 13") %>%
-  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
-profits_g
-```
-  
-  
+  dyEvent(-0.2 , "May", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+    dyEvent(-4.5 , "April", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+    dyEvent(-8.8 , "March", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+      dyEvent(4.1 , "June", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+    dyEvent(-7 , "Lockdown begins", labelLoc = "top") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
+  dyLegend(width = 200, labelsSeparateLines = TRUE) 
+e_g
+``` 
+
+\*Agriculture is normalized by last year's 2-week revenue, while all other variables are normalized by the average reported revenue for February. Reported amounts were averaged every two weeks. 
 
 *** 
 
@@ -112,15 +184,18 @@ profits_g
 
 <font size="5">**Investment (USD, PPP) - past 14 days**</font>
 ``` {r invest}
-  inv_g <- dygraph(inv, main = "") %>%
+  inv_g <- dygraph(inv_r, main = "") %>%
   dySeries("investment_wins", strokeWidth = 4, label = "Investment") %>%
-  dyAxis("x", pixelsPerLabel = 90 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("x", pixelsPerLabel = 90 , drawGrid = FALSE, label = "Survey Week") %>% #grid
   dyAxis("y", label = "USD, PPP", drawGrid = FALSE) %>% 
   dyLegend(width = 250, labelsSeparateLines = FALSE) %>%
-  dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set1")) %>%
+  dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set1"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "May 10") %>%
-  presAnnotation("5", text = "June 13") %>%
+  presAnnotation("4", text = "June 13") %>%
+  presAnnotation("-10", text = "February") %>%
+    dyEvent(-7 , "Lockdown begins", labelLoc = "top") %>%
+    dyEvent(-5 , "Dusk-to-dawn curfew imposed", labelLoc = "top") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
 inv_g
 ```
@@ -130,15 +205,18 @@ inv_g
   
 <font size="5">**Wages (USD, PPP) - past 14 days**</font>
 ``` {r wages}
-  wages_g <- dygraph(wages, main = "") %>%
+  wages_g <- dygraph(wages_r, main = "") %>%
   dySeries("wages_wins", strokeWidth = 4, label = "Wages") %>%
-  dyAxis("x", pixelsPerLabel = 90 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("x", pixelsPerLabel = 90 , drawGrid = FALSE, label = "Survey Week") %>% #grid
   dyAxis("y", label = "USD, PPP", drawGrid = FALSE) %>% 
   dyLegend(width = 250, labelsSeparateLines = FALSE) %>%
-  dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2")) %>%
+  dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "May 10") %>%
   presAnnotation("5", text = "June 13") %>%
+  presAnnotation("-10", text = "February") %>%
+    dyEvent(-7 , "Lockdown begins", labelLoc = "top") %>%
+    dyEvent(-5 , "Dusk-to-dawn curfew imposed", labelLoc = "top") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
 wages_g
 ```
@@ -171,7 +249,37 @@ ecov_g
 *This is for the proportion of enterprises currently operating.  
 
   ***  
-  
+### Layoffs and closures
+
+<font size="5">**Temporal distribution of layoffs relative to February's employment level**</font>
+```{r}
+total <- sum(as.numeric(ent_outcomes$s3_q7_num_paid_feb), na.rm = TRUE) + 197 + 107 +8 +107 + 8 + 98
+layoffs <- data.frame("Month" = c("January", "February", "March", "April", "May"),
+                  "Frequency" = c((sum(ent_outcomes$s3_q8_laidoff_jan, na.rm = TRUE)+42)*100/total,
+                                  (sum(ent_outcomes$s3_q8_laidoff_feb, na.rm = TRUE)+50)*100/total,
+                                  (sum(ent_outcomes$s3_q8_laidoff_mar, na.rm = TRUE)+197)*100/total,
+                                  (sum(ent_outcomes$s3_q8_laidoff_apr, na.rm = TRUE)+8+ 107)*100/total,
+                                  (sum(ent_outcomes$s3_q8_laidoff_may, na.rm = TRUE)+8 +98)*100/total))
+layoffs$Month <- factor(layoffs$Month, levels = layoffs$Month)
+ggplot(layoffs, aes(Month, Frequency)) + geom_col(fill="dodgerblue3", colour="dodgerblue3") + ylab("% Layoffs") + theme_classic()
+```
+
+
+*** 
+
+<font size="5">**Temporal distribution of business closures relative to February's operating level**</font>
+
+```{r}
+closed <- data.frame("Month" = c("January", "February", "March", "April", "May"),
+                  "Proportion" = c((62/2797)*100, (46/2797)*100, (236/2797)*100, (169/2797)*100, ((45+39)/2797)*100))
+closed$Month <- factor(closed$Month, levels = closed$Month)
+
+ggplot(closed, aes(Month, Proportion)) + geom_col(fill="dodgerblue3", colour="dodgerblue3") + ylab("% Business closures")+ theme_classic()
+```
+
+*** 
+
+
 ## {}
       
 These data comes from phone survey interviews conducted by [REMIT Kenya](http://remitkenya.co.ke/) in Siaya County, Kenya. We are collecting data for a sample of ~5,000 enterprises in the county, which is representative of the whole population of enterprises. At the same time, our weekly sampling method assures weekly representativeness of the overall sample.
