@@ -132,18 +132,20 @@ wages_r <- rbind(c(-2,NA), wages_r)
 
 ### Operations
 
-<font size="5">**Enterprise Status**</font> 
+<font size="5">**Percentage of enterprises operating each week**</font> 
 
 ``` {r op}
+op <- op[c("week", "op")]
   op_g <- dygraph(op, main = "") %>%
-  dySeries("perm_closed", strokeWidth = 4, label = "Permanently closed") %>%
-  dySeries("temp_closed", strokeWidth = 4, label = "Temporarily closed") %>%
-  dySeries("op", strokeWidth = 4, label = "Operational") %>%
+#  dySeries("perm_closed", strokeWidth = 4, label = "Permanently closed") %>%
+#  dySeries("temp_closed", strokeWidth = 4, label = "Temporarily closed") %>%
+  dySeries("op", strokeWidth = 4, label = "Operational", color = "rgb(78,125,219)") %>%
   dyAxis("x", pixelsPerLabel = 90 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "Percentage of sample", drawGrid = FALSE, valueRange = c(0, 110)) %>% 
+  dyAxis("y", label = "% Operating Enterprises", drawGrid = FALSE, valueRange = c(0, 110)) %>% 
   dyLegend(width = 500, labelsSeparateLines = FALSE) %>%
-  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set1")) %>%
+  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4) %>%
     dyCrosshair(direction = "vertical") %>%
+    dyEvent(4.1 , "June", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   presAnnotation("1", text = "May 10") %>%
   presAnnotation("5", text = "June 13") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
