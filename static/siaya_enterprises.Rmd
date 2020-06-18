@@ -75,16 +75,33 @@ sr <- ent_weekly_sector[ent_weekly_sector$sector == 3,][c("week", "rev_wins_wins
 tmp <- merge(rt,mf, by = "week", all = TRUE, suffixes = c("_rt","_mf"))
 tmp <- merge(tmp, sr, by = "week", all = TRUE)
 tmp <- merge(tmp, ag, by = "week", all = TRUE)
-# Add retrospective averages from the first 4 weeks of the survey
+
+r_rt_feb <- weighted.mean(ent_outcomes[ent_outcomes$sector == 1,]$rev_feb_wins,ent_outcomes[ent_outcomes$sector == 1,]$ent_weight,na.rm = TRUE)
+r_rt_mar <- weighted.mean(ent_outcomes[ent_outcomes$sector == 1,]$rev_mar_wins,ent_outcomes[ent_outcomes$sector == 1,]$ent_weight,na.rm = TRUE)
+r_rt_apr <- weighted.mean(ent_outcomes[ent_outcomes$sector == 1,]$rev_apr_wins,ent_outcomes[ent_outcomes$sector == 1,]$ent_weight,na.rm = TRUE)
+
+r_mf_feb <- weighted.mean(ent_outcomes[ent_outcomes$sector == 2,]$rev_feb_wins,ent_outcomes[ent_outcomes$sector == 2,]$ent_weight,na.rm = TRUE)
+r_mf_mar <- weighted.mean(ent_outcomes[ent_outcomes$sector == 2,]$rev_mar_wins,ent_outcomes[ent_outcomes$sector == 2,]$ent_weight,na.rm = TRUE)
+r_mf_apr <- weighted.mean(ent_outcomes[ent_outcomes$sector == 2,]$rev_apr_wins,ent_outcomes[ent_outcomes$sector == 2,]$ent_weight,na.rm = TRUE)
+
+r_sr_feb <- weighted.mean(ent_outcomes[ent_outcomes$sector == 3,]$rev_feb_wins,ent_outcomes[ent_outcomes$sector == 3,]$ent_weight,na.rm = TRUE)
+r_sr_mar <- weighted.mean(ent_outcomes[ent_outcomes$sector == 3,]$rev_mar_wins,ent_outcomes[ent_outcomes$sector == 3,]$ent_weight,na.rm = TRUE)
+r_sr_apr <- weighted.mean(ent_outcomes[ent_outcomes$sector == 3,]$rev_apr_wins,ent_outcomes[ent_outcomes$sector == 3,]$ent_weight,na.rm = TRUE)
+
 rev_prof_s <- data.frame("week" = c(-11,-10,-9,-7,-6,-3),
-                  "rev_wins_wins_wins_rt" = c(NA,223.6966,NA,162.1954,NA,138.2139),
-                  "rev_wins_wins_wins_mf" = c(NA,208.973,NA,128.6016,NA,109.5862),
-                  "rev_wins_wins_wins" = c(NA,137.3485,NA, 89.91359,NA,79.15799),
+                  "rev_wins_wins_wins_rt" = c(NA,r_rt_feb,NA,r_rt_mar,NA,r_rt_apr), # Programatically updates
+                  "rev_wins_wins_wins_mf" = c(NA,r_mf_feb,NA,r_mf_mar,NA,r_mf_apr),
+                  "rev_wins_wins_wins" = c(NA,r_sr_feb,NA, r_sr_mar,NA,r_sr_apr),
                   "i1_wins" = c(NA, NA, NA,NA,NA,NA))
+#rev_prof_s <- data.frame("week" = c(-11,-10,-9,-7,-6,-3),
+#                  "rev_wins_wins_wins_rt" = c(NA,223.6966,NA,162.1954,NA,138.2139), #Using dta from first 4 weeks
+#                  "rev_wins_wins_wins_mf" = c(NA,208.973,NA,128.6016,NA,109.5862),
+#                  "rev_wins_wins_wins" = c(NA,137.3485,NA, 89.91359,NA,79.15799),
+#                  "i1_wins" = c(NA, NA, NA,NA,NA,NA))
 rev_prof_s <- rbind(rev_prof_s, tmp)
-rev_prof_s$rev_wins_wins_wins_rt <- rev_prof_s$rev_wins_wins_wins_rt*100/223.6966
-rev_prof_s$rev_wins_wins_wins_mf <- rev_prof_s$rev_wins_wins_wins_mf*100/208.973
-rev_prof_s$rev_wins_wins_wins <- rev_prof_s$rev_wins_wins_wins*100/137.3485
+rev_prof_s$rev_wins_wins_wins_rt <- rev_prof_s$rev_wins_wins_wins_rt*100/r_rt_feb
+rev_prof_s$rev_wins_wins_wins_mf <- rev_prof_s$rev_wins_wins_wins_mf*100/r_mf_feb
+rev_prof_s$rev_wins_wins_wins <- rev_prof_s$rev_wins_wins_wins*100/r_sr_feb
 rev_prof_s$i1_wins <- rev_prof_s$i1_wins*100/.8220776
 rev_prof_s <- rbind(rev_prof_s, c(6, NA, NA, NA,NA,NA))
 # Take two week averages (reduce noise)
