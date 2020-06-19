@@ -154,7 +154,7 @@ op_g
 
 *** 
 
-<font size="5">**Operational status by month**</font> 
+<font size="5">**Status by month relative to February's operation levels**</font> 
 
 ```{r}
 closed <- data.frame("Month" = c("January", "February", "March", "April", "May",
