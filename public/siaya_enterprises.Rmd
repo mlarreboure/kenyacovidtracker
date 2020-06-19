@@ -154,7 +154,7 @@ op_g
 
 *** 
 
-<font size="5">**Status by month relative to February's operation levels**</font> 
+<font size="5">**Operational status by month**</font> 
 
 ```{r}
 closed <- data.frame("Month" = c("January", "February", "March", "April", "May",
@@ -274,7 +274,7 @@ How has COVID-19 affected this business?*
   dySeries("ecov_2", strokeWidth = 4, label = "Has not affected") %>%
   dySeries("ecov_3", strokeWidth = 4, label = "Other") %>%
   dyAxis("x", pixelsPerLabel = 90 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "USD, PPP", drawGrid = FALSE) %>% 
+  dyAxis("y", label = "Percentage of sample", drawGrid = FALSE) %>% 
   dyLegend(width = 500, labelsSeparateLines = FALSE) %>%
   dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set1")) %>%
     dyCrosshair(direction = "vertical") %>%
