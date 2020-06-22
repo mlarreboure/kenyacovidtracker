@@ -45,6 +45,19 @@ wages <- ent_weekly[wages]
 cov <- c("week", "ecov_1", "ecov_2", "ecov_3")
 cov <- ent_weekly[cov]
 
+
+cust <- c("week", "s3_q10_customers_p7")
+cust <- ent_weekly[cust]
+
+cust_d <- c("week", "for_customers", "loc_customers")
+cust_d <- ent_weekly[cust_d]
+
+wfh <- c("week", "wfh_1", "wfh_2")
+wfh <- ent_weekly[wfh]
+
+mob <- c("week", "s3_q16a_mobilesales", "mob_money")
+mob <- ent_weekly[mob]
+
 presAnnotation <- function(dygraph, x, text) {
   dygraph %>%
     dyAnnotation(x, text, attachAtBottom = TRUE, width = 60, height = 25)
@@ -285,6 +298,71 @@ ecov_g
 ```
     
 *This is for the proportion of enterprises currently operating.  
+
+*** 
+
+<font size="5">**Percentage of businesses with employees working from home**</font>
+``` {r}
+  wfh_g <- dygraph(wfh, main = "") %>%
+#  dySeries("perm_closed", strokeWidth = 4, label = "Permanently closed") %>%
+  dySeries("wfh_1", strokeWidth = 4, label = "Sometimes or all of the time", color = "darkgreen") %>%
+  dySeries("wfh_2", strokeWidth = 4, label = "Never", color = "rgb(78,125,219)") %>%
+  dyAxis("x", pixelsPerLabel = 90 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", label = "% Working from home", drawGrid = FALSE, valueRange = c(0, 110)) %>% 
+  dyLegend(width = 500, labelsSeparateLines = FALSE) %>%
+  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4) %>%
+    dyCrosshair(direction = "vertical") %>%
+    dyEvent(4.1 , "June", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  presAnnotation("1", text = "May 10") %>%
+  presAnnotation("5", text = "June 13") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
+wfh_g
+```
+
+
+  *** 
+
+<font size="5">**Mobile Payments**</font>
+
+Percentage of firms accepting mobile payments, and the share of mobile payments among firms that accept mobile payments. 
+
+``` {r}
+  mob_g <- dygraph(mob, main = "") %>%
+#  dySeries("perm_closed", strokeWidth = 4, label = "Permanently closed") %>%
+  dySeries("mob_money", strokeWidth = 4, label = "Accepting mobile payments", color = "darkgreen") %>%
+  dySeries("s3_q16a_mobilesales", strokeWidth = 4, label = "Share of mobile payments", color = "rgb(78,125,219)") %>%
+  dyAxis("x", pixelsPerLabel = 90 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", label = "Percentage", drawGrid = FALSE, valueRange = c(0, 110)) %>% 
+  dyLegend(width = 500, labelsSeparateLines = FALSE) %>%
+  dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4) %>%
+    dyCrosshair(direction = "vertical") %>%
+    dyEvent(4.1 , "June", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  presAnnotation("1", text = "May 10") %>%
+  presAnnotation("5", text = "June 13") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
+mob_g
+```
+
+  *** 
+
+<font size="5">**Number of customers, past 7 days**</font>
+``` {r}
+  cust_g <- dygraph(cust, main = "") %>%
+#  dySeries("perm_closed", strokeWidth = 4, label = "Permanently closed") %>%
+#  dySeries("loc_customers", strokeWidth = 4, label = "Local customers", color = "darkgreen") %>%
+  dySeries("s3_q10_customers_p7", strokeWidth = 4, label = "Customers", color = "rgb(78,125,219)") %>%
+  dyAxis("x", pixelsPerLabel = 90 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", label = "Customers, last week", drawGrid = FALSE, valueRange = c(0, 110)) %>% 
+  dyLegend(width = 500, labelsSeparateLines = FALSE) %>%
+  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4) %>%
+    dyCrosshair(direction = "vertical") %>%
+    dyEvent(4.1 , "June", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  presAnnotation("1", text = "May 10") %>%
+  presAnnotation("5", text = "June 13") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
+cust_g
+```
+
 
   ***  
 ### Layoffs
