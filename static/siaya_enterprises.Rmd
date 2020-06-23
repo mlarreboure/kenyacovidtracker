@@ -138,32 +138,48 @@ tmp <- data.frame("week" = c(-1),
                   "wages_wins" = c(w_feb)) #alternatively, 28.96816 if we restrict for first weeks only.
 wages_r <- rbind(tmp,wages)
 wages_r <- rbind(c(-2,NA), wages_r)
-```
 
+#### Create operating enterprise table with retro. data
+op_feb <- weighted.mean(ent_outcomes$op_feb,ent_outcomes$ent_weight,na.rm = TRUE)*100
+op_mar <- weighted.mean(ent_outcomes$op_mar,ent_outcomes$ent_weight,na.rm = TRUE)*100
+op_apr <- weighted.mean(ent_outcomes$op_apr,ent_outcomes$ent_weight,na.rm = TRUE)*100
+op_may <- weighted.mean(ent_outcomes$op_may,ent_outcomes$ent_weight,na.rm = TRUE)*100
+op <- op[c("week", "op")]
+tmp <- data.frame("week" = c(-14,-13.1,-11,-8.8,-6,-4.5),
+                  "op" = c(NA, op_feb, NA, op_mar, NA, op_apr))
+op <- rbind(tmp,op)
+```
   
 ##  {.tabset}
 
 ### Operations
 
-<font size="5">**Percentage of enterprises operating each week**</font> 
+<font size="5">**Enterprises operating each week**</font> 
 
 ``` {r op}
-op <- op[c("week", "op")]
   op_g <- dygraph(op, main = "") %>%
 #  dySeries("perm_closed", strokeWidth = 4, label = "Permanently closed") %>%
 #  dySeries("temp_closed", strokeWidth = 4, label = "Temporarily closed") %>%
   dySeries("op", strokeWidth = 4, label = "Operational", color = "rgb(78,125,219)") %>%
   dyAxis("x", pixelsPerLabel = 90 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "% Operating Enterprises", drawGrid = FALSE, valueRange = c(0, 110)) %>% 
+  dyAxis("y", label = "% Operating enterprises", drawGrid = FALSE, valueRange = c(0, 110)) %>% 
   dyLegend(width = 500, labelsSeparateLines = FALSE) %>%
-  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4) %>%
+  dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4,
+            connectSeparatedPoints = TRUE) %>%
     dyCrosshair(direction = "vertical") %>%
     dyEvent(4.1 , "June", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyEvent(-0.2 , "May", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+    dyEvent(-4.5 , "April", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+    dyEvent(-8.8 , "March", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+   dyEvent(-13.1 , "February", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+   dyEvent(-7 , "Lockdown begins", labelLoc = "top") %>%
   presAnnotation("1", text = "May 10") %>%
   presAnnotation("5", text = "June 13") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
 op_g
 ```
+
+February, March and April data points assume that no business that closed down up until that point reopened, and they correspond to the first day of each month. 
 
 *** 
 
