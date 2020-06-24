@@ -75,7 +75,7 @@ tmp <- data.frame("week" = c(-11,-10,-9,-7,-6,-3),
                   "rev_wins" = c(NA,r_feb,NA, r_mar,NA, r_apr),
                   "profits_wins" = c(NA,p_feb,NA, p_mar,NA, p_apr))
 rev_prof <- rbind(tmp, rev_prof)
-rev_prof[13,] <- c(6, NA, NA)
+#rev_prof[13,] <- c(6, NA, NA)
 
 ############ Create dataframe of revenues by sector ###############
 ## Re-shape data for graphs
@@ -116,14 +116,16 @@ rev_prof_s$rev_wins_wins_wins_rt <- rev_prof_s$rev_wins_wins_wins_rt*100/r_rt_fe
 rev_prof_s$rev_wins_wins_wins_mf <- rev_prof_s$rev_wins_wins_wins_mf*100/r_mf_feb
 rev_prof_s$rev_wins_wins_wins <- rev_prof_s$rev_wins_wins_wins*100/r_sr_feb
 rev_prof_s$i1_wins <- rev_prof_s$i1_wins*100/.8220776
-rev_prof_s <- rbind(rev_prof_s, c(6, NA, NA, NA,NA,NA))
+#rev_prof_s <- rbind(rev_prof_s, c(6, NA, NA, NA,NA,NA))
 # Take two week averages (reduce noise)
 tmp <- rev_prof_s[1:8,]
 tmp <- rbind(tmp,(rev_prof_s[9,]+rev_prof_s[10,])/2)
 tmp <- rbind(tmp,(rev_prof_s[11,]+rev_prof_s[12,])/2)
 tmp <- rbind(tmp,(rev_prof_s[13,]+rev_prof_s[14,])/2)
 tmp <- rbind(tmp,(rev_prof_s[15,]+rev_prof_s[16,])/2)
-tmp <- rbind(tmp, rev_prof_s[c(17,18),])
+tmp <- rbind(tmp,(rev_prof_s[17,]+rev_prof_s[18,])/2)
+#tmp <- rbind(tmp, rev_prof_s[19,]) # Data from week 7 is very volatile... (fewer obs...) Update once data comes in
+tmp <- rbind(tmp, c(7, NA,NA,NA,NA))
 rev_prof_s <- tmp
 
 
@@ -132,6 +134,7 @@ i_feb <- weighted.mean(ent_outcomes[ent_outcomes$week != 5,][,"investment_feb_wi
 w_feb <- weighted.mean(ent_outcomes[ent_outcomes$week != 5,][,"wages_feb_wins"],ent_outcomes[ent_outcomes$week != 5,][,"ent_weight"],na.rm = TRUE)
 tmp <- data.frame("week" = c(-1),
                   "investment_wins" = c(i_feb)) #alternatively, 2.291782 if we restrict for first weeks only.
+inv <- rbind(inv[inv$week < 7,], c(7, NA)) ## Exclude week 7 since very few data points
 inv_r <- rbind(tmp,inv)
 inv_r <- rbind(c(-2,NA), inv_r)
 tmp <- data.frame("week" = c(-1),
@@ -425,7 +428,6 @@ So far we have interviewed 3,041 enterprises, with the following distribution pe
 | Week 2 |	17 May 2020 - 23 May 2020	| 458 |
 | Week 3 |	24 May 2020 - 30 May 2020	| 434 |
 | Week 4 |	31 May 2020 - 06 June 2020	| 732 |
-| Week 5 |	07 May 2020 - 13 June 2020	| 885 |
-
-
+| Week 5 |	07 June 2020 - 13 June 2020	| 885 |
+| Week 6 | 14 June 2020 - 20 June 2020 | 904 |
 
