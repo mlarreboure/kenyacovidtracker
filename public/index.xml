@@ -5,12 +5,28 @@
     <link>/</link>
       <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <description>Kenya | COVID-19 Economic Tracker</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 13 May 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sun, 21 Jun 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/gelani-banks-zaunxTcZ3a4-unsplash.jpg</url>
       <title>Kenya | COVID-19 Economic Tracker</title>
       <link>/</link>
     </image>
+    
+    <item>
+      <title>Prices Survey - National Sample</title>
+      <link>/morestudies/prices/</link>
+      <pubDate>Sun, 21 Jun 2020 00:00:00 +0000</pubDate>
+      <guid>/morestudies/prices/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Traders Survey - Border Counties</title>
+      <link>/morestudies/trading/</link>
+      <pubDate>Tue, 16 Jun 2020 00:00:00 +0000</pubDate>
+      <guid>/morestudies/trading/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>FloodList</title>
@@ -101,14 +117,6 @@
       <link>/other/tracker/</link>
       <pubDate>Wed, 15 Apr 2020 00:00:00 +0000</pubDate>
       <guid>/other/tracker/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Traders Survey - Border Counties</title>
-      <link>/weeklystats/trading/</link>
-      <pubDate>Wed, 15 Apr 2020 00:00:00 +0000</pubDate>
-      <guid>/weeklystats/trading/</guid>
       <description></description>
     </item>
     
