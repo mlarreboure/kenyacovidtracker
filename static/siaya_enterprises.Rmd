@@ -36,6 +36,9 @@ profits <- ent_weekly[profits]
 op <- c("week", "op", "temp_closed", "perm_closed")
 op <- ent_weekly[op]
 
+op_hrs <- c("week", "s3_q5_emphrs_p7_wins")
+op_hrs <- ent_weekly[op_hrs]
+
 inv <- c("week", "investment_wins")
 inv <- ent_weekly[inv]
 
@@ -45,6 +48,8 @@ wages <- ent_weekly[wages]
 cov <- c("week", "ecov_1", "ecov_2", "ecov_3")
 cov <- ent_weekly[cov]
 
+loan <- c("week", "s_loan", "s_gov", "s_ngo")
+loan <- ent_weekly[loan]
 
 cust <- c("week", "s3_q10_customers_p7")
 cust <- ent_weekly[cust]
@@ -165,7 +170,7 @@ op <- rbind(tmp,op)
 #  dySeries("temp_closed", strokeWidth = 4, label = "Temporarily closed") %>%
   dySeries("op", strokeWidth = 4, label = "Operational", color = "rgb(78,125,219)") %>%
   dyAxis("x", pixelsPerLabel = 90 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "% Operating enterprises", drawGrid = FALSE, valueRange = c(0, 110)) %>% 
+  dyAxis("y", label = "% Operating enterprises", drawGrid = FALSE, valueRange = c(60, 100)) %>% 
   dyLegend(width = 500, labelsSeparateLines = FALSE) %>%
   dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4,
             connectSeparatedPoints = TRUE) %>%
@@ -177,7 +182,7 @@ op <- rbind(tmp,op)
    dyEvent(-13.1 , "February", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
    dyEvent(-7 , "Lockdown begins", labelLoc = "top") %>%
   presAnnotation("1", text = "May 10") %>%
-  presAnnotation("5", text = "June 13") %>%
+  presAnnotation("7", text = "June 27") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
 op_g
 ```
@@ -186,7 +191,33 @@ February, March and April data points assume that no business that closed down u
 
 *** 
 
-<font size="5">**Status by month relative to February's operation levels**</font> 
+<font size="5">**Total hours worked by all employees on the past 7 days**</font> 
+
+``` {r op_hrs}
+  op_hrs_g <- dygraph(op_hrs, main = "") %>%
+#  dySeries("perm_closed", strokeWidth = 4, label = "Permanently closed") %>%
+  dySeries("s3_q5_emphrs_p7_wins", strokeWidth = 4, label = "Hours worked, all employees", color = "rgb(204,0,0)") %>%
+  dyAxis("x", pixelsPerLabel = 90 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", label = "Hours", drawGrid = FALSE, valueRange = c(52, 68)) %>% 
+  dyLegend(width = 500, labelsSeparateLines = FALSE) %>%
+  dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4,
+            connectSeparatedPoints = TRUE) %>%
+    dyCrosshair(direction = "vertical") %>%
+    dyEvent(4.1 , "June", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyEvent(-0.2 , "May", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+    dyEvent(-4.5 , "April", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+    dyEvent(-8.8 , "March", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+   dyEvent(-13.1 , "February", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+   dyEvent(-7 , "Lockdown begins", labelLoc = "top") %>%
+  presAnnotation("1", text = "May 10") %>%
+  presAnnotation("7", text = "June 27") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
+op_hrs_g
+```
+
+*** 
+
+<font size="5">**Closures by month relative to February's operation levels**</font> 
 
 ```{r}
 closed <- data.frame("Month" = c("January", "February", "March", "April", "May",
@@ -199,6 +230,7 @@ closed$Month <- factor(closed$Month, levels = c("January", "February", "March", 
 
 ggplot(closed, aes(Month, Proportion)) + geom_col(aes(fill = Closed)) + ylab("% Business closures")+ theme_classic()
 ```
+
 
 *** 
 ### Revenue and profit  
@@ -244,6 +276,34 @@ e_g
 ``` 
 
 \*Agriculture is normalized by last year's 2-week revenue, while all other variables are normalized by the average reported revenue for February. Reported amounts were averaged every two weeks. 
+
+*** 
+
+### External funding
+
+<font size="5">**Enterprises reporting external funding since February 2020**</font>
+``` {r loan}
+  loan_g <- dygraph(loan, main = "") %>%
+  dySeries("s_loan", strokeWidth = 4, label = "Loan", color = "rgb(78,125,219)") %>%
+  dySeries("s_gov", strokeWidth = 4, label = "Government assistance", color = "rgb(204,0,0)") %>%
+  dySeries("s_ngo", strokeWidth = 4, label = "NGO Assistance", color = "darkgreen") %>%
+  dyAxis("x", pixelsPerLabel = 90 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", label = "% Received external funding", drawGrid = FALSE, valueRange = c(0, 22)) %>% 
+  dyLegend(width = 500, labelsSeparateLines = FALSE) %>%
+  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4,
+            connectSeparatedPoints = TRUE) %>%
+    dyCrosshair(direction = "vertical") %>%
+    dyEvent(4.1 , "June", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyEvent(-0.2 , "May", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+    dyEvent(-4.5 , "April", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+    dyEvent(-8.8 , "March", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+   dyEvent(-13.1 , "February", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+   dyEvent(-7 , "Lockdown begins", labelLoc = "top") %>%
+  presAnnotation("1", text = "May 10") %>%
+  presAnnotation("7", text = "June 27") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
+loan_g
+```
 
 *** 
 
@@ -351,7 +411,7 @@ Percentage of firms accepting mobile payments, and the share of mobile payments 
   dySeries("mob_money", strokeWidth = 4, label = "Accepting mobile payments", color = "darkgreen") %>%
   dySeries("s3_q16a_mobilesales", strokeWidth = 4, label = "Share of mobile payments", color = "rgb(78,125,219)") %>%
   dyAxis("x", pixelsPerLabel = 90 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "Percentage", drawGrid = FALSE, valueRange = c(0, 110)) %>% 
+  dyAxis("y", label = "Percentage", drawGrid = FALSE, valueRange = c(0, 70)) %>% 
   dyLegend(width = 500, labelsSeparateLines = FALSE) %>%
   dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4) %>%
     dyCrosshair(direction = "vertical") %>%
@@ -371,9 +431,9 @@ mob_g
 #  dySeries("loc_customers", strokeWidth = 4, label = "Local customers", color = "darkgreen") %>%
   dySeries("s3_q10_customers_p7", strokeWidth = 4, label = "Customers", color = "rgb(78,125,219)") %>%
   dyAxis("x", pixelsPerLabel = 90 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "Customers, last week", drawGrid = FALSE, valueRange = c(0, 110)) %>% 
+  dyAxis("y", label = "Customers, last week", drawGrid = FALSE, valueRange = c(30, 80)) %>% 
   dyLegend(width = 500, labelsSeparateLines = FALSE) %>%
-  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4) %>%
+  dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4) %>%
     dyCrosshair(direction = "vertical") %>%
     dyEvent(4.1 , "June", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   presAnnotation("1", text = "May 10") %>%
