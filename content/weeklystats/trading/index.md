@@ -3,7 +3,7 @@ title: Traders Survey - Border Counties
 summary: Descriptive statistics for border trading in Busia, Bungoma, and Kakamega Counties.
 tags:
 - Border
-date: "2020-06-16T00:00:00Z"
+date: "2020-04-15T00:00:00Z"
 
 # Optional external URL for project (replaces project detail page).
 external_link: "border_traders.pdf"
