@@ -322,7 +322,7 @@ loan_g
   dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set1"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "May 10") %>%
-  presAnnotation("5", text = "June 13") %>%
+  presAnnotation("6", text = "June 20") %>%
 #  presAnnotation("-10", text = "February") %>%
   dyEvent(-1 , "February", labelLoc = "bottom", color = "gray", strokePattern = "solid") %>%
     dyEvent(-0.5 , "Lockdown begins March 15", labelLoc = "bottom") %>%
@@ -344,7 +344,7 @@ inv_g
   dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "May 10") %>%
-  presAnnotation("5", text = "June 13") %>%
+  presAnnotation("7", text = "June 27") %>%
   presAnnotation("-10", text = "February") %>%
     dyEvent(-1 , "February", labelLoc = "bottom", color = "gray", strokePattern = "solid") %>%
     dyEvent(-0.5 , "Lockdown begins March 15", labelLoc = "bottom") %>%
@@ -374,7 +374,7 @@ How has COVID-19 affected this business?*
   dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set1")) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "May 10") %>%
-  presAnnotation("5", text = "June 13") %>%
+  presAnnotation("7", text = "June 27") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
 ecov_g
 ```
@@ -396,7 +396,7 @@ ecov_g
     dyCrosshair(direction = "vertical") %>%
     dyEvent(4.1 , "June", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   presAnnotation("1", text = "May 10") %>%
-  presAnnotation("5", text = "June 13") %>%
+  presAnnotation("7", text = "June 27") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
 cust_g
 ```
@@ -422,7 +422,7 @@ Percentage of enterprises that reported a change in their business model since M
     dyCrosshair(direction = "vertical") %>%
     dyEvent(4.1 , "June", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   presAnnotation("1", text = "May 10") %>%
-  presAnnotation("5", text = "June 13") %>%
+  presAnnotation("7", text = "June 27") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
 bm_g
 ```
@@ -442,7 +442,7 @@ bm_g
     dyCrosshair(direction = "vertical") %>%
     dyEvent(4.1 , "June", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   presAnnotation("1", text = "May 10") %>%
-  presAnnotation("5", text = "June 13") %>%
+  presAnnotation("7", text = "June 27") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
 wfh_g
 ```
@@ -466,7 +466,7 @@ Percentage of firms accepting mobile payments and their share among firms that a
     dyCrosshair(direction = "vertical") %>%
     dyEvent(4.1 , "June", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   presAnnotation("1", text = "May 10") %>%
-  presAnnotation("5", text = "June 13") %>%
+  presAnnotation("7", text = "June 27") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
 mob_g
 ```
