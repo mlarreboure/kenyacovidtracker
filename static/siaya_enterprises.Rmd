@@ -16,6 +16,7 @@ library(haven)
 library(tidyverse)
 library(dygraphs)
 library(xts)
+library(lubridate)
 
 
 ent_weekly <- read_dta("../../GE_Endline2/covid19/data/COVID_AllENTs_outcomes_weekly.dta")
@@ -150,7 +151,7 @@ tmp <- data.frame("week" = c(-1),
 wages_r <- rbind(tmp,wages)
 wages_r <- rbind(c(-2,NA), wages_r)
 
-#### Create operating enterprise table with retro. data
+#### Create operating enterprise table with retro. data ############
 op_feb <- weighted.mean(ent_outcomes$op_feb,ent_outcomes$ent_weight,na.rm = TRUE)*100
 op_mar <- weighted.mean(ent_outcomes$op_mar,ent_outcomes$ent_weight,na.rm = TRUE)*100
 op_apr <- weighted.mean(ent_outcomes$op_apr,ent_outcomes$ent_weight,na.rm = TRUE)*100
@@ -159,6 +160,54 @@ op <- op[c("week", "op")]
 tmp <- data.frame("week" = c(-14,-13.1,-11,-8.8,-6,-4.5),
                   "op" = c(NA, op_feb, NA, op_mar, NA, op_apr))
 op <- rbind(tmp,op)
+
+############### Create table for closures ##################
+
+#Calculate relevant frequencies
+open_feb <- sum(ent_outcomes$operating == 1) + sum(ent_outcomes$s2_q2_whenclose %in% c(2,3,4,5,6,7,8,9))
+freq <- data.frame(table(ent_outcomes$s2_q2_whenclose, ent_outcomes$temp_closed)) #frequencies by month
+
+## Assign a month to closures that happened "last week" or "7 days before that"
+# Temp closed, if closed within 4 days of month, assigned to previous month ("closed last week")
+recently_closed_may <- sum(ent_outcomes$s2_q2_whenclose == 9 & month(ent_outcomes$today) == 5 & ent_outcomes$perm_closed == 0, na.rm = TRUE) +
+  sum(ent_outcomes$s2_q2_whenclose == 8 & month(ent_outcomes$today) == 5 & day(ent_outcomes$today) > 11 & ent_outcomes$perm_closed == 0, na.rm = TRUE) + 
+  sum(ent_outcomes$s2_q2_whenclose == 9 & month(ent_outcomes$today) == 6 & day(ent_outcomes$today) < 5 & ent_outcomes$perm_closed == 0, na.rm = TRUE) +
+  sum(ent_outcomes$s2_q2_whenclose == 8 & month(ent_outcomes$today) == 6 & day(ent_outcomes$today) <= 11 & ent_outcomes$perm_closed == 0, na.rm = TRUE)
+
+recently_closed_jun <- sum(ent_outcomes$s2_q2_whenclose == 9 & month(ent_outcomes$today) == 6 & day(ent_outcomes$today) > 4 & ent_outcomes$perm_closed == 0,
+                           na.rm = TRUE) +
+  sum(ent_outcomes$s2_q2_whenclose == 8 & month(ent_outcomes$today) == 6 & day(ent_outcomes$today) > 11 & ent_outcomes$perm_closed == 0, na.rm = TRUE)
+
+# Perm closed, if closed within 4 days of month, assigned to previous month ("closed last week")
+recently_pclosed_may <- sum(ent_outcomes$s2_q2_whenclose == 9 & month(ent_outcomes$today) == 5 & ent_outcomes$perm_closed == 1, na.rm = TRUE) +
+  sum(ent_outcomes$s2_q2_whenclose == 8 & month(ent_outcomes$today) == 5 & day(ent_outcomes$today) > 11 & ent_outcomes$perm_closed == 1, na.rm = TRUE) + 
+  sum(ent_outcomes$s2_q2_whenclose == 9 & month(ent_outcomes$today) == 6 & day(ent_outcomes$today) < 5 & ent_outcomes$perm_closed == 1, na.rm = TRUE) +
+  sum(ent_outcomes$s2_q2_whenclose == 8 & month(ent_outcomes$today) == 6 & day(ent_outcomes$today) <= 11 & ent_outcomes$perm_closed == 1, na.rm = TRUE)
+
+recently_pclosed_jun <- sum(ent_outcomes$s2_q2_whenclose == 9 & month(ent_outcomes$today) == 6 & day(ent_outcomes$today) > 4 & ent_outcomes$perm_closed == 1,
+                           na.rm = TRUE) +
+  sum(ent_outcomes$s2_q2_whenclose == 8 & month(ent_outcomes$today) == 6 & day(ent_outcomes$today) > 11 & ent_outcomes$perm_closed == 1, na.rm = TRUE)
+
+#Create dataframe
+closed <- data.frame("Month" = c("January", "February", "March", "April", "May", "June",
+                                 "January", "February", "March", "April", "May", "June"),
+                  "Proportion" = c(#Temp:
+                                   (freq[freq$Var1 == 1 & freq$Var2 == 1,]$Freq/open_feb)*100, 
+                                   (freq[freq$Var1 == 2 & freq$Var2 == 1,]$Freq/open_feb)*100, 
+                                   (freq[freq$Var1 == 3 & freq$Var2 == 1,]$Freq/open_feb)*100, 
+                                   (freq[freq$Var1 == 4 & freq$Var2 == 1,]$Freq/open_feb)*100, 
+                                   ((freq[freq$Var1 == 5 & freq$Var2 == 1,]$Freq + recently_closed_may)/open_feb)*100, 
+                                   ((freq[freq$Var1 == 6 & freq$Var2 == 1,]$Freq + recently_closed_jun)/open_feb)*100,
+                                   #Perm:
+                                   (freq[freq$Var1 == 1 & freq$Var2 == 0,]$Freq/open_feb)*100, 
+                                   (freq[freq$Var1 == 2 & freq$Var2 == 0,]$Freq/open_feb)*100, 
+                                   (freq[freq$Var1 == 3 & freq$Var2 == 0,]$Freq/open_feb)*100, 
+                                   (freq[freq$Var1 == 4 & freq$Var2 == 0,]$Freq/open_feb)*100, 
+                                   ((freq[freq$Var1 == 5 & freq$Var2 == 0,]$Freq + recently_pclosed_may)/open_feb)*100,
+                                   ((freq[freq$Var1 == 6 & freq$Var2 == 0,]$Freq + recently_pclosed_jun)/open_feb)*100),
+                  "Closed" = c("Temporarily", "Temporarily", "Temporarily","Temporarily","Temporarily", "Temporarily",
+                                "Permanently", "Permanently","Permanently", "Permanently", "Permanently", "Permanently"))
+closed$Month <- factor(closed$Month, levels = c("January", "February", "March", "April", "May", "June"))
 ```
   
 ##  {.tabset}
@@ -223,14 +272,6 @@ op_hrs_g
 <font size="5">**Closures by month relative to February's operation levels**</font> 
 
 ```{r}
-closed <- data.frame("Month" = c("January", "February", "March", "April", "May",
-                                 "January", "February", "March", "April", "May"),
-                  "Proportion" = c((47/2797)*100, (43/2797)*100, (230/2797)*100, (168/2797)*100, ((45+39)/2797)*100,
-                                   (15/2797)*100, (3/2797)*100, (6/2797)*100, (1/2797)*100, ((0)/2797)*100),
-                  "Closed" = c("Temporarily", "Temporarily", "Temporarily","Temporarily","Temporarily",
-                                "Permanently", "Permanently","Permanently", "Permanently", "Permanently"))
-closed$Month <- factor(closed$Month, levels = c("January", "February", "March", "April", "May"))
-
 ggplot(closed, aes(Month, Proportion)) + geom_col(aes(fill = Closed)) + ylab("% Business closures")+ theme_classic()
 ```
 
