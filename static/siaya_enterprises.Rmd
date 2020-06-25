@@ -124,7 +124,7 @@ rev_prof_s <- rbind(rev_prof_s, tmp)
 rev_prof_s$rev_wins_wins_wins_rt <- rev_prof_s$rev_wins_wins_wins_rt*100/r_rt_feb
 rev_prof_s$rev_wins_wins_wins_mf <- rev_prof_s$rev_wins_wins_wins_mf*100/r_mf_feb
 rev_prof_s$rev_wins_wins_wins <- rev_prof_s$rev_wins_wins_wins*100/r_sr_feb
-rev_prof_s$i1_wins <- rev_prof_s$i1_wins*100/.8220776
+rev_prof_s$i1_wins <- rev_prof_s$i1_wins*100/.8220776 #Weighted mean of baseline (last year) using first 4 weeks of data
 #rev_prof_s <- rbind(rev_prof_s, c(6, NA, NA, NA,NA,NA))
 # Take two week averages (reduce noise)
 tmp <- rev_prof_s[1:8,]
@@ -208,6 +208,71 @@ closed <- data.frame("Month" = c("January", "February", "March", "April", "May",
                   "Closed" = c("Temporarily", "Temporarily", "Temporarily","Temporarily","Temporarily", "Temporarily",
                                 "Permanently", "Permanently","Permanently", "Permanently", "Permanently", "Permanently"))
 closed$Month <- factor(closed$Month, levels = c("January", "February", "March", "April", "May", "June"))
+
+##### Create table for layoffs ############
+## Number of employees in February
+total <- sum(as.numeric(ent_outcomes$s3_q7_num_paid_feb), na.rm = TRUE) + 
+         sum(ent_outcomes[ent_outcomes$s2_q2_whenclose %in% c(3,4,5,6,8,9),][,"s2_q5_num_employees"], na.rm = TRUE)
+
+## Assign month to p7 and p14 observations:
+#Layoffs business open
+recent_layoff_apr <- sum(ent_outcomes[month(ent_outcomes$today) == 5 & day(ent_outcomes$today) <= 11,]$s3_q8_laidoff_p14, na.rm = TRUE)
+
+recent_layoff_may <- sum(ent_outcomes[(month(ent_outcomes$today) == 5 & day(ent_outcomes$today) > 11),]$s3_q8_laidoff_p14, na.rm = TRUE) +
+  sum(ent_outcomes[(month(ent_outcomes$today) == 5 & day(ent_outcomes$today) > 4),]$s3_q8_laidoff_p7, na.rm = TRUE) + 
+  sum(ent_outcomes[(month(ent_outcomes$today) == 6 & day(ent_outcomes$today) < 5),]$s3_q8_laidoff_p7, na.rm = TRUE) +
+  sum(ent_outcomes[(month(ent_outcomes$today) == 6 & day(ent_outcomes$today) <= 11),]$s3_q8_laidoff_p14, na.rm = TRUE)
+
+recent_layoff_jun <- sum(ent_outcomes[(month(ent_outcomes$today) == 6 & day(ent_outcomes$today) > 11),]$s3_q8_laidoff_p14, na.rm = TRUE) + 
+  sum(ent_outcomes[(month(ent_outcomes$today) == 6 & day(ent_outcomes$today) > 4),]$s3_q8_laidoff_p7, na.rm = TRUE)
+
+#due to closures
+recent_clayoff_may <- sum(ent_outcomes[ent_outcomes$s2_q2_whenclose == 9 & 
+                   month(ent_outcomes$today) == 5,]$s2_q5_num_employees, na.rm = TRUE) +
+  sum(ent_outcomes[ent_outcomes$s2_q2_whenclose == 8 & 
+                     month(ent_outcomes$today) == 5 & 
+                     day(ent_outcomes$today) > 11,]$s2_q5_num_employees, na.rm = TRUE) +
+  sum(ent_outcomes[ent_outcomes$s2_q2_whenclose == 9 & 
+                     month(ent_outcomes$today) == 6 & 
+                     day(ent_outcomes$today) < 5,]$s2_q5_num_employees, na.rm = TRUE) +
+  sum(ent_outcomes[ent_outcomes$s2_q2_whenclose == 8 & 
+                     month(ent_outcomes$today) == 6 & 
+                     day(ent_outcomes$today) <= 11,]$s2_q5_num_employees, na.rm = TRUE)
+
+recent_clayoff_jun <-
+  sum(ent_outcomes[ent_outcomes$s2_q2_whenclose == 9 & 
+                     month(ent_outcomes$today) == 6 & 
+                     day(ent_outcomes$today) > 4,]$s2_q5_num_employees, na.rm = TRUE) +
+  sum(ent_outcomes[ent_outcomes$s2_q2_whenclose == 8 & 
+                     month(ent_outcomes$today) == 6 & 
+                     day(ent_outcomes$today) > 11,]$s2_q5_num_employees, na.rm = TRUE)
+
+
+# Create dataframe
+layoffs <- data.frame("Month" = c("January", "February", "March", "April", "May", "June",
+                                  "January", "February", "March", "April", "May", "June"),
+                  "Frequency" = c((sum(ent_outcomes$s3_q8_laidoff_jan, na.rm = TRUE))*100/total,
+                                  (sum(ent_outcomes$s3_q8_laidoff_feb, na.rm = TRUE))*100/total,
+                                  (sum(ent_outcomes$s3_q8_laidoff_mar, na.rm = TRUE))*100/total,
+                                  (sum(ent_outcomes$s3_q8_laidoff_apr, na.rm = TRUE)+ recent_layoff_apr)*100/total,
+                                  (sum(ent_outcomes$s3_q8_laidoff_may, na.rm = TRUE)+ recent_layoff_may)*100/total,
+                                  (sum(ent_outcomes$s3_q8_laidoff_jun, na.rm = TRUE)+ recent_layoff_jun)*100/total,
+                                  (sum(ent_outcomes[ent_outcomes$s2_q2_whenclose == 1,][,"s2_q5_num_employees"], 
+                                       na.rm = TRUE))*100/total,
+                                  (sum(ent_outcomes[ent_outcomes$s2_q2_whenclose == 2,][,"s2_q5_num_employees"], 
+                                       na.rm = TRUE))*100/total,
+                                  (sum(ent_outcomes[ent_outcomes$s2_q2_whenclose == 3,][,"s2_q5_num_employees"], 
+                                      na.rm = TRUE))*100/total,
+                                  (sum(ent_outcomes[ent_outcomes$s2_q2_whenclose == 4,][,"s2_q5_num_employees"], 
+                                       na.rm = TRUE))*100/total,
+                                  (sum(ent_outcomes[ent_outcomes$s2_q2_whenclose == 5,][,"s2_q5_num_employees"], 
+                                       na.rm = TRUE) + recent_clayoff_may)*100/total,
+                                  (sum(ent_outcomes[ent_outcomes$s2_q2_whenclose == 6,][,"s2_q5_num_employees"], 
+                                       na.rm = TRUE) + recent_clayoff_jun)*100/total),
+                  "Status" = c("Enterprise operating","Enterprise operating","Enterprise operating","Enterprise operating","Enterprise operating", "Enterprise operating",
+                                          "Enterprise closed","Enterprise closed","Enterprise closed","Enterprise closed","Enterprise closed","Enterprise closed"))
+layoffs$Month <- factor(layoffs$Month, levels = c("January", "February", "March", "April", "May", "June"))
+
 ```
   
 ##  {.tabset}
@@ -518,27 +583,6 @@ mob_g
 
 <font size="5">**Temporal distribution of layoffs relative to February's employment level**</font>
 ```{r}
-total <- sum(as.numeric(ent_outcomes$s3_q7_num_paid_feb), na.rm = TRUE) + 197 + 107 +8 +107 + 8 + 98
-layoffs <- data.frame("Month" = c("January", "February", "March", "April", "May",
-                                  "January", "February", "March", "April", "May"),
-                  "Frequency" = c((sum(ent_outcomes$s3_q8_laidoff_jan, na.rm = TRUE))*100/total,
-                                  (sum(ent_outcomes$s3_q8_laidoff_feb, na.rm = TRUE))*100/total,
-                                  (sum(ent_outcomes$s3_q8_laidoff_mar, na.rm = TRUE))*100/total,
-                                  (sum(ent_outcomes$s3_q8_laidoff_apr, na.rm = TRUE)+8)*100/total,
-                                  (sum(ent_outcomes$s3_q8_laidoff_may, na.rm = TRUE)+8)*100/total,
-                                  (sum(ent_outcomes[ent_outcomes$s2_q2_whenclose == 1,][,"s2_q5_num_employees"], 
-                                       na.rm = TRUE))*100/total,
-                                  (sum(ent_outcomes[ent_outcomes$s2_q2_whenclose == 2,][,"s2_q5_num_employees"], 
-                                       na.rm = TRUE))*100/total,
-                                  (sum(ent_outcomes[ent_outcomes$s2_q2_whenclose == 3,][,"s2_q5_num_employees"], 
-                                      na.rm = TRUE))*100/total,
-                                  (sum(ent_outcomes[ent_outcomes$s2_q2_whenclose == 4,][,"s2_q5_num_employees"], 
-                                       na.rm = TRUE))*100/total,
-                                  (sum(ent_outcomes[(ent_outcomes$s2_q2_whenclose == 8 | ent_outcomes$s2_q2_whenclose == 9),][,"s2_q5_num_employees"], 
-                                       na.rm = TRUE))*100/total),
-                  "Status" = c("Enterprise operating","Enterprise operating","Enterprise operating","Enterprise operating","Enterprise operating",
-                                          "Enterprise closed","Enterprise closed","Enterprise closed","Enterprise closed","Enterprise closed"))
-layoffs$Month <- factor(layoffs$Month, levels = c("January", "February", "March", "April", "May"))
 ggplot(layoffs, aes(Month, Frequency)) + geom_col(aes(fill = Status)) + ylab("% Layoffs") + theme_classic()
 ```
 
