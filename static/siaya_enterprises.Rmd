@@ -19,12 +19,10 @@ library(xts)
 library(lubridate)
 
 
-ent_weekly <- read_dta("../../GE_Endline2/covid19/data/COVID_AllENTs_outcomes_weekly.dta")
+ent_weekly <- read_dta("../../GE_Endline2/covid19/data/COVID_AllENTs_outcomes_weekly.dta") 
 ent_outcomes <- read_dta("../../GE_Endline2/covid19/data/COVID_AllENTs_outcomes.dta") #to get retrospective vars
 ent_weekly_sector <- read_dta("../../GE_Endline2/covid19/data/COVID_AllENTs_outcomes_weekly_sector.dta")
-ent_weekly_sector_n <- read_dta("../../GE_Endline2/covid19/data/COVID_AllENTs_outcomes_weekly_sector_normalized.dta")
-ent_weekly_subsector <- read_dta("../../GE_Endline2/covid19/data/COVID_AllENTs_outcomes_weekly_subsector.dta")
-covid_weekly <- read_dta("../../GE_Endline2/covid19/data/COVID_AllHHs_outcomes_weekly_c.dta")
+covid_weekly <- read_dta("../../GE_Endline2/covid19/data/COVID_AllHHs_outcomes_weekly_c.dta") # For agriculural ent.
 
 
 #Grouping vars for graphs
@@ -73,24 +71,25 @@ presAnnotation <- function(dygraph, x, text) {
 }
 
 ##### Create dataframe with retrospective data on profits and revenues
-rev_prof <- ent_weekly[c("week", "rev_wins", "profits_wins")]
-r_feb <- weighted.mean(ent_outcomes$rev_feb_wins,ent_outcomes$ent_weight,na.rm = TRUE) # Weighted average of feb vars
+rev_prof <- ent_weekly[c("week", "rev_wins", "profits_wins")] #relevant variables
+r_feb <- weighted.mean(ent_outcomes$rev_feb_wins,ent_outcomes$ent_weight,na.rm = TRUE) # Weighted average of monthly vars
 r_mar <- weighted.mean(ent_outcomes$rev_mar_wins,ent_outcomes$ent_weight,na.rm = TRUE)
 r_apr <- weighted.mean(ent_outcomes$rev_apr_wins,ent_outcomes$ent_weight,na.rm = TRUE)
 p_feb <- weighted.mean(ent_outcomes$profits_feb_wins,ent_outcomes$ent_weight,na.rm = TRUE)
 p_mar <- weighted.mean(ent_outcomes$profits_mar_wins,ent_outcomes$ent_weight,na.rm = TRUE)
 p_apr <- weighted.mean(ent_outcomes$profits_apr_wins,ent_outcomes$ent_weight,na.rm = TRUE)
+
+#Retrospective dataframe
 tmp <- data.frame("week" = c(-11,-10,-9,-7,-6,-3),
-                  "rev_wins" = c(NA,r_feb,NA, r_mar,NA, r_apr),
+                  "rev_wins" = c(NA,r_feb,NA, r_mar,NA, r_apr), 
                   "profits_wins" = c(NA,p_feb,NA, p_mar,NA, p_apr))
-rev_prof <- rbind(tmp, rev_prof)
-#rev_prof[13,] <- c(6, NA, NA)
+rev_prof <- rbind(tmp, rev_prof) # append to dataframe
 
 ############ Create dataframe of revenues by sector ###############
 ## Re-shape data for graphs
-ag <- covid_weekly[c("week", "i1_wins")]
-ag$week <- ag$week -5
-ag <- ag[ag$week < 5,]
+ag <- covid_weekly[c("week", "i1_wins")] #agricultural data
+ag$week <- ag$week -5  # make weeks coincide with ent survey
+ag <- ag[ag$week < 5,] # exclude last week of data (few observations)
 rt <- ent_weekly_sector[ent_weekly_sector$sector == 1,][c("week", "rev_wins_wins_wins")]
 mf <- ent_weekly_sector[ent_weekly_sector$sector == 2,][c("week", "rev_wins_wins_wins")]
 sr <- ent_weekly_sector[ent_weekly_sector$sector == 3,][c("week", "rev_wins_wins_wins")]
@@ -98,35 +97,32 @@ tmp <- merge(rt,mf, by = "week", all = TRUE, suffixes = c("_rt","_mf"))
 tmp <- merge(tmp, sr, by = "week", all = TRUE)
 tmp <- merge(tmp, ag, by = "week", all = TRUE)
 
+# Retrospective data on Retail sector
 r_rt_feb <- weighted.mean(ent_outcomes[ent_outcomes$sector == 1,]$rev_feb_wins,ent_outcomes[ent_outcomes$sector == 1,]$ent_weight,na.rm = TRUE)
 r_rt_mar <- weighted.mean(ent_outcomes[ent_outcomes$sector == 1,]$rev_mar_wins,ent_outcomes[ent_outcomes$sector == 1,]$ent_weight,na.rm = TRUE)
 r_rt_apr <- weighted.mean(ent_outcomes[ent_outcomes$sector == 1,]$rev_apr_wins,ent_outcomes[ent_outcomes$sector == 1,]$ent_weight,na.rm = TRUE)
-
+# Manufacturing
 r_mf_feb <- weighted.mean(ent_outcomes[ent_outcomes$sector == 2,]$rev_feb_wins,ent_outcomes[ent_outcomes$sector == 2,]$ent_weight,na.rm = TRUE)
 r_mf_mar <- weighted.mean(ent_outcomes[ent_outcomes$sector == 2,]$rev_mar_wins,ent_outcomes[ent_outcomes$sector == 2,]$ent_weight,na.rm = TRUE)
 r_mf_apr <- weighted.mean(ent_outcomes[ent_outcomes$sector == 2,]$rev_apr_wins,ent_outcomes[ent_outcomes$sector == 2,]$ent_weight,na.rm = TRUE)
-
+# Services
 r_sr_feb <- weighted.mean(ent_outcomes[ent_outcomes$sector == 3,]$rev_feb_wins,ent_outcomes[ent_outcomes$sector == 3,]$ent_weight,na.rm = TRUE)
 r_sr_mar <- weighted.mean(ent_outcomes[ent_outcomes$sector == 3,]$rev_mar_wins,ent_outcomes[ent_outcomes$sector == 3,]$ent_weight,na.rm = TRUE)
 r_sr_apr <- weighted.mean(ent_outcomes[ent_outcomes$sector == 3,]$rev_apr_wins,ent_outcomes[ent_outcomes$sector == 3,]$ent_weight,na.rm = TRUE)
 
 rev_prof_s <- data.frame("week" = c(-11,-10,-9,-7,-6,-3),
-                  "rev_wins_wins_wins_rt" = c(NA,r_rt_feb,NA,r_rt_mar,NA,r_rt_apr), # Programatically updates
+                  "rev_wins_wins_wins_rt" = c(NA,r_rt_feb,NA,r_rt_mar,NA,r_rt_apr), 
                   "rev_wins_wins_wins_mf" = c(NA,r_mf_feb,NA,r_mf_mar,NA,r_mf_apr),
                   "rev_wins_wins_wins" = c(NA,r_sr_feb,NA, r_sr_mar,NA,r_sr_apr),
                   "i1_wins" = c(NA, NA, NA,NA,NA,NA))
-#rev_prof_s <- data.frame("week" = c(-11,-10,-9,-7,-6,-3),
-#                  "rev_wins_wins_wins_rt" = c(NA,223.6966,NA,162.1954,NA,138.2139), #Using dta from first 4 weeks
-#                  "rev_wins_wins_wins_mf" = c(NA,208.973,NA,128.6016,NA,109.5862),
-#                  "rev_wins_wins_wins" = c(NA,137.3485,NA, 89.91359,NA,79.15799),
-#                  "i1_wins" = c(NA, NA, NA,NA,NA,NA))
-rev_prof_s <- rbind(rev_prof_s, tmp)
-rev_prof_s$rev_wins_wins_wins_rt <- rev_prof_s$rev_wins_wins_wins_rt*100/r_rt_feb
+
+rev_prof_s <- rbind(rev_prof_s, tmp) # Append retrospective data to weekly data
+rev_prof_s$rev_wins_wins_wins_rt <- rev_prof_s$rev_wins_wins_wins_rt*100/r_rt_feb #Normalize wrt baseline values
 rev_prof_s$rev_wins_wins_wins_mf <- rev_prof_s$rev_wins_wins_wins_mf*100/r_mf_feb
 rev_prof_s$rev_wins_wins_wins <- rev_prof_s$rev_wins_wins_wins*100/r_sr_feb
 rev_prof_s$i1_wins <- rev_prof_s$i1_wins*100/.8220776 #Weighted mean of baseline (last year) using first 4 weeks of data
 #rev_prof_s <- rbind(rev_prof_s, c(6, NA, NA, NA,NA,NA))
-# Take two week averages (reduce noise)
+# Take two week averages (reduce noise) of the weekly data only
 tmp <- rev_prof_s[1:8,]
 tmp <- rbind(tmp,(rev_prof_s[9,]+rev_prof_s[10,])/2)
 tmp <- rbind(tmp,(rev_prof_s[11,]+rev_prof_s[12,])/2)
@@ -134,7 +130,7 @@ tmp <- rbind(tmp,(rev_prof_s[13,]+rev_prof_s[14,])/2)
 tmp <- rbind(tmp,(rev_prof_s[15,]+rev_prof_s[16,])/2)
 tmp <- rbind(tmp,(rev_prof_s[17,]+rev_prof_s[18,])/2)
 #tmp <- rbind(tmp, rev_prof_s[19,]) # Data from week 7 is very volatile... (fewer obs...) Update once data comes in
-tmp <- rbind(tmp, c(7, NA,NA,NA,NA))
+tmp <- rbind(tmp, c(7, NA,NA,NA,NA)) # Setting week 7 to missing values
 rev_prof_s <- tmp
 
 
@@ -164,7 +160,7 @@ op <- rbind(tmp,op)
 ############### Create table for closures ##################
 
 #Calculate relevant frequencies
-open_feb <- sum(ent_outcomes$operating == 1) + sum(ent_outcomes$s2_q2_whenclose %in% c(2,3,4,5,6,7,8,9))
+open_feb <- sum(ent_outcomes$operating == 1) + sum(ent_outcomes$s2_q2_whenclose %in% c(2,3,4,5,6,7,8,9)) # Count open ent. in feb
 freq <- data.frame(table(ent_outcomes$s2_q2_whenclose, ent_outcomes$temp_closed)) #frequencies by month
 
 ## Assign a month to closures that happened "last week" or "7 days before that"
@@ -188,7 +184,7 @@ recently_pclosed_jun <- sum(ent_outcomes$s2_q2_whenclose == 9 & month(ent_outcom
                            na.rm = TRUE) +
   sum(ent_outcomes$s2_q2_whenclose == 8 & month(ent_outcomes$today) == 6 & day(ent_outcomes$today) > 11 & ent_outcomes$perm_closed == 1, na.rm = TRUE)
 
-#Create dataframe
+# Create dataframe, Var 1 is when closed and Var2 is whether it was a temp. closure
 closed <- data.frame("Month" = c("January", "February", "March", "April", "May", "June",
                                  "January", "February", "March", "April", "May", "June"),
                   "Proportion" = c(#Temp:
