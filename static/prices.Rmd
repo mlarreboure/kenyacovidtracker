@@ -63,7 +63,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 We rely on a quick-response online survey to track product prices and availability of selected essential consumer products across Kenya. The data are collected with the help of volunteers, mainly university students and affiliates of NGOs, who record information through an online form on their smartphone - either when or after visiting a shop in-person or getting deliveries. Embedding the survey into day-to-day activities of respondents helps us to address concerns about initiating or prolonging human interactions that would not occur otherwise. The geographic distribution of the survey responses correlates strongly with population density and covers 36 out of 47 counties. Areas where our sample has shortcomings relative the overall population are rural areas, prices from open air markets, and counties in the North of Kenya. About 30% of the respondents shop at supermarkets, another 30% at general shops, 15% at kibandas and the remainder at roadside stalls, open air markets or on online platforms. 
 
-So far the volunteers submitted 958 surveys since 27th March 2020.  On average volunteers record prices of 4-5 items per survey. The data is spares in the first few weeks of the data collection. With the support of numerous partners we were able to expand our network of volunteers over time. 
+So far volunteers submitted 958 surveys since 27th March 2020.  On average volunteers record prices of 4-5 items per survey. The data is spares in the first few weeks of the data collection. With the support of numerous partners we were able to expand our network of volunteers over time. 
 
 | Week	| Dates	| Number of online surveys |
 |------|:-----:|:---------:|
