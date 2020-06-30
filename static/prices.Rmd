@@ -65,7 +65,7 @@ We rely on a quick-response online survey to track product prices and availabili
 
 So far we collected 995 survey responses since 27th March 2020.  On average respondents record prices of 4-5 items per survey. 
 
-*The data is spares in the early weeks of the data collection, which needs to be taken into account for the interpretation of the price dispersion in those week. With the support of numerous partners we were able to expand our network of volunteers over time.
+*The data is sparse in the early weeks of the data collection, which needs to be taken into account for the interpretation of the price dispersion in those week. With the support of numerous partners we were able to expand our network of volunteers over time.
 
 | Week of the year	| Dates	| Number of online surveys |
 |------|:-----:|:---------:|
@@ -87,7 +87,7 @@ So far we collected 995 survey responses since 27th March 2020.  On average resp
 *** 
 Acknowledgement:
 
-We are immensely grateful for the support Mary Mang'eli (Kenyatta University and Laikipia University) and Mdoe Jackson (Kenyatta University) in helping us to reach out to a fantastic group of student volunteers. We thank Innovations for Poverty Action (IPA) Kenya for their support in distributing the link for the online survey. 
+We are immensely grateful for the support of Mary Mang'eli (Kenyatta University and Laikipia University) and Mdoe Jackson (Kenyatta University) in helping us to reach out to a fantastic group of student volunteers. We thank Innovations for Poverty Action (IPA) Kenya for their support in distributing the link for the online survey. 
 
 The data collection is made possible thanks to the outstanding contributions from over 150 volunteers. Special thanks to Faith Mutinda, Felix Mbaka, Brian Kwanya, Mayaka Jackson, Mary Maina, David Ochieng, Stacey Jebet, Elizabeth Mwikali Wambua, Teresia Wangeci Thiong'o, Selevenus Gesabo, Lynette Wangeci, Frankline Nisah and Samuel Muiruri Thiongo.
 
