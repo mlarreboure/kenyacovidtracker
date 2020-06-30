@@ -21,13 +21,13 @@ knitr::opts_chunk$set(echo = TRUE)
 ##  {.tabset}
 
 ### Bread and cereals 
-<font size="5">**Maize flour (2kg)**</font>
+<font size="5">**Maize flour (2 kg)**</font>
   
   ![](prices/Dots_maize.png)
 
 ***   
 
-<font size="5">**Rice (kg)**</font>
+<font size="5">**Rice (1 kg)**</font>
   
   ![](prices/Dots_rice.png)
   
@@ -41,19 +41,19 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ### Other items
 
-<font size="5">**Sugar (kg)**</font>
+<font size="5">**Sugar (1 kg)**</font>
   
   ![](prices/Dots_sugar.png)
 
 ***   
 
-<font size="5">**Egg**</font>
+<font size="5">**Egg (one)**</font>
   
   ![](prices/Dots_egg.png)
 
 *** 
 
-<font size="5">**Banana**</font>
+<font size="5">**Banana (one)**</font>
   
   ![](prices/Dots_banana.png)
 
@@ -61,14 +61,16 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## {}
 
-We rely on a quick-response online survey to track product prices and availability of selected essential consumer products across Kenya. The data are collected with the help of volunteers, mainly university students and affiliates of NGOs, who record information through an online form on their smartphone - either when or after visiting a shop in-person or getting deliveries. Embedding the survey into day-to-day activities of respondents helps us to address concerns about initiating or prolonging human interactions that would not occur otherwise. The geographic distribution of the survey responses correlates strongly with population density and covers 36 out of 47 counties. Regions of the country with good mobile network coverage are over-represented in our sample. Counties in the North of Kenya are under-represented. Other areas were our sample diverges from the overall population are that fewer volunteers shop at open air markets. About 30% of the respondents shop at supermarkets, another 30% at general shops, 15% at kibandas and the remainder at roadside stalls, open air markets or on online platforms. 
+We rely on a quick-response online survey to track product prices and availability of selected essential consumer products across Kenya. The data are collected with the help of volunteers, mainly university students and affiliates of NGOs, who record information through an online form on their smartphone - either when or after visiting a shop in-person or getting deliveries. Embedding the survey into day-to-day activities of respondents helps us to address concerns about initiating or prolonging human interactions that would not occur otherwise. The geographic distribution of the survey responses correlates strongly with population density and covers 36 out of 47 counties. Regions of the country with good mobile network coverage are over-represented in our sample. Counties in the North of Kenya are under-represented. About 30% of the respondents shop at supermarkets, another 30% at general shops, 15% at kibandas and the remainder at roadside stalls, open air markets or on online platforms. 
 
-So far volunteers submitted 958 surveys since 27th March 2020.  On average volunteers record prices of 4-5 items per survey. The data is spares in the first few weeks of the data collection. With the support of numerous partners we were able to expand our network of volunteers over time. 
+So far we collected 995 survey responses since 27th March 2020.  On average respondents record prices of 4-5 items per survey. 
 
-| Week	| Dates	| Number of online surveys |
+*The data is spares in the early weeks of the data collection, which needs to be taken into account for the interpretation of the price dispersion in those week. With the support of numerous partners we were able to expand our network of volunteers over time.
+
+| Week of the year	| Dates	| Number of online surveys |
 |------|:-----:|:---------:|
-| Week 13 |	27 March - 31 March 2020	| 25 |
-| Week 14 |	1 April - 7 April 2020 	| 25 |
+| Week 13 |	27 March 2020 - 31 March 2020	| 25 |
+| Week 14 |	1 April 2020 - 7 April 2020 	| 25 |
 | Week 15 |	8 April 2020 - 14 April 2020	| 23 |
 | Week 16 |	15 April 2020 - 21 April 2020	| 21 |
 | Week 17 |	22 April 2020 - 28 April 2020	| 18 |
@@ -76,10 +78,17 @@ So far volunteers submitted 958 surveys since 27th March 2020.  On average volun
 | Week 19 |	6 May 2020 - 12 May 2020	| 36 |  
 | Week 20 |	13 May 2020 - 19 May 2020	| 22 |
 | Week 21 |	20 May 2020 - 26 May 2020	| 11 |
-| Week 22 |	27 May 2020 - 2 June 2020	| 97 |
-| Week 23 |	3 June 2020 - 9 June 2020	| 119 |
-| Week 24 |	10 June 2020 - 16 June 2020	| 169 |
-| Week 25 |	17 June 2020 - 23 June 2020	| 231 |
-| Week 26 |	24 June 2020 - 28 June 2020	| 132 |
+| Week 22 |	27 May 2020 - 2 June 2020	| 96 |
+| Week 23 |	3 June 2020 - 9 June 2020	| 118 |
+| Week 24 |	10 June 2020 - 16 June 2020	| 165 |
+| Week 25 |	17 June 2020 - 23 June 2020	| 224 |
+| Week 26 |	24 June 2020 - 30 June 2020	| 182 |
+
+*** 
+Acknowledgement:
+
+We are immensely grateful for the support Mary Mang'eli (Kenyatta University and Laikipia University) and Mdoe Jackson (Kenyatta University) in helping us to reach out to a fantastic group of student volunteers. We thank Innovations for Poverty Action (IPA) Kenya for their support in distributing the link for the online survey. 
+
+The data collection is made possible thanks to the outstanding contributions from over 150 volunteers. Special thanks to Faith Mutinda, Felix Mbaka, Brian Kwanya, Mayaka Jackson, Mary Maina, David Ochieng, Stacey Jebet, Elizabeth Mwikali Wambua, Teresia Wangeci Thiong'o, Selevenus Gesabo, Lynette Wangeci, Frankline Nisah and Samuel Muiruri Thiongo.
 
   
