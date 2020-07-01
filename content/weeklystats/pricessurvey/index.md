@@ -1,6 +1,6 @@
 ---
 title: Prices Survey - National Sample
-summary: Quick-response online survey to track prices and availability of selected essential consumer products across Kenya.
+summary: Quick-response online survey tracking prices of essential consumer products across Kenya.
 tags:
 - National
 date: "2020-04-15T00:00:00Z"
