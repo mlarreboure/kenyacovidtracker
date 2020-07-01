@@ -1,34 +1,12 @@
 ---
-title: Household Survey - Siaya County
+title: "Household Survey - Siaya County"
 summary: Descriptive statistics for households in Siaya County.
-tags:
-- Siaya
-
-date: "2020-04-15T00:00:00Z"
-
-# Optional external URL for project (replaces project detail page).
-external_link: "timeseries.html"
-
+date: '2020-04-15T00:00:00Z'
+tags: Siaya
+external_link: timeseries.html
 image:
-  caption: 
+  caption: null
   focal_point: Smart
-
-# links:
-# - icon: twitter
-#  icon_pack: fab
-#  name: Follow
-#  url: https://twitter.com/georgecushen
-# url_code: ""
-# url_pdf: ""
-# url_slides: ""
-# url_video: ""
-
-# Slides (optional).
-#   Associate this project with Markdown slides.
-#   Simply enter your slide deck's filename without extension.
-#   E.g. `slides = "example-slides"` references `content/slides/example-slides.md`.
-#   Otherwise, set `slides = ""`.
-# slides: example
 ---
 
 These data comes from phone survey interviews conducted by [REMIT Kenya](http://remitkenya.co.ke/) in Siaya County, Kenya. We are collecting data for a sample of ~12,000 households in the county, which is representative of the whole population. At the same time, our weekly sampling method assures weekly representativeness of the overall sample.
