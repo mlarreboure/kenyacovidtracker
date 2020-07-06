@@ -17,7 +17,7 @@ output:
 
 ### Income  
 <font size="5">**Earnings per capita (USD, PPP) - past 14 days**</font>
-preservec63b344b76dfe460
+preserve8d8c7699029678a7
   
 
   This plot aggregates income from each of the three earning sources, across all working-age household members, stacking them to add to the average earning per capita, including children, in the past 14 days. If the household does not perceive income from one or more of the sources, those data points are assigned zeros to assure representativeness for the whole population.  
@@ -27,7 +27,7 @@ preservec63b344b76dfe460
 <font size="5">**Dissaving per capita (USD, PPP) - past 14 days**</font>  
  The dissaving variable is constructed by adding the value of assets sold and loans taken, and substracting the value of any assets or durables bought.  
 
-preserve14323bdf978073d6
+preserve5025d40158e3ea1f
 
    
 ***  
@@ -35,7 +35,7 @@ preserve14323bdf978073d6
   <font size="5">**Transfers per capita (USD, PPP) - past 14 days**</font>  
     We ask whether in the past 14 days anyone in the household received a gift/assistance of money or goods, and its value, from (i) the government, (ii) from a non-governmental organization or community group, or (iii) from an individual politican or government official.  
 
-preserve618dfd8a33b289b1
+preservecb5bb1ac3a52e3a3
   
 
   
@@ -44,7 +44,7 @@ preserve618dfd8a33b289b1
 ### Consumption
 
 <font size="5">**Weekly consumption per capita (USD, PPP)**</font>
-preservee8c9de3230e08ded
+preserve00066b0f79872fc9
 Own-food consumption accounts for own agricultural and pastoral production at market value. Pre-covid average uses 2016-2017 data.
 
 *** 
@@ -52,7 +52,7 @@ Own-food consumption accounts for own agricultural and pastoral production at ma
 ### Food Security  
 <font size="5">**Number of days skipping meals in the past 7 days**</font>  
 
-preservebf10874f8fb519a6
+preserve4042c3a5d537184a
 Pre-COVID average uses data from 2016-2017.
      
 ***  
@@ -62,7 +62,7 @@ Pre-COVID average uses data from 2016-2017.
    
  
    
-preservef7e769ef1fd005b7
+preserve2dd711cfbe06f32d
  
      
 ***  
@@ -71,13 +71,13 @@ preservef7e769ef1fd005b7
     We ask whether in the past 7 days, any household member experienced: (i) having to reduce the number of meals and/or the portion of each meal they would usually eat, (ii) difficulties in going to food markets due to mobility restrictions imposed by government, and (iii) difficulties in buying food due to most food markets being closed.  
     
   
-preserve6e36de1fa8ab1ee9
+preserve7438e921346060af
  
    
 ***  
 ### Household enterprises  
 <font size="5">**Enterprises revenue and profits in the past 14 days**</font>
-preserve88c6d3463093a5c0
+preserve03ab23e62727e3ef
   
   ***  
 
@@ -86,7 +86,7 @@ preserve88c6d3463093a5c0
 <font size="5">**Reported COVID-19 Behavior Adoption**</font>    
 We ask respondents whether they have changed their behavior in any way since learning about COVID-19, and if so, how  it has changed.
 
-preserve91b3c6b6ed304e61
+preservedea24dca7ded5757
    
     
 ***  
@@ -95,7 +95,7 @@ preserve91b3c6b6ed304e61
 We ask respondents whether they have experienced any illnesses or symptoms of a given list in the past 14 days.  
   
 
-preserveb2fd257570a833b2
+preservee73884e23e93f2b0
   
   
 
@@ -104,7 +104,7 @@ preserveb2fd257570a833b2
 <font size="5">**Number of in-person interactions (other than HH members)**</font>  
   We ask: "Taken together, how many people outside this household have you interacted with in-person?"   
 
-preserve3eb107e9e0ffa42c
+preserve19d255bebcf6ac6c
   
 
 *** 
@@ -112,7 +112,7 @@ preserve3eb107e9e0ffa42c
 ### Labor Supply
 
 <font size="5">**Weekly labor supply (hours per household adult)**</font>
-preservefb2ed2d0d322f57a
+preserve3339dad083c85ac0
   
   This plot aggregates hours worked on each of the three sources, across all working-age household members, stacking them to add to the average weekly labor supply per household adult. If the household does not work any hours on one or more of the labor categories, those data points are assigned zeros to assure representativeness of the whole population. 
 
@@ -121,7 +121,7 @@ preservefb2ed2d0d322f57a
 
 <font size="5">**Children educational activities**</font>  
      We ask what has each child been doing over the last 15 minutes, whether the child has done any learning-related activities in the past 24 hours, and if so, what kind of activity. From this question we also learn whether the child attended school.
-preserve3d5dfea8c3bf7edf
+preserve3e2e3ade86028c53
 
    
    
@@ -133,14 +133,14 @@ preserve3d5dfea8c3bf7edf
 <font size="5">**Gender violence**</font>
 
 We ask married/cohabitant female respondents whether their husband/partner has (i) threaten to harm them or someone close to them, (ii) hit, slapped, kicked, or physically hurt them, and (iii) forced them to perform sexual acts.*  
-preserve7ee92fbe0e47e7dd
+preservec734018ffa35d446
   *This plot shows data only for the share of female respondents that were surveyed by a female field officer, and are currently married or living with a partner. This sub-sample accounts for ~55% of all married/cohabitant females in the study sample, and ~36% of all females.  
      
 ***  
   
 <font size="5">**Violence in the household**</font>  
 We ask: (i) Over the past 14 days, has there been a higher than usual amount of fights with members of your household?, and (ii) In the past 14 days, did you or your partner ever beat any of the children living in this household?  
-preserve15beac5c475d546b
+preserve57dcdcfa9e616f93
 
 
 ***  
@@ -150,14 +150,14 @@ preserve15beac5c475d546b
 <font size="5">**Trust in government**</font>  
 
 How much do you trust your country’s government to take care of its citizens?  
-preserve4515518eda394f2b
+preservebb44772c1c8fcb3a
    
 ***   
   
   <font size="5">**Trust in other people**</font>  
 
 Generally speaking, would you say that most people can be trusted or that you need to be very careful in dealing with people?  
-preserve2c75b0d0ae26dcf0
+preserve7af06ad2c8dc4d61
 
 
 *** 
@@ -169,7 +169,7 @@ preserve2c75b0d0ae26dcf0
 
 **The Centre for Epidemiological Studies Depression Scale** (CES-D-10) is a 10-item Likert scale questionnaire assessing depressive symptoms in the past week. It includes three items on depressed affect, five items on somatic symptoms, and two on positive affect. Options for each item range from “rarely or none of the time” (score of 0) to “all of the time” (score of 3). Scoring is reversed for positive affect statements. Total scores can range from 0 to 30. **Higher scores suggest greater severity of symptoms.**  
 
-preserve16417d36aa41e496
+preserve8a9875c1c1b6f88c
 
 Pre-COVID average computed with data from 2016-2017
 
@@ -180,35 +180,35 @@ We also ask questions 1-5 on core mental health from the John Hopkins Bloomberg 
 <font size="5">**Nervious, anxious or on edge**</font>  
 
 In the past 7 days, how often have you felt nervous, anxious, or on edge?  
-preserve8bf4a59e0be378c8
+preserve488d3f38a19809f4
    
 *** 
 <font size="5">**Depressed**</font>    
 
 In the past 7 days, how often have you felt depressed?  
 
-preserve1a4a2472fa782833
+preserve4522d5fd3be683ac
    
 *** 
 <font size="5">**Lonely**</font>    
 
 In the past 7 days, how often have you felt lonely?  
 
-preservebca82057c1e84ee7
+preserve1895d192905d9e54
    
 *** 
 <font size="5">**Hopeful about the future**</font>  
     
 In the past 7 days, how often have you felt hopeful about the future?  
 
-preserve786df4157509c366
+preserve644db5527e5a2d6d
    
 *** 
 <font size="5">**Had physical reactions due to COVID-19**</font>  
 
   In the past 7 days, how often have you had physical reactions, such as sweating, trouble breathing, nausea, or a pounding heart, when thinking about your experience (e.g., social distancing, loss of income/work, concerns about infection) with the coronavirus/COVID-19 pandemic? 
   
-preserve96a0f8c73d0fd431
+preserve8bce737d7595c1d4
    
 *** 
 
@@ -216,35 +216,35 @@ preserve96a0f8c73d0fd431
 ### Food prices
 
 <font size="5">**Food 1**</font>  
-preserveb3267eeeeb3f41c4
+preservef07554d82f6d2438
   
 ***     
 
 <font size="5">**Food 2**</font>  
-preserve9936b2576cd5fe71
+preservebc02ed63a60f123e
   
 ***       
 
 <font size="5">**Food 3**</font>  
-preserve17c20123a09c577f
+preservea7d36dcc2a3c3e2b
   
 ***    
 
 ### Other prices
 
 <font size="5">**Services**</font>  
-preservec1c755fc7471154a
+preserve17599d60e9306f70
   
 ***  
 
 <font size="5">**Livestock**</font>  
-preserve3339e20810745c32
+preserveea2339c3bfa1a51a
   
   ***   
     
 
 <font size="5">**Non-food**</font>  
-preserve285c3edacfb73016
+preserve70763e667fed5fb3
   
 ***     
 
