@@ -50,7 +50,7 @@ Collaborators on this project are:
 [Dennis Egger](https://www.dennisegger.net) - University of California, Berkeley;   
 [Tilman Graff](https://tilmangraff.github.io/) - Busara Center, Nairobi;  
 [Johannes Haushofer](https://www.princeton.edu/haushofer/) - Princeton University;   
-[George Kinyanjui](https://www.saldru.uct.ac.za/staff/george-kariuki-kinyanjui/) - University of Cape Town);  
+[George Kinyanjui](https://www.saldru.uct.ac.za/staff/george-kariuki-kinyanjui/) - University of Cape Town;  
 [Magdalena Larreboure](https://mlarreboure.com/) - Busara Center, Nairobi;   
 [Layna Lowe](https://cega.berkeley.edu/user-type/staff/#layna-lowe) - University of California, Berkeley;   
 [Edward Miguel](http://emiguel.econ.berkeley.edu/) - University of California, Berkeley;  
