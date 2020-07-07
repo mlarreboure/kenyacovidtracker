@@ -1,5 +1,5 @@
 ---
-title: Prices Survey - National Sample
+title: Price Survey - National Sample
 summary: Quick-response online survey tracking prices of essential consumer products across Kenya.
 tags:
 - National
