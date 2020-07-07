@@ -50,6 +50,7 @@ Collaborators on this project are:
 [Dennis Egger](https://www.dennisegger.net) - University of California, Berkeley;   
 [Tilman Graff](https://tilmangraff.github.io/) - Busara Center, Nairobi;  
 [Johannes Haushofer](https://www.princeton.edu/haushofer/) - Princeton University;   
+[George Kinyanjui](https://www.saldru.uct.ac.za/staff/george-kariuki-kinyanjui/) - University of Cape Town;  
 [Magdalena Larreboure](https://mlarreboure.com/) - Busara Center, Nairobi;   
 [Layna Lowe](https://cega.berkeley.edu/user-type/staff/#layna-lowe) - University of California, Berkeley;   
 [Edward Miguel](http://emiguel.econ.berkeley.edu/) - University of California, Berkeley;  
@@ -59,5 +60,7 @@ Collaborators on this project are:
 [Carlos Paramo](https://www.linkedin.com/in/carlosparamob) - University of California, Berkeley;   
 [Andrew Wabwire](http://remitkenya.co.ke/index.php/about-us/) - REMIT Kenya;  
 [Michael Walker](http://www.michaelwwalker.me/) - University of California, Berkeley;  
+[Verena Wiedemann](https://www.economics.ox.ac.uk/graduate-students/verena-wiedemann) - University of Oxford;  
 [Eleanor Wiseman](https://www.linkedin.com/in/eleanor-wiseman-831b523a) - University of California, Berkeley.
+
 
