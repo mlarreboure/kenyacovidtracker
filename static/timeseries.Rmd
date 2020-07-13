@@ -23,7 +23,7 @@ library(plotly) #interactive visualization
 
 ## Importing Data ##
 #covid_weekly <- read_dta("~/Dropbox (Princeton)/GE_Endline2/covid19/data/COVID_AllHHs_outcomes_weekly.dta")
-covid_weekly <- read_dta("../../GE_Endline2/covid19/data/COVID_AllHHs_outcomes_weekly.dta")
+covid_weekly <- read_dta("../../GE_Endline2/covid19/data/COVID_HH_outcomes_weekly.dta") # name changed, dropped the "All"
 
 covid_price_index <- read.csv("../../GE_Endline2/covid19/data/COVID_PriceIndex_Heatmap.csv", header = T)
 covid_price_index["Price Index"] <- covid_price_index$price_index_median
@@ -171,7 +171,7 @@ presAnnotation <- function(dygraph, x, text) {
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
   dyAxis("y", label = "USD, PPP", drawGrid = FALSE) %>% 
   dyLegend(width = 250, labelsSeparateLines = TRUE) %>%
-  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2")) %>%
+  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
   presAnnotation("8", text = "May 30") %>%
@@ -196,7 +196,7 @@ d_g  <- dygraph(d, main = "") %>%
   dySeries("i7_wins", strokeWidth = 4, label = "Dissaving") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
   dyAxis("y", drawGrid = FALSE , label = "USD, PPP") %>% 
-  dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1")) %>%
+  dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
   presAnnotation("8", text = "May 30") %>%
@@ -218,7 +218,7 @@ it_g  <- dygraph(it, main = "") %>%
   dySeries("i5c_wins", strokeWidth = 4, label = "Politicians") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
   dyAxis("y", drawGrid = FALSE , label = "USD, PPP") %>% 
-  dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1")) %>%
+  dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
   presAnnotation("8", text = "May 30") %>%
@@ -245,7 +245,7 @@ c_g <- dygraph(c, main = "", group = "Siaya County Sample") %>%
   dyAxis("y", label = "USD, PPP", drawGrid = FALSE) %>% 
   dyLegend(width = 250 , labelsSeparateLines = TRUE) %>%
     dyCrosshair(direction = "vertical") %>%
-  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2")) %>%
+  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2"), connectSeparatedPoints = FALSE) %>%
       dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
   presAnnotation("8", text = "May 30") %>%
@@ -272,7 +272,7 @@ f1_d_g  <- dygraph(f1_d, main = "") %>%
 #  dySeries("f1_d_hungrychild", strokeWidth = 4, label = "Children gone to bed hungry") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
   dyAxis("y", drawGrid = FALSE , label = "Number of days") %>% 
-  dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1")) %>%
+  dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
   presAnnotation("8", text = "May 30") %>%
@@ -300,13 +300,13 @@ f1_g  <- dygraph(f1, main = "") %>%
   dySeries("f1_h_shortages_wins", strokeWidth = 4, label = "Shortages in markets") %>%
   dyAxis("x", pixelsPerLabel = 75 , drawGrid = FALSE, label = "Weeks") %>% #grid
   dyAxis("y", drawGrid = FALSE , label = "Percentage of sample") %>% 
-  dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1")) %>%
+  dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("3", text = "April 25") %>%
   presAnnotation("8", text = "May 30") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
   dyLegend(width = 450, labelsSeparateLines = FALSE) %>% 
-  dyRangeSelector(dateWindow = c("2", "9"))
+  dyRangeSelector(dateWindow = c("2", "15"))
 f1_g
 ```   
  
@@ -324,13 +324,13 @@ f1a_g  <- dygraph(f1a, main = "") %>%
   dySeries("f1_h_closed_wins", strokeWidth = 4, label = "Closed food markets") %>%
   dyAxis("x", pixelsPerLabel = 75 , drawGrid = FALSE, label = "Weeks") %>% #grid
   dyAxis("y", drawGrid = FALSE , label = "Percentage of sample") %>% 
-  dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2")) %>%
+  dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("3", text = "April 25") %>%
   presAnnotation("8", text = "May 30") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
   dyLegend(width = 475, labelsSeparateLines = FALSE) %>% 
-  dyRangeSelector(dateWindow = c("2", "9"))
+  dyRangeSelector(dateWindow = c("2", "15"))
 f1a_g
 ``` 
  
