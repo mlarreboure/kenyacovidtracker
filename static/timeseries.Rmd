@@ -871,16 +871,18 @@ These data comes from phone survey interviews conducted by [REMIT Kenya](http://
 
 So far we have interviewed 8,582 households, with the following distribution per week:
 
-| Week	| Dates	| Number of surveys |
-|------|:-----:|:---------:|
-| Week 1 |	05 April 2020 - 11 April 2020	| 745 |
-| Week 2 |	12 April 2020 - 18 April 2020	| 744 |
-| Week 3 |	19 April 2020 - 25 April 2020	| 1,478 |
-| Week 4 |	26 April 2020 - 02 May 2020	| 1,146 |
-| Week 5 |	03 May 2020 - 09 May 2020	| 1,499 |
-| Week 6 |	10 May 2020 - 16 May 2020	| 986 |
-| Week 7 |	17 May 2020 - 23 May 2020	| 1,217 |  
-| Week 8 |	24 May 2020 - 30 May 2020	| 771 |
+| Week	| Dates	| Number of surveys | Survey round |
+|------|:-----:|:---------:|:-------:|
+| Week 1 |	05 April 2020 - 11 April 2020	| 745 | 1 |
+| Week 2 |	12 April 2020 - 18 April 2020	| 744 | 1|
+| Week 3 |	19 April 2020 - 25 April 2020	| 1,478 |1|
+| Week 4 |	26 April 2020 - 02 May 2020	| 1,146 |1|
+| Week 5 |	03 May 2020 - 09 May 2020	| 1,499 |1|
+| Week 6 |	10 May 2020 - 16 May 2020	| 986 |1|
+| Week 7 |	17 May 2020 - 23 May 2020	| 1,217 |1|
+| Week 8 |	24 May 2020 - 30 May 2020	| 771 |1|
+| Week 12 |	21 June 2020 - 27 June 2020	| 1747 |2|
+| Week 14 |	5 July 2020 - 11 July 2020	| 1087 |2|
 
 
 
