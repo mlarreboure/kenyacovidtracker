@@ -19,10 +19,10 @@ library(xts)
 library(lubridate)
 
 
-ent_weekly <- read_dta("../../GE_Endline2/covid19/data/COVID_AllENTs_outcomes_weekly.dta") 
-ent_outcomes <- read_dta("../../GE_Endline2/covid19/data/COVID_AllENTs_outcomes.dta") #to get retrospective vars
-ent_weekly_sector <- read_dta("../../GE_Endline2/covid19/data/COVID_AllENTs_outcomes_weekly_sector.dta")
-covid_weekly <- read_dta("../../GE_Endline2/covid19/data/COVID_AllHHs_outcomes_weekly_c.dta") # For agriculural ent.
+ent_weekly <- read_dta("../../GE_Endline2/covid19/data/COVID_ENT_outcomes_weekly.dta") 
+ent_outcomes <- read_dta("../../GE_Endline2/covid19/data/COVID_ENT_Rd1_outcomes.dta") #to get retrospective vars
+ent_weekly_sector <- read_dta("../../GE_Endline2/covid19/data/COVID_ENT_outcomes_weekly_sector.dta")
+covid_weekly <- read_dta("../../GE_Endline2/covid19/data/COVID_HH_outcomes_weekly.dta") # For agriculural ent.
 
 
 #Grouping vars for graphs
@@ -89,7 +89,6 @@ rev_prof <- rbind(tmp, rev_prof) # append to dataframe
 ## Re-shape data for graphs
 ag <- covid_weekly[c("week", "i1_wins")] #agricultural data
 ag$week <- ag$week -5  # make weeks coincide with ent survey
-ag <- ag[ag$week < 5,] # exclude last week of data (few observations)
 rt <- ent_weekly_sector[ent_weekly_sector$sector == 1,][c("week", "rev_wins_wins_wins")]
 mf <- ent_weekly_sector[ent_weekly_sector$sector == 2,][c("week", "rev_wins_wins_wins")]
 sr <- ent_weekly_sector[ent_weekly_sector$sector == 3,][c("week", "rev_wins_wins_wins")]
@@ -129,8 +128,10 @@ tmp <- rbind(tmp,(rev_prof_s[11,]+rev_prof_s[12,])/2)
 tmp <- rbind(tmp,(rev_prof_s[13,]+rev_prof_s[14,])/2)
 tmp <- rbind(tmp,(rev_prof_s[15,]+rev_prof_s[16,])/2)
 tmp <- rbind(tmp,(rev_prof_s[17,]+rev_prof_s[18,])/2)
-#tmp <- rbind(tmp, rev_prof_s[19,]) # Data from week 7 is very volatile... (fewer obs...) Update once data comes in
-tmp <- rbind(tmp, c(7, NA,NA,NA,NA)) # Setting week 7 to missing values
+tmp[tmp$week == 3.5,"i1_wins"] = rev_prof_s[15,"i1_wins"]
+tmp[tmp$week == 5.5,"i1_wins"] = rev_prof_s[18,"i1_wins"]
+tmp <- rbind(tmp, c(7.5, NA,NA,NA,(rev_prof_s[19,"i1_wins"]+rev_prof_s[20,"i1_wins"])/2)) # Setting week 7 to missing values
+tmp <- rbind(tmp, rev_prof_s[21:22,])
 rev_prof_s <- tmp
 
 
@@ -139,9 +140,10 @@ i_feb <- weighted.mean(ent_outcomes[ent_outcomes$week != 5,][,"investment_feb_wi
 w_feb <- weighted.mean(ent_outcomes[ent_outcomes$week != 5,][,"wages_feb_wins"],ent_outcomes[ent_outcomes$week != 5,][,"ent_weight"],na.rm = TRUE)
 tmp <- data.frame("week" = c(-1),
                   "investment_wins" = c(i_feb)) #alternatively, 2.291782 if we restrict for first weeks only.
-inv <- rbind(inv[inv$week < 7,], c(7, NA)) ## Exclude week 7 since very few data points
+inv <- rbind(inv, c(7, NA)) ## Exclude week 7 since very few data points
 inv_r <- rbind(tmp,inv)
 inv_r <- rbind(c(-2,NA), inv_r)
+inv_r <- rbind(inv_r, c(10, NA))
 tmp <- data.frame("week" = c(-1),
                   "wages_wins" = c(w_feb)) #alternatively, 28.96816 if we restrict for first weeks only.
 wages_r <- rbind(tmp,wages)
@@ -388,6 +390,8 @@ e_g
 
 <font size="5">**Enterprises reporting external funding since February 2020**</font>
 ``` {r loan}
+loan <- loan[loan$week < 9,] # Data missing after this week for these variables
+loan <- rbind(loan, c(8, NA, NA, NA))
   loan_g <- dygraph(loan, main = "") %>%
   dySeries("s_loan", strokeWidth = 4, label = "Loan", color = "rgb(78,125,219)") %>%
   dySeries("s_gov", strokeWidth = 4, label = "Government assistance", color = "rgb(204,0,0)") %>%
