@@ -129,9 +129,7 @@ tmp <- rbind(tmp,(rev_prof_s[13,]+rev_prof_s[14,])/2)
 tmp <- rbind(tmp,(rev_prof_s[15,]+rev_prof_s[16,])/2)
 tmp <- rbind(tmp,(rev_prof_s[17,]+rev_prof_s[18,])/2)
 tmp[tmp$week == 3.5,"i1_wins"] = rev_prof_s[15,"i1_wins"]
-tmp[tmp$week == 5.5,"i1_wins"] = rev_prof_s[18,"i1_wins"]
-tmp <- rbind(tmp, c(7.5, NA,NA,NA,(rev_prof_s[19,"i1_wins"]+rev_prof_s[20,"i1_wins"])/2)) # Setting week 7 to missing values
-tmp <- rbind(tmp, rev_prof_s[21:22,])
+tmp <- rbind(tmp, rev_prof_s[19:21,])
 rev_prof_s <- tmp
 
 
@@ -386,36 +384,6 @@ e_g
 
 *** 
 
-### External funding
-
-<font size="5">**Enterprises reporting external funding since February 2020**</font>
-``` {r loan}
-loan <- loan[loan$week < 9,] # Data missing after this week for these variables
-loan <- rbind(loan, c(8, NA, NA, NA))
-  loan_g <- dygraph(loan, main = "") %>%
-  dySeries("s_loan", strokeWidth = 4, label = "Loan", color = "rgb(78,125,219)") %>%
-  dySeries("s_gov", strokeWidth = 4, label = "Government assistance", color = "rgb(204,0,0)") %>%
-  dySeries("s_ngo", strokeWidth = 4, label = "NGO assistance", color = "darkgreen") %>%
-  dyAxis("x", pixelsPerLabel = 90 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "% that received external funding", drawGrid = FALSE, valueRange = c(0, 22)) %>% 
-  dyLegend(width = 500, labelsSeparateLines = FALSE) %>%
-  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4,
-            connectSeparatedPoints = TRUE) %>%
-    dyCrosshair(direction = "vertical") %>%
-    dyEvent(4.1 , "June", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
-  dyEvent(-0.2 , "May", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
-    dyEvent(-4.5 , "April", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
-    dyEvent(-8.8 , "March", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
-   dyEvent(-13.1 , "February", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
-   dyEvent(-7 , "Lockdown begins", labelLoc = "top") %>%
-  presAnnotation("1", text = "May 10") %>%
-  presAnnotation("7", text = "June 27") %>%
-  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
-loan_g
-```
-
-*** 
-
 ### Investment and wages
 
 <font size="5">**Investment (USD, PPP) - past 14 days**</font>
@@ -596,12 +564,14 @@ These data comes from phone survey interviews conducted by [REMIT Kenya](http://
 
 So far we have interviewed 3,041 enterprises, with the following distribution per week:
 
-| Week	| Dates	| Number of surveys |
-|------|:-----:|:---------:|
-| Week 1 |	10 May 2020 - 16 May 2020	| 532 |
-| Week 2 |	17 May 2020 - 23 May 2020	| 458 |
-| Week 3 |	24 May 2020 - 30 May 2020	| 434 |
-| Week 4 |	31 May 2020 - 06 June 2020	| 732 |
-| Week 5 |	07 June 2020 - 13 June 2020	| 885 |
-| Week 6 | 14 June 2020 - 20 June 2020 | 904 |
+| Week	| Dates	| Number of surveys | Round |
+|------|:-----:|:---------:|:-----:|
+| Week 1 |	10 May 2020 - 16 May 2020	| 532 |1|
+| Week 2 |	17 May 2020 - 23 May 2020	| 458 |1|
+| Week 3 |	24 May 2020 - 30 May 2020	| 434 |1|
+| Week 4 |	31 May 2020 - 06 June 2020	| 732 |1|
+| Week 5 |	07 June 2020 - 13 June 2020	| 885 |1|
+| Week 6 | 14 June 2020 - 20 June 2020 | 1216 |1|
+| Week 9 | 5 July 2020 - 11 July 2020 | 570 |2|
+
 
