@@ -26,7 +26,7 @@ library(plotly) #interactive visualization
 covid_weekly <- read_dta("../../GE_Endline2/covid19/data/COVID_HH_outcomes_weekly.dta") # name changed, dropped the "All"
 covid_hh <- read_dta("../../GE_Endline2/covid19/data/COVID_HH_Rd2_outcomes.dta") # To get February data weighted means
 covid_ent_hh <- read_dta("../../GE_Endline2/covid19/data/COVID_ENT_HHs_outcomes.dta") # Get February data wght. means
-covid_ent_hh <- covid_ent_hh[!is.na(covid_ent_hh$hhent_weight),]
+covid_ent_hh <- covid_ent_hh[!is.na(covid_ent_hh$hhent_weight),] #Skip HH's that don't have a weight (replicates Stata code)
 
 covid_price_index <- read.csv("../../GE_Endline2/covid19/data/COVID_PriceIndex_Heatmap.csv", header = T)
 covid_price_index["Price Index"] <- covid_price_index$price_index_median
@@ -127,26 +127,46 @@ v <- covid_weekly[v]
 #services
 ps <- c("week", "mean_price_11", "mean_price_111", "mean_price_113") #"Adult head shaving (1)", "Fixing a small hole at a tailor (1)", "Grinding 1kg of maize"
 ps <- covid_weekly[ps]
+ps$mean_price_11 <- (ps$mean_price_11/ps$mean_price_11[2])*100
+ps$mean_price_111 <- (ps$mean_price_111/ps$mean_price_111[2])*100
+ps$mean_price_113 <- (ps$mean_price_113/ps$mean_price_113[2])*100
 
 #livestock
 pl <- c("week", "mean_price_18", "mean_price_16", "mean_price_112") #"Chicken hen (1)", "Calf - local (1)", "Goat (1)"
 pl <- covid_weekly[pl]
+pl$mean_price_18 <- (pl$mean_price_18/pl$mean_price_18[2])*100
+pl$mean_price_16 <- (pl$mean_price_16/pl$mean_price_16[2])*100
+pl$mean_price_112 <- (pl$mean_price_112/pl$mean_price_112[2])*100
 
-#food1
-pf1 <- c("week", "mean_price_12", "mean_price_14", "mean_price_15", "mean_price_119") #"Banana - sweet (bunch)", "Beans (2kg)", "Beef meat (1kg)", "Tilapia fish (whole)"
+#food1 - Animal products
+pf1 <- c("week", "mean_price_15", "mean_price_119", "mean_price_19", "mean_price_110") #"Beef meat (1kg)", "Tilapia fish (whole)", "Cooking fat (500g)", "Egg (one)"
 pf1 <- covid_weekly[pf1]
+pf1$mean_price_15 <- (pf1$mean_price_15/pf1$mean_price_15[2])*100      #Normalized prices to first week survey
+pf1$mean_price_119 <- (pf1$mean_price_119/pf1$mean_price_119[2])*100
+pf1$mean_price_110 <- (pf1$mean_price_110/pf1$mean_price_110[2])*100
+pf1$mean_price_19 <- (pf1$mean_price_19/pf1$mean_price_19[2])*100
 
-#food2
-pf2 <- c("week", "mean_price_19", "mean_price_114", "mean_price_117", "mean_price_118") # "Cooking fat (500g)", "Maize (2kg)", "Rice (1kg)", "Sugar (1kg)"
+#food2 - Fruits / Vegetables 
+pf2 <- c("week", "mean_price_12", "mean_price_120", "mean_price_115") # Banana, Tomatoes, Onions
 pf2 <- covid_weekly[pf2]
+pf2$mean_price_12 <- (pf2$mean_price_12/pf2$mean_price_12[2])*100
+pf2$mean_price_120 <- (pf2$mean_price_120/pf2$mean_price_120[2])*100
+pf2$mean_price_115 <- (pf2$mean_price_115/pf2$mean_price_115[2])*100
 
-#food3
-pf3 <- c("week", "mean_price_110", "mean_price_115", "mean_price_120") # "Egg (one)", "Onions (4)", "Tomatoes (4)"
+#food3 - Grains, other
+pf3 <- c("week", "mean_price_14", "mean_price_114", "mean_price_117",  "mean_price_118") # Beans, Maize, Sugar, Rice
 pf3 <- covid_weekly[pf3]
+pf3$mean_price_14 <- (pf3$mean_price_14/pf3$mean_price_14[2])*100
+pf3$mean_price_114 <- (pf3$mean_price_114/pf3$mean_price_114[2])*100
+pf3$mean_price_117 <- (pf3$mean_price_117/pf3$mean_price_117[2])*100
+pf3$mean_price_118 <- (pf3$mean_price_118/pf3$mean_price_118[2])*100
 
 #non food
 pnf <- c("week", "mean_price_13", "mean_price_17", "mean_price_116") #"Bar soap (1)", "Charcoal (2kg)", "Panadol (pair)"
 pnf <- covid_weekly[pnf]
+pnf$mean_price_13 <- (pnf$mean_price_13/pnf$mean_price_13[2])*100
+pnf$mean_price_17 <- (pnf$mean_price_17/pnf$mean_price_17[2])*100
+pnf$mean_price_116 <- (pnf$mean_price_116/pnf$mean_price_116[2])*100
 
 #MENTAL HEALTH
 #cesd_10
@@ -768,17 +788,16 @@ mh5_g <- dygraph(mh5, main = "", group = "Siaya County Sample") %>%
 
 ### Food prices
 
-<font size="5">**Food 1**</font>  
+<font size="5">**Animal Products**</font>  
 ``` {r food1}
-
 pf1_g <- dygraph(pf1, main = "", group = "Siaya County Sample") %>%
   dySeries("mean_price_15", strokeWidth = 4, label = "Beef meat (1kg)") %>%
   dySeries("mean_price_119", strokeWidth = 4, label = "Tilapia fish (whole)") %>%
-  dySeries("mean_price_14", strokeWidth = 4, label = "Beans (2kg)") %>%
-  dySeries("mean_price_12", strokeWidth = 4, label = "Banana - sweet (bunch)") %>%
+  dySeries("mean_price_110", strokeWidth = 4, label = "Egg (1)") %>%
+  dySeries("mean_price_19", strokeWidth = 4, label = "Cooking fat (500g)") %>%
 
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "Price - USD, PPP", drawGrid = FALSE) %>% 
+  dyAxis("y", label = "Percentage relative to first week", drawGrid = FALSE, valueRange = c(75, 115)) %>% 
   dyLegend(width = 550 , labelsSeparateLines = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   dyOptions(includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(9, "Set1"), connectSeparatedPoints = TRUE) %>%
@@ -788,22 +807,20 @@ pf1_g <- dygraph(pf1, main = "", group = "Siaya County Sample") %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) 
   pf1_g
-
 ```
   
 ***     
 
-<font size="5">**Food 2**</font>  
+<font size="5">**Fruits / Vegetables**</font>  
 ``` {r food2}
 
 pf2_g <- dygraph(pf2, main = "", group = "Siaya County Sample") %>%
-  dySeries("mean_price_114", strokeWidth = 4, label = "Maize (2kg)") %>%
-  dySeries("mean_price_118", strokeWidth = 4, label = "Sugar (1kg)") %>%
-  dySeries("mean_price_117", strokeWidth = 4, label = "Rice (1kg)") %>%
-  dySeries("mean_price_19", strokeWidth = 4, label = "Cooking fat (500g)") %>%
+  dySeries("mean_price_12", strokeWidth = 4, label = "Banana - sweet (bunch)") %>%
+  dySeries("mean_price_120", strokeWidth = 4, label = "Tomatoes (4)") %>%
+  dySeries("mean_price_115", strokeWidth = 4, label = "Onions (4)") %>%
 
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "Price - USD, PPP", drawGrid = FALSE) %>% 
+  dyAxis("y", label = "Percentage relative to first week", drawGrid = FALSE, valueRange = c(68,125)) %>% 
   dyLegend(width = 500 , labelsSeparateLines = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   dyOptions(includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2"), connectSeparatedPoints = TRUE) %>%
@@ -818,16 +835,17 @@ pf2_g <- dygraph(pf2, main = "", group = "Siaya County Sample") %>%
   
 ***       
 
-<font size="5">**Food 3**</font>  
+<font size="5">**Grains / Other**</font>  
 ``` {r food3}
 
 pf3_g <- dygraph(pf3, main = "", group = "Siaya County Sample") %>%
-  dySeries("mean_price_120", strokeWidth = 4, label = "Tomatoes (4)") %>%
-  dySeries("mean_price_115", strokeWidth = 4, label = "Onions (4)") %>%
-  dySeries("mean_price_110", strokeWidth = 4, label = "Egg (1)") %>%
+  dySeries("mean_price_114", strokeWidth = 4, label = "Maize (2kg)") %>%
+  dySeries("mean_price_118", strokeWidth = 4, label = "Sugar (1kg)") %>%
+  dySeries("mean_price_117", strokeWidth = 4, label = "Rice (1kg)") %>%
+  dySeries("mean_price_14", strokeWidth = 4, label = "Beans (2kg)") %>%
 
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "Price - USD, PPP", drawGrid = FALSE) %>% 
+  dyAxis("y", label = "Percentage relative to first week", drawGrid = FALSE, valueRange = c(90,135)) %>% 
   dyLegend(width = 300 , labelsSeparateLines = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   dyOptions(includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(9, "Set1"), connectSeparatedPoints = TRUE) %>%
@@ -852,7 +870,7 @@ ps_g <- dygraph(ps, main = "", group = "Siaya County Sample") %>%
   dySeries("mean_price_111", strokeWidth = 4, label = "Fixing a small hole at a tailor (1)") %>%
   dySeries("mean_price_113", strokeWidth = 4, label = "Grinding 1kg of maize") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "Price - USD, PPP", drawGrid = FALSE) %>% 
+  dyAxis("y", label = "Percentage relative to first week", drawGrid = FALSE, valueRange = c(60, 150)) %>% 
   dyLegend(width = 250 , labelsSeparateLines = TRUE) %>%
     dyCrosshair(direction = "vertical") %>%
   dyOptions(includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = TRUE) %>%
@@ -875,7 +893,7 @@ pl_g <- dygraph(pl, main = "", group = "Siaya County Sample") %>%
   dySeries("mean_price_112", strokeWidth = 4, label = "Goat (1)") %>%
   dySeries("mean_price_18", strokeWidth = 4, label = "Chicken hen (1)") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "Price - USD, PPP", drawGrid = FALSE) %>% 
+  dyAxis("y", label = "Percentage relative to first week", drawGrid = FALSE, valueRange = c(80, 115)) %>% 
   dyLegend(width = 400 , labelsSeparateLines = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   dyOptions(includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = TRUE) %>%
@@ -899,7 +917,7 @@ pnf_g <- dygraph(pnf, main = "", group = "Siaya County Sample") %>%
   dySeries("mean_price_17", strokeWidth = 4, label = "Charcoal (2kg)") %>%
   dySeries("mean_price_116", strokeWidth = 4, label = "Panadol (pair)") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "Price - USD, PPP", drawGrid = FALSE) %>% 
+  dyAxis("y", label = "Percentage relative to first week", drawGrid = FALSE, valueRange = c(60, 120)) %>% 
   dyLegend(width = 400 , labelsSeparateLines = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   dyOptions(includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = TRUE) %>%
