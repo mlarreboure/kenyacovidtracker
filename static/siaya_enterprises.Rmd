@@ -44,7 +44,7 @@ inv <- ent_weekly[inv]
 wages <- c("week", "wages_wins")
 wages <- ent_weekly[wages]
 
-cov <- c("week", "ecov_1", "ecov_2", "ecov_3")
+cov <- c("week", "ecov_1", "ecov_4", "ecov_5")
 cov <- ent_weekly[cov]
 
 bm <- c("week", "bm_emp", "bm_cust")
@@ -440,12 +440,12 @@ How has COVID-19 affected this business?*
 ``` {r ecov}
   ecov_g <- dygraph(cov, main = "") %>%
   dySeries("ecov_1", strokeWidth = 4, label = "Reduction in demand/customers") %>%
-  dySeries("ecov_2", strokeWidth = 4, label = "Has not affected") %>%
-  dySeries("ecov_3", strokeWidth = 4, label = "Other") %>%
+  dySeries("ecov_4", strokeWidth = 4, label = "Other: affected by curfew / market closure") %>%
+  dySeries("ecov_5", strokeWidth = 4, label = "Other") %>%
   dyAxis("x", pixelsPerLabel = 90 , drawGrid = FALSE, label = "Weeks") %>% #grid
   dyAxis("y", label = "Percentage of sample", drawGrid = FALSE) %>% 
   dyLegend(width = 500, labelsSeparateLines = FALSE) %>%
-  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set1")) %>%
+  dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set1")) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "May 10") %>%
   presAnnotation("7", text = "June 27") %>%
