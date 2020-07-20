@@ -951,6 +951,7 @@ So far we have interviewed 8,582 households, with the following distribution per
 | Week 8 |	24 May 2020 - 30 May 2020	| 771 |1|
 | Week 12 |	21 June 2020 - 27 June 2020	| 1747 |2|
 | Week 14 |	5 July 2020 - 11 July 2020	| 1087 |2|
+| Week 15 |	12 July 2020 - 18 July 2020	| 611 |2|
 
 
 
