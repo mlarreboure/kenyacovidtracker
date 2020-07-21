@@ -222,6 +222,31 @@ i_g
   
 
   This plot aggregates income from each of the three earning sources, across all working-age household members, stacking them to add to the average earning per capita, including children, in the past 14 days. If the household does not perceive income from one or more of the sources, those data points are assigned zeros to assure representativeness for the whole population.  
+  
+***  
+  
+<font size="5">**Hourly Wages**</font>
+
+Hourly wages calculated by dividing total wages by total hours worked at the individual level, conditional on employment. Averages weighted by total hours worked at the individual level multiplied by household level weights. 
+
+```{r wage}
+wg <- c("week", "w1b__wins")
+wg <- covid_weekly[wg]
+  
+d_g  <- dygraph(wg, main = "") %>%
+  dySeries("w1b__wins", strokeWidth = 4, label = "Wage") %>%
+#  dySeries("w1c__wins", strokeWidth = 4, label = "Wage conditional on working in February") %>%
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", drawGrid = FALSE , label = "USD, PPP", valueRange = c(0, 4)) %>%
+  dyOptions(axisLineWidth = 4,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE) %>%
+    dyCrosshair(direction = "vertical") %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation("15", text = "July 18") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
+    dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyLegend(width = 210, show="always") 
+d_g
+```
    
 ***  
   
