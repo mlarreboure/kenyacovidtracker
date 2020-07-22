@@ -28,6 +28,22 @@ covid_hh <- read_dta("../../GE_Endline2/covid19/data/COVID_HH_Rd2_outcomes.dta")
 covid_ent_hh <- read_dta("../../GE_Endline2/covid19/data/COVID_ENT_HHs_outcomes.dta") # Get February data wght. means
 covid_ent_hh <- covid_ent_hh[!is.na(covid_ent_hh$hhent_weight),] #Skip HH's that don't have a weight (replicates Stata code)
 
+## By eligibility status
+tmp <- read_dta("../../GE_Endline2/covid19/data/COVID_HH_outcomes_eligibility_weekly.dta")
+covid_weekly_e <- tmp[tmp$eligible == 1,]
+covid_weekly_e[nrow(covid_weekly_e)+1,] <- NA
+covid_weekly_e[nrow(covid_weekly_e),"week"] <- max(covid_weekly_e$week, na.rm = TRUE) + 1
+covid_weekly_e[nrow(covid_weekly_e)+1,] <- NA
+covid_weekly_e[nrow(covid_weekly_e),"week"] <- 0
+covid_weekly_e <- covid_weekly_e[order(covid_weekly_e$week),]
+
+covid_weekly_i <- tmp[tmp$eligible == 0,]
+covid_weekly_i[nrow(covid_weekly_i)+1,] <- NA
+covid_weekly_i[nrow(covid_weekly_i),"week"] <- max(covid_weekly_i$week, na.rm = TRUE) + 1
+covid_weekly_i[nrow(covid_weekly_i)+1,] <- NA
+covid_weekly_i[nrow(covid_weekly_i),"week"] <- 0
+covid_weekly_i <- covid_weekly_i[order(covid_weekly_i$week),]
+
 covid_price_index <- read.csv("../../GE_Endline2/covid19/data/COVID_PriceIndex_Heatmap.csv", header = T)
 covid_price_index["Price Index"] <- covid_price_index$price_index_median
 covid_price_index$subloc_name <- as.character(covid_price_index$subloc_name)
@@ -200,6 +216,10 @@ presAnnotation <- function(dygraph, x, text) {
 
 ### Income  
 <font size="5">**Earnings per capita (USD, PPP) - past 14 days**</font>
+
+####  {.tabset .tabset-pills}
+
+##### All
 ``` {r income}
   i_g <- dygraph(i, main = "") %>%
   dySeries("i3_wins", strokeWidth = 4, label = "Wage earnings") %>%
@@ -207,7 +227,7 @@ presAnnotation <- function(dygraph, x, text) {
   dySeries("i1_wins", strokeWidth = 4, label = "Agricultural earnings") %>%
   #  dySeries("i7_wins", strokeWidth = 4, label = "Dissaving") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "USD, PPP", drawGrid = FALSE) %>% 
+  dyAxis("y", label = "USD, PPP", drawGrid = FALSE, valueRange = c(0, 2.8)) %>% 
   dyLegend(width = 250, labelsSeparateLines = TRUE) %>%
   dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
@@ -221,10 +241,66 @@ i_g
 ```
   
 
-  This plot aggregates income from each of the three earning sources, across all working-age household members, stacking them to add to the average earning per capita, including children, in the past 14 days. If the household does not perceive income from one or more of the sources, those data points are assigned zeros to assure representativeness for the whole population.  
+  This plot aggregates income from each of the three earning sources, across all working-age household members, stacking them to add to the average earning per capita, including children, in the past 14 days. If the household does not perceive income from one or more of the sources, those data points are assigned zeros to assure representativeness for the whole population. 
   
+##### Eligible
+``` {r}
+i_l <- c("week", "i2_wins", "i3_wins", "i1_wins")
+i_l <- covid_weekly_e[i_l]
+
+  i_g <- dygraph(i_l, main = "") %>%
+  dySeries("i3_wins", strokeWidth = 4, label = "Wage earnings") %>%
+  dySeries("i2_wins", strokeWidth = 4, label = "Self-employment earnings") %>%
+  dySeries("i1_wins", strokeWidth = 4, label = "Agricultural earnings") %>%
+  #  dySeries("i7_wins", strokeWidth = 4, label = "Dissaving") %>%
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", label = "USD, PPP", drawGrid = FALSE, valueRange = c(0, 2.8)) %>% 
+  dyLegend(width = 250, labelsSeparateLines = TRUE) %>%
+  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = FALSE) %>%
+    dyCrosshair(direction = "vertical") %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation("14", text = "July 11") %>%
+ dyEvent(0 , "Lockdown begins March 15", labelLoc = "top") %>%
+  dyEvent(-1 , "February", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
+i_g
+```
+  
+
+  This plot aggregates income from each of the three earning sources, across all working-age household members, stacking them to add to the average earning per capita, including children, in the past 14 days. If the household does not perceive income from one or more of the sources, those data points are assigned zeros to assure representativeness for the whole population. 
+
+##### Ineligible 
+``` {r}
+i_h <- c("week", "i2_wins", "i3_wins", "i1_wins")
+i_h <- covid_weekly_i[i_h]
+
+  i_g <- dygraph(i_h, main = "") %>%
+  dySeries("i3_wins", strokeWidth = 4, label = "Wage earnings") %>%
+  dySeries("i2_wins", strokeWidth = 4, label = "Self-employment earnings") %>%
+  dySeries("i1_wins", strokeWidth = 4, label = "Agricultural earnings") %>%
+  #  dySeries("i7_wins", strokeWidth = 4, label = "Dissaving") %>%
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", label = "USD, PPP", drawGrid = FALSE, valueRange = c(0, 2.8)) %>% 
+  dyLegend(width = 250, labelsSeparateLines = TRUE) %>%
+  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = FALSE) %>%
+    dyCrosshair(direction = "vertical") %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation("14", text = "July 11") %>%
+ dyEvent(0 , "Lockdown begins March 15", labelLoc = "top") %>%
+  dyEvent(-1 , "February", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
+i_g
+```
+  
+
+  This plot aggregates income from each of the three earning sources, across all working-age household members, stacking them to add to the average earning per capita, including children, in the past 14 days. If the household does not perceive income from one or more of the sources, those data points are assigned zeros to assure representativeness for the whole population. 
+  
+####  {}
+
 ***  
-  
+
 <font size="5">**Hourly Wages**</font>
 
 Hourly wages calculated by dividing total wages by total hours worked at the individual level, conditional on employment. Averages weighted by total hours worked at the individual level multiplied by household level weights. 
@@ -252,14 +328,18 @@ d_g
   
 <font size="5">**Dissaving per capita (USD, PPP) - past 14 days**</font>  
  The dissaving variable is constructed by adding the value of assets sold and loans taken, and substracting the value of any assets or durables bought.  
+ 
+####  {.tabset .tabset-pills}
+
+##### All
 
 ```{r dissaving}
 d_g  <- dygraph(d, main = "") %>%
   dySeries("i7_wins", strokeWidth = 4, label = "Average dissavings") %>%
   dySeries("dissaved", strokeWidth = 4, label = "% of sample that dissaved", axis = "y2") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", drawGrid = FALSE , label = "USD, PPP") %>% 
-  dyAxis("y2", drawGrid=FALSE, label = "Percentage") %>%
+  dyAxis("y", drawGrid = FALSE , label = "USD, PPP", valueRange = c(0,2.7)) %>% 
+  dyAxis("y2", drawGrid=FALSE, label = "Percentage", valueRange = c(0,25)) %>%
   dyOptions(axisLineWidth = 4,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
@@ -270,10 +350,59 @@ d_g  <- dygraph(d, main = "") %>%
 d_g
 ```
 
+##### Eligible
+
+```{r}
+d_l <- covid_weekly_e[c("week", "i7_wins", "dissaved")]
+
+d_g  <- dygraph(d_l, main = "") %>%
+  dySeries("i7_wins", strokeWidth = 4, label = "Average dissavings") %>%
+  dySeries("dissaved", strokeWidth = 4, label = "% of sample that dissaved", axis = "y2") %>%
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", drawGrid = FALSE , label = "USD, PPP", valueRange = c(0,2.7)) %>% 
+  dyAxis("y2", drawGrid=FALSE, label = "Percentage", valueRange = c(0,25)) %>%
+  dyOptions(axisLineWidth = 4,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE) %>%
+    dyCrosshair(direction = "vertical") %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation("15", text = "July 18") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
+    dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyLegend(width = 210, show="always") 
+d_g
+```
+
+##### Ineligible
+
+```{r}
+d_h <- covid_weekly_i[c("week", "i7_wins", "dissaved")]
+
+d_g  <- dygraph(d_h, main = "") %>%
+  dySeries("i7_wins", strokeWidth = 4, label = "Average dissavings") %>%
+  dySeries("dissaved", strokeWidth = 4, label = "% of sample that dissaved", axis = "y2") %>%
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", drawGrid = FALSE , label = "USD, PPP", valueRange = c(0,2.7)) %>% 
+  dyAxis("y2", drawGrid=FALSE, label = "Percentage", valueRange = c(0,25)) %>%
+  dyOptions(axisLineWidth = 4,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE) %>%
+    dyCrosshair(direction = "vertical") %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation("15", text = "July 18") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
+    dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyLegend(width = 210, show="always") 
+d_g
+```
+
+#### {}
+
 ***  
    
   <font size="5">**Transfers per capita (USD, PPP) - past 14 days**</font>  
-    We ask whether in the past 14 days anyone in the household received a gift/assistance of money or goods, and its value, from (i) the government, (ii) from a non-governmental organization or community group, or (iii) from an individual politican or government official.  
+
+####  {.tabset .tabset-pills}
+
+##### All
+
+We ask whether in the past 14 days anyone in the household received a gift/assistance of money or goods, and its value, from (i) the government, (ii) from a non-governmental organization or community group, or (iii) from an individual politican or government official.  
 
 ```{r transfers}
 it_g  <- dygraph(it, main = "") %>%
@@ -281,7 +410,7 @@ it_g  <- dygraph(it, main = "") %>%
   dySeries("i5b_wins", strokeWidth = 4, label = "NGO or community group") %>%
   dySeries("i5c_wins", strokeWidth = 4, label = "Politicians") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", drawGrid = FALSE , label = "USD, PPP") %>% 
+  dyAxis("y", drawGrid = FALSE , label = "USD, PPP", valueRange = c(0,0.14)) %>% 
   dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
@@ -294,8 +423,56 @@ it_g  <- dygraph(it, main = "") %>%
 it_g
 ```
   
+##### Eligible
 
-  
+We ask whether in the past 14 days anyone in the household received a gift/assistance of money or goods, and its value, from (i) the government, (ii) from a non-governmental organization or community group, or (iii) from an individual politican or government official.  
+
+```{r transfers_e}
+it_e <- covid_weekly_e[c("week", "i5a_wins", "i5b_wins", "i5c_wins")]
+it_g  <- dygraph(it_e, main = "") %>%
+  dySeries("i5a_wins", strokeWidth = 4, label = "Government") %>%
+  dySeries("i5b_wins", strokeWidth = 4, label = "NGO or community group") %>%
+  dySeries("i5c_wins", strokeWidth = 4, label = "Politicians") %>%
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", drawGrid = FALSE , label = "USD, PPP", valueRange = c(0,0.14)) %>% 
+  dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = FALSE) %>%
+    dyCrosshair(direction = "vertical") %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation("15", text = "July 18") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
+  dyEvent(-1 , "February", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyEvent(0 , "Lockdown begins March 15", labelLoc = "top") %>%
+    dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyLegend(width = 500, labelsSeparateLines = FALSE) 
+it_g
+```
+
+##### Ineligible
+
+We ask whether in the past 14 days anyone in the household received a gift/assistance of money or goods, and its value, from (i) the government, (ii) from a non-governmental organization or community group, or (iii) from an individual politican or government official.  
+
+```{r transfers_i}
+it_i <- covid_weekly_i[c("week", "i5a_wins", "i5b_wins", "i5c_wins")]
+it_g  <- dygraph(it_i, main = "") %>%
+  dySeries("i5a_wins", strokeWidth = 4, label = "Government") %>%
+  dySeries("i5b_wins", strokeWidth = 4, label = "NGO or community group") %>%
+  dySeries("i5c_wins", strokeWidth = 4, label = "Politicians") %>%
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", drawGrid = FALSE , label = "USD, PPP", valueRange = c(0,0.14)) %>% 
+  dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = FALSE) %>%
+    dyCrosshair(direction = "vertical") %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation("15", text = "July 18") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
+  dyEvent(-1 , "February", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyEvent(0 , "Lockdown begins March 15", labelLoc = "top") %>%
+    dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyLegend(width = 500, labelsSeparateLines = FALSE) 
+it_g
+```
+
+#### {}
+
 *** 
 
 ### Consumption
@@ -959,6 +1136,8 @@ pnf_g <- dygraph(pnf, main = "", group = "Siaya County Sample") %>%
 ***     
 
 ## {}
+
+Eligible households are those that qualified for [GiveDirectly transfers](http://emiguel.econ.berkeley.edu/assets/miguel_research/88/GE-Paper_2019-12-18.pdf) by living in homes with thatched roofs in 2014. 
       
 These data comes from phone survey interviews conducted by [REMIT Kenya](http://remitkenya.co.ke/) in Siaya County, Kenya. We are collecting data for a sample of ~11,000 households in the county, which is representative of the whole population. At the same time, our weekly sampling method assures weekly representativeness of the overall sample.
 
