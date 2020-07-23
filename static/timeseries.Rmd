@@ -842,7 +842,12 @@ e_g
 
 ### COVID-19  
 
-<font size="5">**Reported COVID-19 Behavior Adoption**</font>    
+<font size="5">**Reported COVID-19 Behavior Adoption**</font> 
+
+####  {.tabset .tabset-pills}
+
+##### All
+
 We ask respondents whether they have changed their behavior in any way since learning about COVID-19, and if so, how  it has changed.
 
 ```{r behavior_changes}
@@ -852,7 +857,7 @@ We ask respondents whether they have changed their behavior in any way since lea
     dySeries("ckn6_stayhome_wins", strokeWidth = 4, label = "Stay Home") %>%
     dySeries("ckn6_sanitizer_wins", strokeWidth = 4, label = "Hand Sanitizer") %>%
     dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-    dyAxis("y", drawGrid = FALSE, label = "Percentage of sample") %>% #grid
+    dyAxis("y", drawGrid = FALSE, label = "Percentage of sample", valueRange = c(0, 100)) %>% #grid
     dyLegend(width = 580) %>%
     dyOptions(axisLineWidth = 4, includeZero = TRUE, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2"), connectSeparatedPoints = TRUE) %>%
   presAnnotation("1", text = "April 11") %>%
@@ -863,13 +868,66 @@ We ask respondents whether they have changed their behavior in any way since lea
   dyCrosshair(direction = "vertical")
   ckn6_g
 ```
-   
+
+##### Eligible
+
+We ask respondents whether they have changed their behavior in any way since learning about COVID-19, and if so, how  it has changed.
+
+```{r behavior_changes_e}
+ckn6_e <- covid_weekly_e[c("week","ckn6_washhands_wins", "ckn6_mask_wins", "ckn6_stayhome_wins", "ckn6_sanitizer_wins")]
+  ckn6_g <- dygraph(ckn6_e, main = "") %>%
+    dySeries("ckn6_washhands_wins", strokeWidth = 4, label = "Hand Washing") %>%
+    dySeries("ckn6_mask_wins", strokeWidth = 4, label = "Face Mask") %>%    
+    dySeries("ckn6_stayhome_wins", strokeWidth = 4, label = "Stay Home") %>%
+    dySeries("ckn6_sanitizer_wins", strokeWidth = 4, label = "Hand Sanitizer") %>%
+    dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+    dyAxis("y", drawGrid = FALSE, label = "Percentage of sample", valueRange = c(0, 100)) %>% #grid
+    dyLegend(width = 580) %>%
+    dyOptions(axisLineWidth = 4, includeZero = TRUE, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2"), connectSeparatedPoints = TRUE) %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation("15", text = "July 18") %>%
+    dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+    dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
+    dyEvent(1.7 , "Face masks mandatory", labelLoc = "top") %>%
+  dyCrosshair(direction = "vertical")
+  ckn6_g
+```
+
+##### Ineligible
+
+We ask respondents whether they have changed their behavior in any way since learning about COVID-19, and if so, how  it has changed.
+
+```{r behavior_changes_i}
+ckn6_i <- covid_weekly_i[c("week","ckn6_washhands_wins", "ckn6_mask_wins", "ckn6_stayhome_wins", "ckn6_sanitizer_wins")]
+  ckn6_g <- dygraph(ckn6_i, main = "") %>%
+    dySeries("ckn6_washhands_wins", strokeWidth = 4, label = "Hand Washing") %>%
+    dySeries("ckn6_mask_wins", strokeWidth = 4, label = "Face Mask") %>%    
+    dySeries("ckn6_stayhome_wins", strokeWidth = 4, label = "Stay Home") %>%
+    dySeries("ckn6_sanitizer_wins", strokeWidth = 4, label = "Hand Sanitizer") %>%
+    dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+    dyAxis("y", drawGrid = FALSE, label = "Percentage of sample", valueRange = c(0, 100)) %>% #grid
+    dyLegend(width = 580) %>%
+    dyOptions(axisLineWidth = 4, includeZero = TRUE, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2"), connectSeparatedPoints = TRUE) %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation("15", text = "July 18") %>%
+    dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+    dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
+    dyEvent(1.7 , "Face masks mandatory", labelLoc = "top") %>%
+  dyCrosshair(direction = "vertical")
+  ckn6_g
+```
+
+#### {}
     
 ***  
 
 <font size="5">**Reported COVID-19 Symptoms, past 14 days**</font>  
+
+####  {.tabset .tabset-pills}
+
+##### All
+
 We ask respondents whether they have experienced any illnesses or symptoms of a given list in the past 14 days.  
-  
 
 ``` {r symptoms}
   cov1_g <- dygraph(cov1, main = "") %>% 
@@ -878,7 +936,7 @@ We ask respondents whether they have experienced any illnesses or symptoms of a 
   dySeries("cov1_cough_wins", strokeWidth = 4, label = "Cough") %>%
   dySeries("cov1_fever_cough_wins", strokeWidth = 4, label = "Fever+Cough") %>%
     dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-    dyAxis("y", drawGrid = FALSE, label = "Percentage of sample") %>% #grid
+    dyAxis("y", drawGrid = FALSE, label = "Percentage of sample", valueRange = c(0, 25)) %>% #grid
   dyLegend(width = 500) %>%
   dyOptions(axisLineWidth = 4, includeZero = TRUE, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2"), connectSeparatedPoints = TRUE) %>%
     dyCrosshair(direction = "vertical") %>%
@@ -888,12 +946,63 @@ We ask respondents whether they have experienced any illnesses or symptoms of a 
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
   cov1_g
 ```
-  
-  
+
+##### Eligible
+
+We ask respondents whether they have experienced any illnesses or symptoms of a given list in the past 14 days.  
+
+``` {r symptoms_e}
+cov1_e <- covid_weekly_e[c("week", "cov1_fever_wins", "cov1_tired_wins", "cov1_cough_wins", "cov1_fever_cough_wins")]
+  cov1_g <- dygraph(cov1_e, main = "") %>% 
+  dySeries("cov1_fever_wins", strokeWidth = 4, label = "Fever") %>%
+  dySeries("cov1_tired_wins", strokeWidth = 4, label = "Tired") %>%
+  dySeries("cov1_cough_wins", strokeWidth = 4, label = "Cough") %>%
+  dySeries("cov1_fever_cough_wins", strokeWidth = 4, label = "Fever+Cough") %>%
+    dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+    dyAxis("y", drawGrid = FALSE, label = "Percentage of sample", valueRange = c(0, 25)) %>% #grid
+  dyLegend(width = 500) %>%
+  dyOptions(axisLineWidth = 4, includeZero = TRUE, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2"), connectSeparatedPoints = TRUE) %>%
+    dyCrosshair(direction = "vertical") %>%
+    dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation("15", text = "July 18") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
+  cov1_g
+```
+
+##### Ineligible
+
+We ask respondents whether they have experienced any illnesses or symptoms of a given list in the past 14 days.  
+
+``` {r symptoms_i}
+cov1_i <- covid_weekly_i[c("week", "cov1_fever_wins", "cov1_tired_wins", "cov1_cough_wins", "cov1_fever_cough_wins")]
+  cov1_g <- dygraph(cov1_i, main = "") %>% 
+  dySeries("cov1_fever_wins", strokeWidth = 4, label = "Fever") %>%
+  dySeries("cov1_tired_wins", strokeWidth = 4, label = "Tired") %>%
+  dySeries("cov1_cough_wins", strokeWidth = 4, label = "Cough") %>%
+  dySeries("cov1_fever_cough_wins", strokeWidth = 4, label = "Fever+Cough") %>%
+    dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+    dyAxis("y", drawGrid = FALSE, label = "Percentage of sample", valueRange = c(0, 25)) %>% #grid
+  dyLegend(width = 500) %>%
+  dyOptions(axisLineWidth = 4, includeZero = TRUE, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2"), connectSeparatedPoints = TRUE) %>%
+    dyCrosshair(direction = "vertical") %>%
+    dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation("15", text = "July 18") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
+  cov1_g
+```
+
+#### {}
 
 *** 
 
 <font size="5">**Number of in-person interactions (other than HH members)**</font>  
+
+####  {.tabset .tabset-pills}
+
+##### All
+
   We ask: "Taken together, how many people outside this household have you interacted with in-person?"   
 
 ```{r interactions}
@@ -902,7 +1011,7 @@ net5_g  <- dygraph(net5, main = "") %>%
   dySeries("net5_last7_wins", strokeWidth = 4, label = "In the past 7 days") %>%
   dySeries("net5_today_wins", strokeWidth = 4, label = "Today") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", drawGrid = FALSE, label = "Number of people") %>% 
+  dyAxis("y", drawGrid = FALSE, label = "Number of people", valueRange = c(0, 20)) %>% 
   dyLegend(width = 500) %>%
      dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
@@ -912,20 +1021,70 @@ net5_g  <- dygraph(net5, main = "") %>%
   dyOptions(axisLineWidth = 4, includeZero = TRUE, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE)
 net5_g
 ```
-  
+
+##### Eligible
+
+  We ask: "Taken together, how many people outside this household have you interacted with in-person?"   
+
+```{r interactions_e}
+net5_e <- covid_weekly_e[c("week", "net5_last14_wins", "net5_last7_wins", "net5_today_wins")]
+net5_g  <- dygraph(net5_e, main = "") %>%
+  dySeries("net5_last14_wins", strokeWidth = 4, label = "In the past 14 days") %>%
+  dySeries("net5_last7_wins", strokeWidth = 4, label = "In the past 7 days") %>%
+  dySeries("net5_today_wins", strokeWidth = 4, label = "Today") %>%
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", drawGrid = FALSE, label = "Number of people", valueRange = c(0, 20)) %>% 
+  dyLegend(width = 500) %>%
+     dyCrosshair(direction = "vertical") %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation("15", text = "July 18") %>%
+    dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+ dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
+  dyOptions(axisLineWidth = 4, includeZero = TRUE, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE)
+net5_g
+```
+
+##### Ineligible
+
+  We ask: "Taken together, how many people outside this household have you interacted with in-person?"   
+
+```{r interactions_i}
+net5_i <- covid_weekly_i[c("week", "net5_last14_wins", "net5_last7_wins", "net5_today_wins")]
+net5_g  <- dygraph(net5_i, main = "") %>%
+  dySeries("net5_last14_wins", strokeWidth = 4, label = "In the past 14 days") %>%
+  dySeries("net5_last7_wins", strokeWidth = 4, label = "In the past 7 days") %>%
+  dySeries("net5_today_wins", strokeWidth = 4, label = "Today") %>%
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", drawGrid = FALSE, label = "Number of people", valueRange = c(0, 20)) %>% 
+  dyLegend(width = 500) %>%
+     dyCrosshair(direction = "vertical") %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation("15", text = "July 18") %>%
+    dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+ dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
+  dyOptions(axisLineWidth = 4, includeZero = TRUE, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE)
+net5_g
+```
+
+#### {}
 
 *** 
   
 ### Labor Supply
 
 <font size="5">**Weekly labor supply (hours per household adult)**</font>
+
+####  {.tabset .tabset-pills}
+
+##### All
+
 ``` {r labor}
 l_g <- dygraph(l, main = "", group = "Siaya County Sample") %>%
   dySeries("l1_wins", strokeWidth = 4, label = "Agricultural labor supply") %>%
   dySeries("l3_wins", strokeWidth = 4, label = "Wage labor supply") %>%
   dySeries("l2_wins", strokeWidth = 4, label = "Own enterprise labor supply") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "Hours per adult household member", drawGrid = FALSE) %>% 
+  dyAxis("y", label = "Hours per adult household member", drawGrid = FALSE, valueRange = c(0, 26)) %>% 
   dyLegend(width = 550 , labelsSeparateLines = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2"), connectSeparatedPoints = TRUE) %>%
@@ -939,19 +1098,75 @@ l_g <- dygraph(l, main = "", group = "Siaya County Sample") %>%
 ```
   
   This plot aggregates hours worked on each of the three sources, across all working-age household members, stacking them to add to the average weekly labor supply per household adult. If the household does not work any hours on one or more of the labor categories, those data points are assigned zeros to assure representativeness of the whole population. 
+  
+##### Eligible
+
+``` {r labor_e}
+l_e <- covid_weekly_e[c("week", "l1_wins", "l2_wins", "l3_wins")]
+l_g <- dygraph(l_e, main = "", group = "Siaya County Sample") %>%
+  dySeries("l1_wins", strokeWidth = 4, label = "Agricultural labor supply") %>%
+  dySeries("l3_wins", strokeWidth = 4, label = "Wage labor supply") %>%
+  dySeries("l2_wins", strokeWidth = 4, label = "Own enterprise labor supply") %>%
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", label = "Hours per adult household member", drawGrid = FALSE, valueRange = c(0, 26)) %>% 
+  dyLegend(width = 550 , labelsSeparateLines = FALSE) %>%
+    dyCrosshair(direction = "vertical") %>%
+  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2"), connectSeparatedPoints = TRUE) %>%
+      dyCrosshair(direction = "vertical") %>%
+  presAnnotation("1", text = "April 11") %>%
+    dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  presAnnotation("15", text = "July 18") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) 
+  l_g
+
+```
+  
+  This plot aggregates hours worked on each of the three sources, across all working-age household members, stacking them to add to the average weekly labor supply per household adult. If the household does not work any hours on one or more of the labor categories, those data points are assigned zeros to assure representativeness of the whole population. 
+  
+##### Ineligible
+
+``` {r labor_i}
+l_i <- covid_weekly_i[c("week", "l1_wins", "l2_wins", "l3_wins")]
+l_g <- dygraph(l_i, main = "", group = "Siaya County Sample") %>%
+  dySeries("l1_wins", strokeWidth = 4, label = "Agricultural labor supply") %>%
+  dySeries("l3_wins", strokeWidth = 4, label = "Wage labor supply") %>%
+  dySeries("l2_wins", strokeWidth = 4, label = "Own enterprise labor supply") %>%
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", label = "Hours per adult household member", drawGrid = FALSE, valueRange = c(0, 26)) %>% 
+  dyLegend(width = 550 , labelsSeparateLines = FALSE) %>%
+    dyCrosshair(direction = "vertical") %>%
+  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2"), connectSeparatedPoints = TRUE) %>%
+      dyCrosshair(direction = "vertical") %>%
+  presAnnotation("1", text = "April 11") %>%
+    dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  presAnnotation("15", text = "July 18") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) 
+  l_g
+
+```
+  
+  This plot aggregates hours worked on each of the three sources, across all working-age household members, stacking them to add to the average weekly labor supply per household adult. If the household does not work any hours on one or more of the labor categories, those data points are assigned zeros to assure representativeness of the whole population. 
+  
+#### {}
 
 ***  
 ### Children Education  
 
-<font size="5">**Children educational activities**</font>  
-     We ask what has each child been doing over the last 15 minutes, whether the child has done any learning-related activities in the past 24 hours, and if so, what kind of activity. From this question we also learn whether the child attended school.
+<font size="5">**Children educational activities**</font> 
+
+####  {.tabset .tabset-pills}
+
+##### All
+
+We ask what has each child been doing over the last 15 minutes, whether the child has done any learning-related activities in the past 24 hours, and if so, what kind of activity. From this question we also learn whether the child attended school.
+
 ```{r children}
 ch_g  <- dygraph(ch, main = "", group = "Siaya County Sample") %>%
   dySeries("ch3_wins", strokeWidth = 4, label = "Attended school in past 24hrs") %>%
   dySeries("ch2_wins", strokeWidth = 4, label = "Any learning in past 24hrs") %>%
   dySeries("ch1_wins", strokeWidth = 4, label = "Any learning in past 15mins") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", drawGrid = FALSE, label = "Percentage of sample") %>% 
+  dyAxis("y", drawGrid = FALSE, label = "Percentage of sample", valueRange = c(0, 100)) %>% 
      dyCrosshair(direction = "vertical") %>%
  dyLegend(width = 570) %>%
   presAnnotation("1", text = "April 11") %>%
@@ -962,7 +1177,51 @@ ch_g  <- dygraph(ch, main = "", group = "Siaya County Sample") %>%
 ch_g
 ```
 
-   
+##### Eligible
+
+We ask what has each child been doing over the last 15 minutes, whether the child has done any learning-related activities in the past 24 hours, and if so, what kind of activity. From this question we also learn whether the child attended school.
+
+```{r children_e}
+ch_e <- covid_weekly_e[c("week", "ch3_wins", "ch2_wins", "ch1_wins")]
+ch_g  <- dygraph(ch_e, main = "", group = "Siaya County Sample") %>%
+  dySeries("ch3_wins", strokeWidth = 4, label = "Attended school in past 24hrs") %>%
+  dySeries("ch2_wins", strokeWidth = 4, label = "Any learning in past 24hrs") %>%
+  dySeries("ch1_wins", strokeWidth = 4, label = "Any learning in past 15mins") %>%
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", drawGrid = FALSE, label = "Percentage of sample", valueRange = c(0, 100)) %>% 
+     dyCrosshair(direction = "vertical") %>%
+ dyLegend(width = 570) %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation("15", text = "July 18") %>%
+    dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
+  dyOptions(axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE)
+ch_g
+```
+
+##### Ineligible
+
+We ask what has each child been doing over the last 15 minutes, whether the child has done any learning-related activities in the past 24 hours, and if so, what kind of activity. From this question we also learn whether the child attended school.
+
+```{r children_i}
+ch_i <- covid_weekly_i[c("week", "ch3_wins", "ch2_wins", "ch1_wins")]
+ch_g  <- dygraph(ch_i, main = "", group = "Siaya County Sample") %>%
+  dySeries("ch3_wins", strokeWidth = 4, label = "Attended school in past 24hrs") %>%
+  dySeries("ch2_wins", strokeWidth = 4, label = "Any learning in past 24hrs") %>%
+  dySeries("ch1_wins", strokeWidth = 4, label = "Any learning in past 15mins") %>%
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", drawGrid = FALSE, label = "Percentage of sample", valueRange = c(0, 100)) %>% 
+     dyCrosshair(direction = "vertical") %>%
+ dyLegend(width = 570) %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation("15", text = "July 18") %>%
+    dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
+  dyOptions(axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE)
+ch_g
+```
+
+#### {}  
    
 ***  
   
@@ -971,14 +1230,19 @@ ch_g
 
 <font size="5">**Gender violence**</font>
 
-We ask married/cohabitant female respondents whether their husband/partner has (i) threaten to harm them or someone close to them, (ii) hit, slapped, kicked, or physically hurt them, and (iii) forced them to perform sexual acts.*  
+####  {.tabset .tabset-pills}
+
+##### All
+
+We ask married/cohabitant female respondents whether their husband/partner has (i) threaten to harm them or someone close to them, (ii) hit, slapped, kicked, or physically hurt them, and (iii) forced them to perform sexual acts.* 
+
 ```{r gender}
 gv_g  <- dygraph(gv, main = "", group = "Siaya County Sample") %>%
   dySeries("gv1", strokeWidth = 4, label = "Threaten to harm them") %>%
   dySeries("gv2", strokeWidth = 4, label = "Physically hurt them") %>%
   dySeries("gv3", strokeWidth = 4, label = "Forced them to perform sexual acts") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", drawGrid = FALSE, label = "Percentage of married/cohabitant females") %>% 
+  dyAxis("y", drawGrid = FALSE, label = "Percentage of married/cohabitant females", valueRange = c(0, 13)) %>% 
      dyCrosshair(direction = "vertical") %>%
  dyLegend(width = 580) %>%
   presAnnotation("1", text = "April 11") %>%
@@ -989,6 +1253,54 @@ gv_g  <- dygraph(gv, main = "", group = "Siaya County Sample") %>%
 gv_g
 ```
   *This plot shows data only for the share of female respondents that were surveyed by a female field officer, and are currently married or living with a partner. This sub-sample accounts for ~55% of all married/cohabitant females in the study sample, and ~36% of all females.  
+  
+##### Eligible
+
+We ask married/cohabitant female respondents whether their husband/partner has (i) threaten to harm them or someone close to them, (ii) hit, slapped, kicked, or physically hurt them, and (iii) forced them to perform sexual acts.* 
+
+```{r gender_e}
+gv_e <- covid_weekly_e[c("week", "gv1", "gv2", "gv3")]
+gv_g  <- dygraph(gv_e, main = "", group = "Siaya County Sample") %>%
+  dySeries("gv1", strokeWidth = 4, label = "Threaten to harm them") %>%
+  dySeries("gv2", strokeWidth = 4, label = "Physically hurt them") %>%
+  dySeries("gv3", strokeWidth = 4, label = "Forced them to perform sexual acts") %>%
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", drawGrid = FALSE, label = "Percentage of married/cohabitant females", valueRange = c(0, 13)) %>% 
+     dyCrosshair(direction = "vertical") %>%
+ dyLegend(width = 580) %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation("15", text = "July 18") %>%
+    dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
+  dyOptions(axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE)
+gv_g
+```
+  *This plot shows data only for the share of female respondents that were surveyed by a female field officer, and are currently married or living with a partner. This sub-sample accounts for ~55% of all married/cohabitant females in the study sample, and ~36% of all females.  
+  
+##### Ineligible
+
+We ask married/cohabitant female respondents whether their husband/partner has (i) threaten to harm them or someone close to them, (ii) hit, slapped, kicked, or physically hurt them, and (iii) forced them to perform sexual acts.* 
+
+```{r gender_i}
+gv_i <- covid_weekly_i[c("week", "gv1", "gv2", "gv3")]
+gv_g  <- dygraph(gv_i, main = "", group = "Siaya County Sample") %>%
+  dySeries("gv1", strokeWidth = 4, label = "Threaten to harm them") %>%
+  dySeries("gv2", strokeWidth = 4, label = "Physically hurt them") %>%
+  dySeries("gv3", strokeWidth = 4, label = "Forced them to perform sexual acts") %>%
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", drawGrid = FALSE, label = "Percentage of married/cohabitant females", valueRange = c(0, 13)) %>% 
+     dyCrosshair(direction = "vertical") %>%
+ dyLegend(width = 580) %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation("15", text = "July 18") %>%
+    dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
+  dyOptions(axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE)
+gv_g
+```
+  *This plot shows data only for the share of female respondents that were surveyed by a female field officer, and are currently married or living with a partner. This sub-sample accounts for ~55% of all married/cohabitant females in the study sample, and ~36% of all females.  
+  
+#### {}
      
 ***  
   
