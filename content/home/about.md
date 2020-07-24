@@ -52,10 +52,10 @@ Collaborators on this project are:
 [Johannes Haushofer](https://www.princeton.edu/haushofer/) - Princeton University;   
 [George Kinyanjui](https://www.saldru.uct.ac.za/staff/george-kariuki-kinyanjui/) - University of Cape Town;  
 [Magdalena Larreboure](https://mlarreboure.com/) - Busara Center, Nairobi;   
-[Layna Lowe](https://cega.berkeley.edu/user-type/staff/#layna-lowe) - University of California, Berkeley;   
+[Layna Lowe](https://cega.berkeley.edu/user-type/staff/#layna-lowe) - University of California, Berkeley; [Anya Marchenko](https://cega.berkeley.edu/user-type/staff/#anya-marchenko) - University of California, Berkeley; 
 [Edward Miguel](http://emiguel.econ.berkeley.edu/) - University of California, Berkeley;  
-[Carol Nekesa](https://www.linkedin.com/in/carolyne-nekesa-khagondi-99b42466) - REMIT Kenya;  
-[Eric Owino](http://remitkenya.co.ke/index.php/about-us/) - REMIT Kenya;  
+[Carol Nekesa](https://www.linkedin.com/in/carolyne-nekesa-khagondi-99b42466) - Vyxer REMIT Kenya;  
+[Eric Owino](http://remitkenya.co.ke/index.php/about-us/) - Vyxer REMIT Kenya;  
 [Utz Johann Pape](https://blogs.worldbank.org/team/utz-pape) - The World Bank;   
 [Carlos Paramo](https://www.linkedin.com/in/carlosparamob) - University of California, Berkeley;   
 [Andrew Wabwire](http://remitkenya.co.ke/index.php/about-us/) - REMIT Kenya;  
