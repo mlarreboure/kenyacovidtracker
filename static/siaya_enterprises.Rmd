@@ -129,7 +129,9 @@ tmp <- rbind(tmp,(rev_prof_s[13,]+rev_prof_s[14,])/2)
 tmp <- rbind(tmp,(rev_prof_s[15,]+rev_prof_s[16,])/2)
 tmp <- rbind(tmp,(rev_prof_s[17,]+rev_prof_s[18,])/2)
 tmp[tmp$week == 3.5,"i1_wins"] = rev_prof_s[15,"i1_wins"]
-tmp <- rbind(tmp, rev_prof_s[19:21,])
+tmp <- rbind(tmp, rev_prof_s[19,])
+tmp <- rbind(tmp,(rev_prof_s[20,]+rev_prof_s[21,])/2)
+tmp <- rbind(tmp, rev_prof_s[22:23,])
 rev_prof_s <- tmp
 
 
@@ -138,10 +140,8 @@ i_feb <- weighted.mean(ent_outcomes[ent_outcomes$week != 5,][,"investment_feb_wi
 w_feb <- weighted.mean(ent_outcomes[ent_outcomes$week != 5,][,"wages_feb_wins"],ent_outcomes[ent_outcomes$week != 5,][,"ent_weight"],na.rm = TRUE)
 tmp <- data.frame("week" = c(-1),
                   "investment_wins" = c(i_feb)) #alternatively, 2.291782 if we restrict for first weeks only.
-inv <- rbind(inv, c(7, NA)) ## Exclude week 7 since very few data points
 inv_r <- rbind(tmp,inv)
 inv_r <- rbind(c(-2,NA), inv_r)
-inv_r <- rbind(inv_r, c(10, NA))
 tmp <- data.frame("week" = c(-1),
                   "wages_wins" = c(w_feb)) #alternatively, 28.96816 if we restrict for first weeks only.
 wages_r <- rbind(tmp,wages)
@@ -573,5 +573,7 @@ So far we have interviewed 3,041 enterprises, with the following distribution pe
 | Week 5 |	07 June 2020 - 13 June 2020	| 885 |1|
 | Week 6 | 14 June 2020 - 20 June 2020 | 1216 |1|
 | Week 9 | 5 July 2020 - 11 July 2020 | 570 |2|
+| Week 10 | 12 July 2020 - 18 July 2020 | 609 |2|
+| Week 11 | 19 July 2020 - 25 July 2020 | 552 |2|
 
 
