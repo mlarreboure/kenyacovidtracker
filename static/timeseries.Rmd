@@ -120,6 +120,34 @@ i3_feb <- weighted.mean(covid_hh$i3_feb_wins,covid_hh$hh_weight,na.rm = TRUE)
 i <- rbind(c(-1, i1_feb, i2_feb, i3_feb), i)
 i <- rbind(c(-2,NA,NA,NA), i)
 
+i_e <- c("week", "i2_wins", "i3_wins", "i1_wins")
+i_e <- covid_weekly_e[!(covid_weekly_e$week %in% c(9,10)),i_e]
+i1_feb_e <- weighted.mean(covid_hh[covid_hh$eligible == 1,]$i1_feb_wins,
+                          covid_hh[covid_hh$eligible == 1,]$hh_weight,
+                          na.rm = TRUE)
+i2_feb_e <- weighted.mean(covid_hh[covid_hh$eligible == 1,]$i2_feb_wins,
+                          covid_hh[covid_hh$eligible == 1,]$hh_weight,
+                          na.rm = TRUE)
+i3_feb_e <- weighted.mean(covid_hh[covid_hh$eligible == 1,]$i3_feb_wins,
+                          covid_hh[covid_hh$eligible == 1,]$hh_weight,
+                          na.rm = TRUE)
+i_e <- rbind(c(-1, i1_feb_e, i2_feb_e, i3_feb_e), i_e)
+i_e <- rbind(c(-2,NA,NA,NA), i_e)
+
+i_i <- c("week", "i2_wins", "i3_wins", "i1_wins")
+i_i <- covid_weekly_i[!(covid_weekly_i$week %in% c(9,10)),i_i]
+i1_feb_i <- weighted.mean(covid_hh[covid_hh$eligible == 0,]$i1_feb_wins,
+                          covid_hh[covid_hh$eligible == 0,]$hh_weight,
+                          na.rm = TRUE)
+i2_feb_i <- weighted.mean(covid_hh[covid_hh$eligible == 0,]$i2_feb_wins,
+                          covid_hh[covid_hh$eligible == 0,]$hh_weight,
+                          na.rm = TRUE)
+i3_feb_i <- weighted.mean(covid_hh[covid_hh$eligible == 0,]$i3_feb_wins,
+                          covid_hh[covid_hh$eligible == 0,]$hh_weight,
+                          na.rm = TRUE)
+i_i <- rbind(c(-1, i1_feb_i, i2_feb_i, i3_feb_i), i_i)
+i_i <- rbind(c(-2,NA,NA,NA), i_i)
+
 d <- c("week", "i7_wins", "dissaved") 
 d <- covid_weekly[d]
 
@@ -130,6 +158,28 @@ i5b_feb <- weighted.mean(covid_hh$i5b_feb_wins,covid_hh$hh_weight,na.rm = TRUE)
 i5c_feb <- weighted.mean(covid_hh$i5c_feb_wins,covid_hh$hh_weight,na.rm = TRUE)
 it <- rbind(c(-1, i5a_feb, i5b_feb, i5c_feb), it)
 it <- rbind(c(-2,NA,NA,NA), it)
+
+it_e <- c("week", "i5a_wins", "i5b_wins" , "i5c_wins")
+it_e <- covid_weekly_e[!(covid_weekly_e$week %in% c(9,10)),it_e]
+i5a_feb_e <- weighted.mean(covid_hh[covid_hh$eligible == 1,]$i5a_feb_wins,
+                           covid_hh[covid_hh$eligible == 1,]$hh_weight,na.rm = TRUE)
+i5b_feb_e <- weighted.mean(covid_hh[covid_hh$eligible == 1,]$i5b_feb_wins,
+                           covid_hh[covid_hh$eligible == 1,]$hh_weight,na.rm = TRUE)
+i5c_feb_e <- weighted.mean(covid_hh[covid_hh$eligible == 1,]$i5c_feb_wins,
+                           covid_hh[covid_hh$eligible == 1,]$hh_weight,na.rm = TRUE)
+it_e <- rbind(c(-1, i5a_feb_e, i5b_feb_e, i5c_feb_e), it_e)
+it_e <- rbind(c(-2,NA,NA,NA), it_e)
+
+it_i <- c("week", "i5a_wins", "i5b_wins" , "i5c_wins")
+it_i <- covid_weekly_i[!(covid_weekly_i$week %in% c(9,10)),it_i]
+i5a_feb_i <- weighted.mean(covid_hh[covid_hh$eligible == 0,]$i5a_feb_wins,
+                           covid_hh[covid_hh$eligible == 0,]$hh_weight,na.rm = TRUE)
+i5b_feb_i <- weighted.mean(covid_hh[covid_hh$eligible == 0,]$i5b_feb_wins,
+                           covid_hh[covid_hh$eligible == 0,]$hh_weight,na.rm = TRUE)
+i5c_feb_i <- weighted.mean(covid_hh[covid_hh$eligible == 0,]$i5c_feb_wins,
+                           covid_hh[covid_hh$eligible == 0,]$hh_weight,na.rm = TRUE)
+it_i <- rbind(c(-1, i5a_feb_i, i5b_feb_i, i5c_feb_i), it_i)
+it_i <- rbind(c(-2,NA,NA,NA), it_i)
 
 f1 <- c("week", "f1_h_shortages_wins", "f1_h_price_wins", "f1_h_income_wins")
 f1 <- covid_weekly[f1]
@@ -278,10 +328,7 @@ i_g
   
 ##### Eligible
 ``` {r}
-i_l <- c("week", "i2_wins", "i3_wins", "i1_wins")
-i_l <- covid_weekly_e[i_l]
-
-  i_g <- dygraph(i_l, main = "") %>%
+  i_g <- dygraph(i_e, main = "") %>%
   dySeries("i3_wins", strokeWidth = 4, label = "Wage earnings") %>%
   dySeries("i2_wins", strokeWidth = 4, label = "Self-employment earnings") %>%
   dySeries("i1_wins", strokeWidth = 4, label = "Agricultural earnings") %>%
@@ -305,10 +352,7 @@ i_g
 
 ##### Ineligible 
 ``` {r}
-i_h <- c("week", "i2_wins", "i3_wins", "i1_wins")
-i_h <- covid_weekly_i[i_h]
-
-  i_g <- dygraph(i_h, main = "") %>%
+  i_g <- dygraph(i_i, main = "") %>%
   dySeries("i3_wins", strokeWidth = 4, label = "Wage earnings") %>%
   dySeries("i2_wins", strokeWidth = 4, label = "Self-employment earnings") %>%
   dySeries("i1_wins", strokeWidth = 4, label = "Agricultural earnings") %>%
@@ -461,7 +505,6 @@ it_g
 We ask whether in the past 14 days anyone in the household received a gift/assistance of money or goods, and its value, from (i) the government, (ii) from a non-governmental organization or community group, or (iii) from an individual politican or government official.  
 
 ```{r transfers_e}
-it_e <- covid_weekly_e[c("week", "i5a_wins", "i5b_wins", "i5c_wins")]
 it_g  <- dygraph(it_e, main = "") %>%
   dySeries("i5a_wins", strokeWidth = 4, label = "Government") %>%
   dySeries("i5b_wins", strokeWidth = 4, label = "NGO or community group") %>%
@@ -485,7 +528,6 @@ it_g
 We ask whether in the past 14 days anyone in the household received a gift/assistance of money or goods, and its value, from (i) the government, (ii) from a non-governmental organization or community group, or (iii) from an individual politican or government official.  
 
 ```{r transfers_i}
-it_i <- covid_weekly_i[c("week", "i5a_wins", "i5b_wins", "i5c_wins")]
 it_g  <- dygraph(it_i, main = "") %>%
   dySeries("i5a_wins", strokeWidth = 4, label = "Government") %>%
   dySeries("i5b_wins", strokeWidth = 4, label = "NGO or community group") %>%
