@@ -60,6 +60,21 @@ covid_weekly_m[nrow(covid_weekly_m)+1,] <- NA
 covid_weekly_m[nrow(covid_weekly_m),"week"] <- 0
 covid_weekly_m <- covid_weekly_m[order(covid_weekly_m$week),]
 
+## HH has children
+tmp <- read_dta("../../GE_Endline2/covid19/data/COVID_HH_outcomes_children_weekly.dta")
+covid_weekly_c <- tmp[tmp$child_hh == 1,] #Female
+covid_weekly_c[nrow(covid_weekly_c)+1,] <- NA
+covid_weekly_c[nrow(covid_weekly_c),"week"] <- max(covid_weekly_c$week, na.rm = TRUE) + 1
+covid_weekly_c[nrow(covid_weekly_c)+1,] <- NA
+covid_weekly_c[nrow(covid_weekly_c),"week"] <- 0
+covid_weekly_c <- covid_weekly_c[order(covid_weekly_c$week),]
+
+covid_weekly_nc <- tmp[tmp$child_hh == 0,] #male
+covid_weekly_nc[nrow(covid_weekly_nc)+1,] <- NA
+covid_weekly_nc[nrow(covid_weekly_nc),"week"] <- max(covid_weekly_nc$week, na.rm = TRUE) + 1
+covid_weekly_nc[nrow(covid_weekly_nc)+1,] <- NA
+covid_weekly_nc[nrow(covid_weekly_nc),"week"] <- 0
+covid_weekly_nc <- covid_weekly_nc[order(covid_weekly_nc$week),]
 ##############
 
 covid_price_index <- read.csv("../../GE_Endline2/covid19/data/COVID_PriceIndex_Heatmap.csv", header = T)
