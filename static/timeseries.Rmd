@@ -20,6 +20,8 @@ library(ggplot2)
 library(rjson) #reading shapefiles for heatmaps
 library(plotly) #interactive visualization
 
+end_week = "16"
+end_survey = "July 25"
 
 ## Importing Data ##
 #covid_weekly <- read_dta("~/Dropbox (Princeton)/GE_Endline2/covid19/data/COVID_AllHHs_outcomes_weekly.dta")
@@ -315,7 +317,7 @@ presAnnotation <- function(dygraph, x, text) {
   dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("14", text = "July 11") %>%
+  presAnnotation(end_week, text = end_survey) %>%
  dyEvent(0 , "Lockdown begins March 15", labelLoc = "top") %>%
   dyEvent(-1 , "February", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
@@ -339,7 +341,7 @@ i_g
   dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("14", text = "July 11") %>%
+  presAnnotation(end_week, text = end_survey) %>%
  dyEvent(0 , "Lockdown begins March 15", labelLoc = "top") %>%
   dyEvent(-1 , "February", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
@@ -363,7 +365,7 @@ i_g
   dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("14", text = "July 11") %>%
+  presAnnotation(end_week, text = end_survey) %>%
  dyEvent(0 , "Lockdown begins March 15", labelLoc = "top") %>%
   dyEvent(-1 , "February", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
@@ -394,7 +396,7 @@ d_g  <- dygraph(wg, main = "") %>%
   dyOptions(axisLineWidth = 4,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   dyLegend(width = 210, show="always") 
@@ -420,7 +422,7 @@ d_g  <- dygraph(d, main = "") %>%
   dyOptions(axisLineWidth = 4,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   dyLegend(width = 210, show="always") 
@@ -441,7 +443,7 @@ d_g  <- dygraph(d_l, main = "") %>%
   dyOptions(axisLineWidth = 4,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   dyLegend(width = 210, show="always") 
@@ -462,7 +464,7 @@ d_g  <- dygraph(d_h, main = "") %>%
   dyOptions(axisLineWidth = 4,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   dyLegend(width = 210, show="always") 
@@ -491,7 +493,7 @@ it_g  <- dygraph(it, main = "") %>%
   dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
   dyEvent(-1 , "February", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   dyEvent(0 , "Lockdown begins March 15", labelLoc = "top") %>%
@@ -514,7 +516,7 @@ it_g  <- dygraph(it_e, main = "") %>%
   dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
   dyEvent(-1 , "February", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   dyEvent(0 , "Lockdown begins March 15", labelLoc = "top") %>%
@@ -537,7 +539,7 @@ it_g  <- dygraph(it_i, main = "") %>%
   dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
   dyEvent(-1 , "February", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   dyEvent(0 , "Lockdown begins March 15", labelLoc = "top") %>%
@@ -572,7 +574,7 @@ c_g <- dygraph(c, main = "", group = "Siaya County Sample") %>%
   dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2"), connectSeparatedPoints = TRUE) %>%
       dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
       dyLimit(limit = el1_m$c1_EL1[1], "Pre-COVID average, food expenditure", 
     strokePattern = "dotted", color = "orange") %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
@@ -601,7 +603,7 @@ c_g <- dygraph(c_e, main = "", group = "Siaya County Sample") %>%
   dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2"), connectSeparatedPoints = TRUE) %>%
       dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
       dyLimit(limit = el1_m$c1_EL1[1], "Pre-COVID average, food expenditure", 
     strokePattern = "dotted", color = "orange") %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
@@ -630,7 +632,7 @@ c_g <- dygraph(c_i, main = "", group = "Siaya County Sample") %>%
   dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2"), connectSeparatedPoints = TRUE) %>%
       dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
       dyLimit(limit = el1_m$c1_EL1[1], "Pre-COVID average, food expenditure", 
     strokePattern = "dotted", color = "orange") %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
@@ -664,7 +666,7 @@ f1_d_g  <- dygraph(f1_d, main = "") %>%
   dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
   dyLegend(width = 210, labelsSeparateLines = TRUE) %>%
     dyLimit(limit = el1$h9_1_skippedadult[1], "Pre-COVID average",
@@ -690,7 +692,7 @@ f1_d_g  <- dygraph(f1_d_e, main = "") %>%
   dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
   dyLegend(width = 210, labelsSeparateLines = TRUE) %>%
     dyLimit(limit = el1$h9_1_skippedadult[1], "Pre-COVID average",
@@ -716,7 +718,7 @@ f1_d_g  <- dygraph(f1_d_i, main = "") %>%
   dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
   dyLegend(width = 210, labelsSeparateLines = TRUE) %>%
     dyLimit(limit = el1$h9_1_skippedadult[1], "Pre-COVID average",
@@ -752,11 +754,10 @@ f1_g  <- dygraph(f1, main = "") %>%
   dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("3", text = "April 25") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
-  dyLegend(width = 450, labelsSeparateLines = FALSE) %>% 
-  dyRangeSelector(dateWindow = c("2", "16"))
+  dyLegend(width = 450, labelsSeparateLines = FALSE)
 f1_g
 ``` 
 
@@ -777,11 +778,10 @@ f1_g  <- dygraph(f1_e, main = "") %>%
   dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("3", text = "April 25") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
-  dyLegend(width = 450, labelsSeparateLines = FALSE) %>% 
-  dyRangeSelector(dateWindow = c("2", "16"))
+  dyLegend(width = 450, labelsSeparateLines = FALSE)
 f1_g
 ``` 
 
@@ -802,11 +802,10 @@ f1_g  <- dygraph(f1_i, main = "") %>%
   dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("3", text = "April 25") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
-  dyLegend(width = 450, labelsSeparateLines = FALSE) %>% 
-  dyRangeSelector(dateWindow = c("2", "16"))
+  dyLegend(width = 450, labelsSeparateLines = FALSE)
 f1_g
 ``` 
 
@@ -833,11 +832,10 @@ f1a_g  <- dygraph(f1a, main = "") %>%
   dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2"), connectSeparatedPoints = TRUE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("3", text = "April 25") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
-  dyLegend(width = 475, labelsSeparateLines = FALSE) %>% 
-  dyRangeSelector(dateWindow = c("2", "16"))
+  dyLegend(width = 475, labelsSeparateLines = FALSE)
 f1a_g
 ```
 
@@ -857,11 +855,10 @@ f1a_g  <- dygraph(f1a_e, main = "") %>%
   dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2"), connectSeparatedPoints = TRUE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("3", text = "April 25") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
-  dyLegend(width = 475, labelsSeparateLines = FALSE) %>% 
-  dyRangeSelector(dateWindow = c("2", "16"))
+  dyLegend(width = 475, labelsSeparateLines = FALSE)
 f1a_g
 ```
 
@@ -881,11 +878,10 @@ f1a_g  <- dygraph(f1a_i, main = "") %>%
   dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2"), connectSeparatedPoints = TRUE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("3", text = "April 25") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
-  dyLegend(width = 475, labelsSeparateLines = FALSE) %>% 
-  dyRangeSelector(dateWindow = c("2", "16"))
+  dyLegend(width = 475, labelsSeparateLines = FALSE)
 f1a_g
 ```
 
@@ -904,7 +900,7 @@ e_g  <- dygraph(e, main = "") %>%
   dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   dyEvent(-1 , "February", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   dyEvent(0 , "Lockdown begins March 15", labelLoc = "top") %>%
@@ -936,7 +932,7 @@ We ask respondents whether they have changed their behavior in any way since lea
     dyLegend(width = 580) %>%
     dyOptions(axisLineWidth = 4, includeZero = TRUE, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2"), connectSeparatedPoints = TRUE) %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
     dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
     dyEvent(1.7 , "Face masks mandatory", labelLoc = "top") %>%
@@ -960,7 +956,7 @@ ckn6_e <- covid_weekly_e[c("week","ckn6_washhands_wins", "ckn6_mask_wins", "ckn6
     dyLegend(width = 580) %>%
     dyOptions(axisLineWidth = 4, includeZero = TRUE, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2"), connectSeparatedPoints = TRUE) %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
     dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
     dyEvent(1.7 , "Face masks mandatory", labelLoc = "top") %>%
@@ -984,7 +980,7 @@ ckn6_i <- covid_weekly_i[c("week","ckn6_washhands_wins", "ckn6_mask_wins", "ckn6
     dyLegend(width = 580) %>%
     dyOptions(axisLineWidth = 4, includeZero = TRUE, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2"), connectSeparatedPoints = TRUE) %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
     dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
     dyEvent(1.7 , "Face masks mandatory", labelLoc = "top") %>%
@@ -1008,7 +1004,7 @@ ckn6_f <- covid_weekly_f[c("week", "ckn6_washhands_wins", "ckn6_mask_wins", "ckn
     dyLegend(width = 580) %>%
     dyOptions(axisLineWidth = 4, includeZero = TRUE, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2"), connectSeparatedPoints = TRUE) %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
     dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
     dyEvent(1.7 , "Face masks mandatory", labelLoc = "top") %>%
@@ -1032,7 +1028,7 @@ ckn6_m <- covid_weekly_m[c("week", "ckn6_washhands_wins", "ckn6_mask_wins", "ckn
     dyLegend(width = 580) %>%
     dyOptions(axisLineWidth = 4, includeZero = TRUE, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2"), connectSeparatedPoints = TRUE) %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
     dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
     dyEvent(1.7 , "Face masks mandatory", labelLoc = "top") %>%
@@ -1065,7 +1061,7 @@ We ask respondents whether they have experienced any illnesses or symptoms of a 
     dyCrosshair(direction = "vertical") %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
   cov1_g
 ```
@@ -1088,7 +1084,7 @@ cov1_e <- covid_weekly_e[c("week", "cov1_fever_wins", "cov1_tired_wins", "cov1_c
     dyCrosshair(direction = "vertical") %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
   cov1_g
 ```
@@ -1111,7 +1107,7 @@ cov1_i <- covid_weekly_i[c("week", "cov1_fever_wins", "cov1_tired_wins", "cov1_c
     dyCrosshair(direction = "vertical") %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
   cov1_g
 ```
@@ -1134,7 +1130,7 @@ cov1_f <- covid_weekly_f[c("week", "cov1_fever_wins", "cov1_tired_wins", "cov1_c
     dyCrosshair(direction = "vertical") %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
   cov1_g
 ```
@@ -1157,7 +1153,7 @@ cov1_m <- covid_weekly_m[c("week", "cov1_fever_wins", "cov1_tired_wins", "cov1_c
     dyCrosshair(direction = "vertical") %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
   cov1_g
 ```
@@ -1184,7 +1180,7 @@ net5_g  <- dygraph(net5, main = "") %>%
   dyLegend(width = 500) %>%
      dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
   dyOptions(axisLineWidth = 4, includeZero = TRUE, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE)
@@ -1206,7 +1202,7 @@ net5_g  <- dygraph(net5_e, main = "") %>%
   dyLegend(width = 500) %>%
      dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
   dyOptions(axisLineWidth = 4, includeZero = TRUE, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE)
@@ -1228,7 +1224,7 @@ net5_g  <- dygraph(net5_i, main = "") %>%
   dyLegend(width = 500) %>%
      dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
   dyOptions(axisLineWidth = 4, includeZero = TRUE, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE)
@@ -1250,7 +1246,7 @@ net5_g  <- dygraph(net5_f, main = "") %>%
   dyLegend(width = 500) %>%
      dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
   dyOptions(axisLineWidth = 4, includeZero = TRUE, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE)
@@ -1272,7 +1268,7 @@ net5_g  <- dygraph(net5_m, main = "") %>%
   dyLegend(width = 500) %>%
      dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
   dyOptions(axisLineWidth = 4, includeZero = TRUE, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE)
@@ -1304,7 +1300,7 @@ l_g <- dygraph(l, main = "", group = "Siaya County Sample") %>%
       dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) 
   l_g
 
@@ -1328,7 +1324,7 @@ l_g <- dygraph(l_e, main = "", group = "Siaya County Sample") %>%
       dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) 
   l_g
 
@@ -1352,7 +1348,7 @@ l_g <- dygraph(l_i, main = "", group = "Siaya County Sample") %>%
       dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) 
   l_g
 
@@ -1383,7 +1379,7 @@ ch_g  <- dygraph(ch, main = "", group = "Siaya County Sample") %>%
      dyCrosshair(direction = "vertical") %>%
  dyLegend(width = 570) %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
   dyOptions(axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE)
@@ -1405,7 +1401,7 @@ ch_g  <- dygraph(ch_e, main = "", group = "Siaya County Sample") %>%
      dyCrosshair(direction = "vertical") %>%
  dyLegend(width = 570) %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
   dyOptions(axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE)
@@ -1427,7 +1423,7 @@ ch_g  <- dygraph(ch_i, main = "", group = "Siaya County Sample") %>%
      dyCrosshair(direction = "vertical") %>%
  dyLegend(width = 570) %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
   dyOptions(axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE)
@@ -1459,7 +1455,7 @@ gv_g  <- dygraph(gv, main = "", group = "Siaya County Sample") %>%
      dyCrosshair(direction = "vertical") %>%
  dyLegend(width = 580) %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
   dyOptions(axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE)
@@ -1482,7 +1478,7 @@ gv_g  <- dygraph(gv_e, main = "", group = "Siaya County Sample") %>%
      dyCrosshair(direction = "vertical") %>%
  dyLegend(width = 580) %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
   dyOptions(axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE)
@@ -1505,7 +1501,7 @@ gv_g  <- dygraph(gv_i, main = "", group = "Siaya County Sample") %>%
      dyCrosshair(direction = "vertical") %>%
  dyLegend(width = 580) %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
   dyOptions(axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE)
@@ -1533,7 +1529,7 @@ v_g  <- dygraph(v, main = "", group = "Siaya County Sample") %>%
      dyCrosshair(direction = "vertical") %>%
  dyLegend(width = 350) %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
   dyOptions(axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE)
@@ -1553,7 +1549,7 @@ v_g  <- dygraph(v_e, main = "", group = "Siaya County Sample") %>%
      dyCrosshair(direction = "vertical") %>%
  dyLegend(width = 350) %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
   dyOptions(axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE)
@@ -1573,7 +1569,7 @@ v_g  <- dygraph(v_i, main = "", group = "Siaya County Sample") %>%
      dyCrosshair(direction = "vertical") %>%
  dyLegend(width = 350) %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
   dyOptions(axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE)
@@ -1606,7 +1602,7 @@ tg_g <- dygraph(tg, main = "", group = "Siaya County Sample") %>%
     dyCrosshair(direction = "vertical") %>%
   dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = TRUE) %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
       dyCrosshair(direction = "vertical") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) 
@@ -1631,7 +1627,7 @@ tg_g <- dygraph(tg_e, main = "", group = "Siaya County Sample") %>%
     dyCrosshair(direction = "vertical") %>%
   dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = TRUE) %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
       dyCrosshair(direction = "vertical") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) 
@@ -1656,7 +1652,7 @@ tg_g <- dygraph(tg_i, main = "", group = "Siaya County Sample") %>%
     dyCrosshair(direction = "vertical") %>%
   dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = TRUE) %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
       dyCrosshair(direction = "vertical") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) 
@@ -1681,7 +1677,7 @@ tg_g <- dygraph(tg_f, main = "", group = "Siaya County Sample") %>%
     dyCrosshair(direction = "vertical") %>%
   dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = TRUE) %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
       dyCrosshair(direction = "vertical") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) 
@@ -1706,7 +1702,7 @@ tg_g <- dygraph(tg_m, main = "", group = "Siaya County Sample") %>%
     dyCrosshair(direction = "vertical") %>%
   dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = TRUE) %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
       dyCrosshair(direction = "vertical") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) 
@@ -1852,7 +1848,7 @@ cesd_g <- dygraph(cesd_10, main = "", group = "Siaya County Sample") %>%
     dyCrosshair(direction = "vertical") %>%
   dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = TRUE) %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
       dyCrosshair(direction = "vertical") %>%
       dyLimit(limit = 10.67273, "Pre-COVID average",
     strokePattern = "dotted", color = "green") %>%
@@ -1878,7 +1874,7 @@ cesd_g <- dygraph(cesd_10_e, main = "", group = "Siaya County Sample") %>%
     dyCrosshair(direction = "vertical") %>%
   dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = TRUE) %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
       dyCrosshair(direction = "vertical") %>%
       dyLimit(limit = 10.67273, "Pre-COVID average",
     strokePattern = "dotted", color = "green") %>%
@@ -1904,7 +1900,7 @@ cesd_g <- dygraph(cesd_10_i, main = "", group = "Siaya County Sample") %>%
     dyCrosshair(direction = "vertical") %>%
   dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = TRUE) %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
       dyCrosshair(direction = "vertical") %>%
       dyLimit(limit = 10.67273, "Pre-COVID average",
     strokePattern = "dotted", color = "green") %>%
@@ -1930,7 +1926,7 @@ cesd_g <- dygraph(cesd_10_f, main = "", group = "Siaya County Sample") %>%
     dyCrosshair(direction = "vertical") %>%
   dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = TRUE) %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
       dyCrosshair(direction = "vertical") %>%
       dyLimit(limit = 10.67273, "Pre-COVID average",
     strokePattern = "dotted", color = "green") %>%
@@ -1956,7 +1952,7 @@ cesd_g <- dygraph(cesd_10_m, main = "", group = "Siaya County Sample") %>%
     dyCrosshair(direction = "vertical") %>%
   dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = TRUE) %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
       dyCrosshair(direction = "vertical") %>%
       dyLimit(limit = 10.67273, "Pre-COVID average",
     strokePattern = "dotted", color = "green") %>%
@@ -1989,7 +1985,7 @@ mh1_g <- dygraph(mh1, main = "", group = "Siaya County Sample") %>%
     dyCrosshair(direction = "vertical") %>%
   dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = TRUE) %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
       dyCrosshair(direction = "vertical") %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) 
@@ -2014,7 +2010,7 @@ mh2_g <- dygraph(mh2, main = "", group = "Siaya County Sample") %>%
     dyCrosshair(direction = "vertical") %>%
   dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = TRUE) %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
       dyCrosshair(direction = "vertical") %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) 
@@ -2039,7 +2035,7 @@ mh3_g <- dygraph(mh3, main = "", group = "Siaya County Sample") %>%
     dyCrosshair(direction = "vertical") %>%
   dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = TRUE) %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
       dyCrosshair(direction = "vertical") %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) 
@@ -2064,7 +2060,7 @@ mh4_g <- dygraph(mh4, main = "", group = "Siaya County Sample") %>%
     dyCrosshair(direction = "vertical") %>%
   dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = TRUE) %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
       dyCrosshair(direction = "vertical") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) 
@@ -2089,7 +2085,7 @@ mh5_g <- dygraph(mh5, main = "", group = "Siaya County Sample") %>%
     dyCrosshair(direction = "vertical") %>%
   dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = TRUE) %>%
   presAnnotation("1", text = "April 11") %>%
-  presAnnotation("15", text = "July 18") %>%
+  presAnnotation(end_week, text = end_survey) %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
       dyCrosshair(direction = "vertical") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) 
