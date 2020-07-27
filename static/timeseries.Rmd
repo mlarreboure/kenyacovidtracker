@@ -44,6 +44,24 @@ covid_weekly_i[nrow(covid_weekly_i)+1,] <- NA
 covid_weekly_i[nrow(covid_weekly_i),"week"] <- 0
 covid_weekly_i <- covid_weekly_i[order(covid_weekly_i$week),]
 
+## By gender
+tmp <- read_dta("../../GE_Endline2/covid19/data/COVID_HH_outcomes_gender_weekly.dta")
+covid_weekly_f <- tmp[tmp$s9_fogender == 2,] #Female
+covid_weekly_f[nrow(covid_weekly_f)+1,] <- NA
+covid_weekly_f[nrow(covid_weekly_f),"week"] <- max(covid_weekly_f$week, na.rm = TRUE) + 1
+covid_weekly_f[nrow(covid_weekly_f)+1,] <- NA
+covid_weekly_f[nrow(covid_weekly_f),"week"] <- 0
+covid_weekly_f <- covid_weekly_f[order(covid_weekly_f$week),]
+
+covid_weekly_m <- tmp[tmp$s9_fogender == 1,] #male
+covid_weekly_m[nrow(covid_weekly_m)+1,] <- NA
+covid_weekly_m[nrow(covid_weekly_m),"week"] <- max(covid_weekly_m$week, na.rm = TRUE) + 1
+covid_weekly_m[nrow(covid_weekly_m)+1,] <- NA
+covid_weekly_m[nrow(covid_weekly_m),"week"] <- 0
+covid_weekly_m <- covid_weekly_m[order(covid_weekly_m$week),]
+
+##############
+
 covid_price_index <- read.csv("../../GE_Endline2/covid19/data/COVID_PriceIndex_Heatmap.csv", header = T)
 covid_price_index["Price Index"] <- covid_price_index$price_index_median
 covid_price_index$subloc_name <- as.character(covid_price_index$subloc_name)
@@ -917,6 +935,54 @@ ckn6_i <- covid_weekly_i[c("week","ckn6_washhands_wins", "ckn6_mask_wins", "ckn6
   ckn6_g
 ```
 
+##### Female
+
+We ask respondents whether they have changed their behavior in any way since learning about COVID-19, and if so, how  it has changed.
+
+```{r behavior_changes_f}
+ckn6_f <- covid_weekly_f[c("week", "ckn6_washhands_wins", "ckn6_mask_wins", "ckn6_stayhome_wins", "ckn6_sanitizer_wins")]
+  ckn6_g <- dygraph(ckn6_f, main = "") %>%
+    dySeries("ckn6_washhands_wins", strokeWidth = 4, label = "Hand Washing") %>%
+    dySeries("ckn6_mask_wins", strokeWidth = 4, label = "Face Mask") %>%    
+    dySeries("ckn6_stayhome_wins", strokeWidth = 4, label = "Stay Home") %>%
+    dySeries("ckn6_sanitizer_wins", strokeWidth = 4, label = "Hand Sanitizer") %>%
+    dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+    dyAxis("y", drawGrid = FALSE, label = "Percentage of sample", valueRange = c(0, 100)) %>% #grid
+    dyLegend(width = 580) %>%
+    dyOptions(axisLineWidth = 4, includeZero = TRUE, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2"), connectSeparatedPoints = TRUE) %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation("15", text = "July 18") %>%
+    dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+    dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
+    dyEvent(1.7 , "Face masks mandatory", labelLoc = "top") %>%
+  dyCrosshair(direction = "vertical")
+  ckn6_g
+```
+
+##### Male
+
+We ask respondents whether they have changed their behavior in any way since learning about COVID-19, and if so, how  it has changed.
+
+```{r behavior_changes_m}
+ckn6_m <- covid_weekly_m[c("week", "ckn6_washhands_wins", "ckn6_mask_wins", "ckn6_stayhome_wins", "ckn6_sanitizer_wins")]
+  ckn6_g <- dygraph(ckn6_m, main = "") %>%
+    dySeries("ckn6_washhands_wins", strokeWidth = 4, label = "Hand Washing") %>%
+    dySeries("ckn6_mask_wins", strokeWidth = 4, label = "Face Mask") %>%    
+    dySeries("ckn6_stayhome_wins", strokeWidth = 4, label = "Stay Home") %>%
+    dySeries("ckn6_sanitizer_wins", strokeWidth = 4, label = "Hand Sanitizer") %>%
+    dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+    dyAxis("y", drawGrid = FALSE, label = "Percentage of sample", valueRange = c(0, 100)) %>% #grid
+    dyLegend(width = 580) %>%
+    dyOptions(axisLineWidth = 4, includeZero = TRUE, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2"), connectSeparatedPoints = TRUE) %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation("15", text = "July 18") %>%
+    dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+    dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
+    dyEvent(1.7 , "Face masks mandatory", labelLoc = "top") %>%
+  dyCrosshair(direction = "vertical")
+  ckn6_g
+```
+
 #### {}
     
 ***  
@@ -993,6 +1059,52 @@ cov1_i <- covid_weekly_i[c("week", "cov1_fever_wins", "cov1_tired_wins", "cov1_c
   cov1_g
 ```
 
+##### Female
+
+We ask respondents whether they have experienced any illnesses or symptoms of a given list in the past 14 days.  
+
+``` {r symptoms_f}
+cov1_f <- covid_weekly_f[c("week", "cov1_fever_wins", "cov1_tired_wins", "cov1_cough_wins", "cov1_fever_cough_wins")]
+  cov1_g <- dygraph(cov1_f, main = "") %>% 
+  dySeries("cov1_fever_wins", strokeWidth = 4, label = "Fever") %>%
+  dySeries("cov1_tired_wins", strokeWidth = 4, label = "Tired") %>%
+  dySeries("cov1_cough_wins", strokeWidth = 4, label = "Cough") %>%
+  dySeries("cov1_fever_cough_wins", strokeWidth = 4, label = "Fever+Cough") %>%
+    dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+    dyAxis("y", drawGrid = FALSE, label = "Percentage of sample", valueRange = c(0, 25)) %>% #grid
+  dyLegend(width = 500) %>%
+  dyOptions(axisLineWidth = 4, includeZero = TRUE, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2"), connectSeparatedPoints = TRUE) %>%
+    dyCrosshair(direction = "vertical") %>%
+    dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation("15", text = "July 18") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
+  cov1_g
+```
+
+##### Male
+
+We ask respondents whether they have experienced any illnesses or symptoms of a given list in the past 14 days.  
+
+``` {r symptoms_m}
+cov1_m <- covid_weekly_m[c("week", "cov1_fever_wins", "cov1_tired_wins", "cov1_cough_wins", "cov1_fever_cough_wins")]
+  cov1_g <- dygraph(cov1_m, main = "") %>% 
+  dySeries("cov1_fever_wins", strokeWidth = 4, label = "Fever") %>%
+  dySeries("cov1_tired_wins", strokeWidth = 4, label = "Tired") %>%
+  dySeries("cov1_cough_wins", strokeWidth = 4, label = "Cough") %>%
+  dySeries("cov1_fever_cough_wins", strokeWidth = 4, label = "Fever+Cough") %>%
+    dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+    dyAxis("y", drawGrid = FALSE, label = "Percentage of sample", valueRange = c(0, 25)) %>% #grid
+  dyLegend(width = 500) %>%
+  dyOptions(axisLineWidth = 4, includeZero = TRUE, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2"), connectSeparatedPoints = TRUE) %>%
+    dyCrosshair(direction = "vertical") %>%
+    dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation("15", text = "July 18") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
+  cov1_g
+```
+
 #### {}
 
 *** 
@@ -1011,7 +1123,7 @@ net5_g  <- dygraph(net5, main = "") %>%
   dySeries("net5_last7_wins", strokeWidth = 4, label = "In the past 7 days") %>%
   dySeries("net5_today_wins", strokeWidth = 4, label = "Today") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", drawGrid = FALSE, label = "Number of people", valueRange = c(0, 20)) %>% 
+  dyAxis("y", drawGrid = FALSE, label = "Number of people", valueRange = c(0, 22)) %>% 
   dyLegend(width = 500) %>%
      dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
@@ -1033,7 +1145,7 @@ net5_g  <- dygraph(net5_e, main = "") %>%
   dySeries("net5_last7_wins", strokeWidth = 4, label = "In the past 7 days") %>%
   dySeries("net5_today_wins", strokeWidth = 4, label = "Today") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", drawGrid = FALSE, label = "Number of people", valueRange = c(0, 20)) %>% 
+  dyAxis("y", drawGrid = FALSE, label = "Number of people", valueRange = c(0, 22)) %>% 
   dyLegend(width = 500) %>%
      dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
@@ -1055,7 +1167,51 @@ net5_g  <- dygraph(net5_i, main = "") %>%
   dySeries("net5_last7_wins", strokeWidth = 4, label = "In the past 7 days") %>%
   dySeries("net5_today_wins", strokeWidth = 4, label = "Today") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", drawGrid = FALSE, label = "Number of people", valueRange = c(0, 20)) %>% 
+  dyAxis("y", drawGrid = FALSE, label = "Number of people", valueRange = c(0, 22)) %>% 
+  dyLegend(width = 500) %>%
+     dyCrosshair(direction = "vertical") %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation("15", text = "July 18") %>%
+    dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+ dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
+  dyOptions(axisLineWidth = 4, includeZero = TRUE, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE)
+net5_g
+```
+
+##### Female
+
+  We ask: "Taken together, how many people outside this household have you interacted with in-person?"   
+
+```{r interactions_f}
+net5_f <- covid_weekly_f[c("week", "net5_last14_wins", "net5_last7_wins", "net5_today_wins")]
+net5_g  <- dygraph(net5_f, main = "") %>%
+  dySeries("net5_last14_wins", strokeWidth = 4, label = "In the past 14 days") %>%
+  dySeries("net5_last7_wins", strokeWidth = 4, label = "In the past 7 days") %>%
+  dySeries("net5_today_wins", strokeWidth = 4, label = "Today") %>%
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", drawGrid = FALSE, label = "Number of people", valueRange = c(0, 22)) %>% 
+  dyLegend(width = 500) %>%
+     dyCrosshair(direction = "vertical") %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation("15", text = "July 18") %>%
+    dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+ dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
+  dyOptions(axisLineWidth = 4, includeZero = TRUE, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE)
+net5_g
+```
+
+##### Male
+
+  We ask: "Taken together, how many people outside this household have you interacted with in-person?"   
+
+```{r interactions_m}
+net5_m <- covid_weekly_m[c("week", "net5_last14_wins", "net5_last7_wins", "net5_today_wins")]
+net5_g  <- dygraph(net5_m, main = "") %>%
+  dySeries("net5_last14_wins", strokeWidth = 4, label = "In the past 14 days") %>%
+  dySeries("net5_last7_wins", strokeWidth = 4, label = "In the past 7 days") %>%
+  dySeries("net5_today_wins", strokeWidth = 4, label = "Today") %>%
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", drawGrid = FALSE, label = "Number of people", valueRange = c(0, 22)) %>% 
   dyLegend(width = 500) %>%
      dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
@@ -1451,6 +1607,56 @@ tg_g <- dygraph(tg_i, main = "", group = "Siaya County Sample") %>%
 
 ```
 
+##### Female
+
+How much do you trust your country’s government to take care of its citizens?  
+``` {r trustgov_f}
+tg_f <- covid_weekly_f[c("week", "tg1", "tg2", "tg3", "tg4", "tg5")]
+tg_g <- dygraph(tg_f, main = "", group = "Siaya County Sample") %>%
+  dySeries("tg1", strokeWidth = 4, label = "Strongly distrust") %>%
+  dySeries("tg2", strokeWidth = 4, label = "Somewhat distrust") %>%
+  dySeries("tg3", strokeWidth = 4, label = "Neither trust nor distrust") %>%
+  dySeries("tg4", strokeWidth = 4, label = "Somewhat trust") %>%
+  dySeries("tg5", strokeWidth = 4, label = "Strongly trust") %>%
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", label = "Percentage of sample", drawGrid = FALSE, valueRange = c(0, 110)) %>% 
+  dyLegend(width = 450 , labelsSeparateLines = FALSE) %>%
+    dyCrosshair(direction = "vertical") %>%
+  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = TRUE) %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation("15", text = "July 18") %>%
+    dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+      dyCrosshair(direction = "vertical") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) 
+  tg_g
+
+```
+
+##### Male
+
+How much do you trust your country’s government to take care of its citizens?  
+``` {r trustgov_m}
+tg_m <- covid_weekly_m[c("week", "tg1", "tg2", "tg3", "tg4", "tg5")]
+tg_g <- dygraph(tg_m, main = "", group = "Siaya County Sample") %>%
+  dySeries("tg1", strokeWidth = 4, label = "Strongly distrust") %>%
+  dySeries("tg2", strokeWidth = 4, label = "Somewhat distrust") %>%
+  dySeries("tg3", strokeWidth = 4, label = "Neither trust nor distrust") %>%
+  dySeries("tg4", strokeWidth = 4, label = "Somewhat trust") %>%
+  dySeries("tg5", strokeWidth = 4, label = "Strongly trust") %>%
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", label = "Percentage of sample", drawGrid = FALSE, valueRange = c(0, 110)) %>% 
+  dyLegend(width = 450 , labelsSeparateLines = FALSE) %>%
+    dyCrosshair(direction = "vertical") %>%
+  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = TRUE) %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation("15", text = "July 18") %>%
+    dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+      dyCrosshair(direction = "vertical") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) 
+  tg_g
+
+```
+
 #### {}
    
 ***   
@@ -1507,6 +1713,48 @@ Generally speaking, would you say that most people can be trusted or that you ne
 ``` {r trustpeople_i}
 tp_i <- covid_weekly_i[c("week", "tp1", "tp2", "tp3")]
 tp_g <- dygraph(tp_i, main = "", group = "Siaya County Sample") %>%
+  dySeries("tp3", strokeWidth = 4, label = "Need to be careful") %>%
+  dySeries("tp2", strokeWidth = 4, label = "Most people can be trusted") %>%
+  dySeries("tp1", strokeWidth = 4, label = "Don't know") %>%
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", label = "Percentage of sample", drawGrid = FALSE, valueRange = c(0, 110)) %>% 
+  dyLegend(width = 500 , labelsSeparateLines = FALSE) %>%
+    dyCrosshair(direction = "vertical") %>%
+  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set1"), connectSeparatedPoints = TRUE) %>%
+      dyCrosshair(direction = "vertical") %>%
+    dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) 
+  tp_g
+
+```
+
+##### Female
+
+Generally speaking, would you say that most people can be trusted or that you need to be very careful in dealing with people?  
+``` {r trustpeople_f}
+tp_f <- covid_weekly_f[c("week", "tp1", "tp2", "tp3")]
+tp_g <- dygraph(tp_f, main = "", group = "Siaya County Sample") %>%
+  dySeries("tp3", strokeWidth = 4, label = "Need to be careful") %>%
+  dySeries("tp2", strokeWidth = 4, label = "Most people can be trusted") %>%
+  dySeries("tp1", strokeWidth = 4, label = "Don't know") %>%
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", label = "Percentage of sample", drawGrid = FALSE, valueRange = c(0, 110)) %>% 
+  dyLegend(width = 500 , labelsSeparateLines = FALSE) %>%
+    dyCrosshair(direction = "vertical") %>%
+  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set1"), connectSeparatedPoints = TRUE) %>%
+      dyCrosshair(direction = "vertical") %>%
+    dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) 
+  tp_g
+
+```
+
+##### Male
+
+Generally speaking, would you say that most people can be trusted or that you need to be very careful in dealing with people?  
+``` {r trustpeople_m}
+tp_m <- covid_weekly_m[c("week", "tp1", "tp2", "tp3")]
+tp_g <- dygraph(tp_m, main = "", group = "Siaya County Sample") %>%
   dySeries("tp3", strokeWidth = 4, label = "Need to be careful") %>%
   dySeries("tp2", strokeWidth = 4, label = "Most people can be trusted") %>%
   dySeries("tp1", strokeWidth = 4, label = "Don't know") %>%
@@ -1592,6 +1840,58 @@ Pre-COVID average computed with data from 2016-2017
 ``` {r cesd10_i}
 cesd_10_i <- covid_weekly_i[c("week", "cesd")]
 cesd_g <- dygraph(cesd_10_i, main = "", group = "Siaya County Sample") %>%
+  dySeries("cesd", strokeWidth = 4, label = "CES-D score") %>%
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", label = "Average score", drawGrid = FALSE, valueRange = c(0, 13)) %>% 
+  dyLegend(width = 450 , labelsSeparateLines = FALSE) %>%
+    dyCrosshair(direction = "vertical") %>%
+  dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = TRUE) %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation("15", text = "July 18") %>%
+      dyCrosshair(direction = "vertical") %>%
+      dyLimit(limit = 10.67273, "Pre-COVID average",
+    strokePattern = "dotted", color = "green") %>%
+    dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) 
+  cesd_g
+
+``` 
+
+Pre-COVID average computed with data from 2016-2017
+
+##### Female
+
+**The Centre for Epidemiological Studies Depression Scale** (CES-D-10) is a 10-item Likert scale questionnaire assessing depressive symptoms in the past week. It includes three items on depressed affect, five items on somatic symptoms, and two on positive affect. Options for each item range from “rarely or none of the time” (score of 0) to “all of the time” (score of 3). Scoring is reversed for positive affect statements. Total scores can range from 0 to 30. **Higher scores suggest greater severity of symptoms.**  
+
+``` {r cesd10_f}
+cesd_10_f <- covid_weekly_f[c("week", "cesd")]
+cesd_g <- dygraph(cesd_10_f, main = "", group = "Siaya County Sample") %>%
+  dySeries("cesd", strokeWidth = 4, label = "CES-D score") %>%
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", label = "Average score", drawGrid = FALSE, valueRange = c(0, 13)) %>% 
+  dyLegend(width = 450 , labelsSeparateLines = FALSE) %>%
+    dyCrosshair(direction = "vertical") %>%
+  dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = TRUE) %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation("15", text = "July 18") %>%
+      dyCrosshair(direction = "vertical") %>%
+      dyLimit(limit = 10.67273, "Pre-COVID average",
+    strokePattern = "dotted", color = "green") %>%
+    dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) 
+  cesd_g
+
+``` 
+
+Pre-COVID average computed with data from 2016-2017
+
+##### Male
+
+**The Centre for Epidemiological Studies Depression Scale** (CES-D-10) is a 10-item Likert scale questionnaire assessing depressive symptoms in the past week. It includes three items on depressed affect, five items on somatic symptoms, and two on positive affect. Options for each item range from “rarely or none of the time” (score of 0) to “all of the time” (score of 3). Scoring is reversed for positive affect statements. Total scores can range from 0 to 30. **Higher scores suggest greater severity of symptoms.**  
+
+``` {r cesd10_m}
+cesd_10_m <- covid_weekly_m[c("week", "cesd")]
+cesd_g <- dygraph(cesd_10_m, main = "", group = "Siaya County Sample") %>%
   dySeries("cesd", strokeWidth = 4, label = "CES-D score") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
   dyAxis("y", label = "Average score", drawGrid = FALSE, valueRange = c(0, 13)) %>% 
