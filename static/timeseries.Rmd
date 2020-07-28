@@ -354,6 +354,8 @@ presAnnotation <- function(dygraph, x, text) {
 ### Income  
 <font size="5">**Earnings per capita (USD, PPP) - past 14 days**</font>
 
+Eligible households are those that qualified for [GiveDirectly transfers](http://emiguel.econ.berkeley.edu/assets/miguel_research/88/GE-Paper_2019-12-18.pdf) by living in homes with thatched roofs in 2014. 
+
 ####  {.tabset .tabset-pills}
 
 ##### All
@@ -744,6 +746,8 @@ it_g
 
 <font size="5">**Weekly consumption per capita (USD, PPP)**</font>
 
+Eligible households are those that qualified for [GiveDirectly transfers](http://emiguel.econ.berkeley.edu/assets/miguel_research/88/GE-Paper_2019-12-18.pdf) by living in homes with thatched roofs in 2014. 
+
 ####  {.tabset .tabset-pills}
 
 ##### All
@@ -896,6 +900,8 @@ Own-food consumption accounts for own agricultural and pastoral production at ma
 
 ### Food Security  
 <font size="5">**Number of days skipping meals in the past 7 days**</font>  
+
+Eligible households are those that qualified for [GiveDirectly transfers](http://emiguel.econ.berkeley.edu/assets/miguel_research/88/GE-Paper_2019-12-18.pdf) by living in homes with thatched roofs in 2014. 
 
 ####  {.tabset .tabset-pills}
 
@@ -1212,6 +1218,8 @@ e_g
 ### COVID-19  
 
 <font size="5">**Reported COVID-19 Behavior Adoption**</font> 
+
+Eligible households are those that qualified for [GiveDirectly transfers](http://emiguel.econ.berkeley.edu/assets/miguel_research/88/GE-Paper_2019-12-18.pdf) by living in homes with thatched roofs in 2014. 
 
 ####  {.tabset .tabset-pills}
 
@@ -1581,6 +1589,8 @@ net5_g
 
 <font size="5">**Weekly labor supply (hours per household adult)**</font>
 
+Eligible households are those that qualified for [GiveDirectly transfers](http://emiguel.econ.berkeley.edu/assets/miguel_research/88/GE-Paper_2019-12-18.pdf) by living in homes with thatched roofs in 2014. 
+
 ####  {.tabset .tabset-pills}
 
 ##### All
@@ -1709,6 +1719,8 @@ l_g <- dygraph(l_nc, main = "", group = "Siaya County Sample") %>%
 
 <font size="5">**Children educational activities**</font> 
 
+Eligible households are those that qualified for [GiveDirectly transfers](http://emiguel.econ.berkeley.edu/assets/miguel_research/88/GE-Paper_2019-12-18.pdf) by living in homes with thatched roofs in 2014. 
+
 ####  {.tabset .tabset-pills}
 
 ##### All
@@ -1784,6 +1796,8 @@ ch_g
 
 
 <font size="5">**Gender violence**</font>
+
+Eligible households are those that qualified for [GiveDirectly transfers](http://emiguel.econ.berkeley.edu/assets/miguel_research/88/GE-Paper_2019-12-18.pdf) by living in homes with thatched roofs in 2014. 
 
 ####  {.tabset .tabset-pills}
 
@@ -1929,6 +1943,8 @@ v_g
 ### Trust
 
 <font size="5">**Trust in government**</font>  
+
+Eligible households are those that qualified for [GiveDirectly transfers](http://emiguel.econ.berkeley.edu/assets/miguel_research/88/GE-Paper_2019-12-18.pdf) by living in homes with thatched roofs in 2014. 
 
 ####  {.tabset .tabset-pills}
 
@@ -2178,6 +2194,8 @@ tp_g <- dygraph(tp_m, main = "", group = "Siaya County Sample") %>%
 
 
 <font size="5">**Depression, CES-D-10**</font> 
+
+Eligible households are those that qualified for [GiveDirectly transfers](http://emiguel.econ.berkeley.edu/assets/miguel_research/88/GE-Paper_2019-12-18.pdf) by living in homes with thatched roofs in 2014. 
 
 ####  {.tabset .tabset-pills}
 
