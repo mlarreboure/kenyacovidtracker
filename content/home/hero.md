@@ -39,5 +39,5 @@ title = ""
 +++
   
     
-The Kenya Covid Tracker is a unique "one stop shop" for real-time data on the spread of COVID-19 and its economic fallout in Kenya. Our goal is to help policy makers in Kenya craft both public health and economic responses to the crisis. We will continue adding data as it becomes available.       
+The Kenya COVID-19 Economic Tracker is a unique "one stop shop" for real-time data on the spread of COVID-19 and its economic fallout in Kenya. Our goal is to help policy makers in Kenya craft both public health and economic responses to the crisis. We will continue adding data as it becomes available.       
         
