@@ -257,12 +257,34 @@ ch <- covid_weekly[ch]
 l <- c("week", "l1_wins", "l2_wins", "l3_wins")
 l <- covid_weekly[l]
 
+# Enterprises
 e <- c("week", "e3_wins", "e4_wins")
 e <- covid_weekly[!(covid_weekly$week %in% c(9,10)),e]
 e3_feb <- weighted.mean(covid_ent_hh$e3_feb_wins,covid_ent_hh$hhent_weight,na.rm = TRUE)
 e4_feb <- weighted.mean(covid_ent_hh$e4_feb_wins,covid_ent_hh$hhent_weight,na.rm = TRUE)
 e <- rbind(c(-1, e3_feb, e4_feb), e)
 e <- rbind(c(-2,NA,NA,NA), e)
+
+# Enterprises by elegibility
+e_e <- c("week", "e3_wins", "e4_wins")
+e_e <- covid_weekly_e[!(covid_weekly_e$week %in% c(9,10)),e_e]
+e3_feb_e <- weighted.mean(covid_ent_hh[covid_ent_hh$eligible == 1,]$e3_feb_wins,
+                          covid_ent_hh[covid_ent_hh$eligible == 1,]$hhent_weight,na.rm = TRUE)
+e4_feb_e <- weighted.mean(covid_ent_hh[covid_ent_hh$eligible == 1,]$e4_feb_wins,
+                          covid_ent_hh[covid_ent_hh$eligible == 1,]$hhent_weight,na.rm = TRUE)
+e_e <- rbind(c(-1, e3_feb_e, e4_feb_e), e_e)
+e_e <- rbind(c(-2,NA,NA,NA), e_e)
+
+e_i <- c("week", "e3_wins", "e4_wins")
+e_i <- covid_weekly_i[!(covid_weekly_i$week %in% c(9,10)),e_i]
+e3_feb_i <- weighted.mean(covid_ent_hh[covid_ent_hh$eligible == 0,]$e3_feb_wins,
+                          covid_ent_hh[covid_ent_hh$eligible == 0,]$hhent_weight,na.rm = TRUE)
+e4_feb_i <- weighted.mean(covid_ent_hh[covid_ent_hh$eligible == 0,]$e4_feb_wins,
+                          covid_ent_hh[covid_ent_hh$eligible == 0,]$hhent_weight,na.rm = TRUE)
+e_i <- rbind(c(-1, e3_feb_i, e4_feb_i), e_i)
+e_i <- rbind(c(-2,NA,NA,NA), e_i)
+
+
 
 tg <- c("week", "tg1", "tg2", "tg3", "tg4", "tg5")
 tg <- covid_weekly[tg]
@@ -484,6 +506,10 @@ i_g
 
 <font size="5">**Hourly Wages**</font>
 
+#### {.tabset .tabset-pills}
+
+##### All
+
 Hourly wages calculated by dividing total wages by total hours worked at the individual level, conditional on employment. Averages weighted by total hours worked at the individual level multiplied by household level weights. 
 
 ```{r wage}
@@ -504,7 +530,55 @@ d_g  <- dygraph(wg, main = "") %>%
   dyLegend(width = 210, show="always") 
 d_g
 ```
-   
+
+##### Eligible
+
+Hourly wages calculated by dividing total wages by total hours worked at the individual level, conditional on employment. Averages weighted by total hours worked at the individual level multiplied by household level weights. 
+
+```{r wage_e}
+wg_e <- c("week", "w1b__wins")
+wg_e <- covid_weekly_e[wg_e]
+  
+d_g  <- dygraph(wg_e, main = "") %>%
+  dySeries("w1b__wins", strokeWidth = 4, label = "Wage") %>%
+#  dySeries("w1c__wins", strokeWidth = 4, label = "Wage conditional on working in February") %>%
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", drawGrid = FALSE , label = "USD, PPP", valueRange = c(0, 4)) %>%
+  dyOptions(axisLineWidth = 4,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE) %>%
+    dyCrosshair(direction = "vertical") %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation(end_week, text = end_survey) %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
+    dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyLegend(width = 210, show="always") 
+d_g
+```
+
+##### Ineligible
+
+Hourly wages calculated by dividing total wages by total hours worked at the individual level, conditional on employment. Averages weighted by total hours worked at the individual level multiplied by household level weights. 
+
+```{r wage_i}
+wg_i <- c("week", "w1b__wins")
+wg_i <- covid_weekly_i[wg_i]
+  
+d_g  <- dygraph(wg_i, main = "") %>%
+  dySeries("w1b__wins", strokeWidth = 4, label = "Wage") %>%
+#  dySeries("w1c__wins", strokeWidth = 4, label = "Wage conditional on working in February") %>%
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", drawGrid = FALSE , label = "USD, PPP", valueRange = c(0, 4)) %>%
+  dyOptions(axisLineWidth = 4,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE) %>%
+    dyCrosshair(direction = "vertical") %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation(end_week, text = end_survey) %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
+    dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyLegend(width = 210, show="always") 
+d_g
+```
+
+#### {}
+
 ***  
   
 <font size="5">**Dissaving per capita (USD, PPP) - past 14 days**</font>  
@@ -1195,12 +1269,19 @@ f1a_g
 ***  
 ### Household enterprises  
 <font size="5">**Enterprises revenue and profits in the past 14 days**</font>
+
+Eligible households are those that qualified for [GiveDirectly transfers](http://emiguel.econ.berkeley.edu/assets/miguel_research/88/GE-Paper_2019-12-18.pdf) by living in homes with thatched roofs in 2014.
+
+#### {.tabset .tabset-pills}
+
+##### All
+
 ```{r enterprises}
 e_g  <- dygraph(e, main = "") %>%
   dySeries("e3_wins", strokeWidth = 4, label = "Total enterprise revenue") %>%
   dySeries("e4_wins", strokeWidth = 4, label = "Total enterprise profits") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", drawGrid = FALSE , label = "USD, PPP") %>% 
+  dyAxis("y", drawGrid = FALSE , label = "USD, PPP", valueRange = c(0, 85)) %>% 
   dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
@@ -1212,6 +1293,48 @@ e_g  <- dygraph(e, main = "") %>%
   dyLegend(width = 200, labelsSeparateLines = TRUE) 
 e_g
 ``` 
+
+##### Eligible
+
+```{r enterprises_e}
+e_g  <- dygraph(e_e, main = "") %>%
+  dySeries("e3_wins", strokeWidth = 4, label = "Total enterprise revenue") %>%
+  dySeries("e4_wins", strokeWidth = 4, label = "Total enterprise profits") %>%
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", drawGrid = FALSE , label = "USD, PPP", valueRange = c(0, 85)) %>% 
+  dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = FALSE) %>%
+    dyCrosshair(direction = "vertical") %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation(end_week, text = end_survey) %>%
+    dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyEvent(-1 , "February", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyEvent(0 , "Lockdown begins March 15", labelLoc = "top") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
+  dyLegend(width = 200, labelsSeparateLines = TRUE) 
+e_g
+``` 
+
+##### Ineligible
+
+```{r enterprises_i}
+e_g  <- dygraph(e_i, main = "") %>%
+  dySeries("e3_wins", strokeWidth = 4, label = "Total enterprise revenue") %>%
+  dySeries("e4_wins", strokeWidth = 4, label = "Total enterprise profits") %>%
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", drawGrid = FALSE , label = "USD, PPP", valueRange = c(0, 85)) %>% 
+  dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = FALSE) %>%
+    dyCrosshair(direction = "vertical") %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation(end_week, text = end_survey) %>%
+    dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyEvent(-1 , "February", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyEvent(0 , "Lockdown begins March 15", labelLoc = "top") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
+  dyLegend(width = 200, labelsSeparateLines = TRUE) 
+e_g
+``` 
+
+#### {}
   
   ***  
 
