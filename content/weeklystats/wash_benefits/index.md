@@ -1,6 +1,6 @@
 ---
 title: "Household Survey - Kakamega and Bungoma Counties"
-summary: Descriptive statistics for households in Kakamega and Bungoma counties, previously enrolled in WASH Benefits Kenya.
+summary: Descriptive statistics for rural households in Kakamega and Bungoma counties.
 date: '2020-04-15T00:00:00Z'
 tags: 
 - 
