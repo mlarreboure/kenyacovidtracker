@@ -45,7 +45,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 *** 
 
-<font size="5">**Brow bread (400 g)**</font>
+<font size="5">**Brown bread (400 g)**</font>
   
   ![](prices/Dots_bread_brown.png)
 
