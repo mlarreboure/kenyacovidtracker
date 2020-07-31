@@ -3,7 +3,7 @@ title: Price Survey - National Sample
 summary: Quick-response online survey tracking prices of essential consumer products across Kenya.
 tags:
 - National
-date: "2020-04-15T00:00:00Z"
+date: "2020-03-15T00:00:00Z"
 
 # Optional external URL for project (replaces project detail page).
 external_link: "prices.html"

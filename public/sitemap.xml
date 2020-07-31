@@ -3,12 +3,47 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/other/flood/</loc>
-    <lastmod>2020-05-13T00:00:00+00:00</lastmod>
+    <loc>/weeklystats/siaya/</loc>
+    <lastmod>2020-07-15T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/</loc>
+    <lastmod>2020-07-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/siaya/</loc>
+    <lastmod>2020-07-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2020-07-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/weeklystats/</loc>
+    <lastmod>2020-07-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/weeklystats/enterprises/</loc>
+    <lastmod>2020-06-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/national/</loc>
+    <lastmod>2020-05-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/weeklystats/national/</loc>
+    <lastmod>2020-05-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/other/flood/</loc>
     <lastmod>2020-05-13T00:00:00+00:00</lastmod>
   </url>
   
@@ -28,47 +63,7 @@
   </url>
   
   <url>
-    <loc>/tags/border/</loc>
-    <lastmod>2020-04-15T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/weeklystats/enterprises/</loc>
-    <lastmod>2020-04-15T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/weeklystats/wash_benefits/</loc>
-    <lastmod>2020-04-15T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/weeklystats/siaya/</loc>
-    <lastmod>2020-04-15T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/national/</loc>
-    <lastmod>2020-04-15T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/weeklystats/pricessurvey/</loc>
-    <lastmod>2020-04-15T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/weeklystats/national/</loc>
-    <lastmod>2020-04-15T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/siaya/</loc>
-    <lastmod>2020-04-15T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
     <lastmod>2020-04-15T00:00:00+00:00</lastmod>
   </url>
   
@@ -78,13 +73,18 @@
   </url>
   
   <url>
-    <loc>/weeklystats/trading/</loc>
-    <lastmod>2020-04-15T00:00:00+00:00</lastmod>
+    <loc>/weeklystats/pricessurvey/</loc>
+    <lastmod>2020-03-15T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/weeklystats/</loc>
-    <lastmod>2020-04-15T00:00:00+00:00</lastmod>
+    <loc>/tags/border/</loc>
+    <lastmod>2020-01-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/weeklystats/trading/</loc>
+    <lastmod>2020-01-15T00:00:00+00:00</lastmod>
   </url>
   
   <url>
