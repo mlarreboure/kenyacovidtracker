@@ -132,8 +132,8 @@ tmp[tmp$week == 3.5,"i1_wins"] = rev_prof_s[15,"i1_wins"]
 tmp <- rbind(tmp, rev_prof_s[19,])
 tmp <- rbind(tmp,(rev_prof_s[20,]+rev_prof_s[21,])/2)
 tmp <- rbind(tmp,(rev_prof_s[22,]+rev_prof_s[23,])/2)
-tmp <- rbind(tmp, rev_prof_s[24,])
-rev_prof_s <- tmp
+tmp <- rbind(tmp, rev_prof_s[24,]) # if end week is odd, average end week with previous week and append empty row.
+rev_prof_s <- tmp                  # if end week is even, append data of last row (no average) and append empty row.
 
 
 ############## Create DF for Investment / Wages ################
