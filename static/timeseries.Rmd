@@ -2633,10 +2633,10 @@ mh1_g <- dygraph(mh1, main = "", group = "Siaya County Sample") %>%
   dySeries("s6_q1_2", strokeWidth = 4, label = "1-2 days") %>%
   dySeries("s6_q1_1", strokeWidth = 4, label = "Not at all or less than one day") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "Percentage of sample", drawGrid = FALSE, valueRange = c(0, 110)) %>% 
+  dyAxis("y", label = "Percentage of sample", drawGrid = FALSE, valueRange = c(0, 60)) %>% 
   dyLegend(width = 450 , labelsSeparateLines = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
-  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = TRUE) %>%
+  dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = TRUE) %>%
   presAnnotation("1", text = "April 11") %>%
   presAnnotation(end_week, text = end_survey) %>%
       dyCrosshair(direction = "vertical") %>%
@@ -2658,10 +2658,10 @@ mh2_g <- dygraph(mh2, main = "", group = "Siaya County Sample") %>%
   dySeries("s6_q2_2", strokeWidth = 4, label = "1-2 days") %>%
   dySeries("s6_q2_1", strokeWidth = 4, label = "Not at all or less than one day") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "Percentage of sample", drawGrid = FALSE, valueRange = c(0, 110)) %>% 
+  dyAxis("y", label = "Percentage of sample", drawGrid = FALSE, valueRange = c(0, 60)) %>% 
   dyLegend(width = 450 , labelsSeparateLines = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
-  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = TRUE) %>%
+  dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = TRUE) %>%
   presAnnotation("1", text = "April 11") %>%
   presAnnotation(end_week, text = end_survey) %>%
       dyCrosshair(direction = "vertical") %>%
@@ -2683,10 +2683,10 @@ mh3_g <- dygraph(mh3, main = "", group = "Siaya County Sample") %>%
   dySeries("s6_q3_2", strokeWidth = 4, label = "1-2 days") %>%
   dySeries("s6_q3_1", strokeWidth = 4, label = "Not at all or less than one day") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "Percentage of sample", drawGrid = FALSE, valueRange = c(0, 110)) %>% 
+  dyAxis("y", label = "Percentage of sample", drawGrid = FALSE, valueRange = c(0, 80)) %>% 
   dyLegend(width = 450 , labelsSeparateLines = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
-  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = TRUE) %>%
+  dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = TRUE) %>%
   presAnnotation("1", text = "April 11") %>%
   presAnnotation(end_week, text = end_survey) %>%
       dyCrosshair(direction = "vertical") %>%
@@ -2708,10 +2708,10 @@ mh4_g <- dygraph(mh4, main = "", group = "Siaya County Sample") %>%
   dySeries("s6_q4_2", strokeWidth = 4, label = "1-2 days") %>%
   dySeries("s6_q4_1", strokeWidth = 4, label = "Not at all or less than one day") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "Percentage of sample", drawGrid = FALSE, valueRange = c(0, 110)) %>% 
+  dyAxis("y", label = "Percentage of sample", drawGrid = FALSE, valueRange = c(0, 60)) %>% 
   dyLegend(width = 450 , labelsSeparateLines = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
-  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = TRUE) %>%
+  dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = TRUE) %>%
   presAnnotation("1", text = "April 11") %>%
   presAnnotation(end_week, text = end_survey) %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
@@ -2733,10 +2733,10 @@ mh5_g <- dygraph(mh5, main = "", group = "Siaya County Sample") %>%
   dySeries("s6_q5_2", strokeWidth = 4, label = "1-2 days") %>%
   dySeries("s6_q5_1", strokeWidth = 4, label = "Not at all or less than one day") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "Percentage of sample", drawGrid = FALSE, valueRange = c(0, 110)) %>% 
+  dyAxis("y", label = "Percentage of sample", drawGrid = FALSE, valueRange = c(0, 100)) %>% 
   dyLegend(width = 450 , labelsSeparateLines = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
-  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = TRUE) %>%
+  dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = TRUE) %>%
   presAnnotation("1", text = "April 11") %>%
   presAnnotation(end_week, text = end_survey) %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
