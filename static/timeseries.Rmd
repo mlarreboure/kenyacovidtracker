@@ -1707,6 +1707,120 @@ net5_g
 #### {}
 
 *** 
+<font size="5">**Face mask usage by activity / location**</font>
+
+Conditional on visiting location / participating in the activity. 
+
+####  {.tabset .tabset-pills}
+
+##### All
+
+```{r}
+fmsk <- data.frame("Activity" = c("Market", "Religious gathering", "Public transportation", "Store", "Visiting Household",
+                                  "Work",
+                                  "Market", "Religious gathering", "Public transportation", "Store", "Visiting Household",
+                                  "Work"),
+                  "Percentage" = c(
+                    mean(covid_hh$fmsk_1, na.rm = TRUE)*100,
+                    mean(covid_hh$fmsk_2, na.rm = TRUE)*100,
+                    mean(covid_hh$fmsk_3, na.rm = TRUE)*100,
+                    mean(covid_hh$fmsk_4, na.rm = TRUE)*100,
+                    mean(covid_hh$fmsk_5, na.rm = TRUE)*100,
+                    mean(covid_hh$fmsk_6, na.rm = TRUE)*100,
+                    
+                    mean(covid_hh$fmsk_others_1, na.rm = TRUE)*100,
+                    mean(covid_hh$fmsk_others_2, na.rm = TRUE)*100,
+                    mean(covid_hh$fmsk_others_3, na.rm = TRUE)*100,
+                    mean(covid_hh$fmsk_others_4, na.rm = TRUE)*100,
+                    mean(covid_hh$fmsk_others_5, na.rm = TRUE)*100,
+                    mean(covid_hh$fmsk_others_6, na.rm = TRUE)*100
+                  ),
+                  "Who" = c("Self","Self","Self","Self","Self","Self",
+                            "Others","Others","Others","Others","Others","Others"))
+fmsk$Activity <- factor(fmsk$Activity, levels = c("Market", "Religious gathering", "Public transportation", "Store", "Visiting Household","Work"))
+
+ggplot(fmsk, aes(Activity, Percentage)) + geom_col(aes(fill = Who), position = "dodge") + coord_flip() + ylab("% Wearing mask") + ylim(0,100) + theme_minimal()
+```
+
+##### Eligible
+
+```{r}
+fmsk <- data.frame("Activity" = c("Market", "Religious gathering", "Public transportation", "Store", "Visiting Household",
+                                  "Work"),
+                  "Percentage" = c(
+                    mean(covid_hh[covid_hh$eligible == 1,]$fmsk_1, na.rm = TRUE)*100,
+                    mean(covid_hh[covid_hh$eligible == 1,]$fmsk_2, na.rm = TRUE)*100,
+                    mean(covid_hh[covid_hh$eligible == 1,]$fmsk_3, na.rm = TRUE)*100,
+                    mean(covid_hh[covid_hh$eligible == 1,]$fmsk_4, na.rm = TRUE)*100,
+                    mean(covid_hh[covid_hh$eligible == 1,]$fmsk_5, na.rm = TRUE)*100,
+                    mean(covid_hh[covid_hh$eligible == 1,]$fmsk_6, na.rm = TRUE)*100),
+                  "Who" = c("Self", "Self", "Self", "Self", "Self", "Self")
+                  )
+fmsk$Activity <- factor(fmsk$Activity, levels = c("Market", "Religious gathering", "Public transportation", "Store", "Visiting Household","Work"))
+
+ggplot(fmsk, aes(Activity, Percentage)) + geom_col(aes(fill = Who)) + coord_flip() + ylab("% Wearing mask") + theme_minimal()+ ylim(0,100)
+```
+
+##### Ineligible
+
+```{r}
+fmsk <- data.frame("Activity" = c("Market", "Religious gathering", "Public transportation", "Store", "Visiting Household",
+                                  "Work"),
+                  "Percentage" = c(
+                    mean(covid_hh[covid_hh$eligible == 0,]$fmsk_1, na.rm = TRUE)*100,
+                    mean(covid_hh[covid_hh$eligible == 0,]$fmsk_2, na.rm = TRUE)*100,
+                    mean(covid_hh[covid_hh$eligible == 0,]$fmsk_3, na.rm = TRUE)*100,
+                    mean(covid_hh[covid_hh$eligible == 0,]$fmsk_4, na.rm = TRUE)*100,
+                    mean(covid_hh[covid_hh$eligible == 0,]$fmsk_5, na.rm = TRUE)*100,
+                    mean(covid_hh[covid_hh$eligible == 0,]$fmsk_6, na.rm = TRUE)*100),
+                  "Who" = c("Self", "Self", "Self", "Self", "Self", "Self")
+                  )
+fmsk$Activity <- factor(fmsk$Activity, levels = c("Market", "Religious gathering", "Public transportation", "Store", "Visiting Household","Work"))
+
+ggplot(fmsk, aes(Activity, Percentage)) + geom_col(aes(fill = Who)) + coord_flip() + ylab("% Wearing mask") + theme_minimal()+ ylim(0,100)
+```
+
+##### Male
+
+```{r}
+fmsk <- data.frame("Activity" = c("Market", "Religious gathering", "Public transportation", "Store", "Visiting Household",
+                                  "Work"),
+                  "Percentage" = c(
+                    mean(covid_hh[covid_hh$s9_fogender == 1,]$fmsk_1, na.rm = TRUE)*100,
+                    mean(covid_hh[covid_hh$s9_fogender == 1,]$fmsk_2, na.rm = TRUE)*100,
+                    mean(covid_hh[covid_hh$s9_fogender == 1,]$fmsk_3, na.rm = TRUE)*100,
+                    mean(covid_hh[covid_hh$s9_fogender == 1,]$fmsk_4, na.rm = TRUE)*100,
+                    mean(covid_hh[covid_hh$s9_fogender == 1,]$fmsk_5, na.rm = TRUE)*100,
+                    mean(covid_hh[covid_hh$s9_fogender == 1,]$fmsk_6, na.rm = TRUE)*100),
+                  "Who" = c("Self", "Self", "Self", "Self", "Self", "Self")
+                  )
+fmsk$Activity <- factor(fmsk$Activity, levels = c("Market", "Religious gathering", "Public transportation", "Store", "Visiting Household","Work"))
+
+ggplot(fmsk, aes(Activity, Percentage)) + geom_col(aes(fill = Who)) + coord_flip() + ylab("% Wearing mask") + theme_minimal()+ ylim(0,100)
+```
+
+##### Female
+
+```{r}
+fmsk <- data.frame("Activity" = c("Market", "Religious gathering", "Public transportation", "Store", "Visiting Household",
+                                  "Work"),
+                  "Percentage" = c(
+                    mean(covid_hh[covid_hh$s9_fogender == 2,]$fmsk_1, na.rm = TRUE)*100,
+                    mean(covid_hh[covid_hh$s9_fogender == 2,]$fmsk_2, na.rm = TRUE)*100,
+                    mean(covid_hh[covid_hh$s9_fogender == 2,]$fmsk_3, na.rm = TRUE)*100,
+                    mean(covid_hh[covid_hh$s9_fogender == 2,]$fmsk_4, na.rm = TRUE)*100,
+                    mean(covid_hh[covid_hh$s9_fogender == 2,]$fmsk_5, na.rm = TRUE)*100,
+                    mean(covid_hh[covid_hh$s9_fogender == 2,]$fmsk_6, na.rm = TRUE)*100),
+                  "Who" = c("Self", "Self", "Self", "Self", "Self", "Self")
+                  )
+fmsk$Activity <- factor(fmsk$Activity, levels = c("Market", "Religious gathering", "Public transportation", "Store", "Visiting Household","Work"))
+
+ggplot(fmsk, aes(Activity, Percentage)) + geom_col(aes(fill = Who)) + coord_flip() + ylab("% Wearing mask") + theme_minimal()+ ylim(0,100)
+```
+
+#### {}
+
+*** 
   
 ### Labor Supply
 
