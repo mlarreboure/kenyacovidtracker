@@ -1821,6 +1821,104 @@ ggplot(fmsk, aes(Activity, Percentage)) + geom_col(aes(fill = Who)) + coord_flip
 #### {}
 
 *** 
+
+<font size="5">**Visited or had visitors from another household, past 14 days**</font>
+
+#### {.tabset .tabset-pills}
+
+##### All
+
+```{r}
+net4 <- covid_weekly[c("week", "net4")]
+net4_g  <- dygraph(net4, main = "") %>%
+  dySeries("net4", strokeWidth = 4, label = "Visited or had visitors") %>%
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", drawGrid = FALSE, label = "Percentage", valueRange = c(10, 60)) %>% 
+  dyLegend(width = 500) %>%
+     dyCrosshair(direction = "vertical") %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation(end_week, text = end_survey) %>%
+    dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+ dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
+  dyOptions(axisLineWidth = 4, includeZero = TRUE, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE)
+net4_g
+```
+
+##### Eligible
+
+```{r}
+net4 <- covid_weekly_e[c("week", "net4")]
+net4_g  <- dygraph(net4, main = "") %>%
+  dySeries("net4", strokeWidth = 4, label = "Visited or had visitors") %>%
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", drawGrid = FALSE, label = "Percentage", valueRange = c(10, 60)) %>% 
+  dyLegend(width = 500) %>%
+     dyCrosshair(direction = "vertical") %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation(end_week, text = end_survey) %>%
+    dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+ dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
+  dyOptions(axisLineWidth = 4, includeZero = TRUE, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE)
+net4_g
+```
+
+##### Ineligible
+
+```{r}
+net4 <- covid_weekly_i[c("week", "net4")]
+net4_g  <- dygraph(net4, main = "") %>%
+  dySeries("net4", strokeWidth = 4, label = "Visited or had visitors") %>%
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", drawGrid = FALSE, label = "Percentage", valueRange = c(10, 60)) %>% 
+  dyLegend(width = 500) %>%
+     dyCrosshair(direction = "vertical") %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation(end_week, text = end_survey) %>%
+    dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+ dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
+  dyOptions(axisLineWidth = 4, includeZero = TRUE, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE)
+net4_g
+```
+
+##### Household with children
+
+```{r}
+net4 <- covid_weekly_c[c("week", "net4")]
+net4_g  <- dygraph(net4, main = "") %>%
+  dySeries("net4", strokeWidth = 4, label = "Visited or had visitors") %>%
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", drawGrid = FALSE, label = "Percentage", valueRange = c(10, 60)) %>% 
+  dyLegend(width = 500) %>%
+     dyCrosshair(direction = "vertical") %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation(end_week, text = end_survey) %>%
+    dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+ dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
+  dyOptions(axisLineWidth = 4, includeZero = TRUE, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE)
+net4_g
+```
+
+##### No children
+
+```{r}
+net4 <- covid_weekly_nc[c("week", "net4")]
+net4_g  <- dygraph(net4, main = "") %>%
+  dySeries("net4", strokeWidth = 4, label = "Visited or had visitors") %>%
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", drawGrid = FALSE, label = "Percentage", valueRange = c(10, 60)) %>% 
+  dyLegend(width = 500) %>%
+     dyCrosshair(direction = "vertical") %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation(end_week, text = end_survey) %>%
+    dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+ dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
+  dyOptions(axisLineWidth = 4, includeZero = TRUE, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE)
+net4_g
+```
+
+#### {}
+
+*** 
   
 ### Labor Supply
 
