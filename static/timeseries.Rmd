@@ -1709,7 +1709,7 @@ net5_g
 *** 
 <font size="5">**Face mask usage by activity / location**</font>
 
-Conditional on visiting location / participating in the activity. 
+Conditional on visiting location / participating in the activity. We present two variables, the first one is self-reported mask usage and the second one is the observed proportion of other people using a face mask. 
 
 ####  {.tabset .tabset-pills}
 
