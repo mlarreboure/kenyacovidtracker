@@ -5,7 +5,7 @@
     <link>/weeklystats/</link>
       <atom:link href="/weeklystats/index.xml" rel="self" type="application/rss+xml" />
     <description>Weeklystats</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 15 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 15 Jul 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/file-20200430-42951-1eb1lbm.jpg</url>
       <title>Weeklystats</title>
@@ -13,41 +13,49 @@
     </image>
     
     <item>
-      <title>Enterprise Survey - Siaya County</title>
-      <link>/weeklystats/enterprises/</link>
-      <pubDate>Wed, 15 Apr 2020 00:00:00 +0000</pubDate>
-      <guid>/weeklystats/enterprises/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Household Survey - Siaya County</title>
       <link>/weeklystats/siaya/</link>
-      <pubDate>Wed, 15 Apr 2020 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 15 Jul 2020 00:00:00 +0000</pubDate>
       <guid>/weeklystats/siaya/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Prices Survey - National Sample</title>
-      <link>/weeklystats/pricessurvey/</link>
-      <pubDate>Wed, 15 Apr 2020 00:00:00 +0000</pubDate>
-      <guid>/weeklystats/pricessurvey/</guid>
+      <title>Enterprise Survey - Siaya County</title>
+      <link>/weeklystats/enterprises/</link>
+      <pubDate>Mon, 15 Jun 2020 00:00:00 +0000</pubDate>
+      <guid>/weeklystats/enterprises/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Rapid Response Phone Surveys - National Sample</title>
       <link>/weeklystats/national/</link>
-      <pubDate>Wed, 15 Apr 2020 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 15 May 2020 00:00:00 +0000</pubDate>
       <guid>/weeklystats/national/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Household Survey - Kakamega and Bungoma Counties</title>
+      <link>/weeklystats/wash_benefits/</link>
+      <pubDate>Wed, 15 Apr 2020 00:00:00 +0000</pubDate>
+      <guid>/weeklystats/wash_benefits/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Price Survey - National Sample</title>
+      <link>/weeklystats/pricessurvey/</link>
+      <pubDate>Sun, 15 Mar 2020 00:00:00 +0000</pubDate>
+      <guid>/weeklystats/pricessurvey/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Traders Survey - Border Counties</title>
       <link>/weeklystats/trading/</link>
-      <pubDate>Wed, 15 Apr 2020 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 15 Jan 2020 00:00:00 +0000</pubDate>
       <guid>/weeklystats/trading/</guid>
       <description></description>
     </item>

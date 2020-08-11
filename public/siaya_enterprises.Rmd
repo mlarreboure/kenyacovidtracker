@@ -19,10 +19,10 @@ library(xts)
 library(lubridate)
 
 
-ent_weekly <- read_dta("../../GE_Endline2/covid19/data/COVID_AllENTs_outcomes_weekly.dta") 
-ent_outcomes <- read_dta("../../GE_Endline2/covid19/data/COVID_AllENTs_outcomes.dta") #to get retrospective vars
-ent_weekly_sector <- read_dta("../../GE_Endline2/covid19/data/COVID_AllENTs_outcomes_weekly_sector.dta")
-covid_weekly <- read_dta("../../GE_Endline2/covid19/data/COVID_AllHHs_outcomes_weekly_c.dta") # For agriculural ent.
+ent_weekly <- read_dta("../../GE_Endline2/covid19/data/COVID_ENT_outcomes_weekly.dta") 
+ent_outcomes <- read_dta("../../GE_Endline2/covid19/data/COVID_ENT_Rd1_outcomes.dta") #to get retrospective vars
+ent_weekly_sector <- read_dta("../../GE_Endline2/covid19/data/COVID_ENT_outcomes_weekly_sector.dta")
+covid_weekly <- read_dta("../../GE_Endline2/covid19/data/COVID_HH_outcomes_weekly.dta") # For agriculural ent.
 
 
 #Grouping vars for graphs
@@ -44,7 +44,7 @@ inv <- ent_weekly[inv]
 wages <- c("week", "wages_wins")
 wages <- ent_weekly[wages]
 
-cov <- c("week", "ecov_1", "ecov_2", "ecov_3")
+cov <- c("week", "ecov_1", "ecov_4", "ecov_5")
 cov <- ent_weekly[cov]
 
 bm <- c("week", "bm_emp", "bm_cust")
@@ -89,7 +89,6 @@ rev_prof <- rbind(tmp, rev_prof) # append to dataframe
 ## Re-shape data for graphs
 ag <- covid_weekly[c("week", "i1_wins")] #agricultural data
 ag$week <- ag$week -5  # make weeks coincide with ent survey
-ag <- ag[ag$week < 5,] # exclude last week of data (few observations)
 rt <- ent_weekly_sector[ent_weekly_sector$sector == 1,][c("week", "rev_wins_wins_wins")]
 mf <- ent_weekly_sector[ent_weekly_sector$sector == 2,][c("week", "rev_wins_wins_wins")]
 sr <- ent_weekly_sector[ent_weekly_sector$sector == 3,][c("week", "rev_wins_wins_wins")]
@@ -129,8 +128,10 @@ tmp <- rbind(tmp,(rev_prof_s[11,]+rev_prof_s[12,])/2)
 tmp <- rbind(tmp,(rev_prof_s[13,]+rev_prof_s[14,])/2)
 tmp <- rbind(tmp,(rev_prof_s[15,]+rev_prof_s[16,])/2)
 tmp <- rbind(tmp,(rev_prof_s[17,]+rev_prof_s[18,])/2)
-#tmp <- rbind(tmp, rev_prof_s[19,]) # Data from week 7 is very volatile... (fewer obs...) Update once data comes in
-tmp <- rbind(tmp, c(7, NA,NA,NA,NA)) # Setting week 7 to missing values
+tmp[tmp$week == 3.5,"i1_wins"] = rev_prof_s[15,"i1_wins"]
+tmp <- rbind(tmp, rev_prof_s[19,])
+tmp <- rbind(tmp,(rev_prof_s[20,]+rev_prof_s[21,])/2)
+tmp <- rbind(tmp, rev_prof_s[22:23,])
 rev_prof_s <- tmp
 
 
@@ -139,7 +140,6 @@ i_feb <- weighted.mean(ent_outcomes[ent_outcomes$week != 5,][,"investment_feb_wi
 w_feb <- weighted.mean(ent_outcomes[ent_outcomes$week != 5,][,"wages_feb_wins"],ent_outcomes[ent_outcomes$week != 5,][,"ent_weight"],na.rm = TRUE)
 tmp <- data.frame("week" = c(-1),
                   "investment_wins" = c(i_feb)) #alternatively, 2.291782 if we restrict for first weeks only.
-inv <- rbind(inv[inv$week < 7,], c(7, NA)) ## Exclude week 7 since very few data points
 inv_r <- rbind(tmp,inv)
 inv_r <- rbind(c(-2,NA), inv_r)
 tmp <- data.frame("week" = c(-1),
@@ -384,34 +384,6 @@ e_g
 
 *** 
 
-### External funding
-
-<font size="5">**Enterprises reporting external funding since February 2020**</font>
-``` {r loan}
-  loan_g <- dygraph(loan, main = "") %>%
-  dySeries("s_loan", strokeWidth = 4, label = "Loan", color = "rgb(78,125,219)") %>%
-  dySeries("s_gov", strokeWidth = 4, label = "Government assistance", color = "rgb(204,0,0)") %>%
-  dySeries("s_ngo", strokeWidth = 4, label = "NGO assistance", color = "darkgreen") %>%
-  dyAxis("x", pixelsPerLabel = 90 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "% that received external funding", drawGrid = FALSE, valueRange = c(0, 22)) %>% 
-  dyLegend(width = 500, labelsSeparateLines = FALSE) %>%
-  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4,
-            connectSeparatedPoints = TRUE) %>%
-    dyCrosshair(direction = "vertical") %>%
-    dyEvent(4.1 , "June", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
-  dyEvent(-0.2 , "May", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
-    dyEvent(-4.5 , "April", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
-    dyEvent(-8.8 , "March", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
-   dyEvent(-13.1 , "February", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
-   dyEvent(-7 , "Lockdown begins", labelLoc = "top") %>%
-  presAnnotation("1", text = "May 10") %>%
-  presAnnotation("7", text = "June 27") %>%
-  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
-loan_g
-```
-
-*** 
-
 ### Investment and wages
 
 <font size="5">**Investment (USD, PPP) - past 14 days**</font>
@@ -468,12 +440,12 @@ How has COVID-19 affected this business?*
 ``` {r ecov}
   ecov_g <- dygraph(cov, main = "") %>%
   dySeries("ecov_1", strokeWidth = 4, label = "Reduction in demand/customers") %>%
-  dySeries("ecov_2", strokeWidth = 4, label = "Has not affected") %>%
-  dySeries("ecov_3", strokeWidth = 4, label = "Other") %>%
+  dySeries("ecov_4", strokeWidth = 4, label = "Other: affected by curfew / market closure") %>%
+  dySeries("ecov_5", strokeWidth = 4, label = "Other") %>%
   dyAxis("x", pixelsPerLabel = 90 , drawGrid = FALSE, label = "Weeks") %>% #grid
   dyAxis("y", label = "Percentage of sample", drawGrid = FALSE) %>% 
   dyLegend(width = 500, labelsSeparateLines = FALSE) %>%
-  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set1")) %>%
+  dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set1")) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "May 10") %>%
   presAnnotation("7", text = "June 27") %>%
@@ -592,12 +564,16 @@ These data comes from phone survey interviews conducted by [REMIT Kenya](http://
 
 So far we have interviewed 3,041 enterprises, with the following distribution per week:
 
-| Week	| Dates	| Number of surveys |
-|------|:-----:|:---------:|
-| Week 1 |	10 May 2020 - 16 May 2020	| 532 |
-| Week 2 |	17 May 2020 - 23 May 2020	| 458 |
-| Week 3 |	24 May 2020 - 30 May 2020	| 434 |
-| Week 4 |	31 May 2020 - 06 June 2020	| 732 |
-| Week 5 |	07 June 2020 - 13 June 2020	| 885 |
-| Week 6 | 14 June 2020 - 20 June 2020 | 904 |
+| Week	| Dates	| Number of surveys | Round |
+|------|:-----:|:---------:|:-----:|
+| Week 1 |	10 May 2020 - 16 May 2020	| 532 |1|
+| Week 2 |	17 May 2020 - 23 May 2020	| 458 |1|
+| Week 3 |	24 May 2020 - 30 May 2020	| 434 |1|
+| Week 4 |	31 May 2020 - 06 June 2020	| 732 |1|
+| Week 5 |	07 June 2020 - 13 June 2020	| 885 |1|
+| Week 6 | 14 June 2020 - 20 June 2020 | 1216 |1|
+| Week 9 | 5 July 2020 - 11 July 2020 | 570 |2|
+| Week 10 | 12 July 2020 - 18 July 2020 | 609 |2|
+| Week 11 | 19 July 2020 - 25 July 2020 | 552 |2|
+
 
