@@ -57,7 +57,8 @@ Collaborators on this project are:
 [Anya Marchenko](https://cega.berkeley.edu/user-type/staff/#anya-marchenko) - University of California, Berkeley;   
 [Edward Miguel](http://emiguel.econ.berkeley.edu/) - University of California, Berkeley;  
 [Carolyne Nekesa](https://www.linkedin.com/in/carolyne-nekesa-khagondi-99b42466) - Vyxer REMIT Kenya;   
-[Cecilia Nekesa](https://ke.linkedin.com/in/cecilia-nekesa-makokha-62a85231) - Vyxer REMIT Kenya;  
+[Cecilia Nekesa](https://ke.linkedin.com/in/cecilia-nekesa-makokha-62a85231) - Vyxer REMIT Kenya; 
+[Samuel Oonge](soonge@remitkenya.co.ke) - Vyxer REMIT Kenya;
 [Eric Owino](http://remitkenya.co.ke/index.php/about-us/) - Vyxer REMIT Kenya;  
 [Utz Johann Pape](https://blogs.worldbank.org/team/utz-pape) - The World Bank;   
 [Carlos Paramo](https://www.linkedin.com/in/carlosparamob) - University of California, Berkeley;   
