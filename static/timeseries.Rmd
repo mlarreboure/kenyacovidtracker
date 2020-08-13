@@ -20,8 +20,8 @@ library(ggplot2)
 library(rjson) #reading shapefiles for heatmaps
 library(plotly) #interactive visualization
 
-end_week = "17"
-end_survey = "August 1"
+end_week = "18"
+end_survey = "August 8"
 
 ## Importing Data ##
 #covid_weekly <- read_dta("~/Dropbox (Princeton)/GE_Endline2/covid19/data/COVID_AllHHs_outcomes_weekly.dta")
@@ -183,54 +183,54 @@ i_nc <- rbind(c(-2,NA,NA,NA), i_nc)
 d <- c("week", "i7_wins", "dissaved") 
 d <- covid_weekly[d]
 
-it <- c("week", "i5a_wins", "i5b_wins" , "i5c_wins")
+it <- c("week", "govsupport", "ngosupport" , "polsupport")
 it <- covid_weekly[!(covid_weekly$week %in% c(9,10)),it]
-i5a_feb <- weighted.mean(covid_hh$i5a_feb_wins,covid_hh$hh_weight,na.rm = TRUE)
-i5b_feb <- weighted.mean(covid_hh$i5b_feb_wins,covid_hh$hh_weight,na.rm = TRUE)
-i5c_feb <- weighted.mean(covid_hh$i5c_feb_wins,covid_hh$hh_weight,na.rm = TRUE)
+i5a_feb <- weighted.mean(covid_hh$govsupport_feb,covid_hh$hh_weight,na.rm = TRUE)
+i5b_feb <- weighted.mean(covid_hh$ngosupport_feb,covid_hh$hh_weight,na.rm = TRUE)
+i5c_feb <- weighted.mean(covid_hh$polsupport_feb,covid_hh$hh_weight,na.rm = TRUE)
 it <- rbind(c(-1, i5a_feb, i5b_feb, i5c_feb), it)
 it <- rbind(c(-2,NA,NA,NA), it)
 
-it_e <- c("week", "i5a_wins", "i5b_wins" , "i5c_wins")
+it_e <- c("week", "govsupport", "ngosupport" , "polsupport")
 it_e <- covid_weekly_e[!(covid_weekly_e$week %in% c(9,10)),it_e]
-i5a_feb_e <- weighted.mean(covid_hh[covid_hh$eligible == 1,]$i5a_feb_wins,
+i5a_feb_e <- weighted.mean(covid_hh[covid_hh$eligible == 1,]$govsupport_feb,
                            covid_hh[covid_hh$eligible == 1,]$hh_weight,na.rm = TRUE)
-i5b_feb_e <- weighted.mean(covid_hh[covid_hh$eligible == 1,]$i5b_feb_wins,
+i5b_feb_e <- weighted.mean(covid_hh[covid_hh$eligible == 1,]$ngosupport_feb,
                            covid_hh[covid_hh$eligible == 1,]$hh_weight,na.rm = TRUE)
-i5c_feb_e <- weighted.mean(covid_hh[covid_hh$eligible == 1,]$i5c_feb_wins,
+i5c_feb_e <- weighted.mean(covid_hh[covid_hh$eligible == 1,]$polsupport_feb,
                            covid_hh[covid_hh$eligible == 1,]$hh_weight,na.rm = TRUE)
 it_e <- rbind(c(-1, i5a_feb_e, i5b_feb_e, i5c_feb_e), it_e)
 it_e <- rbind(c(-2,NA,NA,NA), it_e)
 
-it_i <- c("week", "i5a_wins", "i5b_wins" , "i5c_wins")
+it_i <- c("week", "govsupport", "ngosupport" , "polsupport")
 it_i <- covid_weekly_i[!(covid_weekly_i$week %in% c(9,10)),it_i]
-i5a_feb_i <- weighted.mean(covid_hh[covid_hh$eligible == 0,]$i5a_feb_wins,
+i5a_feb_i <- weighted.mean(covid_hh[covid_hh$eligible == 0,]$govsupport_feb,
                            covid_hh[covid_hh$eligible == 0,]$hh_weight,na.rm = TRUE)
-i5b_feb_i <- weighted.mean(covid_hh[covid_hh$eligible == 0,]$i5b_feb_wins,
+i5b_feb_i <- weighted.mean(covid_hh[covid_hh$eligible == 0,]$ngosupport_feb,
                            covid_hh[covid_hh$eligible == 0,]$hh_weight,na.rm = TRUE)
-i5c_feb_i <- weighted.mean(covid_hh[covid_hh$eligible == 0,]$i5c_feb_wins,
+i5c_feb_i <- weighted.mean(covid_hh[covid_hh$eligible == 0,]$polsupport_feb,
                            covid_hh[covid_hh$eligible == 0,]$hh_weight,na.rm = TRUE)
 it_i <- rbind(c(-1, i5a_feb_i, i5b_feb_i, i5c_feb_i), it_i)
 it_i <- rbind(c(-2,NA,NA,NA), it_i)
 
-it_c <- c("week", "i5a_wins", "i5b_wins" , "i5c_wins")
+it_c <- c("week", "govsupport", "ngosupport" , "polsupport")
 it_c <- covid_weekly_c[!(covid_weekly_c$week %in% c(9,10)),it_c]
-i5a_feb_c <- weighted.mean(covid_hh[covid_hh$child_hh == 1,]$i5a_feb_wins,
+i5a_feb_c <- weighted.mean(covid_hh[covid_hh$child_hh == 1,]$govsupport_feb,
                            covid_hh[covid_hh$child_hh == 1,]$hh_weight,na.rm = TRUE)
-i5b_feb_c <- weighted.mean(covid_hh[covid_hh$child_hh == 1,]$i5b_feb_wins,
+i5b_feb_c <- weighted.mean(covid_hh[covid_hh$child_hh == 1,]$ngosupport_feb,
                            covid_hh[covid_hh$child_hh == 1,]$hh_weight,na.rm = TRUE)
-i5c_feb_c <- weighted.mean(covid_hh[covid_hh$child_hh == 1,]$i5c_feb_wins,
+i5c_feb_c <- weighted.mean(covid_hh[covid_hh$child_hh == 1,]$polsupport_feb,
                            covid_hh[covid_hh$child_hh == 1,]$hh_weight,na.rm = TRUE)
 it_c <- rbind(c(-1, i5a_feb_c, i5b_feb_c, i5c_feb_c), it_c)
 it_c <- rbind(c(-2,NA,NA,NA), it_c)
 
-it_nc <- c("week", "i5a_wins", "i5b_wins" , "i5c_wins")
+it_nc <- c("week", "govsupport", "ngosupport" , "polsupport")
 it_nc <- covid_weekly_nc[!(covid_weekly_nc$week %in% c(9,10)),it_nc]
-i5a_feb_nc <- weighted.mean(covid_hh[covid_hh$child_hh == 0,]$i5a_feb_wins,
+i5a_feb_nc <- weighted.mean(covid_hh[covid_hh$child_hh == 0,]$govsupport_feb,
                            covid_hh[covid_hh$child_hh == 0,]$hh_weight,na.rm = TRUE)
-i5b_feb_nc <- weighted.mean(covid_hh[covid_hh$child_hh == 0,]$i5b_feb_wins,
+i5b_feb_nc <- weighted.mean(covid_hh[covid_hh$child_hh == 0,]$ngosupport_feb,
                            covid_hh[covid_hh$child_hh == 0,]$hh_weight,na.rm = TRUE)
-i5c_feb_nc <- weighted.mean(covid_hh[covid_hh$child_hh == 0,]$i5c_feb_wins,
+i5c_feb_nc <- weighted.mean(covid_hh[covid_hh$child_hh == 0,]$polsupport_feb,
                            covid_hh[covid_hh$child_hh == 0,]$hh_weight,na.rm = TRUE)
 it_nc <- rbind(c(-1, i5a_feb_nc, i5b_feb_nc, i5c_feb_nc), it_nc)
 it_nc <- rbind(c(-2,NA,NA,NA), it_nc)
@@ -693,7 +693,7 @@ d_g
 
 ***  
    
-  <font size="5">**Transfers per capita (USD, PPP) - past 14 days**</font>  
+  <font size="5">**Percentage of households receiving support - past 14 days**</font>  
 
 ####  {.tabset .tabset-pills}
 
@@ -703,11 +703,11 @@ We ask whether in the past 14 days anyone in the household received a gift/assis
 
 ```{r transfers}
 it_g  <- dygraph(it, main = "") %>%
-  dySeries("i5a_wins", strokeWidth = 4, label = "Government") %>%
-  dySeries("i5b_wins", strokeWidth = 4, label = "NGO or community group") %>%
-  dySeries("i5c_wins", strokeWidth = 4, label = "Politicians") %>%
+  dySeries("govsupport", strokeWidth = 4, label = "Government") %>%
+  dySeries("ngosupport", strokeWidth = 4, label = "NGO or community group") %>%
+  dySeries("polsupport", strokeWidth = 4, label = "Politicians") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", drawGrid = FALSE , label = "USD, PPP", valueRange = c(0,0.14)) %>% 
+  dyAxis("y", drawGrid = FALSE , label = "Percentage", valueRange = c(0,8)) %>% 
   dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
@@ -726,11 +726,11 @@ We ask whether in the past 14 days anyone in the household received a gift/assis
 
 ```{r transfers_e}
 it_g  <- dygraph(it_e, main = "") %>%
-  dySeries("i5a_wins", strokeWidth = 4, label = "Government") %>%
-  dySeries("i5b_wins", strokeWidth = 4, label = "NGO or community group") %>%
-  dySeries("i5c_wins", strokeWidth = 4, label = "Politicians") %>%
+  dySeries("govsupport", strokeWidth = 4, label = "Government") %>%
+  dySeries("ngosupport", strokeWidth = 4, label = "NGO or community group") %>%
+  dySeries("polsupport", strokeWidth = 4, label = "Politicians") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", drawGrid = FALSE , label = "USD, PPP", valueRange = c(0,0.14)) %>% 
+  dyAxis("y", drawGrid = FALSE , label = "Percentage", valueRange = c(0,8)) %>% 
   dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
@@ -739,7 +739,7 @@ it_g  <- dygraph(it_e, main = "") %>%
   dyEvent(-1 , "February", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   dyEvent(0 , "Lockdown begins March 15", labelLoc = "top") %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
-  dyLegend(width = 500, labelsSeparateLines = FALSE) 
+  dyLegend(width = 500, labelsSeparateLines = FALSE)  
 it_g
 ```
 
@@ -749,11 +749,11 @@ We ask whether in the past 14 days anyone in the household received a gift/assis
 
 ```{r transfers_i}
 it_g  <- dygraph(it_i, main = "") %>%
-  dySeries("i5a_wins", strokeWidth = 4, label = "Government") %>%
-  dySeries("i5b_wins", strokeWidth = 4, label = "NGO or community group") %>%
-  dySeries("i5c_wins", strokeWidth = 4, label = "Politicians") %>%
+  dySeries("govsupport", strokeWidth = 4, label = "Government") %>%
+  dySeries("ngosupport", strokeWidth = 4, label = "NGO or community group") %>%
+  dySeries("polsupport", strokeWidth = 4, label = "Politicians") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", drawGrid = FALSE , label = "USD, PPP", valueRange = c(0,0.14)) %>% 
+  dyAxis("y", drawGrid = FALSE , label = "Percentage", valueRange = c(0,8)) %>% 
   dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
@@ -772,11 +772,11 @@ We ask whether in the past 14 days anyone in the household received a gift/assis
 
 ```{r transfers_c}
 it_g  <- dygraph(it_c, main = "") %>%
-  dySeries("i5a_wins", strokeWidth = 4, label = "Government") %>%
-  dySeries("i5b_wins", strokeWidth = 4, label = "NGO or community group") %>%
-  dySeries("i5c_wins", strokeWidth = 4, label = "Politicians") %>%
+  dySeries("govsupport", strokeWidth = 4, label = "Government") %>%
+  dySeries("ngosupport", strokeWidth = 4, label = "NGO or community group") %>%
+  dySeries("polsupport", strokeWidth = 4, label = "Politicians") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", drawGrid = FALSE , label = "USD, PPP", valueRange = c(0,0.14)) %>% 
+  dyAxis("y", drawGrid = FALSE , label = "Percentage", valueRange = c(0,8)) %>% 
   dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
@@ -795,11 +795,11 @@ We ask whether in the past 14 days anyone in the household received a gift/assis
 
 ```{r transfers_nc}
 it_g  <- dygraph(it_nc, main = "") %>%
-  dySeries("i5a_wins", strokeWidth = 4, label = "Government") %>%
-  dySeries("i5b_wins", strokeWidth = 4, label = "NGO or community group") %>%
-  dySeries("i5c_wins", strokeWidth = 4, label = "Politicians") %>%
+dySeries("govsupport", strokeWidth = 4, label = "Government") %>%
+  dySeries("ngosupport", strokeWidth = 4, label = "NGO or community group") %>%
+  dySeries("polsupport", strokeWidth = 4, label = "Politicians") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", drawGrid = FALSE , label = "USD, PPP", valueRange = c(0,0.14)) %>% 
+  dyAxis("y", drawGrid = FALSE , label = "Percentage", valueRange = c(0,8)) %>% 
   dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
@@ -2881,7 +2881,7 @@ pf2_g <- dygraph(pf2, main = "", group = "Siaya County Sample") %>%
   dySeries("mean_price_115", strokeWidth = 4, label = "Onions (4)") %>%
 
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "Percentage relative to first week", drawGrid = FALSE, valueRange = c(68,125)) %>% 
+  dyAxis("y", label = "Percentage relative to first week", drawGrid = FALSE, valueRange = c(60,125)) %>% 
   dyLegend(width = 500 , labelsSeparateLines = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   dyOptions(includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2"), connectSeparatedPoints = TRUE) %>%
@@ -2906,7 +2906,7 @@ pf3_g <- dygraph(pf3, main = "", group = "Siaya County Sample") %>%
   dySeries("mean_price_14", strokeWidth = 4, label = "Beans (2kg)") %>%
 
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "Percentage relative to first week", drawGrid = FALSE, valueRange = c(90,135)) %>% 
+  dyAxis("y", label = "Percentage relative to first week", drawGrid = FALSE, valueRange = c(75,135)) %>% 
   dyLegend(width = 300 , labelsSeparateLines = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   dyOptions(includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(9, "Set1"), connectSeparatedPoints = TRUE) %>%
