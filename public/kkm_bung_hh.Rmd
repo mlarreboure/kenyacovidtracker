@@ -1,0 +1,160 @@
+---
+title: "Kakamega and Bungoma Household Phone Survey"
+output:
+  html_document:
+    theme: paper
+    toc: FALSE
+    includes:
+      before_body: header.html
+      
+
+---
+Julie E. Powers^1^, Cecilia Nekesa^2^, Blastus Bwire^2^, Carolyne Nekesa^2^, Amy J. Pickering^1^
+
+1. Tufts University
+2. Vyxer REMIT Kenya
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+library(ggplot2)
+library(haven)
+library(dygraphs)
+library(RColorBrewer)
+
+
+
+# Import data
+phone_weekly <- read_dta("C:\\Users\\Julie Powers\\Box\\Pickering_projects\\Pickering_chlorine_mortality\\Phone survey results to share\\phonesurvey_outcomes_weekly_means_07222020.dta")
+
+phone_weekly
+
+```
+<br>
+
+ <font size="5">**Reported Symptoms, past 7 days**</font>  
+We ask respondents whether they have experienced any of the following symptoms in the past 7 days.  
+
+<br>
+
+```{r, echo=FALSE}
+# Symptoms
+symptoms <- c("nweek", "respfever_7d", "respcough_7d", "respfatigue_7d", "respheadache_7d", "resptaste_7d")
+symptoms <- phone_weekly[symptoms]
+
+symptomsgraph <- dygraph(symptoms) %>%
+  dySeries("respfever_7d", strokeWidth = 3, label = "Fever") %>%
+  dySeries("respcough_7d", strokeWidth = 3, label = "Cough") %>%
+  dySeries("respfatigue_7d", strokeWidth = 3, label = "Unusual fatigue") %>%
+  dySeries("respheadache_7d", strokeWidth = 3, label = "Headache") %>%
+  dySeries("resptaste_7d", strokeWidth = 3, label = "Loss of smell or taste") %>%
+  dyAxis("x", label = "Weeks", pixelsPerLabel = 100, rangePad = 10, drawGrid = FALSE) %>% 
+  dyAxis("y", label = "Percentage of respondents", valueRange = c(0,30), drawGrid = FALSE) %>%
+  dyLegend(labelsSeparateLines = FALSE, width = 550) %>%
+  dyOptions(axisLineWidth = 4, includeZero = TRUE, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Dark2"))
+  
+symptomsgraph
+```
+ <br>
+ 
+ <font size="5">**Economic impacts**</font>  
+
+_"In the past month/30 days, have you or someone in your household been forced to do any of the following to pay for food, healthcare, or other expenses?"_
+<br>
+```{r, echo=FALSE}
+# Economic impacts
+econ <- c("nweek", "sellassets", "depletesavings", "borrowmoney", "skippayment")
+econ <- phone_weekly[econ]
+
+econgraph <- dygraph(econ) %>%
+  dySeries("sellassets", strokeWidth = 3, label = "Sell off assets") %>%
+    dySeries("depletesavings", strokeWidth = 3, label = "Deplete savings") %>%
+    dySeries("borrowmoney", strokeWidth = 3, label = "Borrow money you were not certain you could pay back") %>%
+  dySeries("skippayment", strokeWidth = 3, label = "Skip making a required payment on a loan") %>%
+  dyAxis("x", label = "Weeks", pixelsPerLabel = 100, rangePad = 10, drawGrid = FALSE) %>% 
+  dyAxis("y", label = "Percent of respondents",valueRange = c(0, 60), drawGrid = FALSE ) %>%
+  dyLegend(width = 550) %>%
+  dyOptions(axisLineWidth = 4, includeZero = TRUE, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Dark2"))
+  
+econgraph
+```
+
+<br>
+ <font size="5">**Food security**</font> 
+
+_"In the past month/30 days, did you worry that your household would not have enough food?"_
+
+_"In the past month/30 days, did you or any household member have to eat a smaller meal than you felt you needed because there was not enough food?"_
+
+_"In the past month/30 days, did you or any household member have to eat fewer meals in a day because there was not enough food?" _
+
+_"In the past month/30 days,  was  there  ever  no  food  to  eat  of  any  kind  in  your  house  because of lack of resources to get food?"_
+<br>
+<br>
+```{r, echo=FALSE}
+food <- c("nweek", "worryfood", "smallmeal", "fewmeals", "nofood")
+food <- phone_weekly[food]
+
+foodgraph <- dygraph(food) %>%
+  dySeries("worryfood", strokeWidth = 3, label = "Worried about running out of food") %>%
+  dySeries("smallmeal", strokeWidth = 3, label = "Ate smaller meals") %>%
+  dySeries("fewmeals", strokeWidth = 3, label = "Ate fewer meals") %>%
+  dySeries("nofood", strokeWidth = 3, label = "Ran out of food") %>%
+  dyAxis("x", label = "Weeks", rangePad = 50, pixelsPerLabel = 100, drawGrid = FALSE) %>% 
+  dyAxis("y", label = "Percentage of Respondents", valueRange = c(0,105), drawGrid = FALSE) %>%
+  dyLegend(labelsSeparateLines = FALSE , width = 550) %>%
+  dyOptions(axisLineWidth = 4, includeZero = TRUE, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Dark2"))
+
+foodgraph
+```
+<br>
+<font size="5">**Approval of government policies**</font> 
+
+_"Do you approve of the government's decision to permit all domestic travel, including in and out of Nairobi, Mombasa county, and Mandera county?"_
+
+_"Do you approve of the government's decision to keep schools closed until January 2021?"_
+
+_"Do you approve of the nationwide nightly curfew?"_
+ <br>
+ <br>
+
+
+```{r, echo=FALSE}
+approve <- c("nweek", "approve_travel", "approve_schools", "approve_curfew")
+approve <- phone_weekly[approve]
+
+approvegraph <- dygraph(approve) %>%
+  dySeries("approve_travel", strokeWidth = 3, label = "Domestic travel") %>%
+  dySeries("approve_schools", strokeWidth = 3, label = "Schools closed until January 2021") %>%
+  dySeries("approve_curfew", strokeWidth = 3, label = "Nightly curfew") %>%
+  dyAxis("x", label = "Weeks", rangePad = 50, pixelsPerLabel = 100, drawGrid = FALSE) %>% 
+  dyAxis("y", label = "Percentage of Respondents", valueRange = c(0,105), drawGrid = FALSE) %>%
+  dyLegend(labelsSeparateLines = FALSE , width = 550) %>%
+  dyOptions(axisLineWidth = 4, includeZero = TRUE, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(3, "Dark2"))
+
+  
+approvegraph
+```
+<br>
+<br>
+
+This data comes from phone surveys collected by Vyxer REMIT Kenya in partnership with Tufts University. Please contact julie.powers@tufts.edu and amy.pickering@tufts.edu with any questions.
+
+_Study area:_ Villages are enrolled that are located in Bungoma or Kakamega counties and were previously enrolled in WASH Benefits Kenya (W, WSH, WSHN, AC, PC arms only). 
+
+_Eligibility:_ Respondents are eligible if they are women 50 years of age or younger, have had a child since January 1, 2008, and live in an eligible village.
+
+_Study design:_ Respondents were visited in person by our team for another study, between July 2019 and March 2020 (when data collection was halted due to COVID-19). During this time, we censused 575 out of 730 eligible villages, and enrolled and surveyed 34,098 eligible women. We are following up with a subset of these women by phone. The final sample size for this phone survey will depend on the trajectory of COVID-19 in the study area and funding constraints. We have divided the respondents who provided a phone number (N = 29,301) into seven random survey rounds of equal size. Each survey round will have the same proportion of respondents from each geographic block. Respondents selected are geographically representative for each survey round, but are not geographically representative on a weekly basis. For this reason, weekly data should be interpreted with caution. We attempt to contact each respondent five times.
+
+_Sample size to date:_  We have interviewed 1,844 respondents to-date, all from survey round 1. Our response rate (number of surveys completed/number of respondents we have attempted to contact) is 69%.
+<br>
+
+| Week	| Dates	| Number of surveys |
+|------|:-----:|:---------:|
+| Week 1 |	June 21, 2020 - June 27, 2020	| 158 |
+| Week 2 |	June 28, 2020 - July 4, 2020	| 411 |
+| Week 3 |	July 5, 2020 - July 11, 2020 	| 441 |
+| Week 4 |	July 12, 2020 - July 18, 2020	| 418 |
+| Week 5 |	July 19, 2020 - July 25, 2020	| 416 |
+
+Updated: July 25, 2020
