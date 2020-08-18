@@ -6,8 +6,6 @@ output:
     toc: FALSE
     includes:
       before_body: header.html
-      
-
 ---
 Julie E. Powers^1^, Cecilia Nekesa^2^, Blastus Bwire^2^, Carolyne Nekesa^2^, Amy J. Pickering^1^
 
@@ -25,7 +23,7 @@ library(RColorBrewer)
 
 
 # Import data
-phone_weekly <- read_dta("C:\\Users\\Julie Powers\\Box\\Pickering_projects\\Pickering_chlorine_mortality\\Phone survey results to share\\phonesurvey_outcomes_weekly_means_07222020.dta")
+phone_weekly <- read_dta("C:\\Users\\Julie Powers\\Box\\Pickering_projects\\Pickering_chlorine_mortality\\Phone survey results to share\\phonesurvey_outcomes_weekly_means_08182020.dta")
 
 phone_weekly
 
@@ -146,15 +144,19 @@ _Eligibility:_ Respondents are eligible if they are women 50 years of age or you
 
 _Study design:_ Respondents were visited in person by our team for another study, between July 2019 and March 2020 (when data collection was halted due to COVID-19). During this time, we censused 575 out of 730 eligible villages, and enrolled and surveyed 34,098 eligible women. We are following up with a subset of these women by phone. The final sample size for this phone survey will depend on the trajectory of COVID-19 in the study area and funding constraints. We have divided the respondents who provided a phone number (N = 29,301) into seven random survey rounds of equal size. Each survey round will have the same proportion of respondents from each geographic block. Respondents selected are geographically representative for each survey round, but are not geographically representative on a weekly basis. For this reason, weekly data should be interpreted with caution. We attempt to contact each respondent five times.
 
-_Sample size to date:_  We have interviewed 1,844 respondents to-date, all from survey round 1. Our response rate (number of surveys completed/number of respondents we have attempted to contact) is 69%.
+_Sample size to date:_  We have attempted to contact all respondents in survey round 1. We have interviewed 2,958 respondents to-date, all from survey round 1. Our response rate (number of surveys completed/number of respondents we have attempted to contact) is 71%.
 <br>
 
-| Week	| Dates	| Number of surveys |
+| Week	| Dates	| Number of surveys | Survey Round |
 |------|:-----:|:---------:|
-| Week 1 |	June 21, 2020 - June 27, 2020	| 158 |
-| Week 2 |	June 28, 2020 - July 4, 2020	| 411 |
-| Week 3 |	July 5, 2020 - July 11, 2020 	| 441 |
-| Week 4 |	July 12, 2020 - July 18, 2020	| 418 |
-| Week 5 |	July 19, 2020 - July 25, 2020	| 416 |
+| Week 1 |	June 21, 2020 - June 27, 2020	| 158 | 1 |
+| Week 2 |	June 28, 2020 - July 4, 2020	| 411 | 1 |
+| Week 3 |	July 5, 2020 - July 11, 2020 	| 441 | 1 |
+| Week 4 |	July 12, 2020 - July 18, 2020	| 418 | 1 |
+| Week 5 |	July 19, 2020 - July 25, 2020	| 417 | 1 |
+| Week 6 | Juy 26, 2020 - August 1, 2020 | 452 | 1 |
+| Week 7 | August 2, 2020 - August 8, 2020 | 407| 1 |
+| Week 8 | August 9, 2020 - August 15, 2020 | 254| 1 |
 
-Updated: July 25, 2020
+
+Updated: August 18, 2020
