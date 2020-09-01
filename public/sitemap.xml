@@ -28,6 +28,21 @@
   </url>
   
   <url>
+    <loc>/tags/border/</loc>
+    <lastmod>2020-04-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/weeklystats/enterprises/</loc>
+    <lastmod>2020-04-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/weeklystats/siaya/</loc>
+    <lastmod>2020-04-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/tags/national/</loc>
     <lastmod>2020-04-15T00:00:00+00:00</lastmod>
   </url>
@@ -43,22 +58,17 @@
   </url>
   
   <url>
-    <loc>/weeklystats/enterprises/</loc>
-    <lastmod>2020-04-15T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/weeklystats/siaya/</loc>
-    <lastmod>2020-04-15T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/tags/</loc>
     <lastmod>2020-04-15T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/other/tracker/</loc>
+    <lastmod>2020-04-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/weeklystats/trading/</loc>
     <lastmod>2020-04-15T00:00:00+00:00</lastmod>
   </url>
   

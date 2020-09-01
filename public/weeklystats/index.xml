@@ -13,15 +13,7 @@
     </image>
     
     <item>
-      <title>National - Rapid Response Phone Surveys</title>
-      <link>/weeklystats/national/</link>
-      <pubDate>Wed, 15 Apr 2020 00:00:00 +0000</pubDate>
-      <guid>/weeklystats/national/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Siaya County - Enterprise Survey</title>
+      <title>Enterprise Survey - Siaya County</title>
       <link>/weeklystats/enterprises/</link>
       <pubDate>Wed, 15 Apr 2020 00:00:00 +0000</pubDate>
       <guid>/weeklystats/enterprises/</guid>
@@ -29,7 +21,7 @@
     </item>
     
     <item>
-      <title>Siaya County - Household Survey</title>
+      <title>Household Survey - Siaya County</title>
       <link>/weeklystats/siaya/</link>
       <pubDate>Wed, 15 Apr 2020 00:00:00 +0000</pubDate>
       <guid>/weeklystats/siaya/</guid>
@@ -78,6 +70,22 @@
 &lt;/tbody&gt;
 &lt;/table&gt;
 </description>
+    </item>
+    
+    <item>
+      <title>Rapid Response Phone Surveys - National Sample</title>
+      <link>/weeklystats/national/</link>
+      <pubDate>Wed, 15 Apr 2020 00:00:00 +0000</pubDate>
+      <guid>/weeklystats/national/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Traders Survey - Border Counties</title>
+      <link>/weeklystats/trading/</link>
+      <pubDate>Wed, 15 Apr 2020 00:00:00 +0000</pubDate>
+      <guid>/weeklystats/trading/</guid>
+      <description></description>
     </item>
     
   </channel>

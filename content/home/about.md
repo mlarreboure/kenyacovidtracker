@@ -43,7 +43,21 @@ We are generating descriptive statistics on COVID-19, behavioral adaptations, an
 
 The World Bank, in collaboration with KNBS and UNHCR, is collecting household data targeting both Kenyan and refugee adults through phone surveys. It is also collecting data at the microenterprise level targeting both micro business owners or job seekers between 18 and 35 years old. In addition, it is collecting data at the firm level in collaboration with KNBS.
 
-The Berkeley research team is collecting phone survey data in Siaya County, measuring outcomes for households and enterprises targeted in [Egger et al (2019)](http://emiguel.econ.berkeley.edu/research/general-equilibrium-effects-of-cash-transfers-experimental-evidence-from-kenya), and bringing in an additional sample based on a recent census activity to ensure the sample is representative for the entire study area.
+A joint research team at Berkeley and Busara is analyzing phone survey data from Siaya County, measuring outcomes for households and enterprises targeted in [Egger et al (2019)](http://emiguel.econ.berkeley.edu/research/general-equilibrium-effects-of-cash-transfers-experimental-evidence-from-kenya), and bringing in an additional sample based on a recent census activity to ensure the sample is representative for the entire study area.
 
-The different partners involved in this project are The World Bank, UNHCR, KNBS, Berkeley and REMIT. At The World Bank the Team Lead is [Utz Johann Pape](https://blogs.worldbank.org/team/utz-pape). At Berkeley, the research team is lead by [Dennis Egger](https://www.dennisegger.net), [Johannes Haushofer](https://www.princeton.edu/haushofer/), [Edward Miguel](http://emiguel.econ.berkeley.edu/) and [Michael Walker](http://www.michaelwwalker.me/). All the data collection is being carried out by [REMIT Kenya](http://remitkenya.co.ke/).  
+
+Collaborators on this project are:   
+[Dennis Egger](https://www.dennisegger.net) - University of California, Berkeley;   
+[Tilman Graff](https://tilmangraff.github.io/) - Busara Center, Nairobi;  
+[Johannes Haushofer](https://www.princeton.edu/haushofer/) - Princeton University;   
+[Magdalena Larreboure](https://mlarreboure.com/) - Busara Center, Nairobi;   
+[Layna Lowe](https://cega.berkeley.edu/user-type/staff/#layna-lowe) - University of California, Berkeley;   
+[Edward Miguel](http://emiguel.econ.berkeley.edu/) - University of California, Berkeley;  
+[Carol Nekesa](https://www.linkedin.com/in/carolyne-nekesa-khagondi-99b42466) - REMIT Kenya;  
+[Eric Owino](http://remitkenya.co.ke/index.php/about-us/) - REMIT Kenya;  
+[Utz Johann Pape](https://blogs.worldbank.org/team/utz-pape) - The World Bank;   
+[Carlos Paramo](https://www.linkedin.com/in/carlosparamob) - University of California, Berkeley;   
+[Andrew Wabwire](http://remitkenya.co.ke/index.php/about-us/) - REMIT Kenya;  
+[Michael Walker](http://www.michaelwwalker.me/) - University of California, Berkeley;  
+[Eleanor Wiseman](https://www.linkedin.com/in/eleanor-wiseman-831b523a) - University of California, Berkeley.
 
