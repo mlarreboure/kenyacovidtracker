@@ -3,7 +3,7 @@ title: Rapid Response Phone Surveys - National Sample
 summary: Descriptive statistics for households, microenterprises and formal firms.
 tags:
 - National
-date: "2020-04-15T00:00:00Z"
+date: "2020-05-15T00:00:00Z"
 
 # Optional external URL for project (replaces project detail page).
 external_link: "https://www.worldbank.org/en/country/kenya/brief/monitoring-covid-19-impact-on-households-and-firms-in-kenya"

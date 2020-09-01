@@ -5,9 +5,9 @@
     <link>/tags/national/</link>
       <atom:link href="/tags/national/index.xml" rel="self" type="application/rss+xml" />
     <description>National</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 15 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 15 May 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/gelani-banks-zaunxTcZ3a4-unsplash.jpg</url>
+      <url>/img/file-20200430-42951-1eb1lbm.jpg</url>
       <title>National</title>
       <link>/tags/national/</link>
     </image>
@@ -15,8 +15,16 @@
     <item>
       <title>Rapid Response Phone Surveys - National Sample</title>
       <link>/weeklystats/national/</link>
-      <pubDate>Wed, 15 Apr 2020 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 15 May 2020 00:00:00 +0000</pubDate>
       <guid>/weeklystats/national/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Price Survey - National Sample</title>
+      <link>/weeklystats/pricessurvey/</link>
+      <pubDate>Sun, 15 Mar 2020 00:00:00 +0000</pubDate>
+      <guid>/weeklystats/pricessurvey/</guid>
       <description></description>
     </item>
     

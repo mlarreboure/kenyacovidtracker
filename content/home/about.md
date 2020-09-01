@@ -47,17 +47,26 @@ A joint research team at Berkeley and Busara is analyzing phone survey data from
 
 
 Collaborators on this project are:   
+[Blastus Bwire](https://ke.linkedin.com/in/blastus-bwire-9561ab76) - Vyxer REMIT Kenya;   
 [Dennis Egger](https://www.dennisegger.net) - University of California, Berkeley;   
 [Tilman Graff](https://tilmangraff.github.io/) - Busara Center, Nairobi;  
 [Johannes Haushofer](https://www.princeton.edu/haushofer/) - Princeton University;   
+[George Kinyanjui](https://www.saldru.uct.ac.za/staff/george-kariuki-kinyanjui/) - University of Cape Town;  
 [Magdalena Larreboure](https://mlarreboure.com/) - Busara Center, Nairobi;   
-[Layna Lowe](https://cega.berkeley.edu/user-type/staff/#layna-lowe) - University of California, Berkeley;   
+[Layna Lowe](https://cega.berkeley.edu/user-type/staff/#layna-lowe) - University of California, Berkeley;  
+[Anya Marchenko](https://cega.berkeley.edu/user-type/staff/#anya-marchenko) - University of California, Berkeley;   
 [Edward Miguel](http://emiguel.econ.berkeley.edu/) - University of California, Berkeley;  
-[Carol Nekesa](https://www.linkedin.com/in/carolyne-nekesa-khagondi-99b42466) - REMIT Kenya;  
-[Eric Owino](http://remitkenya.co.ke/index.php/about-us/) - REMIT Kenya;  
+[Carolyne Nekesa](https://www.linkedin.com/in/carolyne-nekesa-khagondi-99b42466) - Vyxer REMIT Kenya;   
+[Cecilia Nekesa](https://ke.linkedin.com/in/cecilia-nekesa-makokha-62a85231) - Vyxer REMIT Kenya;  
+[Samuel Oonge](soonge@remitkenya.co.ke) - Vyxer REMIT Kenya;  
+[Eric Owino](http://remitkenya.co.ke/index.php/about-us/) - Vyxer REMIT Kenya;  
 [Utz Johann Pape](https://blogs.worldbank.org/team/utz-pape) - The World Bank;   
 [Carlos Paramo](https://www.linkedin.com/in/carlosparamob) - University of California, Berkeley;   
-[Andrew Wabwire](http://remitkenya.co.ke/index.php/about-us/) - REMIT Kenya;  
+[Amy J. Pickering](https://engineering.tufts.edu/people/faculty/amy-pickering) - Tufts University;   
+[Julie E. Powers](https://environment.tufts.edu/julie-powers/) - Tufts University;   
+[Andrew Wabwire](http://remitkenya.co.ke/index.php/about-us/) - Vyxer REMIT Kenya;  
 [Michael Walker](http://www.michaelwwalker.me/) - University of California, Berkeley;  
+[Verena Wiedemann](https://www.economics.ox.ac.uk/graduate-students/verena-wiedemann) - University of Oxford;  
 [Eleanor Wiseman](https://www.linkedin.com/in/eleanor-wiseman-831b523a) - University of California, Berkeley.
+
 

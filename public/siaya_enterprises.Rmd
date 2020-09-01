@@ -16,14 +16,13 @@ library(haven)
 library(tidyverse)
 library(dygraphs)
 library(xts)
+library(lubridate)
 
 
-ent_weekly <- read_dta("../../GE_Endline2/covid19/data/COVID_AllENTs_outcomes_weekly.dta")
-ent_outcomes <- read_dta("../../GE_Endline2/covid19/data/COVID_AllENTs_outcomes.dta") #to get retrospective vars
-ent_weekly_sector <- read_dta("../../GE_Endline2/covid19/data/COVID_AllENTs_outcomes_weekly_sector.dta")
-ent_weekly_sector_n <- read_dta("../../GE_Endline2/covid19/data/COVID_AllENTs_outcomes_weekly_sector_normalized.dta")
-ent_weekly_subsector <- read_dta("../../GE_Endline2/covid19/data/COVID_AllENTs_outcomes_weekly_subsector.dta")
-covid_weekly <- read_dta("../../GE_Endline2/covid19/data/COVID_AllHHs_outcomes_weekly_c.dta")
+ent_weekly <- read_dta("../../GE_Endline2/covid19/data/COVID_ENT_outcomes_weekly.dta") 
+ent_outcomes <- read_dta("../../GE_Endline2/covid19/data/COVID_ENT_Rd1_outcomes.dta") #to get retrospective vars
+ent_weekly_sector <- read_dta("../../GE_Endline2/covid19/data/COVID_ENT_outcomes_weekly_sector.dta")
+covid_weekly <- read_dta("../../GE_Endline2/covid19/data/COVID_HH_outcomes_weekly.dta") # For agriculural ent.
 
 
 #Grouping vars for graphs
@@ -36,14 +35,35 @@ profits <- ent_weekly[profits]
 op <- c("week", "op", "temp_closed", "perm_closed")
 op <- ent_weekly[op]
 
+op_hrs <- c("week", "s3_q5_emphrs_p7_wins")
+op_hrs <- ent_weekly[op_hrs]
+
 inv <- c("week", "investment_wins")
 inv <- ent_weekly[inv]
 
 wages <- c("week", "wages_wins")
 wages <- ent_weekly[wages]
 
-cov <- c("week", "ecov_1", "ecov_2", "ecov_3")
+cov <- c("week", "ecov_1", "ecov_4", "ecov_5")
 cov <- ent_weekly[cov]
+
+bm <- c("week", "bm_emp", "bm_cust")
+bm <- ent_weekly[bm]
+
+loan <- c("week", "s_loan", "s_gov", "s_ngo")
+loan <- ent_weekly[loan]
+
+cust <- c("week", "s3_q10_customers_p7")
+cust <- ent_weekly[cust]
+
+cust_d <- c("week", "for_customers", "loc_customers")
+cust_d <- ent_weekly[cust_d]
+
+wfh <- c("week", "wfh_1", "wfh_2")
+wfh <- ent_weekly[wfh]
+
+mob <- c("week", "s3_q16a_mobilesales", "mob_money")
+mob <- ent_weekly[mob]
 
 presAnnotation <- function(dygraph, x, text) {
   dygraph %>%
@@ -51,24 +71,24 @@ presAnnotation <- function(dygraph, x, text) {
 }
 
 ##### Create dataframe with retrospective data on profits and revenues
-rev_prof <- ent_weekly[c("week", "rev_wins", "profits_wins")]
-r_feb <- weighted.mean(ent_outcomes$rev_feb_wins,ent_outcomes$ent_weight,na.rm = TRUE) # Weighted average of feb vars
+rev_prof <- ent_weekly[c("week", "rev_wins", "profits_wins")] #relevant variables
+r_feb <- weighted.mean(ent_outcomes$rev_feb_wins,ent_outcomes$ent_weight,na.rm = TRUE) # Weighted average of monthly vars
 r_mar <- weighted.mean(ent_outcomes$rev_mar_wins,ent_outcomes$ent_weight,na.rm = TRUE)
 r_apr <- weighted.mean(ent_outcomes$rev_apr_wins,ent_outcomes$ent_weight,na.rm = TRUE)
 p_feb <- weighted.mean(ent_outcomes$profits_feb_wins,ent_outcomes$ent_weight,na.rm = TRUE)
 p_mar <- weighted.mean(ent_outcomes$profits_mar_wins,ent_outcomes$ent_weight,na.rm = TRUE)
 p_apr <- weighted.mean(ent_outcomes$profits_apr_wins,ent_outcomes$ent_weight,na.rm = TRUE)
+
+#Retrospective dataframe
 tmp <- data.frame("week" = c(-11,-10,-9,-7,-6,-3),
-                  "rev_wins" = c(NA,r_feb,NA, r_mar,NA, r_apr),
+                  "rev_wins" = c(NA,r_feb,NA, r_mar,NA, r_apr), 
                   "profits_wins" = c(NA,p_feb,NA, p_mar,NA, p_apr))
-rev_prof <- rbind(tmp, rev_prof)
-rev_prof[13,] <- c(6, NA, NA)
+rev_prof <- rbind(tmp, rev_prof) # append to dataframe
 
 ############ Create dataframe of revenues by sector ###############
 ## Re-shape data for graphs
-ag <- covid_weekly[c("week", "i1_wins")]
-ag$week <- ag$week -5
-ag <- ag[ag$week < 5,]
+ag <- covid_weekly[c("week", "i1_wins")] #agricultural data
+ag$week <- ag$week -5  # make weeks coincide with ent survey
 rt <- ent_weekly_sector[ent_weekly_sector$sector == 1,][c("week", "rev_wins_wins_wins")]
 mf <- ent_weekly_sector[ent_weekly_sector$sector == 2,][c("week", "rev_wins_wins_wins")]
 sr <- ent_weekly_sector[ent_weekly_sector$sector == 3,][c("week", "rev_wins_wins_wins")]
@@ -76,42 +96,44 @@ tmp <- merge(rt,mf, by = "week", all = TRUE, suffixes = c("_rt","_mf"))
 tmp <- merge(tmp, sr, by = "week", all = TRUE)
 tmp <- merge(tmp, ag, by = "week", all = TRUE)
 
+# Retrospective data on Retail sector
 r_rt_feb <- weighted.mean(ent_outcomes[ent_outcomes$sector == 1,]$rev_feb_wins,ent_outcomes[ent_outcomes$sector == 1,]$ent_weight,na.rm = TRUE)
 r_rt_mar <- weighted.mean(ent_outcomes[ent_outcomes$sector == 1,]$rev_mar_wins,ent_outcomes[ent_outcomes$sector == 1,]$ent_weight,na.rm = TRUE)
 r_rt_apr <- weighted.mean(ent_outcomes[ent_outcomes$sector == 1,]$rev_apr_wins,ent_outcomes[ent_outcomes$sector == 1,]$ent_weight,na.rm = TRUE)
-
+# Manufacturing
 r_mf_feb <- weighted.mean(ent_outcomes[ent_outcomes$sector == 2,]$rev_feb_wins,ent_outcomes[ent_outcomes$sector == 2,]$ent_weight,na.rm = TRUE)
 r_mf_mar <- weighted.mean(ent_outcomes[ent_outcomes$sector == 2,]$rev_mar_wins,ent_outcomes[ent_outcomes$sector == 2,]$ent_weight,na.rm = TRUE)
 r_mf_apr <- weighted.mean(ent_outcomes[ent_outcomes$sector == 2,]$rev_apr_wins,ent_outcomes[ent_outcomes$sector == 2,]$ent_weight,na.rm = TRUE)
-
+# Services
 r_sr_feb <- weighted.mean(ent_outcomes[ent_outcomes$sector == 3,]$rev_feb_wins,ent_outcomes[ent_outcomes$sector == 3,]$ent_weight,na.rm = TRUE)
 r_sr_mar <- weighted.mean(ent_outcomes[ent_outcomes$sector == 3,]$rev_mar_wins,ent_outcomes[ent_outcomes$sector == 3,]$ent_weight,na.rm = TRUE)
 r_sr_apr <- weighted.mean(ent_outcomes[ent_outcomes$sector == 3,]$rev_apr_wins,ent_outcomes[ent_outcomes$sector == 3,]$ent_weight,na.rm = TRUE)
 
 rev_prof_s <- data.frame("week" = c(-11,-10,-9,-7,-6,-3),
-                  "rev_wins_wins_wins_rt" = c(NA,r_rt_feb,NA,r_rt_mar,NA,r_rt_apr), # Programatically updates
+                  "rev_wins_wins_wins_rt" = c(NA,r_rt_feb,NA,r_rt_mar,NA,r_rt_apr), 
                   "rev_wins_wins_wins_mf" = c(NA,r_mf_feb,NA,r_mf_mar,NA,r_mf_apr),
                   "rev_wins_wins_wins" = c(NA,r_sr_feb,NA, r_sr_mar,NA,r_sr_apr),
                   "i1_wins" = c(NA, NA, NA,NA,NA,NA))
-#rev_prof_s <- data.frame("week" = c(-11,-10,-9,-7,-6,-3),
-#                  "rev_wins_wins_wins_rt" = c(NA,223.6966,NA,162.1954,NA,138.2139), #Using dta from first 4 weeks
-#                  "rev_wins_wins_wins_mf" = c(NA,208.973,NA,128.6016,NA,109.5862),
-#                  "rev_wins_wins_wins" = c(NA,137.3485,NA, 89.91359,NA,79.15799),
-#                  "i1_wins" = c(NA, NA, NA,NA,NA,NA))
-rev_prof_s <- rbind(rev_prof_s, tmp)
-rev_prof_s$rev_wins_wins_wins_rt <- rev_prof_s$rev_wins_wins_wins_rt*100/r_rt_feb
+
+rev_prof_s <- rbind(rev_prof_s, tmp) # Append retrospective data to weekly data
+rev_prof_s$rev_wins_wins_wins_rt <- rev_prof_s$rev_wins_wins_wins_rt*100/r_rt_feb #Normalize wrt baseline values
 rev_prof_s$rev_wins_wins_wins_mf <- rev_prof_s$rev_wins_wins_wins_mf*100/r_mf_feb
 rev_prof_s$rev_wins_wins_wins <- rev_prof_s$rev_wins_wins_wins*100/r_sr_feb
-rev_prof_s$i1_wins <- rev_prof_s$i1_wins*100/.8220776
-rev_prof_s <- rbind(rev_prof_s, c(6, NA, NA, NA,NA,NA))
-# Take two week averages (reduce noise)
+rev_prof_s$i1_wins <- rev_prof_s$i1_wins*100/.8220776 #Weighted mean of baseline (last year) using first 4 weeks of data
+#rev_prof_s <- rbind(rev_prof_s, c(6, NA, NA, NA,NA,NA))
+# Take two week averages (reduce noise) of the weekly data only
 tmp <- rev_prof_s[1:8,]
 tmp <- rbind(tmp,(rev_prof_s[9,]+rev_prof_s[10,])/2)
 tmp <- rbind(tmp,(rev_prof_s[11,]+rev_prof_s[12,])/2)
 tmp <- rbind(tmp,(rev_prof_s[13,]+rev_prof_s[14,])/2)
 tmp <- rbind(tmp,(rev_prof_s[15,]+rev_prof_s[16,])/2)
-tmp <- rbind(tmp, rev_prof_s[c(17,18),])
-rev_prof_s <- tmp
+tmp <- rbind(tmp,(rev_prof_s[17,]+rev_prof_s[18,])/2)
+tmp[tmp$week == 3.5,"i1_wins"] = rev_prof_s[15,"i1_wins"]
+tmp <- rbind(tmp, rev_prof_s[19,])
+tmp <- rbind(tmp,(rev_prof_s[20,]+rev_prof_s[21,])/2)
+tmp <- rbind(tmp,(rev_prof_s[22,]+rev_prof_s[23,])/2)
+tmp <- rbind(tmp, rev_prof_s[24,]) # if end week is odd, average end week with previous week and append empty row.
+rev_prof_s <- tmp                  # if end week is even, append data of last row (no average) and append empty row.
 
 
 ############## Create DF for Investment / Wages ################
@@ -125,52 +147,204 @@ tmp <- data.frame("week" = c(-1),
                   "wages_wins" = c(w_feb)) #alternatively, 28.96816 if we restrict for first weeks only.
 wages_r <- rbind(tmp,wages)
 wages_r <- rbind(c(-2,NA), wages_r)
-```
 
+#### Create operating enterprise table with retro. data ############
+op_feb <- weighted.mean(ent_outcomes$op_feb,ent_outcomes$ent_weight,na.rm = TRUE)*100
+op_mar <- weighted.mean(ent_outcomes$op_mar,ent_outcomes$ent_weight,na.rm = TRUE)*100
+op_apr <- weighted.mean(ent_outcomes$op_apr,ent_outcomes$ent_weight,na.rm = TRUE)*100
+op_may <- weighted.mean(ent_outcomes$op_may,ent_outcomes$ent_weight,na.rm = TRUE)*100
+op <- op[c("week", "op")]
+tmp <- data.frame("week" = c(-14,-13.1,-11,-8.8,-6,-4.5),
+                  "op" = c(NA, op_feb, NA, op_mar, NA, op_apr))
+op <- rbind(tmp,op)
+
+############### Create table for closures ##################
+
+#Calculate relevant frequencies
+open_feb <- sum(ent_outcomes$operating == 1) + sum(ent_outcomes$s2_q2_whenclose %in% c(2,3,4,5,6,7,8,9)) # Count open ent. in feb
+freq <- data.frame(table(ent_outcomes$s2_q2_whenclose, ent_outcomes$temp_closed)) #frequencies by month
+
+## Assign a month to closures that happened "last week" or "7 days before that"
+# Temp closed, if closed within 4 days of month, assigned to previous month ("closed last week")
+recently_closed_may <- sum(ent_outcomes$s2_q2_whenclose == 9 & month(ent_outcomes$today) == 5 & ent_outcomes$perm_closed == 0, na.rm = TRUE) +
+  sum(ent_outcomes$s2_q2_whenclose == 8 & month(ent_outcomes$today) == 5 & day(ent_outcomes$today) > 11 & ent_outcomes$perm_closed == 0, na.rm = TRUE) + 
+  sum(ent_outcomes$s2_q2_whenclose == 9 & month(ent_outcomes$today) == 6 & day(ent_outcomes$today) < 5 & ent_outcomes$perm_closed == 0, na.rm = TRUE) +
+  sum(ent_outcomes$s2_q2_whenclose == 8 & month(ent_outcomes$today) == 6 & day(ent_outcomes$today) <= 11 & ent_outcomes$perm_closed == 0, na.rm = TRUE)
+
+recently_closed_jun <- sum(ent_outcomes$s2_q2_whenclose == 9 & month(ent_outcomes$today) == 6 & day(ent_outcomes$today) > 4 & ent_outcomes$perm_closed == 0,
+                           na.rm = TRUE) +
+  sum(ent_outcomes$s2_q2_whenclose == 8 & month(ent_outcomes$today) == 6 & day(ent_outcomes$today) > 11 & ent_outcomes$perm_closed == 0, na.rm = TRUE)
+
+# Perm closed, if closed within 4 days of month, assigned to previous month ("closed last week")
+recently_pclosed_may <- sum(ent_outcomes$s2_q2_whenclose == 9 & month(ent_outcomes$today) == 5 & ent_outcomes$perm_closed == 1, na.rm = TRUE) +
+  sum(ent_outcomes$s2_q2_whenclose == 8 & month(ent_outcomes$today) == 5 & day(ent_outcomes$today) > 11 & ent_outcomes$perm_closed == 1, na.rm = TRUE) + 
+  sum(ent_outcomes$s2_q2_whenclose == 9 & month(ent_outcomes$today) == 6 & day(ent_outcomes$today) < 5 & ent_outcomes$perm_closed == 1, na.rm = TRUE) +
+  sum(ent_outcomes$s2_q2_whenclose == 8 & month(ent_outcomes$today) == 6 & day(ent_outcomes$today) <= 11 & ent_outcomes$perm_closed == 1, na.rm = TRUE)
+
+recently_pclosed_jun <- sum(ent_outcomes$s2_q2_whenclose == 9 & month(ent_outcomes$today) == 6 & day(ent_outcomes$today) > 4 & ent_outcomes$perm_closed == 1,
+                           na.rm = TRUE) +
+  sum(ent_outcomes$s2_q2_whenclose == 8 & month(ent_outcomes$today) == 6 & day(ent_outcomes$today) > 11 & ent_outcomes$perm_closed == 1, na.rm = TRUE)
+
+# Create dataframe, Var 1 is when closed and Var2 is whether it was a temp. closure
+closed <- data.frame("Month" = c("January", "February", "March", "April", "May", "June",
+                                 "January", "February", "March", "April", "May", "June"),
+                  "Proportion" = c(#Temp:
+                                   (freq[freq$Var1 == 1 & freq$Var2 == 1,]$Freq/open_feb)*100, 
+                                   (freq[freq$Var1 == 2 & freq$Var2 == 1,]$Freq/open_feb)*100, 
+                                   (freq[freq$Var1 == 3 & freq$Var2 == 1,]$Freq/open_feb)*100, 
+                                   (freq[freq$Var1 == 4 & freq$Var2 == 1,]$Freq/open_feb)*100, 
+                                   ((freq[freq$Var1 == 5 & freq$Var2 == 1,]$Freq + recently_closed_may)/open_feb)*100, 
+                                   ((freq[freq$Var1 == 6 & freq$Var2 == 1,]$Freq + recently_closed_jun)/open_feb)*100,
+                                   #Perm:
+                                   (freq[freq$Var1 == 1 & freq$Var2 == 0,]$Freq/open_feb)*100, 
+                                   (freq[freq$Var1 == 2 & freq$Var2 == 0,]$Freq/open_feb)*100, 
+                                   (freq[freq$Var1 == 3 & freq$Var2 == 0,]$Freq/open_feb)*100, 
+                                   (freq[freq$Var1 == 4 & freq$Var2 == 0,]$Freq/open_feb)*100, 
+                                   ((freq[freq$Var1 == 5 & freq$Var2 == 0,]$Freq + recently_pclosed_may)/open_feb)*100,
+                                   ((freq[freq$Var1 == 6 & freq$Var2 == 0,]$Freq + recently_pclosed_jun)/open_feb)*100),
+                  "Closed" = c("Temporarily", "Temporarily", "Temporarily","Temporarily","Temporarily", "Temporarily",
+                                "Permanently", "Permanently","Permanently", "Permanently", "Permanently", "Permanently"))
+closed$Month <- factor(closed$Month, levels = c("January", "February", "March", "April", "May", "June"))
+
+##### Create table for layoffs ############
+## Number of employees in February
+total <- sum(as.numeric(ent_outcomes$s3_q7_num_paid_feb), na.rm = TRUE) + 
+         sum(ent_outcomes[ent_outcomes$s2_q2_whenclose %in% c(3,4,5,6,8,9),][,"s2_q5_num_employees"], na.rm = TRUE)
+
+## Assign month to p7 and p14 observations:
+#Layoffs business open
+recent_layoff_apr <- sum(ent_outcomes[month(ent_outcomes$today) == 5 & day(ent_outcomes$today) <= 11,]$s3_q8_laidoff_p14, na.rm = TRUE)
+
+recent_layoff_may <- sum(ent_outcomes[(month(ent_outcomes$today) == 5 & day(ent_outcomes$today) > 11),]$s3_q8_laidoff_p14, na.rm = TRUE) +
+  sum(ent_outcomes[(month(ent_outcomes$today) == 5 & day(ent_outcomes$today) > 4),]$s3_q8_laidoff_p7, na.rm = TRUE) + 
+  sum(ent_outcomes[(month(ent_outcomes$today) == 6 & day(ent_outcomes$today) < 5),]$s3_q8_laidoff_p7, na.rm = TRUE) +
+  sum(ent_outcomes[(month(ent_outcomes$today) == 6 & day(ent_outcomes$today) <= 11),]$s3_q8_laidoff_p14, na.rm = TRUE)
+
+recent_layoff_jun <- sum(ent_outcomes[(month(ent_outcomes$today) == 6 & day(ent_outcomes$today) > 11),]$s3_q8_laidoff_p14, na.rm = TRUE) + 
+  sum(ent_outcomes[(month(ent_outcomes$today) == 6 & day(ent_outcomes$today) > 4),]$s3_q8_laidoff_p7, na.rm = TRUE)
+
+#due to closures
+recent_clayoff_may <- sum(ent_outcomes[ent_outcomes$s2_q2_whenclose == 9 & 
+                   month(ent_outcomes$today) == 5,]$s2_q5_num_employees, na.rm = TRUE) +
+  sum(ent_outcomes[ent_outcomes$s2_q2_whenclose == 8 & 
+                     month(ent_outcomes$today) == 5 & 
+                     day(ent_outcomes$today) > 11,]$s2_q5_num_employees, na.rm = TRUE) +
+  sum(ent_outcomes[ent_outcomes$s2_q2_whenclose == 9 & 
+                     month(ent_outcomes$today) == 6 & 
+                     day(ent_outcomes$today) < 5,]$s2_q5_num_employees, na.rm = TRUE) +
+  sum(ent_outcomes[ent_outcomes$s2_q2_whenclose == 8 & 
+                     month(ent_outcomes$today) == 6 & 
+                     day(ent_outcomes$today) <= 11,]$s2_q5_num_employees, na.rm = TRUE)
+
+recent_clayoff_jun <-
+  sum(ent_outcomes[ent_outcomes$s2_q2_whenclose == 9 & 
+                     month(ent_outcomes$today) == 6 & 
+                     day(ent_outcomes$today) > 4,]$s2_q5_num_employees, na.rm = TRUE) +
+  sum(ent_outcomes[ent_outcomes$s2_q2_whenclose == 8 & 
+                     month(ent_outcomes$today) == 6 & 
+                     day(ent_outcomes$today) > 11,]$s2_q5_num_employees, na.rm = TRUE)
+
+
+# Create dataframe
+layoffs <- data.frame("Month" = c("January", "February", "March", "April", "May", "June",
+                                  "January", "February", "March", "April", "May", "June"),
+                  "Frequency" = c((sum(ent_outcomes$s3_q8_laidoff_jan, na.rm = TRUE))*100/total,
+                                  (sum(ent_outcomes$s3_q8_laidoff_feb, na.rm = TRUE))*100/total,
+                                  (sum(ent_outcomes$s3_q8_laidoff_mar, na.rm = TRUE))*100/total,
+                                  (sum(ent_outcomes$s3_q8_laidoff_apr, na.rm = TRUE)+ recent_layoff_apr)*100/total,
+                                  (sum(ent_outcomes$s3_q8_laidoff_may, na.rm = TRUE)+ recent_layoff_may)*100/total,
+                                  (sum(ent_outcomes$s3_q8_laidoff_jun, na.rm = TRUE)+ recent_layoff_jun)*100/total,
+                                  (sum(ent_outcomes[ent_outcomes$s2_q2_whenclose == 1,][,"s2_q5_num_employees"], 
+                                       na.rm = TRUE))*100/total,
+                                  (sum(ent_outcomes[ent_outcomes$s2_q2_whenclose == 2,][,"s2_q5_num_employees"], 
+                                       na.rm = TRUE))*100/total,
+                                  (sum(ent_outcomes[ent_outcomes$s2_q2_whenclose == 3,][,"s2_q5_num_employees"], 
+                                      na.rm = TRUE))*100/total,
+                                  (sum(ent_outcomes[ent_outcomes$s2_q2_whenclose == 4,][,"s2_q5_num_employees"], 
+                                       na.rm = TRUE))*100/total,
+                                  (sum(ent_outcomes[ent_outcomes$s2_q2_whenclose == 5,][,"s2_q5_num_employees"], 
+                                       na.rm = TRUE) + recent_clayoff_may)*100/total,
+                                  (sum(ent_outcomes[ent_outcomes$s2_q2_whenclose == 6,][,"s2_q5_num_employees"], 
+                                       na.rm = TRUE) + recent_clayoff_jun)*100/total),
+                  "Status" = c("Enterprise operating","Enterprise operating","Enterprise operating","Enterprise operating","Enterprise operating", "Enterprise operating",
+                                          "Enterprise closed","Enterprise closed","Enterprise closed","Enterprise closed","Enterprise closed","Enterprise closed"))
+layoffs$Month <- factor(layoffs$Month, levels = c("January", "February", "March", "April", "May", "June"))
+
+```
   
 ##  {.tabset}
 
 ### Operations
 
-<font size="5">**Percentage of enterprises operating each week**</font> 
+<font size="5">**Enterprises operating each week**</font> 
 
 ``` {r op}
-op <- op[c("week", "op")]
   op_g <- dygraph(op, main = "") %>%
 #  dySeries("perm_closed", strokeWidth = 4, label = "Permanently closed") %>%
 #  dySeries("temp_closed", strokeWidth = 4, label = "Temporarily closed") %>%
   dySeries("op", strokeWidth = 4, label = "Operational", color = "rgb(78,125,219)") %>%
   dyAxis("x", pixelsPerLabel = 90 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "% Operating Enterprises", drawGrid = FALSE, valueRange = c(0, 110)) %>% 
+  dyAxis("y", label = "% Operating enterprises", drawGrid = FALSE, valueRange = c(60, 100)) %>% 
   dyLegend(width = 500, labelsSeparateLines = FALSE) %>%
-  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4) %>%
+  dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4,
+            connectSeparatedPoints = TRUE) %>%
     dyCrosshair(direction = "vertical") %>%
+  dyEvent(12.3 , "August", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyEvent(8.3 , "July", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
     dyEvent(4.1 , "June", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyEvent(-0.2 , "May", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+    dyEvent(-4.5 , "April", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+    dyEvent(-8.8 , "March", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+   dyEvent(-13.1 , "February", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+   dyEvent(-7 , "Lockdown begins", labelLoc = "top") %>%
   presAnnotation("1", text = "May 10") %>%
-  presAnnotation("5", text = "June 13") %>%
+  presAnnotation("7", text = "June 27") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
 op_g
 ```
 
+February, March and April data points assume that no business that closed down up until that point reopened, and they correspond to the first day of each month. 
+
 *** 
 
-<font size="5">**Status by month relative to February's operation levels**</font> 
+<font size="5">**Total hours worked by all employees - past 7 days**</font> 
 
-```{r}
-closed <- data.frame("Month" = c("January", "February", "March", "April", "May",
-                                 "January", "February", "March", "April", "May"),
-                  "Proportion" = c((47/2797)*100, (43/2797)*100, (230/2797)*100, (168/2797)*100, ((45+39)/2797)*100,
-                                   (15/2797)*100, (3/2797)*100, (6/2797)*100, (1/2797)*100, ((0)/2797)*100),
-                  "Closed" = c("Temporarily", "Temporarily", "Temporarily","Temporarily","Temporarily",
-                                "Permanently", "Permanently","Permanently", "Permanently", "Permanently"))
-closed$Month <- factor(closed$Month, levels = c("January", "February", "March", "April", "May"))
-
-ggplot(closed, aes(Month, Proportion)) + geom_col(aes(fill = Closed)) + ylab("% Business closures")+ theme_classic()
+``` {r op_hrs}
+  op_hrs_g <- dygraph(op_hrs, main = "") %>%
+#  dySeries("perm_closed", strokeWidth = 4, label = "Permanently closed") %>%
+  dySeries("s3_q5_emphrs_p7_wins", strokeWidth = 4, label = "Hours worked, all employees", color = "rgb(204,0,0)") %>%
+  dyAxis("x", pixelsPerLabel = 90 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", label = "Hours", drawGrid = FALSE, valueRange = c(52, 68)) %>% 
+  dyLegend(width = 500, labelsSeparateLines = FALSE) %>%
+  dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4,
+            connectSeparatedPoints = TRUE) %>%
+    dyCrosshair(direction = "vertical") %>%
+  dyEvent(12.3 , "August", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyEvent(8.3 , "July", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+    dyEvent(4.1 , "June", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyEvent(-0.2 , "May", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+    dyEvent(-4.5 , "April", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+    dyEvent(-8.8 , "March", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+   dyEvent(-13.1 , "February", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+   dyEvent(-7 , "Lockdown begins", labelLoc = "top") %>%
+  presAnnotation("1", text = "May 10") %>%
+  presAnnotation("7", text = "June 27") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
+op_hrs_g
 ```
 
 *** 
+
+<font size="5">**Closures by month relative to February's operation levels**</font> 
+
+```{r}
+ggplot(closed, aes(Month, Proportion)) + geom_col(aes(fill = Closed)) + ylab("% Business closures")+ theme_classic()
+```
+
+
+*** 
 ### Revenue and profit  
-<font size="5">**Enterprises revenue and profits in the past 14 days**</font>
+<font size="5">**Enterprises revenue and profits - past 14 days**</font>
 ```{r enter}
 e_g  <- dygraph(rev_prof, main = "") %>%
   dySeries("rev_wins", strokeWidth = 4, label = "Total enterprise revenue" , color = "rgb(78,125,219)") %>%
@@ -179,6 +353,8 @@ e_g  <- dygraph(rev_prof, main = "") %>%
   dyAxis("y", drawGrid = FALSE , label = "USD, PPP") %>% 
   dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, connectSeparatedPoints = TRUE) %>%
     dyCrosshair(direction = "vertical") %>%
+  dyEvent(12.3 , "August", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyEvent(8.3 , "July", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   dyEvent(-0.2 , "May", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
     dyEvent(-4.5 , "April", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
     dyEvent(-8.8 , "March", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
@@ -190,7 +366,7 @@ e_g
 ```
 
 *** 
-<font size="5">**Revenue by sector in the past 14 days (2 week average)**</font>
+<font size="5">**Revenue by sector - past 14 days (2 week average)**</font>
 ```{r}
 e_g  <- dygraph(rev_prof_s, main = "") %>%
   dySeries("rev_wins_wins_wins", strokeWidth = 4, label = "Services", color = "rgb(78,125,219)") %>%
@@ -201,6 +377,8 @@ e_g  <- dygraph(rev_prof_s, main = "") %>%
   dyAxis("y", drawGrid = FALSE , label = "Normalized revenue") %>% 
   dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, connectSeparatedPoints = TRUE) %>%
     dyCrosshair(direction = "vertical") %>%
+  dyEvent(12.3 , "August", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyEvent(8.3 , "July", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   dyEvent(-0.2 , "May", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
     dyEvent(-4.5 , "April", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
     dyEvent(-8.8 , "March", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
@@ -211,7 +389,7 @@ e_g  <- dygraph(rev_prof_s, main = "") %>%
 e_g
 ``` 
 
-\*Agriculture is normalized by last year's 2-week revenue, while all other variables are normalized by the average reported revenue for February. Reported amounts were averaged every two weeks. 
+\*Agriculture is normalized by last year's 2-week typical revenue, while all other variables are normalized by the average reported revenue for February. Reported amounts were averaged every two weeks. 
 
 *** 
 
@@ -227,7 +405,7 @@ e_g
   dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set1"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "May 10") %>%
-  presAnnotation("5", text = "June 13") %>%
+  presAnnotation("6", text = "June 20") %>%
 #  presAnnotation("-10", text = "February") %>%
   dyEvent(-1 , "February", labelLoc = "bottom", color = "gray", strokePattern = "solid") %>%
     dyEvent(-0.5 , "Lockdown begins March 15", labelLoc = "bottom") %>%
@@ -249,7 +427,7 @@ inv_g
   dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "May 10") %>%
-  presAnnotation("5", text = "June 13") %>%
+  presAnnotation("7", text = "June 27") %>%
   presAnnotation("-10", text = "February") %>%
     dyEvent(-1 , "February", labelLoc = "bottom", color = "gray", strokePattern = "solid") %>%
     dyEvent(-0.5 , "Lockdown begins March 15", labelLoc = "bottom") %>%
@@ -263,7 +441,7 @@ wages_g
 ***     
 
 
-### COVID-19  
+### COVID-19 Impact
 <font size="5">**COVID-19 Impact**</font>
 
 How has COVID-19 affected this business?*  
@@ -271,47 +449,125 @@ How has COVID-19 affected this business?*
 ``` {r ecov}
   ecov_g <- dygraph(cov, main = "") %>%
   dySeries("ecov_1", strokeWidth = 4, label = "Reduction in demand/customers") %>%
-  dySeries("ecov_2", strokeWidth = 4, label = "Has not affected") %>%
-  dySeries("ecov_3", strokeWidth = 4, label = "Other") %>%
+  dySeries("ecov_4", strokeWidth = 4, label = "Other: affected by curfew / market closure") %>%
+  dySeries("ecov_5", strokeWidth = 4, label = "Other") %>%
   dyAxis("x", pixelsPerLabel = 90 , drawGrid = FALSE, label = "Weeks") %>% #grid
   dyAxis("y", label = "Percentage of sample", drawGrid = FALSE) %>% 
   dyLegend(width = 500, labelsSeparateLines = FALSE) %>%
-  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set1")) %>%
+  dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set1")) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "May 10") %>%
-  presAnnotation("5", text = "June 13") %>%
+  presAnnotation("7", text = "June 27") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
 ecov_g
 ```
     
 *This is for the proportion of enterprises currently operating.  
 
+  *** 
+
+<font size="5">**Number of customers - past 7 days**</font>
+``` {r}
+  cust_g <- dygraph(cust, main = "") %>%
+#  dySeries("perm_closed", strokeWidth = 4, label = "Permanently closed") %>%
+#  dySeries("loc_customers", strokeWidth = 4, label = "Local customers", color = "darkgreen") %>%
+  dySeries("s3_q10_customers_p7", strokeWidth = 4, label = "Customers", color = "rgb(78,125,219)") %>%
+  dyAxis("x", pixelsPerLabel = 90 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", label = "Customers, last week", drawGrid = FALSE, valueRange = c(30, 80)) %>% 
+  dyLegend(width = 500, labelsSeparateLines = FALSE) %>%
+  dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4) %>%
+    dyCrosshair(direction = "vertical") %>%
+    dyEvent(4.1 , "June", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyEvent(12.3 , "August", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyEvent(8.3 , "July", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  presAnnotation("1", text = "May 10") %>%
+  presAnnotation("7", text = "June 27") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
+cust_g
+```
+
+
   ***  
+
+### COVID-19 Prevention
+
+<font size="5">**Enterprises reporting a preventive change in their business model**</font>
+
+Percentage of enterprises that reported a change in their business model since March 2020 to reduce the risk of employees spreading or contracting the virus as well as changes that reduce customer interactions. 
+
+``` {r}
+  bm_g <- dygraph(bm, main = "") %>%
+#  dySeries("perm_closed", strokeWidth = 4, label = "Permanently closed") %>%
+  dySeries("bm_emp", strokeWidth = 4, label = "Reduce risk to employees", color = "darkgreen") %>%
+  dySeries("bm_cust", strokeWidth = 4, label = "Reduce customer interactions", color = "rgb(78,125,219)") %>%
+  dyAxis("x", pixelsPerLabel = 90 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", label = "Percentage", drawGrid = FALSE, valueRange = c(0, 110)) %>% 
+  dyLegend(width = 500, labelsSeparateLines = FALSE) %>%
+  dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4) %>%
+    dyCrosshair(direction = "vertical") %>%
+    dyEvent(4.1 , "June", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyEvent(12.3 , "August", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyEvent(8.3 , "July", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  presAnnotation("1", text = "May 10") %>%
+  presAnnotation("7", text = "June 27") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
+bm_g
+```
+
+*** 
+
+<font size="5">**Percentage of businesses with employees working from home**</font>
+``` {r}
+  wfh_g <- dygraph(wfh, main = "") %>%
+#  dySeries("perm_closed", strokeWidth = 4, label = "Permanently closed") %>%
+  dySeries("wfh_1", strokeWidth = 4, label = "Sometimes or all of the time", color = "darkgreen") %>%
+  dySeries("wfh_2", strokeWidth = 4, label = "Never", color = "rgb(78,125,219)") %>%
+  dyAxis("x", pixelsPerLabel = 90 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", label = "% Working from home", drawGrid = FALSE, valueRange = c(0, 110)) %>% 
+  dyLegend(width = 500, labelsSeparateLines = FALSE) %>%
+  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4) %>%
+    dyCrosshair(direction = "vertical") %>%
+    dyEvent(4.1 , "June", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyEvent(12.3 , "August", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyEvent(8.3 , "July", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  presAnnotation("1", text = "May 10") %>%
+  presAnnotation("7", text = "June 27") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
+wfh_g
+```
+
+
+  *** 
+
+<font size="5">**Mobile Payments**</font>
+
+Percentage of firms accepting mobile payments and their share among firms that accept mobile payments. 
+
+``` {r}
+  mob_g <- dygraph(mob, main = "") %>%
+#  dySeries("perm_closed", strokeWidth = 4, label = "Permanently closed") %>%
+  dySeries("mob_money", strokeWidth = 4, label = "Accepting mobile payments", color = "darkgreen") %>%
+  dySeries("s3_q16a_mobilesales", strokeWidth = 4, label = "Share of mobile payments", color = "rgb(78,125,219)") %>%
+  dyAxis("x", pixelsPerLabel = 90 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", label = "Percentage", drawGrid = FALSE, valueRange = c(0, 70)) %>% 
+  dyLegend(width = 500, labelsSeparateLines = FALSE) %>%
+  dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4) %>%
+    dyCrosshair(direction = "vertical") %>%
+    dyEvent(4.1 , "June", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyEvent(12.3 , "August", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyEvent(8.3 , "July", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  presAnnotation("1", text = "May 10") %>%
+  presAnnotation("7", text = "June 27") %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
+mob_g
+```
+
+*** 
+
 ### Layoffs
 
 <font size="5">**Temporal distribution of layoffs relative to February's employment level**</font>
 ```{r}
-total <- sum(as.numeric(ent_outcomes$s3_q7_num_paid_feb), na.rm = TRUE) + 197 + 107 +8 +107 + 8 + 98
-layoffs <- data.frame("Month" = c("January", "February", "March", "April", "May",
-                                  "January", "February", "March", "April", "May"),
-                  "Frequency" = c((sum(ent_outcomes$s3_q8_laidoff_jan, na.rm = TRUE))*100/total,
-                                  (sum(ent_outcomes$s3_q8_laidoff_feb, na.rm = TRUE))*100/total,
-                                  (sum(ent_outcomes$s3_q8_laidoff_mar, na.rm = TRUE))*100/total,
-                                  (sum(ent_outcomes$s3_q8_laidoff_apr, na.rm = TRUE)+8)*100/total,
-                                  (sum(ent_outcomes$s3_q8_laidoff_may, na.rm = TRUE)+8)*100/total,
-                                  (sum(ent_outcomes[ent_outcomes$s2_q2_whenclose == 1,][,"s2_q5_num_employees"], 
-                                       na.rm = TRUE))*100/total,
-                                  (sum(ent_outcomes[ent_outcomes$s2_q2_whenclose == 2,][,"s2_q5_num_employees"], 
-                                       na.rm = TRUE))*100/total,
-                                  (sum(ent_outcomes[ent_outcomes$s2_q2_whenclose == 3,][,"s2_q5_num_employees"], 
-                                      na.rm = TRUE))*100/total,
-                                  (sum(ent_outcomes[ent_outcomes$s2_q2_whenclose == 4,][,"s2_q5_num_employees"], 
-                                       na.rm = TRUE))*100/total,
-                                  (sum(ent_outcomes[(ent_outcomes$s2_q2_whenclose == 8 | ent_outcomes$s2_q2_whenclose == 9),][,"s2_q5_num_employees"], 
-                                       na.rm = TRUE))*100/total),
-                  "Status" = c("Enterprise operating","Enterprise operating","Enterprise operating","Enterprise operating","Enterprise operating",
-                                          "Enterprise closed","Enterprise closed","Enterprise closed","Enterprise closed","Enterprise closed"))
-layoffs$Month <- factor(layoffs$Month, levels = c("January", "February", "March", "April", "May"))
 ggplot(layoffs, aes(Month, Frequency)) + geom_col(aes(fill = Status)) + ylab("% Layoffs") + theme_classic()
 ```
 
@@ -325,13 +581,17 @@ These data comes from phone survey interviews conducted by [REMIT Kenya](http://
 
 So far we have interviewed 3,041 enterprises, with the following distribution per week:
 
-| Week	| Dates	| Number of surveys |
-|------|:-----:|:---------:|
-| Week 1 |	10 May 2020 - 16 May 2020	| 532 |
-| Week 2 |	17 May 2020 - 23 May 2020	| 458 |
-| Week 3 |	24 May 2020 - 30 May 2020	| 434 |
-| Week 4 |	31 May 2020 - 06 June 2020	| 732 |
-| Week 5 |	07 May 2020 - 13 June 2020	| 885 |
-
+| Week	| Dates	| Number of surveys | Round |
+|------|:-----:|:---------:|:-----:|
+| Week 1 |	10 May 2020 - 16 May 2020	| 532 |1|
+| Week 2 |	17 May 2020 - 23 May 2020	| 458 |1|
+| Week 3 |	24 May 2020 - 30 May 2020	| 434 |1|
+| Week 4 |	31 May 2020 - 06 June 2020	| 732 |1|
+| Week 5 |	07 June 2020 - 13 June 2020	| 885 |1|
+| Week 6 | 14 June 2020 - 20 June 2020 | 1216 |1|
+| Week 9 | 5 July 2020 - 11 July 2020 | 570 |2|
+| Week 10 | 12 July 2020 - 18 July 2020 | 609 |2|
+| Week 11 | 19 July 2020 - 25 July 2020 | 552 |2|
+| Week 12 | 26 July 2020 - 01 August 2020 | 601 |2|
 
 

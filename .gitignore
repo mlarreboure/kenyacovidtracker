@@ -2,3 +2,5 @@
 .Rhistory
 .RData
 .Ruserdata
+content/.DS_Store
+static/.DS_Store

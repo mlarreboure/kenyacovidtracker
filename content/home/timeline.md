@@ -88,7 +88,7 @@ description = """
 title = "Cessation of movement in and out of Mandera county."
 company=""
 date_start = "2013-04-22" 
-date_end = ""
+date_end = "2013-07-07"
 
 [[experience]]
 title = "Cessation of movement in and out of Kilifi and Kwale counties."
@@ -100,14 +100,14 @@ date_end = "2014-06-07"
 title = "Cessation of movement in and out of Mombasa county."
 company=""
 date_start = "2014-04-08" 
-date_end = ""
+date_end = "2014-07-07"
   
   
 [[experience]]
 title = "Cessation of movement in and out of The Nairobi Metropolitan Area."
 company=""
 date_start = "2015-04-06" 
-date_end = ""
+date_end = "2015-07-07"
 
   [[experience]]
   title = "Kenya Red Cross reports that ongoing heavy rains in western Kenya have affected over 20 villages in Busia, Siaya, Migori, Homa Bay and Kisumu."
@@ -131,7 +131,11 @@ This curfew took place from 7pm-5am until June 07, when the schedule changed to 
   company=""
 date_start = "2018-03-25" 
 date_end = ""
+  description = """
 
+National flights to resume July 15th, and international flights to resume August 1st.
+
+"""
   [[experience]]
   title = "Closing of all schools and higher learning institutions."
   company=""
