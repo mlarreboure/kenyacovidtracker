@@ -132,8 +132,8 @@ tmp[tmp$week == 3.5,"i1_wins"] = rev_prof_s[15,"i1_wins"]
 tmp <- rbind(tmp, rev_prof_s[19,])
 tmp <- rbind(tmp,(rev_prof_s[20,]+rev_prof_s[21,])/2)
 tmp <- rbind(tmp,(rev_prof_s[22,]+rev_prof_s[23,])/2)
-tmp <- rbind(tmp, rev_prof_s[24,]) # if end week is odd, average end week with previous week and append empty row.
-rev_prof_s <- tmp                  # if end week is even, append data of last row (no average) and append empty row.
+tmp <- rbind(tmp, rev_prof_s[24:25,]) # if end week is odd, average end week with previous week and append empty row.
+rev_prof_s <- tmp                     # if end week is even, append data of last row (no average) and append empty row.
 
 
 ############## Create DF for Investment / Wages ################
@@ -589,9 +589,10 @@ So far we have interviewed 3,041 enterprises, with the following distribution pe
 | Week 4 |	31 May 2020 - 06 June 2020	| 732 |1|
 | Week 5 |	07 June 2020 - 13 June 2020	| 885 |1|
 | Week 6 | 14 June 2020 - 20 June 2020 | 1216 |1|
-| Week 9 | 5 July 2020 - 11 July 2020 | 570 |2|
-| Week 10 | 12 July 2020 - 18 July 2020 | 609 |2|
-| Week 11 | 19 July 2020 - 25 July 2020 | 552 |2|
-| Week 12 | 26 July 2020 - 01 August 2020 | 601 |2|
+| Week 9 | 5 July 2020 - 11 July 2020 | 569 |2|
+| Week 10 | 12 July 2020 - 18 July 2020 | 608 |2|
+| Week 11 | 19 July 2020 - 25 July 2020 | 550 |2|
+| Week 12 | 26 July 2020 - 01 August 2020 | 615 |2|
+| Week 13 | 02 August 2020 - 08 August 2020 | 629 |2|
 
 

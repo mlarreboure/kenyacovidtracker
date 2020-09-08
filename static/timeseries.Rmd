@@ -20,8 +20,8 @@ library(ggplot2)
 library(rjson) #reading shapefiles for heatmaps
 library(plotly) #interactive visualization
 
-end_week = "18"
-end_survey = "August 8"
+end_week = "22"
+end_survey = "August 29"
 
 ## Importing Data ##
 #covid_weekly <- read_dta("~/Dropbox (Princeton)/GE_Endline2/covid19/data/COVID_AllHHs_outcomes_weekly.dta")
@@ -365,7 +365,7 @@ mh5 <- covid_weekly[mh5]
 
 presAnnotation <- function(dygraph, x, text) {
   dygraph %>%
-    dyAnnotation(x, text, attachAtBottom = TRUE, width = 60, height = 25)
+    dyAnnotation(x, text, attachAtBottom = TRUE, width = 70, height = 25)
 }
 
 ```

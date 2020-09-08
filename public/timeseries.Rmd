@@ -20,8 +20,8 @@ library(ggplot2)
 library(rjson) #reading shapefiles for heatmaps
 library(plotly) #interactive visualization
 
-end_week = "17"
-end_survey = "August 1"
+end_week = "22"
+end_survey = "August 29"
 
 ## Importing Data ##
 #covid_weekly <- read_dta("~/Dropbox (Princeton)/GE_Endline2/covid19/data/COVID_AllHHs_outcomes_weekly.dta")
@@ -30,16 +30,16 @@ covid_hh <- read_dta("../../GE_Endline2/covid19/data/COVID_HH_Rd2_outcomes.dta")
 covid_ent_hh <- read_dta("../../GE_Endline2/covid19/data/COVID_ENT_HHs_outcomes.dta") # Get February data wght. means
 covid_ent_hh <- covid_ent_hh[!is.na(covid_ent_hh$hhent_weight),] #Skip HH's that don't have a weight (replicates Stata code)
 
-## By eligibility status
-tmp <- read_dta("../../GE_Endline2/covid19/data/COVID_HH_outcomes_eligibility_weekly.dta")
-covid_weekly_e <- tmp[tmp$eligible == 1,]
+## By baseline asset holdings (2014/15)
+tmp <- read_dta("../../GE_Endline2/covid19/data/COVID_HH_outcomes_assets_weekly.dta") # Notation: e is high assets, i is low.
+covid_weekly_e <- tmp[tmp$high_assets_bl == 1,]
 covid_weekly_e[nrow(covid_weekly_e)+1,] <- NA
 covid_weekly_e[nrow(covid_weekly_e),"week"] <- max(covid_weekly_e$week, na.rm = TRUE) + 1
 covid_weekly_e[nrow(covid_weekly_e)+1,] <- NA
 covid_weekly_e[nrow(covid_weekly_e),"week"] <- 0
 covid_weekly_e <- covid_weekly_e[order(covid_weekly_e$week),]
 
-covid_weekly_i <- tmp[tmp$eligible == 0,]
+covid_weekly_i <- tmp[tmp$high_assets_bl == 0,]
 covid_weekly_i[nrow(covid_weekly_i)+1,] <- NA
 covid_weekly_i[nrow(covid_weekly_i),"week"] <- max(covid_weekly_i$week, na.rm = TRUE) + 1
 covid_weekly_i[nrow(covid_weekly_i)+1,] <- NA
@@ -124,28 +124,28 @@ i <- rbind(c(-2,NA,NA,NA), i)
 
 i_e <- c("week", "i2_wins", "i3_wins", "i1_wins")
 i_e <- covid_weekly_e[!(covid_weekly_e$week %in% c(9,10)),i_e]
-i1_feb_e <- weighted.mean(covid_hh[covid_hh$eligible == 1,]$i1_feb_wins,
-                          covid_hh[covid_hh$eligible == 1,]$hh_weight,
+i1_feb_e <- weighted.mean(covid_hh[covid_hh$high_assets_bl == 1,]$i1_feb_wins,
+                          covid_hh[covid_hh$high_assets_bl == 1,]$hh_weight,
                           na.rm = TRUE)
-i2_feb_e <- weighted.mean(covid_hh[covid_hh$eligible == 1,]$i2_feb_wins,
-                          covid_hh[covid_hh$eligible == 1,]$hh_weight,
+i2_feb_e <- weighted.mean(covid_hh[covid_hh$high_assets_bl == 1,]$i2_feb_wins,
+                          covid_hh[covid_hh$high_assets_bl == 1,]$hh_weight,
                           na.rm = TRUE)
-i3_feb_e <- weighted.mean(covid_hh[covid_hh$eligible == 1,]$i3_feb_wins,
-                          covid_hh[covid_hh$eligible == 1,]$hh_weight,
+i3_feb_e <- weighted.mean(covid_hh[covid_hh$high_assets_bl == 1,]$i3_feb_wins,
+                          covid_hh[covid_hh$high_assets_bl == 1,]$hh_weight,
                           na.rm = TRUE)
 i_e <- rbind(c(-1, i1_feb_e, i2_feb_e, i3_feb_e), i_e)
 i_e <- rbind(c(-2,NA,NA,NA), i_e)
 
 i_i <- c("week", "i2_wins", "i3_wins", "i1_wins")
 i_i <- covid_weekly_i[!(covid_weekly_i$week %in% c(9,10)),i_i]
-i1_feb_i <- weighted.mean(covid_hh[covid_hh$eligible == 0,]$i1_feb_wins,
-                          covid_hh[covid_hh$eligible == 0,]$hh_weight,
+i1_feb_i <- weighted.mean(covid_hh[covid_hh$high_assets_bl == 0,]$i1_feb_wins,
+                          covid_hh[covid_hh$high_assets_bl == 0,]$hh_weight,
                           na.rm = TRUE)
-i2_feb_i <- weighted.mean(covid_hh[covid_hh$eligible == 0,]$i2_feb_wins,
-                          covid_hh[covid_hh$eligible == 0,]$hh_weight,
+i2_feb_i <- weighted.mean(covid_hh[covid_hh$high_assets_bl == 0,]$i2_feb_wins,
+                          covid_hh[covid_hh$high_assets_bl == 0,]$hh_weight,
                           na.rm = TRUE)
-i3_feb_i <- weighted.mean(covid_hh[covid_hh$eligible == 0,]$i3_feb_wins,
-                          covid_hh[covid_hh$eligible == 0,]$hh_weight,
+i3_feb_i <- weighted.mean(covid_hh[covid_hh$high_assets_bl == 0,]$i3_feb_wins,
+                          covid_hh[covid_hh$high_assets_bl == 0,]$hh_weight,
                           na.rm = TRUE)
 i_i <- rbind(c(-1, i1_feb_i, i2_feb_i, i3_feb_i), i_i)
 i_i <- rbind(c(-2,NA,NA,NA), i_i)
@@ -183,54 +183,54 @@ i_nc <- rbind(c(-2,NA,NA,NA), i_nc)
 d <- c("week", "i7_wins", "dissaved") 
 d <- covid_weekly[d]
 
-it <- c("week", "i5a_wins", "i5b_wins" , "i5c_wins")
+it <- c("week", "govsupport", "ngosupport" , "polsupport")
 it <- covid_weekly[!(covid_weekly$week %in% c(9,10)),it]
-i5a_feb <- weighted.mean(covid_hh$i5a_feb_wins,covid_hh$hh_weight,na.rm = TRUE)
-i5b_feb <- weighted.mean(covid_hh$i5b_feb_wins,covid_hh$hh_weight,na.rm = TRUE)
-i5c_feb <- weighted.mean(covid_hh$i5c_feb_wins,covid_hh$hh_weight,na.rm = TRUE)
+i5a_feb <- weighted.mean(covid_hh$govsupport_feb,covid_hh$hh_weight,na.rm = TRUE)
+i5b_feb <- weighted.mean(covid_hh$ngosupport_feb,covid_hh$hh_weight,na.rm = TRUE)
+i5c_feb <- weighted.mean(covid_hh$polsupport_feb,covid_hh$hh_weight,na.rm = TRUE)
 it <- rbind(c(-1, i5a_feb, i5b_feb, i5c_feb), it)
 it <- rbind(c(-2,NA,NA,NA), it)
 
-it_e <- c("week", "i5a_wins", "i5b_wins" , "i5c_wins")
+it_e <- c("week", "govsupport", "ngosupport" , "polsupport")
 it_e <- covid_weekly_e[!(covid_weekly_e$week %in% c(9,10)),it_e]
-i5a_feb_e <- weighted.mean(covid_hh[covid_hh$eligible == 1,]$i5a_feb_wins,
-                           covid_hh[covid_hh$eligible == 1,]$hh_weight,na.rm = TRUE)
-i5b_feb_e <- weighted.mean(covid_hh[covid_hh$eligible == 1,]$i5b_feb_wins,
-                           covid_hh[covid_hh$eligible == 1,]$hh_weight,na.rm = TRUE)
-i5c_feb_e <- weighted.mean(covid_hh[covid_hh$eligible == 1,]$i5c_feb_wins,
-                           covid_hh[covid_hh$eligible == 1,]$hh_weight,na.rm = TRUE)
+i5a_feb_e <- weighted.mean(covid_hh[covid_hh$high_assets_bl == 1,]$govsupport_feb,
+                           covid_hh[covid_hh$high_assets_bl == 1,]$hh_weight,na.rm = TRUE)
+i5b_feb_e <- weighted.mean(covid_hh[covid_hh$high_assets_bl == 1,]$ngosupport_feb,
+                           covid_hh[covid_hh$high_assets_bl == 1,]$hh_weight,na.rm = TRUE)
+i5c_feb_e <- weighted.mean(covid_hh[covid_hh$high_assets_bl == 1,]$polsupport_feb,
+                           covid_hh[covid_hh$high_assets_bl == 1,]$hh_weight,na.rm = TRUE)
 it_e <- rbind(c(-1, i5a_feb_e, i5b_feb_e, i5c_feb_e), it_e)
 it_e <- rbind(c(-2,NA,NA,NA), it_e)
 
-it_i <- c("week", "i5a_wins", "i5b_wins" , "i5c_wins")
+it_i <- c("week", "govsupport", "ngosupport" , "polsupport")
 it_i <- covid_weekly_i[!(covid_weekly_i$week %in% c(9,10)),it_i]
-i5a_feb_i <- weighted.mean(covid_hh[covid_hh$eligible == 0,]$i5a_feb_wins,
-                           covid_hh[covid_hh$eligible == 0,]$hh_weight,na.rm = TRUE)
-i5b_feb_i <- weighted.mean(covid_hh[covid_hh$eligible == 0,]$i5b_feb_wins,
-                           covid_hh[covid_hh$eligible == 0,]$hh_weight,na.rm = TRUE)
-i5c_feb_i <- weighted.mean(covid_hh[covid_hh$eligible == 0,]$i5c_feb_wins,
-                           covid_hh[covid_hh$eligible == 0,]$hh_weight,na.rm = TRUE)
+i5a_feb_i <- weighted.mean(covid_hh[covid_hh$high_assets_bl == 0,]$govsupport_feb,
+                           covid_hh[covid_hh$high_assets_bl == 0,]$hh_weight,na.rm = TRUE)
+i5b_feb_i <- weighted.mean(covid_hh[covid_hh$high_assets_bl == 0,]$ngosupport_feb,
+                           covid_hh[covid_hh$high_assets_bl == 0,]$hh_weight,na.rm = TRUE)
+i5c_feb_i <- weighted.mean(covid_hh[covid_hh$high_assets_bl == 0,]$polsupport_feb,
+                           covid_hh[covid_hh$high_assets_bl == 0,]$hh_weight,na.rm = TRUE)
 it_i <- rbind(c(-1, i5a_feb_i, i5b_feb_i, i5c_feb_i), it_i)
 it_i <- rbind(c(-2,NA,NA,NA), it_i)
 
-it_c <- c("week", "i5a_wins", "i5b_wins" , "i5c_wins")
+it_c <- c("week", "govsupport", "ngosupport" , "polsupport")
 it_c <- covid_weekly_c[!(covid_weekly_c$week %in% c(9,10)),it_c]
-i5a_feb_c <- weighted.mean(covid_hh[covid_hh$child_hh == 1,]$i5a_feb_wins,
+i5a_feb_c <- weighted.mean(covid_hh[covid_hh$child_hh == 1,]$govsupport_feb,
                            covid_hh[covid_hh$child_hh == 1,]$hh_weight,na.rm = TRUE)
-i5b_feb_c <- weighted.mean(covid_hh[covid_hh$child_hh == 1,]$i5b_feb_wins,
+i5b_feb_c <- weighted.mean(covid_hh[covid_hh$child_hh == 1,]$ngosupport_feb,
                            covid_hh[covid_hh$child_hh == 1,]$hh_weight,na.rm = TRUE)
-i5c_feb_c <- weighted.mean(covid_hh[covid_hh$child_hh == 1,]$i5c_feb_wins,
+i5c_feb_c <- weighted.mean(covid_hh[covid_hh$child_hh == 1,]$polsupport_feb,
                            covid_hh[covid_hh$child_hh == 1,]$hh_weight,na.rm = TRUE)
 it_c <- rbind(c(-1, i5a_feb_c, i5b_feb_c, i5c_feb_c), it_c)
 it_c <- rbind(c(-2,NA,NA,NA), it_c)
 
-it_nc <- c("week", "i5a_wins", "i5b_wins" , "i5c_wins")
+it_nc <- c("week", "govsupport", "ngosupport" , "polsupport")
 it_nc <- covid_weekly_nc[!(covid_weekly_nc$week %in% c(9,10)),it_nc]
-i5a_feb_nc <- weighted.mean(covid_hh[covid_hh$child_hh == 0,]$i5a_feb_wins,
+i5a_feb_nc <- weighted.mean(covid_hh[covid_hh$child_hh == 0,]$govsupport_feb,
                            covid_hh[covid_hh$child_hh == 0,]$hh_weight,na.rm = TRUE)
-i5b_feb_nc <- weighted.mean(covid_hh[covid_hh$child_hh == 0,]$i5b_feb_wins,
+i5b_feb_nc <- weighted.mean(covid_hh[covid_hh$child_hh == 0,]$ngosupport_feb,
                            covid_hh[covid_hh$child_hh == 0,]$hh_weight,na.rm = TRUE)
-i5c_feb_nc <- weighted.mean(covid_hh[covid_hh$child_hh == 0,]$i5c_feb_wins,
+i5c_feb_nc <- weighted.mean(covid_hh[covid_hh$child_hh == 0,]$polsupport_feb,
                            covid_hh[covid_hh$child_hh == 0,]$hh_weight,na.rm = TRUE)
 it_nc <- rbind(c(-1, i5a_feb_nc, i5b_feb_nc, i5c_feb_nc), it_nc)
 it_nc <- rbind(c(-2,NA,NA,NA), it_nc)
@@ -268,19 +268,19 @@ e <- rbind(c(-2,NA,NA,NA), e)
 # Enterprises by elegibility
 e_e <- c("week", "e3_wins", "e4_wins")
 e_e <- covid_weekly_e[!(covid_weekly_e$week %in% c(9,10)),e_e]
-e3_feb_e <- weighted.mean(covid_ent_hh[covid_ent_hh$eligible == 1,]$e3_feb_wins,
-                          covid_ent_hh[covid_ent_hh$eligible == 1,]$hhent_weight,na.rm = TRUE)
-e4_feb_e <- weighted.mean(covid_ent_hh[covid_ent_hh$eligible == 1,]$e4_feb_wins,
-                          covid_ent_hh[covid_ent_hh$eligible == 1,]$hhent_weight,na.rm = TRUE)
+e3_feb_e <- weighted.mean(covid_ent_hh[covid_ent_hh$high_assets_bl == 1,]$e3_feb_wins,
+                          covid_ent_hh[covid_ent_hh$high_assets_bl == 1,]$hhent_weight,na.rm = TRUE)
+e4_feb_e <- weighted.mean(covid_ent_hh[covid_ent_hh$high_assets_bl == 1,]$e4_feb_wins,
+                          covid_ent_hh[covid_ent_hh$high_assets_bl == 1,]$hhent_weight,na.rm = TRUE)
 e_e <- rbind(c(-1, e3_feb_e, e4_feb_e), e_e)
 e_e <- rbind(c(-2,NA,NA,NA), e_e)
 
 e_i <- c("week", "e3_wins", "e4_wins")
 e_i <- covid_weekly_i[!(covid_weekly_i$week %in% c(9,10)),e_i]
-e3_feb_i <- weighted.mean(covid_ent_hh[covid_ent_hh$eligible == 0,]$e3_feb_wins,
-                          covid_ent_hh[covid_ent_hh$eligible == 0,]$hhent_weight,na.rm = TRUE)
-e4_feb_i <- weighted.mean(covid_ent_hh[covid_ent_hh$eligible == 0,]$e4_feb_wins,
-                          covid_ent_hh[covid_ent_hh$eligible == 0,]$hhent_weight,na.rm = TRUE)
+e3_feb_i <- weighted.mean(covid_ent_hh[covid_ent_hh$high_assets_bl == 0,]$e3_feb_wins,
+                          covid_ent_hh[covid_ent_hh$high_assets_bl == 0,]$hhent_weight,na.rm = TRUE)
+e4_feb_i <- weighted.mean(covid_ent_hh[covid_ent_hh$high_assets_bl == 0,]$e4_feb_wins,
+                          covid_ent_hh[covid_ent_hh$high_assets_bl == 0,]$hhent_weight,na.rm = TRUE)
 e_i <- rbind(c(-1, e3_feb_i, e4_feb_i), e_i)
 e_i <- rbind(c(-2,NA,NA,NA), e_i)
 
@@ -365,7 +365,7 @@ mh5 <- covid_weekly[mh5]
 
 presAnnotation <- function(dygraph, x, text) {
   dygraph %>%
-    dyAnnotation(x, text, attachAtBottom = TRUE, width = 60, height = 25)
+    dyAnnotation(x, text, attachAtBottom = TRUE, width = 70, height = 25)
 }
 
 ```
@@ -376,7 +376,7 @@ presAnnotation <- function(dygraph, x, text) {
 ### Income  
 <font size="5">**Earnings per capita (USD, PPP) - past 14 days**</font>
 
-Eligible households are those that qualified for [GiveDirectly transfers](http://emiguel.econ.berkeley.edu/assets/miguel_research/88/GE-Paper_2019-12-18.pdf) by living in homes with thatched roofs in 2014. 
+Households are assigned the high asset category if they reported higher asset holdings than the median household in a 2014-2015 baseline survey. Asset holdings data is only available for the 2014-2015 survey sample, which is a subsample of the current panel of households.  
 
 ####  {.tabset .tabset-pills}
 
@@ -388,7 +388,7 @@ Eligible households are those that qualified for [GiveDirectly transfers](http:/
   dySeries("i1_wins", strokeWidth = 4, label = "Agricultural earnings") %>%
   #  dySeries("i7_wins", strokeWidth = 4, label = "Dissaving") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "USD, PPP", drawGrid = FALSE, valueRange = c(0, 2.8)) %>% 
+  dyAxis("y", label = "USD, PPP", drawGrid = FALSE, valueRange = c(0, 8)) %>% 
   dyLegend(width = 250, labelsSeparateLines = TRUE) %>%
   dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
@@ -404,7 +404,7 @@ i_g
 
   This plot aggregates income from each of the three earning sources, across all working-age household members, stacking them to add to the average earning per capita, including children, in the past 14 days. If the household does not perceive income from one or more of the sources, those data points are assigned zeros to assure representativeness for the whole population. 
   
-##### Eligible
+##### High assets
 ``` {r}
   i_g <- dygraph(i_e, main = "") %>%
   dySeries("i3_wins", strokeWidth = 4, label = "Wage earnings") %>%
@@ -412,7 +412,7 @@ i_g
   dySeries("i1_wins", strokeWidth = 4, label = "Agricultural earnings") %>%
   #  dySeries("i7_wins", strokeWidth = 4, label = "Dissaving") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "USD, PPP", drawGrid = FALSE, valueRange = c(0, 2.8)) %>% 
+  dyAxis("y", label = "USD, PPP", drawGrid = FALSE, valueRange = c(0, 8)) %>% 
   dyLegend(width = 250, labelsSeparateLines = TRUE) %>%
   dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
@@ -428,7 +428,7 @@ i_g
 
   This plot aggregates income from each of the three earning sources, across all working-age household members, stacking them to add to the average earning per capita, including children, in the past 14 days. If the household does not perceive income from one or more of the sources, those data points are assigned zeros to assure representativeness for the whole population. 
 
-##### Ineligible 
+##### Low assets 
 ``` {r}
   i_g <- dygraph(i_i, main = "") %>%
   dySeries("i3_wins", strokeWidth = 4, label = "Wage earnings") %>%
@@ -436,7 +436,7 @@ i_g
   dySeries("i1_wins", strokeWidth = 4, label = "Agricultural earnings") %>%
   #  dySeries("i7_wins", strokeWidth = 4, label = "Dissaving") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "USD, PPP", drawGrid = FALSE, valueRange = c(0, 2.8)) %>% 
+  dyAxis("y", label = "USD, PPP", drawGrid = FALSE, valueRange = c(0, 8)) %>% 
   dyLegend(width = 250, labelsSeparateLines = TRUE) %>%
   dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
@@ -460,7 +460,7 @@ i_g
   dySeries("i1_wins", strokeWidth = 4, label = "Agricultural earnings") %>%
   #  dySeries("i7_wins", strokeWidth = 4, label = "Dissaving") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "USD, PPP", drawGrid = FALSE, valueRange = c(0, 2.8)) %>% 
+  dyAxis("y", label = "USD, PPP", drawGrid = FALSE, valueRange = c(0, 8)) %>% 
   dyLegend(width = 250, labelsSeparateLines = TRUE) %>%
   dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
@@ -484,7 +484,7 @@ i_g
   dySeries("i1_wins", strokeWidth = 4, label = "Agricultural earnings") %>%
   #  dySeries("i7_wins", strokeWidth = 4, label = "Dissaving") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "USD, PPP", drawGrid = FALSE, valueRange = c(0, 2.8)) %>% 
+  dyAxis("y", label = "USD, PPP", drawGrid = FALSE, valueRange = c(0, 8)) %>% 
   dyLegend(width = 250, labelsSeparateLines = TRUE) %>%
   dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
@@ -531,7 +531,7 @@ d_g  <- dygraph(wg, main = "") %>%
 d_g
 ```
 
-##### Eligible
+##### High assets
 
 Hourly wages calculated by dividing total wages by total hours worked at the individual level, conditional on employment. Averages weighted by total hours worked at the individual level multiplied by household level weights. 
 
@@ -554,7 +554,7 @@ d_g  <- dygraph(wg_e, main = "") %>%
 d_g
 ```
 
-##### Ineligible
+##### Low assets
 
 Hourly wages calculated by dividing total wages by total hours worked at the individual level, conditional on employment. Averages weighted by total hours worked at the individual level multiplied by household level weights. 
 
@@ -593,8 +593,8 @@ d_g  <- dygraph(d, main = "") %>%
   dySeries("i7_wins", strokeWidth = 4, label = "Average dissavings") %>%
   dySeries("dissaved", strokeWidth = 4, label = "% of sample that dissaved", axis = "y2") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", drawGrid = FALSE , label = "USD, PPP", valueRange = c(0,4.2)) %>% 
-  dyAxis("y2", drawGrid=FALSE, label = "Percentage", valueRange = c(0,25)) %>%
+  dyAxis("y", drawGrid = FALSE , label = "USD, PPP", valueRange = c(-0.5,4.5)) %>% 
+  dyAxis("y2", drawGrid=FALSE, label = "Percentage", valueRange = c(0,35)) %>%
   dyOptions(axisLineWidth = 4,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
@@ -605,7 +605,7 @@ d_g  <- dygraph(d, main = "") %>%
 d_g
 ```
 
-##### Eligible
+##### High assets
 
 ```{r}
 d_l <- covid_weekly_e[c("week", "i7_wins", "dissaved")]
@@ -614,8 +614,8 @@ d_g  <- dygraph(d_l, main = "") %>%
   dySeries("i7_wins", strokeWidth = 4, label = "Average dissavings") %>%
   dySeries("dissaved", strokeWidth = 4, label = "% of sample that dissaved", axis = "y2") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", drawGrid = FALSE , label = "USD, PPP", valueRange = c(0,4.2)) %>% 
-  dyAxis("y2", drawGrid=FALSE, label = "Percentage", valueRange = c(0,25)) %>%
+  dyAxis("y", drawGrid = FALSE , label = "USD, PPP", valueRange = c(-0.5,4.5)) %>% 
+  dyAxis("y2", drawGrid=FALSE, label = "Percentage", valueRange = c(0,35)) %>%
   dyOptions(axisLineWidth = 4,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
@@ -626,7 +626,7 @@ d_g  <- dygraph(d_l, main = "") %>%
 d_g
 ```
 
-##### Ineligible
+##### Low assets
 
 ```{r}
 d_h <- covid_weekly_i[c("week", "i7_wins", "dissaved")]
@@ -635,8 +635,8 @@ d_g  <- dygraph(d_h, main = "") %>%
   dySeries("i7_wins", strokeWidth = 4, label = "Average dissavings") %>%
   dySeries("dissaved", strokeWidth = 4, label = "% of sample that dissaved", axis = "y2") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", drawGrid = FALSE , label = "USD, PPP", valueRange = c(0,4.2)) %>% 
-  dyAxis("y2", drawGrid=FALSE, label = "Percentage", valueRange = c(0,25)) %>%
+  dyAxis("y", drawGrid = FALSE , label = "USD, PPP", valueRange = c(-0.5,4.5)) %>% 
+  dyAxis("y2", drawGrid=FALSE, label = "Percentage", valueRange = c(0,35)) %>%
   dyOptions(axisLineWidth = 4,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
@@ -656,8 +656,8 @@ d_g  <- dygraph(d_c, main = "") %>%
   dySeries("i7_wins", strokeWidth = 4, label = "Average dissavings") %>%
   dySeries("dissaved", strokeWidth = 4, label = "% of sample that dissaved", axis = "y2") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", drawGrid = FALSE , label = "USD, PPP", valueRange = c(0,4.2)) %>% 
-  dyAxis("y2", drawGrid=FALSE, label = "Percentage", valueRange = c(0,25)) %>%
+  dyAxis("y", drawGrid = FALSE , label = "USD, PPP", valueRange = c(-0.5,4.5)) %>% 
+  dyAxis("y2", drawGrid=FALSE, label = "Percentage", valueRange = c(0,35)) %>%
   dyOptions(axisLineWidth = 4,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
@@ -677,8 +677,8 @@ d_g  <- dygraph(d_nc, main = "") %>%
   dySeries("i7_wins", strokeWidth = 4, label = "Average dissavings") %>%
   dySeries("dissaved", strokeWidth = 4, label = "% of sample that dissaved", axis = "y2") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", drawGrid = FALSE , label = "USD, PPP", valueRange = c(0,4.2)) %>% 
-  dyAxis("y2", drawGrid=FALSE, label = "Percentage", valueRange = c(0,25)) %>%
+  dyAxis("y", drawGrid = FALSE , label = "USD, PPP", valueRange = c(-0.5,4.5)) %>% 
+  dyAxis("y2", drawGrid=FALSE, label = "Percentage", valueRange = c(0,35)) %>%
   dyOptions(axisLineWidth = 4,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
@@ -693,7 +693,7 @@ d_g
 
 ***  
    
-  <font size="5">**Transfers per capita (USD, PPP) - past 14 days**</font>  
+  <font size="5">**Percentage of households receiving support - past 14 days**</font>  
 
 ####  {.tabset .tabset-pills}
 
@@ -703,11 +703,11 @@ We ask whether in the past 14 days anyone in the household received a gift/assis
 
 ```{r transfers}
 it_g  <- dygraph(it, main = "") %>%
-  dySeries("i5a_wins", strokeWidth = 4, label = "Government") %>%
-  dySeries("i5b_wins", strokeWidth = 4, label = "NGO or community group") %>%
-  dySeries("i5c_wins", strokeWidth = 4, label = "Politicians") %>%
+  dySeries("govsupport", strokeWidth = 4, label = "Government") %>%
+  dySeries("ngosupport", strokeWidth = 4, label = "NGO or community group") %>%
+  dySeries("polsupport", strokeWidth = 4, label = "Politicians") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", drawGrid = FALSE , label = "USD, PPP", valueRange = c(0,0.14)) %>% 
+  dyAxis("y", drawGrid = FALSE , label = "Percentage", valueRange = c(0,8)) %>% 
   dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
@@ -720,17 +720,17 @@ it_g  <- dygraph(it, main = "") %>%
 it_g
 ```
   
-##### Eligible
+##### High assets
 
 We ask whether in the past 14 days anyone in the household received a gift/assistance of money or goods, and its value, from (i) the government, (ii) from a non-governmental organization or community group, or (iii) from an individual politician or government official.  
 
 ```{r transfers_e}
 it_g  <- dygraph(it_e, main = "") %>%
-  dySeries("i5a_wins", strokeWidth = 4, label = "Government") %>%
-  dySeries("i5b_wins", strokeWidth = 4, label = "NGO or community group") %>%
-  dySeries("i5c_wins", strokeWidth = 4, label = "Politicians") %>%
+  dySeries("govsupport", strokeWidth = 4, label = "Government") %>%
+  dySeries("ngosupport", strokeWidth = 4, label = "NGO or community group") %>%
+  dySeries("polsupport", strokeWidth = 4, label = "Politicians") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", drawGrid = FALSE , label = "USD, PPP", valueRange = c(0,0.14)) %>% 
+  dyAxis("y", drawGrid = FALSE , label = "Percentage", valueRange = c(0,8)) %>% 
   dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
@@ -739,21 +739,21 @@ it_g  <- dygraph(it_e, main = "") %>%
   dyEvent(-1 , "February", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   dyEvent(0 , "Lockdown begins March 15", labelLoc = "top") %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
-  dyLegend(width = 500, labelsSeparateLines = FALSE) 
+  dyLegend(width = 500, labelsSeparateLines = FALSE)  
 it_g
 ```
 
-##### Ineligible
+##### Low assets
 
 We ask whether in the past 14 days anyone in the household received a gift/assistance of money or goods, and its value, from (i) the government, (ii) from a non-governmental organization or community group, or (iii) from an individual politician or government official.  
 
 ```{r transfers_i}
 it_g  <- dygraph(it_i, main = "") %>%
-  dySeries("i5a_wins", strokeWidth = 4, label = "Government") %>%
-  dySeries("i5b_wins", strokeWidth = 4, label = "NGO or community group") %>%
-  dySeries("i5c_wins", strokeWidth = 4, label = "Politicians") %>%
+  dySeries("govsupport", strokeWidth = 4, label = "Government") %>%
+  dySeries("ngosupport", strokeWidth = 4, label = "NGO or community group") %>%
+  dySeries("polsupport", strokeWidth = 4, label = "Politicians") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", drawGrid = FALSE , label = "USD, PPP", valueRange = c(0,0.14)) %>% 
+  dyAxis("y", drawGrid = FALSE , label = "Percentage", valueRange = c(0,8)) %>% 
   dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
@@ -772,11 +772,11 @@ We ask whether in the past 14 days anyone in the household received a gift/assis
 
 ```{r transfers_c}
 it_g  <- dygraph(it_c, main = "") %>%
-  dySeries("i5a_wins", strokeWidth = 4, label = "Government") %>%
-  dySeries("i5b_wins", strokeWidth = 4, label = "NGO or community group") %>%
-  dySeries("i5c_wins", strokeWidth = 4, label = "Politicians") %>%
+  dySeries("govsupport", strokeWidth = 4, label = "Government") %>%
+  dySeries("ngosupport", strokeWidth = 4, label = "NGO or community group") %>%
+  dySeries("polsupport", strokeWidth = 4, label = "Politicians") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", drawGrid = FALSE , label = "USD, PPP", valueRange = c(0,0.14)) %>% 
+  dyAxis("y", drawGrid = FALSE , label = "Percentage", valueRange = c(0,8)) %>% 
   dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
@@ -795,11 +795,11 @@ We ask whether in the past 14 days anyone in the household received a gift/assis
 
 ```{r transfers_nc}
 it_g  <- dygraph(it_nc, main = "") %>%
-  dySeries("i5a_wins", strokeWidth = 4, label = "Government") %>%
-  dySeries("i5b_wins", strokeWidth = 4, label = "NGO or community group") %>%
-  dySeries("i5c_wins", strokeWidth = 4, label = "Politicians") %>%
+dySeries("govsupport", strokeWidth = 4, label = "Government") %>%
+  dySeries("ngosupport", strokeWidth = 4, label = "NGO or community group") %>%
+  dySeries("polsupport", strokeWidth = 4, label = "Politicians") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", drawGrid = FALSE , label = "USD, PPP", valueRange = c(0,0.14)) %>% 
+  dyAxis("y", drawGrid = FALSE , label = "Percentage", valueRange = c(0,8)) %>% 
   dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
@@ -820,7 +820,7 @@ it_g
 
 <font size="5">**Weekly consumption per capita (USD, PPP)**</font>
 
-Eligible households are those that qualified for [GiveDirectly transfers](http://emiguel.econ.berkeley.edu/assets/miguel_research/88/GE-Paper_2019-12-18.pdf) by living in homes with thatched roofs in 2014. 
+Households are assigned the high asset category if they reported higher asset holdings than the median household in a 2014-2015 baseline survey. Asset holdings data is only available for the 2014-2015 survey sample, which is a subsample of the current panel of households.  
 
 ####  {.tabset .tabset-pills}
 
@@ -834,7 +834,7 @@ c_g <- dygraph(c, main = "", group = "Siaya County Sample") %>%
   dySeries("c1b_wins", strokeWidth = 4, label = "Own-food consumption") %>%
   #dySeries("c1_wins", strokeWidth = 4, label = "Food expenditure") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "USD, PPP", drawGrid = FALSE, valueRange = c(0, 15)) %>% 
+  dyAxis("y", label = "USD, PPP", drawGrid = FALSE, valueRange = c(0, 17)) %>% 
   dyLegend(width = 250 , labelsSeparateLines = TRUE) %>%
     dyCrosshair(direction = "vertical") %>%
   dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2"), connectSeparatedPoints = TRUE) %>%
@@ -852,7 +852,7 @@ c_g <- dygraph(c, main = "", group = "Siaya County Sample") %>%
 ```
 Own-food consumption accounts for own agricultural and pastoral production at market value. Pre-covid average uses 2016-2017 data.
 
-##### Eligible
+##### High assets
 
 ``` {r consumption_e}
 c_e <- covid_weekly_e[c("week", "c3_wins", "c1a_wins", "c1b_wins")]
@@ -863,7 +863,7 @@ c_g <- dygraph(c_e, main = "", group = "Siaya County Sample") %>%
   dySeries("c1b_wins", strokeWidth = 4, label = "Own-food consumption") %>%
   #dySeries("c1_wins", strokeWidth = 4, label = "Food expenditure") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "USD, PPP", drawGrid = FALSE, valueRange = c(0, 15)) %>% 
+  dyAxis("y", label = "USD, PPP", drawGrid = FALSE, valueRange = c(0, 17)) %>% 
   dyLegend(width = 250 , labelsSeparateLines = TRUE) %>%
     dyCrosshair(direction = "vertical") %>%
   dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2"), connectSeparatedPoints = TRUE) %>%
@@ -881,7 +881,7 @@ c_g <- dygraph(c_e, main = "", group = "Siaya County Sample") %>%
 ```
 Own-food consumption accounts for own agricultural and pastoral production at market value. Pre-covid average uses 2016-2017 data.
 
-##### Ineligible
+##### Low assets
 
 ``` {r consumption_i}
 c_i <- covid_weekly_i[c("week", "c3_wins", "c1a_wins", "c1b_wins")]
@@ -892,7 +892,7 @@ c_g <- dygraph(c_i, main = "", group = "Siaya County Sample") %>%
   dySeries("c1b_wins", strokeWidth = 4, label = "Own-food consumption") %>%
   #dySeries("c1_wins", strokeWidth = 4, label = "Food expenditure") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "USD, PPP", drawGrid = FALSE, valueRange = c(0, 15)) %>% 
+  dyAxis("y", label = "USD, PPP", drawGrid = FALSE, valueRange = c(0, 17)) %>% 
   dyLegend(width = 250 , labelsSeparateLines = TRUE) %>%
     dyCrosshair(direction = "vertical") %>%
   dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2"), connectSeparatedPoints = TRUE) %>%
@@ -921,7 +921,7 @@ c_g <- dygraph(c_c, main = "", group = "Siaya County Sample") %>%
   dySeries("c1b_wins", strokeWidth = 4, label = "Own-food consumption") %>%
   #dySeries("c1_wins", strokeWidth = 4, label = "Food expenditure") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "USD, PPP", drawGrid = FALSE, valueRange = c(0, 15)) %>% 
+  dyAxis("y", label = "USD, PPP", drawGrid = FALSE, valueRange = c(0, 17)) %>% 
   dyLegend(width = 250 , labelsSeparateLines = TRUE) %>%
     dyCrosshair(direction = "vertical") %>%
   dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2"), connectSeparatedPoints = TRUE) %>%
@@ -950,7 +950,7 @@ c_g <- dygraph(c_i, main = "", group = "Siaya County Sample") %>%
   dySeries("c1b_wins", strokeWidth = 4, label = "Own-food consumption") %>%
   #dySeries("c1_wins", strokeWidth = 4, label = "Food expenditure") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "USD, PPP", drawGrid = FALSE, valueRange = c(0, 15)) %>% 
+  dyAxis("y", label = "USD, PPP", drawGrid = FALSE, valueRange = c(0, 17)) %>% 
   dyLegend(width = 250 , labelsSeparateLines = TRUE) %>%
     dyCrosshair(direction = "vertical") %>%
   dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2"), connectSeparatedPoints = TRUE) %>%
@@ -975,7 +975,7 @@ Own-food consumption accounts for own agricultural and pastoral production at ma
 ### Food Security  
 <font size="5">**Number of days skipping meals in the past 7 days**</font>  
 
-Eligible households are those that qualified for [GiveDirectly transfers](http://emiguel.econ.berkeley.edu/assets/miguel_research/88/GE-Paper_2019-12-18.pdf) by living in homes with thatched roofs in 2014. 
+Households are assigned the high asset category if they reported higher asset holdings than the median household in a 2014-2015 baseline survey. Asset holdings data is only available for the 2014-2015 survey sample, which is a subsample of the current panel of households.  
 
 ####  {.tabset .tabset-pills}
 
@@ -1004,7 +1004,7 @@ f1_d_g
 ```
 Pre-COVID average uses data from 2016-2017.
 
-##### Eligible
+##### High assets
 
 ```{r struggles_e}
 f1_d_e <- covid_weekly_e[c("week", "f1_d_skippedadult_wins", "f1_d_skippedchild_wins")]
@@ -1030,7 +1030,7 @@ f1_d_g
 ```
 Pre-COVID average uses data from 2016-2017.
 
-##### Ineligible
+##### Low assets
 
 ```{r struggles_i}
 f1_d_i <- covid_weekly_i[c("week", "f1_d_skippedadult_wins", "f1_d_skippedchild_wins")]
@@ -1139,7 +1139,7 @@ f1_g  <- dygraph(f1, main = "") %>%
 f1_g
 ``` 
 
-##### Eligible
+##### High assets
 
  We ask whether in the past 7 days, any household member was unable to buy the amount of food they usually buy because of: (i) price of food being too high, (ii) household income having dropped, and (iii) shortages in markets.  
    
@@ -1163,7 +1163,7 @@ f1_g  <- dygraph(f1_e, main = "") %>%
 f1_g
 ``` 
 
-##### Ineligible
+##### Low assets
 
  We ask whether in the past 7 days, any household member was unable to buy the amount of food they usually buy because of: (i) price of food being too high, (ii) household income having dropped, and (iii) shortages in markets.  
    
@@ -1217,7 +1217,7 @@ f1a_g  <- dygraph(f1a, main = "") %>%
 f1a_g
 ```
 
-##### Eligible
+##### High assets
 
 We ask whether in the past 7 days, any household member experienced: (i) having to reduce the number of meals and/or the portion of each meal they would usually eat, (ii) difficulties in going to food markets due to mobility restrictions imposed by government, and (iii) difficulties in buying food due to most food markets being closed.  
     
@@ -1240,7 +1240,7 @@ f1a_g  <- dygraph(f1a_e, main = "") %>%
 f1a_g
 ```
 
-##### Ineligible
+##### Low assets
 
 We ask whether in the past 7 days, any household member experienced: (i) having to reduce the number of meals and/or the portion of each meal they would usually eat, (ii) difficulties in going to food markets due to mobility restrictions imposed by government, and (iii) difficulties in buying food due to most food markets being closed.  
     
@@ -1270,7 +1270,7 @@ f1a_g
 ### Household enterprises  
 <font size="5">**Enterprises revenue and profits in the past 14 days**</font>
 
-Eligible households are those that qualified for [GiveDirectly transfers](http://emiguel.econ.berkeley.edu/assets/miguel_research/88/GE-Paper_2019-12-18.pdf) by living in homes with thatched roofs in 2014.
+Households are assigned the high asset category if they reported higher asset holdings than the median household in a 2014-2015 baseline survey. Asset holdings data is only available for the 2014-2015 survey sample, which is a subsample of the current panel of households. 
 
 #### {.tabset .tabset-pills}
 
@@ -1281,7 +1281,7 @@ e_g  <- dygraph(e, main = "") %>%
   dySeries("e3_wins", strokeWidth = 4, label = "Total enterprise revenue") %>%
   dySeries("e4_wins", strokeWidth = 4, label = "Total enterprise profits") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", drawGrid = FALSE , label = "USD, PPP", valueRange = c(0, 85)) %>% 
+  dyAxis("y", drawGrid = FALSE , label = "USD, PPP", valueRange = c(0, 100)) %>% 
   dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
@@ -1294,14 +1294,14 @@ e_g  <- dygraph(e, main = "") %>%
 e_g
 ``` 
 
-##### Eligible
+##### High assets
 
 ```{r enterprises_e}
 e_g  <- dygraph(e_e, main = "") %>%
   dySeries("e3_wins", strokeWidth = 4, label = "Total enterprise revenue") %>%
   dySeries("e4_wins", strokeWidth = 4, label = "Total enterprise profits") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", drawGrid = FALSE , label = "USD, PPP", valueRange = c(0, 85)) %>% 
+  dyAxis("y", drawGrid = FALSE , label = "USD, PPP", valueRange = c(0, 100)) %>% 
   dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
@@ -1314,14 +1314,14 @@ e_g  <- dygraph(e_e, main = "") %>%
 e_g
 ``` 
 
-##### Ineligible
+##### Low assets
 
 ```{r enterprises_i}
 e_g  <- dygraph(e_i, main = "") %>%
   dySeries("e3_wins", strokeWidth = 4, label = "Total enterprise revenue") %>%
   dySeries("e4_wins", strokeWidth = 4, label = "Total enterprise profits") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", drawGrid = FALSE , label = "USD, PPP", valueRange = c(0, 85)) %>% 
+  dyAxis("y", drawGrid = FALSE , label = "USD, PPP", valueRange = c(0, 100)) %>% 
   dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
@@ -1342,7 +1342,7 @@ e_g
 
 <font size="5">**Reported COVID-19 Behavior Adoption**</font> 
 
-Eligible households are those that qualified for [GiveDirectly transfers](http://emiguel.econ.berkeley.edu/assets/miguel_research/88/GE-Paper_2019-12-18.pdf) by living in homes with thatched roofs in 2014. 
+Households are assigned the high asset category if they reported higher asset holdings than the median household in a 2014-2015 baseline survey. Asset holdings data is only available for the 2014-2015 survey sample, which is a subsample of the current panel of households.  
 
 ####  {.tabset .tabset-pills}
 
@@ -1369,7 +1369,7 @@ We ask respondents whether they have changed their behavior in any way since lea
   ckn6_g
 ```
 
-##### Eligible
+##### High assets
 
 We ask respondents whether they have changed their behavior in any way since learning about COVID-19, and if so, how  it has changed.
 
@@ -1393,7 +1393,7 @@ ckn6_e <- covid_weekly_e[c("week","ckn6_washhands_wins", "ckn6_mask_wins", "ckn6
   ckn6_g
 ```
 
-##### Ineligible
+##### Low assets
 
 We ask respondents whether they have changed their behavior in any way since learning about COVID-19, and if so, how  it has changed.
 
@@ -1495,7 +1495,7 @@ We ask respondents whether they have experienced any illnesses or symptoms of a 
   cov1_g
 ```
 
-##### Eligible
+##### High assets
 
 We ask respondents whether they have experienced any illnesses or symptoms of a given list in the past 14 days.  
 
@@ -1518,7 +1518,7 @@ cov1_e <- covid_weekly_e[c("week", "cov1_fever_wins", "cov1_tired_wins", "cov1_c
   cov1_g
 ```
 
-##### Ineligible
+##### Low assets
 
 We ask respondents whether they have experienced any illnesses or symptoms of a given list in the past 14 days.  
 
@@ -1605,7 +1605,7 @@ net5_g  <- dygraph(net5, main = "") %>%
   dySeries("net5_last7_wins", strokeWidth = 4, label = "In the past 7 days") %>%
   dySeries("net5_today_wins", strokeWidth = 4, label = "Today") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", drawGrid = FALSE, label = "Number of people", valueRange = c(0, 35)) %>% 
+  dyAxis("y", drawGrid = FALSE, label = "Number of people", valueRange = c(0, 40)) %>% 
   dyLegend(width = 500) %>%
      dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
@@ -1616,7 +1616,7 @@ net5_g  <- dygraph(net5, main = "") %>%
 net5_g
 ```
 
-##### Eligible
+##### High assets
 
   We ask: "Taken together, how many people outside this household have you interacted with in-person?"   
 
@@ -1627,7 +1627,7 @@ net5_g  <- dygraph(net5_e, main = "") %>%
   dySeries("net5_last7_wins", strokeWidth = 4, label = "In the past 7 days") %>%
   dySeries("net5_today_wins", strokeWidth = 4, label = "Today") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", drawGrid = FALSE, label = "Number of people", valueRange = c(0, 35)) %>% 
+  dyAxis("y", drawGrid = FALSE, label = "Number of people", valueRange = c(0, 40)) %>% 
   dyLegend(width = 500) %>%
      dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
@@ -1638,7 +1638,7 @@ net5_g  <- dygraph(net5_e, main = "") %>%
 net5_g
 ```
 
-##### Ineligible
+##### Low assets
 
   We ask: "Taken together, how many people outside this household have you interacted with in-person?"   
 
@@ -1649,7 +1649,7 @@ net5_g  <- dygraph(net5_i, main = "") %>%
   dySeries("net5_last7_wins", strokeWidth = 4, label = "In the past 7 days") %>%
   dySeries("net5_today_wins", strokeWidth = 4, label = "Today") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", drawGrid = FALSE, label = "Number of people", valueRange = c(0, 35)) %>% 
+  dyAxis("y", drawGrid = FALSE, label = "Number of people", valueRange = c(0, 40)) %>% 
   dyLegend(width = 500) %>%
      dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
@@ -1671,7 +1671,7 @@ net5_g  <- dygraph(net5_f, main = "") %>%
   dySeries("net5_last7_wins", strokeWidth = 4, label = "In the past 7 days") %>%
   dySeries("net5_today_wins", strokeWidth = 4, label = "Today") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", drawGrid = FALSE, label = "Number of people", valueRange = c(0, 35)) %>% 
+  dyAxis("y", drawGrid = FALSE, label = "Number of people", valueRange = c(0, 40)) %>% 
   dyLegend(width = 500) %>%
      dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
@@ -1693,7 +1693,7 @@ net5_g  <- dygraph(net5_m, main = "") %>%
   dySeries("net5_last7_wins", strokeWidth = 4, label = "In the past 7 days") %>%
   dySeries("net5_today_wins", strokeWidth = 4, label = "Today") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", drawGrid = FALSE, label = "Number of people", valueRange = c(0, 35)) %>% 
+  dyAxis("y", drawGrid = FALSE, label = "Number of people", valueRange = c(0, 40)) %>% 
   dyLegend(width = 500) %>%
      dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
@@ -1742,18 +1742,18 @@ fmsk$Activity <- factor(fmsk$Activity, levels = c("Market", "Religious gathering
 ggplot(fmsk, aes(Activity, Percentage)) + geom_col(aes(fill = Who), position = "dodge") + coord_flip() + ylab("% Wearing mask") + ylim(0,100) + theme_minimal()
 ```
 
-##### Eligible
+##### High assets
 
 ```{r}
 fmsk <- data.frame("Activity" = c("Market", "Religious gathering", "Public transportation", "Store", "Visiting Household",
                                   "Work"),
                   "Percentage" = c(
-                    mean(covid_hh[covid_hh$eligible == 1,]$fmsk_1, na.rm = TRUE)*100,
-                    mean(covid_hh[covid_hh$eligible == 1,]$fmsk_2, na.rm = TRUE)*100,
-                    mean(covid_hh[covid_hh$eligible == 1,]$fmsk_3, na.rm = TRUE)*100,
-                    mean(covid_hh[covid_hh$eligible == 1,]$fmsk_4, na.rm = TRUE)*100,
-                    mean(covid_hh[covid_hh$eligible == 1,]$fmsk_5, na.rm = TRUE)*100,
-                    mean(covid_hh[covid_hh$eligible == 1,]$fmsk_6, na.rm = TRUE)*100),
+                    mean(covid_hh[covid_hh$high_assets_bl == 1,]$fmsk_1, na.rm = TRUE)*100,
+                    mean(covid_hh[covid_hh$high_assets_bl == 1,]$fmsk_2, na.rm = TRUE)*100,
+                    mean(covid_hh[covid_hh$high_assets_bl == 1,]$fmsk_3, na.rm = TRUE)*100,
+                    mean(covid_hh[covid_hh$high_assets_bl == 1,]$fmsk_4, na.rm = TRUE)*100,
+                    mean(covid_hh[covid_hh$high_assets_bl == 1,]$fmsk_5, na.rm = TRUE)*100,
+                    mean(covid_hh[covid_hh$high_assets_bl == 1,]$fmsk_6, na.rm = TRUE)*100),
                   "Who" = c("Self", "Self", "Self", "Self", "Self", "Self")
                   )
 fmsk$Activity <- factor(fmsk$Activity, levels = c("Market", "Religious gathering", "Public transportation", "Store", "Visiting Household","Work"))
@@ -1761,18 +1761,18 @@ fmsk$Activity <- factor(fmsk$Activity, levels = c("Market", "Religious gathering
 ggplot(fmsk, aes(Activity, Percentage)) + geom_col(aes(fill = Who)) + coord_flip() + ylab("% Wearing mask") + theme_minimal()+ ylim(0,100)
 ```
 
-##### Ineligible
+##### Low assets
 
 ```{r}
 fmsk <- data.frame("Activity" = c("Market", "Religious gathering", "Public transportation", "Store", "Visiting Household",
                                   "Work"),
                   "Percentage" = c(
-                    mean(covid_hh[covid_hh$eligible == 0,]$fmsk_1, na.rm = TRUE)*100,
-                    mean(covid_hh[covid_hh$eligible == 0,]$fmsk_2, na.rm = TRUE)*100,
-                    mean(covid_hh[covid_hh$eligible == 0,]$fmsk_3, na.rm = TRUE)*100,
-                    mean(covid_hh[covid_hh$eligible == 0,]$fmsk_4, na.rm = TRUE)*100,
-                    mean(covid_hh[covid_hh$eligible == 0,]$fmsk_5, na.rm = TRUE)*100,
-                    mean(covid_hh[covid_hh$eligible == 0,]$fmsk_6, na.rm = TRUE)*100),
+                    mean(covid_hh[covid_hh$high_assets_bl == 0,]$fmsk_1, na.rm = TRUE)*100,
+                    mean(covid_hh[covid_hh$high_assets_bl == 0,]$fmsk_2, na.rm = TRUE)*100,
+                    mean(covid_hh[covid_hh$high_assets_bl == 0,]$fmsk_3, na.rm = TRUE)*100,
+                    mean(covid_hh[covid_hh$high_assets_bl == 0,]$fmsk_4, na.rm = TRUE)*100,
+                    mean(covid_hh[covid_hh$high_assets_bl == 0,]$fmsk_5, na.rm = TRUE)*100,
+                    mean(covid_hh[covid_hh$high_assets_bl == 0,]$fmsk_6, na.rm = TRUE)*100),
                   "Who" = c("Self", "Self", "Self", "Self", "Self", "Self")
                   )
 fmsk$Activity <- factor(fmsk$Activity, levels = c("Market", "Religious gathering", "Public transportation", "Store", "Visiting Household","Work"))
@@ -1844,7 +1844,7 @@ net4_g  <- dygraph(net4, main = "") %>%
 net4_g
 ```
 
-##### Eligible
+##### High assets
 
 ```{r}
 net4 <- covid_weekly_e[c("week", "net4")]
@@ -1862,7 +1862,7 @@ net4_g  <- dygraph(net4, main = "") %>%
 net4_g
 ```
 
-##### Ineligible
+##### Low assets
 
 ```{r}
 net4 <- covid_weekly_i[c("week", "net4")]
@@ -1924,7 +1924,7 @@ net4_g
 
 <font size="5">**Weekly labor supply (hours per household adult)**</font>
 
-Eligible households are those that qualified for [GiveDirectly transfers](http://emiguel.econ.berkeley.edu/assets/miguel_research/88/GE-Paper_2019-12-18.pdf) by living in homes with thatched roofs in 2014. 
+Households are assigned the high asset category if they reported higher asset holdings than the median household in a 2014-2015 baseline survey. Asset holdings data is only available for the 2014-2015 survey sample, which is a subsample of the current panel of households.  
 
 ####  {.tabset .tabset-pills}
 
@@ -1936,7 +1936,7 @@ l_g <- dygraph(l, main = "", group = "Siaya County Sample") %>%
   dySeries("l3_wins", strokeWidth = 4, label = "Wage labor supply") %>%
   dySeries("l2_wins", strokeWidth = 4, label = "Own enterprise labor supply") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "Hours per adult household member", drawGrid = FALSE, valueRange = c(0, 26)) %>% 
+  dyAxis("y", label = "Hours per adult household member", drawGrid = FALSE, valueRange = c(0, 35)) %>% 
   dyLegend(width = 550 , labelsSeparateLines = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2"), connectSeparatedPoints = TRUE) %>%
@@ -1951,7 +1951,7 @@ l_g <- dygraph(l, main = "", group = "Siaya County Sample") %>%
   
   This plot aggregates hours worked on each of the three sources, across all working-age household members, stacking them to add to the average weekly labor supply per household adult. If the household does not work any hours on one or more of the labor categories, those data points are assigned zeros to assure representativeness of the whole population. 
   
-##### Eligible
+##### High assets
 
 ``` {r labor_e}
 l_e <- covid_weekly_e[c("week", "l1_wins", "l2_wins", "l3_wins")]
@@ -1960,7 +1960,7 @@ l_g <- dygraph(l_e, main = "", group = "Siaya County Sample") %>%
   dySeries("l3_wins", strokeWidth = 4, label = "Wage labor supply") %>%
   dySeries("l2_wins", strokeWidth = 4, label = "Own enterprise labor supply") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "Hours per adult household member", drawGrid = FALSE, valueRange = c(0, 26)) %>% 
+  dyAxis("y", label = "Hours per adult household member", drawGrid = FALSE, valueRange = c(0, 35)) %>% 
   dyLegend(width = 550 , labelsSeparateLines = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2"), connectSeparatedPoints = TRUE) %>%
@@ -1975,7 +1975,7 @@ l_g <- dygraph(l_e, main = "", group = "Siaya County Sample") %>%
   
   This plot aggregates hours worked on each of the three sources, across all working-age household members, stacking them to add to the average weekly labor supply per household adult. If the household does not work any hours on one or more of the labor categories, those data points are assigned zeros to assure representativeness of the whole population. 
   
-##### Ineligible
+##### Low assets
 
 ``` {r labor_i}
 l_i <- covid_weekly_i[c("week", "l1_wins", "l2_wins", "l3_wins")]
@@ -1984,7 +1984,7 @@ l_g <- dygraph(l_i, main = "", group = "Siaya County Sample") %>%
   dySeries("l3_wins", strokeWidth = 4, label = "Wage labor supply") %>%
   dySeries("l2_wins", strokeWidth = 4, label = "Own enterprise labor supply") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "Hours per adult household member", drawGrid = FALSE, valueRange = c(0, 26)) %>% 
+  dyAxis("y", label = "Hours per adult household member", drawGrid = FALSE, valueRange = c(0, 35)) %>% 
   dyLegend(width = 550 , labelsSeparateLines = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2"), connectSeparatedPoints = TRUE) %>%
@@ -2008,7 +2008,7 @@ l_g <- dygraph(l_c, main = "", group = "Siaya County Sample") %>%
   dySeries("l3_wins", strokeWidth = 4, label = "Wage labor supply") %>%
   dySeries("l2_wins", strokeWidth = 4, label = "Own enterprise labor supply") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "Hours per adult household member", drawGrid = FALSE, valueRange = c(0, 26)) %>% 
+  dyAxis("y", label = "Hours per adult household member", drawGrid = FALSE, valueRange = c(0, 35)) %>% 
   dyLegend(width = 550 , labelsSeparateLines = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2"), connectSeparatedPoints = TRUE) %>%
@@ -2032,7 +2032,7 @@ l_g <- dygraph(l_nc, main = "", group = "Siaya County Sample") %>%
   dySeries("l3_wins", strokeWidth = 4, label = "Wage labor supply") %>%
   dySeries("l2_wins", strokeWidth = 4, label = "Own enterprise labor supply") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "Hours per adult household member", drawGrid = FALSE, valueRange = c(0, 26)) %>% 
+  dyAxis("y", label = "Hours per adult household member", drawGrid = FALSE, valueRange = c(0, 35)) %>% 
   dyLegend(width = 550 , labelsSeparateLines = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2"), connectSeparatedPoints = TRUE) %>%
@@ -2054,7 +2054,7 @@ l_g <- dygraph(l_nc, main = "", group = "Siaya County Sample") %>%
 
 <font size="5">**Children educational activities**</font> 
 
-Eligible households are those that qualified for [GiveDirectly transfers](http://emiguel.econ.berkeley.edu/assets/miguel_research/88/GE-Paper_2019-12-18.pdf) by living in homes with thatched roofs in 2014. 
+Households are assigned the high asset category if they reported higher asset holdings than the median household in a 2014-2015 baseline survey. Asset holdings data is only available for the 2014-2015 survey sample, which is a subsample of the current panel of households.  
 
 ####  {.tabset .tabset-pills}
 
@@ -2079,7 +2079,7 @@ ch_g  <- dygraph(ch, main = "", group = "Siaya County Sample") %>%
 ch_g
 ```
 
-##### Eligible
+##### High assets
 
 We ask what has each child been doing over the last 15 minutes, whether the child has done any learning-related activities in the past 24 hours, and if so, what kind of activity. From this question we also learn whether the child attended school.
 
@@ -2101,7 +2101,7 @@ ch_g  <- dygraph(ch_e, main = "", group = "Siaya County Sample") %>%
 ch_g
 ```
 
-##### Ineligible
+##### Low assets
 
 We ask what has each child been doing over the last 15 minutes, whether the child has done any learning-related activities in the past 24 hours, and if so, what kind of activity. From this question we also learn whether the child attended school.
 
@@ -2132,7 +2132,7 @@ ch_g
 
 <font size="5">**Gender violence**</font>
 
-Eligible households are those that qualified for [GiveDirectly transfers](http://emiguel.econ.berkeley.edu/assets/miguel_research/88/GE-Paper_2019-12-18.pdf) by living in homes with thatched roofs in 2014. 
+Households are assigned the high asset category if they reported higher asset holdings than the median household in a 2014-2015 baseline survey. Asset holdings data is only available for the 2014-2015 survey sample, which is a subsample of the current panel of households.  
 
 ####  {.tabset .tabset-pills}
 
@@ -2146,7 +2146,7 @@ gv_g  <- dygraph(gv, main = "", group = "Siaya County Sample") %>%
   dySeries("gv2", strokeWidth = 4, label = "Physically hurt them") %>%
   dySeries("gv3", strokeWidth = 4, label = "Forced them to perform sexual acts") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", drawGrid = FALSE, label = "Percentage of married/cohabitant females", valueRange = c(0, 13)) %>% 
+  dyAxis("y", drawGrid = FALSE, label = "Percentage of married/cohabitant females", valueRange = c(0, 20)) %>% 
      dyCrosshair(direction = "vertical") %>%
  dyLegend(width = 580) %>%
   presAnnotation("1", text = "April 11") %>%
@@ -2158,7 +2158,7 @@ gv_g
 ```
   *This plot shows data only for the share of female respondents that were surveyed by a female field officer, and are currently married or living with a partner. This sub-sample accounts for ~55% of all married/cohabitant females in the study sample, and ~36% of all females.  
   
-##### Eligible
+##### High assets
 
 We ask married/cohabitant female respondents whether their husband/partner has (i) threaten to harm them or someone close to them, (ii) hit, slapped, kicked, or physically hurt them, and (iii) forced them to perform sexual acts.* 
 
@@ -2169,7 +2169,7 @@ gv_g  <- dygraph(gv_e, main = "", group = "Siaya County Sample") %>%
   dySeries("gv2", strokeWidth = 4, label = "Physically hurt them") %>%
   dySeries("gv3", strokeWidth = 4, label = "Forced them to perform sexual acts") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", drawGrid = FALSE, label = "Percentage of married/cohabitant females", valueRange = c(0, 13)) %>% 
+  dyAxis("y", drawGrid = FALSE, label = "Percentage of married/cohabitant females", valueRange = c(0, 20)) %>% 
      dyCrosshair(direction = "vertical") %>%
  dyLegend(width = 580) %>%
   presAnnotation("1", text = "April 11") %>%
@@ -2181,7 +2181,7 @@ gv_g
 ```
   *This plot shows data only for the share of female respondents that were surveyed by a female field officer, and are currently married or living with a partner. This sub-sample accounts for ~55% of all married/cohabitant females in the study sample, and ~36% of all females.  
   
-##### Ineligible
+##### Low assets
 
 We ask married/cohabitant female respondents whether their husband/partner has (i) threaten to harm them or someone close to them, (ii) hit, slapped, kicked, or physically hurt them, and (iii) forced them to perform sexual acts.* 
 
@@ -2192,7 +2192,7 @@ gv_g  <- dygraph(gv_i, main = "", group = "Siaya County Sample") %>%
   dySeries("gv2", strokeWidth = 4, label = "Physically hurt them") %>%
   dySeries("gv3", strokeWidth = 4, label = "Forced them to perform sexual acts") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", drawGrid = FALSE, label = "Percentage of married/cohabitant females", valueRange = c(0, 13)) %>% 
+  dyAxis("y", drawGrid = FALSE, label = "Percentage of married/cohabitant females", valueRange = c(20)) %>% 
      dyCrosshair(direction = "vertical") %>%
  dyLegend(width = 580) %>%
   presAnnotation("1", text = "April 11") %>%
@@ -2220,7 +2220,7 @@ v_g  <- dygraph(v, main = "", group = "Siaya County Sample") %>%
   dySeries("gv4", strokeWidth = 4, label = "Children were beaten") %>%
   dySeries("gv5", strokeWidth = 4, label = "More fights than usual") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", drawGrid = FALSE, label = "Percentage of sample", valueRange = c(0, 33)) %>% 
+  dyAxis("y", drawGrid = FALSE, label = "Percentage of sample", valueRange = c(0, 38)) %>% 
      dyCrosshair(direction = "vertical") %>%
  dyLegend(width = 350) %>%
   presAnnotation("1", text = "April 11") %>%
@@ -2231,7 +2231,7 @@ v_g  <- dygraph(v, main = "", group = "Siaya County Sample") %>%
 v_g
 ```
 
-##### Eligible
+##### High assets
 
 We ask: (i) Over the past 14 days, has there been a higher than usual amount of fights with members of your household?, and (ii) In the past 14 days, did you or your partner ever beat any of the children living in this household?  
 ```{r violence_e}
@@ -2240,7 +2240,7 @@ v_g  <- dygraph(v_e, main = "", group = "Siaya County Sample") %>%
   dySeries("gv4", strokeWidth = 4, label = "Children were beaten") %>%
   dySeries("gv5", strokeWidth = 4, label = "More fights than usual") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", drawGrid = FALSE, label = "Percentage of sample", valueRange = c(0, 33)) %>% 
+  dyAxis("y", drawGrid = FALSE, label = "Percentage of sample", valueRange = c(0, 38)) %>% 
      dyCrosshair(direction = "vertical") %>%
  dyLegend(width = 350) %>%
   presAnnotation("1", text = "April 11") %>%
@@ -2251,7 +2251,7 @@ v_g  <- dygraph(v_e, main = "", group = "Siaya County Sample") %>%
 v_g
 ```
 
-##### Ineligible
+##### Low assets
 
 We ask: (i) Over the past 14 days, has there been a higher than usual amount of fights with members of your household?, and (ii) In the past 14 days, did you or your partner ever beat any of the children living in this household?  
 ```{r violence_i}
@@ -2260,7 +2260,7 @@ v_g  <- dygraph(v_i, main = "", group = "Siaya County Sample") %>%
   dySeries("gv4", strokeWidth = 4, label = "Children were beaten") %>%
   dySeries("gv5", strokeWidth = 4, label = "More fights than usual") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", drawGrid = FALSE, label = "Percentage of sample", valueRange = c(0, 33)) %>% 
+  dyAxis("y", drawGrid = FALSE, label = "Percentage of sample", valueRange = c(0, 38)) %>% 
      dyCrosshair(direction = "vertical") %>%
  dyLegend(width = 350) %>%
   presAnnotation("1", text = "April 11") %>%
@@ -2279,7 +2279,7 @@ v_g
 
 <font size="5">**Trust in government**</font>  
 
-Eligible households are those that qualified for [GiveDirectly transfers](http://emiguel.econ.berkeley.edu/assets/miguel_research/88/GE-Paper_2019-12-18.pdf) by living in homes with thatched roofs in 2014. 
+Households are assigned the high asset category if they reported higher asset holdings than the median household in a 2014-2015 baseline survey. Asset holdings data is only available for the 2014-2015 survey sample, which is a subsample of the current panel of households.  
 
 ####  {.tabset .tabset-pills}
 
@@ -2307,7 +2307,7 @@ tg_g <- dygraph(tg, main = "", group = "Siaya County Sample") %>%
 
 ```
 
-##### Eligible
+##### High assets
 
 How much do you trust your country’s government to take care of its citizens?  
 ``` {r trustgov_e}
@@ -2332,7 +2332,7 @@ tg_g <- dygraph(tg_e, main = "", group = "Siaya County Sample") %>%
 
 ```
 
-##### Ineligible
+##### Low assets
 
 How much do you trust your country’s government to take care of its citizens?  
 ``` {r trustgov_i}
@@ -2436,7 +2436,7 @@ tp_g <- dygraph(tp, main = "", group = "Siaya County Sample") %>%
 
 ```
 
-##### Eligible
+##### High assets
 
 Generally speaking, would you say that most people can be trusted or that you need to be very careful in dealing with people?  
 ``` {r trustpeople_e}
@@ -2457,7 +2457,7 @@ tp_g <- dygraph(tp_e, main = "", group = "Siaya County Sample") %>%
 
 ```
 
-##### Ineligible
+##### Low assets
 
 Generally speaking, would you say that most people can be trusted or that you need to be very careful in dealing with people?  
 ``` {r trustpeople_i}
@@ -2530,7 +2530,7 @@ tp_g <- dygraph(tp_m, main = "", group = "Siaya County Sample") %>%
 
 <font size="5">**Depression, CES-D-10**</font> 
 
-Eligible households are those that qualified for [GiveDirectly transfers](http://emiguel.econ.berkeley.edu/assets/miguel_research/88/GE-Paper_2019-12-18.pdf) by living in homes with thatched roofs in 2014. 
+Households are assigned the high asset category if they reported higher asset holdings than the median household in a 2014-2015 baseline survey. Asset holdings data is only available for the 2014-2015 survey sample, which is a subsample of the current panel of households.  
 
 ####  {.tabset .tabset-pills}
 
@@ -2559,7 +2559,7 @@ cesd_g <- dygraph(cesd_10, main = "", group = "Siaya County Sample") %>%
 
 Pre-COVID average computed with data from 2016-2017
 
-##### Eligible
+##### High assets
 
 **The Centre for Epidemiological Studies Depression Scale** (CES-D-10) is a 10-item Likert scale questionnaire assessing depressive symptoms in the past week. It includes three items on depressed affect, five items on somatic symptoms, and two on positive affect. Options for each item range from “rarely or none of the time” (score of 0) to “all of the time” (score of 3). Scoring is reversed for positive affect statements. Total scores can range from 0 to 30. **Higher scores suggest greater severity of symptoms.**  
 
@@ -2585,7 +2585,7 @@ cesd_g <- dygraph(cesd_10_e, main = "", group = "Siaya County Sample") %>%
 
 Pre-COVID average computed with data from 2016-2017
 
-##### Ineligible
+##### Low assets
 
 **The Centre for Epidemiological Studies Depression Scale** (CES-D-10) is a 10-item Likert scale questionnaire assessing depressive symptoms in the past week. It includes three items on depressed affect, five items on somatic symptoms, and two on positive affect. Options for each item range from “rarely or none of the time” (score of 0) to “all of the time” (score of 3). Scoring is reversed for positive affect statements. Total scores can range from 0 to 30. **Higher scores suggest greater severity of symptoms.**  
 
@@ -2881,7 +2881,7 @@ pf2_g <- dygraph(pf2, main = "", group = "Siaya County Sample") %>%
   dySeries("mean_price_115", strokeWidth = 4, label = "Onions (4)") %>%
 
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "Percentage relative to first week", drawGrid = FALSE, valueRange = c(68,125)) %>% 
+  dyAxis("y", label = "Percentage relative to first week", drawGrid = FALSE, valueRange = c(60,125)) %>% 
   dyLegend(width = 500 , labelsSeparateLines = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   dyOptions(includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2"), connectSeparatedPoints = TRUE) %>%
@@ -2906,7 +2906,7 @@ pf3_g <- dygraph(pf3, main = "", group = "Siaya County Sample") %>%
   dySeries("mean_price_14", strokeWidth = 4, label = "Beans (2kg)") %>%
 
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "Percentage relative to first week", drawGrid = FALSE, valueRange = c(90,135)) %>% 
+  dyAxis("y", label = "Percentage relative to first week", drawGrid = FALSE, valueRange = c(75,135)) %>% 
   dyLegend(width = 300 , labelsSeparateLines = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   dyOptions(includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(9, "Set1"), connectSeparatedPoints = TRUE) %>%
@@ -2931,7 +2931,7 @@ ps_g <- dygraph(ps, main = "", group = "Siaya County Sample") %>%
   dySeries("mean_price_111", strokeWidth = 4, label = "Fixing a small hole at a tailor (1)") %>%
   dySeries("mean_price_113", strokeWidth = 4, label = "Grinding 1kg of maize") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "Percentage relative to first week", drawGrid = FALSE, valueRange = c(50, 150)) %>% 
+  dyAxis("y", label = "Percentage relative to first week", drawGrid = FALSE, valueRange = c(35, 155)) %>% 
   dyLegend(width = 250 , labelsSeparateLines = TRUE) %>%
     dyCrosshair(direction = "vertical") %>%
   dyOptions(includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = TRUE) %>%
@@ -2995,6 +2995,8 @@ pnf_g <- dygraph(pnf, main = "", group = "Siaya County Sample") %>%
 
 ## {}
 
+Households are assigned the high asset category if they reported higher asset holdings than the median household in a 2014-2015 baseline survey. Asset holdings data is only available for the 2014-2015 survey sample, which is a subsample of the current panel of households. 
+
 Eligible households are those that qualified for [GiveDirectly transfers](http://emiguel.econ.berkeley.edu/assets/miguel_research/88/GE-Paper_2019-12-18.pdf) by living in homes with thatched roofs in 2014. 
       
 These data comes from phone survey interviews conducted by [REMIT Kenya](http://remitkenya.co.ke/) in Siaya County, Kenya. We are collecting data for a sample of ~11,000 households in the county, which is representative of the whole population. At the same time, our weekly sampling method assures weekly representativeness of the overall sample.
@@ -3015,7 +3017,11 @@ So far we have interviewed 8,582 households, with the following distribution per
 | Week 14 |	5 July 2020 - 11 July 2020	| 1087 |2|
 | Week 15 |	12 July 2020 - 18 July 2020	| 611 |2|
 | Week 16 |	19 July 2020 - 25 July 2020	| 889 |2|
-| Week 17 |	26 July 2020 - 1 August 2020	| 814 |2|
+| Week 17 |	26 July 2020 - 1 August 2020	| 820 |2|
+| Week 18 |	2 August 2020 - 8 August 2020	| 870 |2|
+| Week 19 |	9 August 2020 - 15 August 2020	| 835 |2|
+| Week 20 |	16 August 2020 - 22 August 2020	| 886 |2|
+| Week 21 |	23 August 2020 - 29 August 2020	| 848 |2|
 
 
 
