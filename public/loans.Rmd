@@ -1,0 +1,130 @@
+---
+title: "Weekly Statistics"
+author: 'Siaya County - Household Sample'
+date: ''
+output:
+  html_document:
+    theme: paper
+    toc: FALSE
+    includes:
+      before_body: header.html
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE)
+library(haven)
+library(tidyverse)
+library(dygraphs)
+library(xts)
+library(ggplot2)
+library(rjson) #reading shapefiles for heatmaps
+library(plotly) #interactive visualization
+
+end_week = "20"
+end_survey = "August 22"
+loans_weekly <- read_dta("../../GE_Endline2/covid19/data/temp_loans_weekly.dta") # name changed, dropped the "All"
+
+loans <- c("week", "loantype_1", "loantype_2" , "loantype_3", "loantype_4", "loantype_5" , "loantype_6")
+loans <- loans_weekly[loans]
+
+loans1 <- c("week", "loantype_1" , "loantype_3" , "loantype_6")
+loans1 <- loans_weekly[loans1]
+loans2 <- c("week", "loantype_2", "loantype_4", "loantype_5")
+loans2 <- loans_weekly[loans2]
+
+tookloan <- c("week", "tookloan_0", "tookloan_1")
+tookloan <- loans_weekly[tookloan]
+
+presAnnotation <- function(dygraph, x, text) {
+  dygraph %>%
+    dyAnnotation(x, text, attachAtBottom = TRUE, width = 70, height = 25)
+}
+
+```
+
+<font size="5">**Took a loan**</font>   
+We ask "In the past 14 days, did anyone in this household take out a new loan for use on household consumption?"
+```{r tookloan}
+it_g  <- dygraph(tookloan, main = "") %>%
+  dySeries("tookloan_0", strokeWidth = 4, label = "No") %>%
+  dySeries("tookloan_1", strokeWidth = 4, label = "Yes") %>%  
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", drawGrid = FALSE , label = "Percentage of sample", valueRange = c(0, 110)) %>% 
+  dyOptions(stackedGraph =TRUE , axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(6, "Set2"), connectSeparatedPoints = FALSE) %>%
+    dyCrosshair(direction = "vertical") %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation(end_week, text = end_survey) %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
+  dyEvent(-1 , "February", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyEvent(0 , "Lockdown begins March 15", labelLoc = "top") %>%
+    dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyLegend(width = 100, labelsSeparateLines = FALSE) 
+it_g
+```
+
+<font size="5">**Type of loan taken**</font>  
+"If yes, what kind of loan?"
+```{r loans1}
+it_g  <- dygraph(loans1, main = "") %>%
+  dySeries("loantype_1", strokeWidth = 4, label = "Loan from a friend / relative") %>%
+  dySeries("loantype_3", strokeWidth = 4, label = "Mobile lending") %>%
+  dySeries("loantype_6", strokeWidth = 4, label = "Merry-go-round / ROSCA") %>%
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", drawGrid = FALSE , label = "Percentage of loans taken") %>% 
+  dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(6, "Set1"), connectSeparatedPoints = FALSE) %>%
+    dyCrosshair(direction = "vertical") %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation(end_week, text = end_survey) %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
+  dyEvent(-1 , "February", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyEvent(0 , "Lockdown begins March 15", labelLoc = "top") %>%
+    dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyLegend(width = 500, labelsSeparateLines = FALSE) 
+it_g
+```
+
+```{r loans2}
+it_g  <- dygraph(loans2, main = "") %>%
+  dySeries("loantype_2", strokeWidth = 4, label = "Commercial bank / commercial lender") %>%
+  dySeries("loantype_4", strokeWidth = 4, label = "Money lender / shylock") %>%  
+  dySeries("loantype_5", strokeWidth = 4, label = "SACCO") %>% 
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", drawGrid = FALSE , label = "Percentage of loans taken") %>% 
+  dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(6, "Set2"), connectSeparatedPoints = FALSE) %>%
+    dyCrosshair(direction = "vertical") %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation(end_week, text = end_survey) %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
+  dyEvent(-1 , "February", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyEvent(0 , "Lockdown begins March 15", labelLoc = "top") %>%
+    dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyLegend(width = 500, labelsSeparateLines = FALSE) 
+it_g
+```
+
+
+
+These data comes from phone survey interviews conducted by [REMIT Kenya](http://remitkenya.co.ke/) in Siaya County, Kenya. We are collecting data for a sample of ~11,000 households in the county, which is representative of the whole population. At the same time, our weekly sampling method assures weekly representativeness of the overall sample.
+
+So far we have conducted 15,832 household surveys, with the following distribution per week:
+
+| Week	| Dates	| Number of surveys | Survey round |
+|------|:-----:|:---------:|:-------:|
+| Week 1 |	05 April 2020 - 11 April 2020	| 745 | 1 |
+| Week 2 |	12 April 2020 - 18 April 2020	| 744 | 1|
+| Week 3 |	19 April 2020 - 25 April 2020	| 1,478 |1|
+| Week 4 |	26 April 2020 - 02 May 2020	| 1,146 |1|
+| Week 5 |	03 May 2020 - 09 May 2020	| 1,499 |1|
+| Week 6 |	10 May 2020 - 16 May 2020	| 986 |1|
+| Week 7 |	17 May 2020 - 23 May 2020	| 1,217 |1|
+| Week 8 |	24 May 2020 - 30 May 2020	| 771 |1|
+| Week 12 |	21 June 2020 - 27 June 2020	| 1747 |2|
+| Week 14 |	5 July 2020 - 11 July 2020	| 1087 |2|
+| Week 15 |	12 July 2020 - 18 July 2020	| 611 |2|
+| Week 16 |	19 July 2020 - 25 July 2020	| 889 |2|
+| Week 17 |	26 July 2020 - 1 August 2020	| 820 |2|
+| Week 18 |	2 August 2020 - 9 August 2020	| 870 |2|
+| Week 19 |	10 August 2020 - 17 August 2020	| 836 |2|
+| Week 20 |	18 August 2020 - 25 August 20200	| 384 |2|
+
+
