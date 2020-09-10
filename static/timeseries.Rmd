@@ -20,7 +20,7 @@ library(ggplot2)
 library(rjson) #reading shapefiles for heatmaps
 library(plotly) #interactive visualization
 
-end_week = "22"
+end_week = "21"
 end_survey = "August 29"
 
 ## Importing Data ##
@@ -3001,7 +3001,7 @@ Eligible households are those that qualified for [GiveDirectly transfers](http:/
       
 These data comes from phone survey interviews conducted by [REMIT Kenya](http://remitkenya.co.ke/) in Siaya County, Kenya. We are collecting data for a sample of ~11,000 households in the county, which is representative of the whole population. At the same time, our weekly sampling method assures weekly representativeness of the overall sample.
 
-So far we have interviewed 8,582 households, with the following distribution per week:
+So far we have conducted 17,374 household phone surveys, with the following distribution per week:
 
 | Week	| Dates	| Number of surveys | Survey round |
 |------|:-----:|:---------:|:-------:|
@@ -3021,7 +3021,7 @@ So far we have interviewed 8,582 households, with the following distribution per
 | Week 18 |	2 August 2020 - 8 August 2020	| 870 |2|
 | Week 19 |	9 August 2020 - 15 August 2020	| 835 |2|
 | Week 20 |	16 August 2020 - 22 August 2020	| 886 |2|
-| Week 21 |	23 August 2020 - 29 August 2020	| 848 |2|
+| Week 21 |	23 August 2020 - 29 August 2020	| 1,042 |2|
 
 
 
