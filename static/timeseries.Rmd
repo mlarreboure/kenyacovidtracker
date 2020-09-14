@@ -114,15 +114,16 @@ ckn6 <- covid_weekly[ckn6]
 c <- c("week", "c1a_wins", "c1b_wins", "c3_wins") #, "c3_wins", "c4_wins"
 c <- covid_weekly[c]
 
-i <- c("week", "i1_wins", "i2_wins" , "i3_wins") #, "i4_wins", "i5_wins", "i6_wins"  , "i7_wins"
+i <- c("week", "i4_wins" , "i2_wins", "i3_wins", "i1_wins") #, "i4_wins", "i5_wins", "i6_wins"  , "i7_wins"
 i <- covid_weekly[!(covid_weekly$week %in% c(9,10)),i]
 i1_feb <- weighted.mean(covid_hh$i1_feb_wins,covid_hh$hh_weight,na.rm = TRUE)
 i2_feb <- weighted.mean(covid_hh$i2_feb_wins,covid_hh$hh_weight,na.rm = TRUE)
 i3_feb <- weighted.mean(covid_hh$i3_feb_wins,covid_hh$hh_weight,na.rm = TRUE)
-i <- rbind(c(-1, i1_feb, i2_feb, i3_feb), i)
-i <- rbind(c(-2,NA,NA,NA), i)
+i4_feb <- weighted.mean(covid_hh$i4_feb_wins,covid_hh$hh_weight,na.rm = TRUE)
+i <- rbind(c(-1, i4_feb, i3_feb, i2_feb, i1_feb ), i)
+i <- rbind(c(-2,NA,NA,NA,NA), i)
 
-i_e <- c("week", "i2_wins", "i3_wins", "i1_wins")
+i_e <- c("week", "i4_wins" , "i2_wins", "i3_wins", "i1_wins")
 i_e <- covid_weekly_e[!(covid_weekly_e$week %in% c(9,10)),i_e]
 i1_feb_e <- weighted.mean(covid_hh[covid_hh$high_assets_bl == 1,]$i1_feb_wins,
                           covid_hh[covid_hh$high_assets_bl == 1,]$hh_weight,
@@ -133,10 +134,13 @@ i2_feb_e <- weighted.mean(covid_hh[covid_hh$high_assets_bl == 1,]$i2_feb_wins,
 i3_feb_e <- weighted.mean(covid_hh[covid_hh$high_assets_bl == 1,]$i3_feb_wins,
                           covid_hh[covid_hh$high_assets_bl == 1,]$hh_weight,
                           na.rm = TRUE)
-i_e <- rbind(c(-1, i1_feb_e, i2_feb_e, i3_feb_e), i_e)
-i_e <- rbind(c(-2,NA,NA,NA), i_e)
+i4_feb_e <- weighted.mean(covid_hh[covid_hh$high_assets_bl == 1,]$i4_feb_wins,
+                          covid_hh[covid_hh$high_assets_bl == 1,]$hh_weight,
+                          na.rm = TRUE)
+i_e <- rbind(c(-1, i4_feb_e, i3_feb_e, i2_feb_e, i1_feb_e), i_e)
+i_e <- rbind(c(-2,NA,NA,NA,NA), i_e)
 
-i_i <- c("week", "i2_wins", "i3_wins", "i1_wins")
+i_i <- c("week", "i4_wins" , "i2_wins", "i3_wins", "i1_wins")
 i_i <- covid_weekly_i[!(covid_weekly_i$week %in% c(9,10)),i_i]
 i1_feb_i <- weighted.mean(covid_hh[covid_hh$high_assets_bl == 0,]$i1_feb_wins,
                           covid_hh[covid_hh$high_assets_bl == 0,]$hh_weight,
@@ -147,11 +151,14 @@ i2_feb_i <- weighted.mean(covid_hh[covid_hh$high_assets_bl == 0,]$i2_feb_wins,
 i3_feb_i <- weighted.mean(covid_hh[covid_hh$high_assets_bl == 0,]$i3_feb_wins,
                           covid_hh[covid_hh$high_assets_bl == 0,]$hh_weight,
                           na.rm = TRUE)
-i_i <- rbind(c(-1, i1_feb_i, i2_feb_i, i3_feb_i), i_i)
-i_i <- rbind(c(-2,NA,NA,NA), i_i)
+i4_feb_i <- weighted.mean(covid_hh[covid_hh$high_assets_bl == 0,]$i4_feb_wins,
+                          covid_hh[covid_hh$high_assets_bl == 0,]$hh_weight,
+                          na.rm = TRUE)
+i_i <- rbind(c(-1, i4_feb_i, i3_feb_i, i2_feb_i, i1_feb_i), i_i)
+i_i <- rbind(c(-2,NA,NA,NA,NA), i_i)
 
 # Has child:
-i_c <- c("week", "i2_wins", "i3_wins", "i1_wins")
+i_c <- c("week", "i4_wins" , "i2_wins", "i3_wins", "i1_wins")
 i_c <- covid_weekly_c[!(covid_weekly_c$week %in% c(9,10)),i_c] 
 i1_feb_c <- weighted.mean(covid_hh[covid_hh$child_hh == 1,]$i1_feb_wins,
                           covid_hh[covid_hh$child_hh == 1,]$hh_weight,
@@ -162,11 +169,14 @@ i2_feb_c <- weighted.mean(covid_hh[covid_hh$child_hh == 1,]$i2_feb_wins,
 i3_feb_c <- weighted.mean(covid_hh[covid_hh$child_hh == 1,]$i3_feb_wins,
                           covid_hh[covid_hh$child_hh == 1,]$hh_weight,
                           na.rm = TRUE)
-i_c <- rbind(c(-1, i1_feb_c, i2_feb_c, i3_feb_c), i_c)
-i_c <- rbind(c(-2,NA,NA,NA), i_c)
+i4_feb_c <- weighted.mean(covid_hh[covid_hh$child_hh == 1,]$i4_feb_wins,
+                          covid_hh[covid_hh$child_hh == 1,]$hh_weight,
+                          na.rm = TRUE)
+i_c <- rbind(c(-1, i4_feb_c, i3_feb_c, i2_feb_c, i1_feb_c), i_c)
+i_c <- rbind(c(-2,NA,NA,NA,NA), i_c)
 
 # No child:
-i_nc <- c("week", "i2_wins", "i3_wins", "i1_wins")
+i_nc <- c("week", "i4_wins" , "i2_wins", "i3_wins", "i1_wins")
 i_nc <- covid_weekly_nc[!(covid_weekly_nc$week %in% c(9,10)),i_nc] 
 i1_feb_nc <- weighted.mean(covid_hh[covid_hh$child_hh == 0,]$i1_feb_wins,
                           covid_hh[covid_hh$child_hh == 0,]$hh_weight,
@@ -177,8 +187,11 @@ i2_feb_nc <- weighted.mean(covid_hh[covid_hh$child_hh == 0,]$i2_feb_wins,
 i3_feb_nc <- weighted.mean(covid_hh[covid_hh$child_hh == 0,]$i3_feb_wins,
                           covid_hh[covid_hh$child_hh == 0,]$hh_weight,
                           na.rm = TRUE)
-i_nc <- rbind(c(-1, i1_feb_nc, i2_feb_nc, i3_feb_nc), i_nc)
-i_nc <- rbind(c(-2,NA,NA,NA), i_nc)
+i4_feb_nc <- weighted.mean(covid_hh[covid_hh$child_hh == 0,]$i4_feb_wins,
+                          covid_hh[covid_hh$child_hh == 0,]$hh_weight,
+                          na.rm = TRUE)
+i_nc <- rbind(c(-1, i4_feb_nc, i3_feb_nc, i2_feb_nc, i1_feb_nc), i_nc)
+i_nc <- rbind(c(-2,NA,NA,NA,NA), i_nc)
 
 d <- c("week", "i7_wins", "dissaved") 
 d <- covid_weekly[d]
@@ -256,6 +269,19 @@ ch <- covid_weekly[ch]
 
 l <- c("week", "l1_wins", "l2_wins", "l3_wins")
 l <- covid_weekly[l]
+
+#Loans
+
+loans <- c("week", "loantype_1", "loantype_2" , "loantype_3", "loantype_4", "loantype_5" , "loantype_6")
+loans <- covid_weekly[loans]
+
+loans1 <- c("week", "loantype_1" , "loantype_3" , "loantype_6")
+loans1 <- covid_weekly[loans1]
+loans2 <- c("week", "loantype_2", "loantype_4", "loantype_5")
+loans2 <- covid_weekly[loans2]
+
+tookloan <- c("week", "tookloan_0", "tookloan_1")
+tookloan <- covid_weekly[tookloan]
 
 # Enterprises
 e <- c("week", "e3_wins", "e4_wins")
@@ -383,14 +409,15 @@ Households are assigned the high asset category if they reported higher asset ho
 ##### All
 ``` {r income}
   i_g <- dygraph(i, main = "") %>%
+  dySeries("i4_wins", strokeWidth = 4, label = "Total earnings") %>%
   dySeries("i3_wins", strokeWidth = 4, label = "Wage earnings") %>%
   dySeries("i2_wins", strokeWidth = 4, label = "Self-employment earnings") %>%
   dySeries("i1_wins", strokeWidth = 4, label = "Agricultural earnings") %>%
   #  dySeries("i7_wins", strokeWidth = 4, label = "Dissaving") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "USD, PPP", drawGrid = FALSE, valueRange = c(0, 8)) %>% 
+  dyAxis("y", label = "USD, PPP", drawGrid = FALSE, valueRange = c(0, 7)) %>% 
   dyLegend(width = 250, labelsSeparateLines = TRUE) %>%
-  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = FALSE) %>%
+  dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
   presAnnotation(end_week, text = end_survey) %>%
@@ -402,19 +429,20 @@ i_g
 ```
   
 
-  This plot aggregates income from each of the three earning sources, across all working-age household members, stacking them to add to the average earning per capita, including children, in the past 14 days. If the household does not perceive income from one or more of the sources, those data points are assigned zeros to assure representativeness for the whole population. 
+  This plot shows income from three earning sources, across all working-age household members, and the average earning per capita, including children, in the past 14 days. If the household does not perceive income from one or more of the sources, those data points are assigned zeros to assure representativeness for the whole population. 
   
 ##### High assets
 ``` {r}
   i_g <- dygraph(i_e, main = "") %>%
+  dySeries("i4_wins", strokeWidth = 4, label = "Total earnings") %>%
   dySeries("i3_wins", strokeWidth = 4, label = "Wage earnings") %>%
   dySeries("i2_wins", strokeWidth = 4, label = "Self-employment earnings") %>%
   dySeries("i1_wins", strokeWidth = 4, label = "Agricultural earnings") %>%
   #  dySeries("i7_wins", strokeWidth = 4, label = "Dissaving") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "USD, PPP", drawGrid = FALSE, valueRange = c(0, 8)) %>% 
+  dyAxis("y", label = "USD, PPP", drawGrid = FALSE, valueRange = c(0, 7)) %>% 
   dyLegend(width = 250, labelsSeparateLines = TRUE) %>%
-  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = FALSE) %>%
+  dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
   presAnnotation(end_week, text = end_survey) %>%
@@ -426,19 +454,20 @@ i_g
 ```
   
 
-  This plot aggregates income from each of the three earning sources, across all working-age household members, stacking them to add to the average earning per capita, including children, in the past 14 days. If the household does not perceive income from one or more of the sources, those data points are assigned zeros to assure representativeness for the whole population. 
-
+  This plot shows income from three earning sources, across all working-age household members, and the average earning per capita, including children, in the past 14 days. If the household does not perceive income from one or more of the sources, those data points are assigned zeros to assure representativeness for the whole population. 
+  
 ##### Low assets 
 ``` {r}
   i_g <- dygraph(i_i, main = "") %>%
+  dySeries("i4_wins", strokeWidth = 4, label = "Total earnings") %>%
   dySeries("i3_wins", strokeWidth = 4, label = "Wage earnings") %>%
   dySeries("i2_wins", strokeWidth = 4, label = "Self-employment earnings") %>%
   dySeries("i1_wins", strokeWidth = 4, label = "Agricultural earnings") %>%
   #  dySeries("i7_wins", strokeWidth = 4, label = "Dissaving") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "USD, PPP", drawGrid = FALSE, valueRange = c(0, 8)) %>% 
+  dyAxis("y", label = "USD, PPP", drawGrid = FALSE, valueRange = c(0, 7)) %>% 
   dyLegend(width = 250, labelsSeparateLines = TRUE) %>%
-  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = FALSE) %>%
+  dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
   presAnnotation(end_week, text = end_survey) %>%
@@ -450,19 +479,20 @@ i_g
 ```
   
 
-  This plot aggregates income from each of the three earning sources, across all working-age household members, stacking them to add to the average earning per capita, including children, in the past 14 days. If the household does not perceive income from one or more of the sources, those data points are assigned zeros to assure representativeness for the whole population.
+  This plot shows income from three earning sources, across all working-age household members, and the average earning per capita, including children, in the past 14 days. If the household does not perceive income from one or more of the sources, those data points are assigned zeros to assure representativeness for the whole population. 
   
 ##### Household with children 
 ``` {r}
   i_g <- dygraph(i_c, main = "") %>%
+  dySeries("i4_wins", strokeWidth = 4, label = "Total earnings") %>%
   dySeries("i3_wins", strokeWidth = 4, label = "Wage earnings") %>%
   dySeries("i2_wins", strokeWidth = 4, label = "Self-employment earnings") %>%
   dySeries("i1_wins", strokeWidth = 4, label = "Agricultural earnings") %>%
   #  dySeries("i7_wins", strokeWidth = 4, label = "Dissaving") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "USD, PPP", drawGrid = FALSE, valueRange = c(0, 8)) %>% 
+  dyAxis("y", label = "USD, PPP", drawGrid = FALSE, valueRange = c(0, 7)) %>% 
   dyLegend(width = 250, labelsSeparateLines = TRUE) %>%
-  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = FALSE) %>%
+  dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
   presAnnotation(end_week, text = end_survey) %>%
@@ -474,19 +504,20 @@ i_g
 ```
   
 
-  This plot aggregates income from each of the three earning sources, across all working-age household members, stacking them to add to the average earning per capita, including children, in the past 14 days. If the household does not perceive income from one or more of the sources, those data points are assigned zeros to assure representativeness for the whole population.
+  This plot shows income from three earning sources, across all working-age household members, and the average earning per capita, including children, in the past 14 days. If the household does not perceive income from one or more of the sources, those data points are assigned zeros to assure representativeness for the whole population. 
   
 ##### No children
 ``` {r}
   i_g <- dygraph(i_nc, main = "") %>%
+  dySeries("i4_wins", strokeWidth = 4, label = "Total earnings") %>%
   dySeries("i3_wins", strokeWidth = 4, label = "Wage earnings") %>%
   dySeries("i2_wins", strokeWidth = 4, label = "Self-employment earnings") %>%
   dySeries("i1_wins", strokeWidth = 4, label = "Agricultural earnings") %>%
   #  dySeries("i7_wins", strokeWidth = 4, label = "Dissaving") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "USD, PPP", drawGrid = FALSE, valueRange = c(0, 8)) %>% 
+  dyAxis("y", label = "USD, PPP", drawGrid = FALSE, valueRange = c(0, 7)) %>% 
   dyLegend(width = 250, labelsSeparateLines = TRUE) %>%
-  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = FALSE) %>%
+  dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
   presAnnotation(end_week, text = end_survey) %>%
@@ -498,7 +529,7 @@ i_g
 ```
   
 
-  This plot aggregates income from each of the three earning sources, across all working-age household members, stacking them to add to the average earning per capita, including children, in the past 14 days. If the household does not perceive income from one or more of the sources, those data points are assigned zeros to assure representativeness for the whole population.
+  This plot shows income from three earning sources, across all working-age household members, and the average earning per capita, including children, in the past 14 days. If the household does not perceive income from one or more of the sources, those data points are assigned zeros to assure representativeness for the whole population. 
   
 ####  {}
 
@@ -1266,7 +1297,73 @@ f1a_g
 #### {}
  
    
-***  
+*** 
+
+### Loans
+<font size="5">**Households taking a new loan for consumption**</font>   
+We ask "In the past 14 days, did anyone in this household take out a new loan for use on household consumption?"
+```{r tookloan}
+it_g  <- dygraph(tookloan, main = "") %>%
+  dySeries("tookloan_0", strokeWidth = 4, label = "No") %>%
+  dySeries("tookloan_1", strokeWidth = 4, label = "Yes") %>%  
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", drawGrid = FALSE , label = "Percentage of sample", valueRange = c(0, 110)) %>% 
+  dyOptions(stackedGraph =TRUE , axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(6, "Set2"), connectSeparatedPoints = FALSE) %>%
+    dyCrosshair(direction = "vertical") %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation(end_week, text = end_survey) %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
+  dyEvent(-1 , "February", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyEvent(0 , "Lockdown begins March 15", labelLoc = "top") %>%
+    dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyLegend(width = 100, labelsSeparateLines = FALSE) 
+it_g
+```
+
+<font size="5">**Type of loan taken**</font>  
+"If yes, what kind of loan?"
+```{r loans1}
+it_g  <- dygraph(loans1, main = "") %>%
+  dySeries("loantype_1", strokeWidth = 4, label = "Loan from a friend / relative") %>%
+  dySeries("loantype_3", strokeWidth = 4, label = "Mobile lending") %>%
+  dySeries("loantype_6", strokeWidth = 4, label = "Merry-go-round / ROSCA") %>%
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", drawGrid = FALSE , label = "Percentage of all loans taken") %>% 
+  dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(6, "Set1"), connectSeparatedPoints = FALSE) %>%
+    dyCrosshair(direction = "vertical") %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation(end_week, text = end_survey) %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
+  dyEvent(-1 , "February", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyEvent(0 , "Lockdown begins March 15", labelLoc = "top") %>%
+    dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyLegend(width = 500, labelsSeparateLines = FALSE) 
+it_g
+```
+
+```{r loans2}
+it_g  <- dygraph(loans2, main = "") %>%
+  dySeries("loantype_2", strokeWidth = 4, label = "Commercial bank / commercial lender") %>%
+  dySeries("loantype_4", strokeWidth = 4, label = "Money lender / shylock") %>%  
+  dySeries("loantype_5", strokeWidth = 4, label = "SACCO") %>% 
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", drawGrid = FALSE , label = "Percentage of all loans taken") %>% 
+  dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(6, "Set2"), connectSeparatedPoints = FALSE) %>%
+    dyCrosshair(direction = "vertical") %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation(end_week, text = end_survey) %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
+  dyEvent(-1 , "February", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyEvent(0 , "Lockdown begins March 15", labelLoc = "top") %>%
+    dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyLegend(width = 500, labelsSeparateLines = FALSE) 
+it_g
+```
+  
+  These plots show the distribution of the type of loans taken over time, conditional on the household taking a loan.  
+  
+***   
+   
 ### Household enterprises  
 <font size="5">**Enterprises revenue and profits in the past 14 days**</font>
 

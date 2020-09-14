@@ -79,7 +79,7 @@ it_g  <- dygraph(loans1, main = "") %>%
   dyEvent(-1 , "February", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   dyEvent(0 , "Lockdown begins March 15", labelLoc = "top") %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
-  dyLegend(width = 500, labelsSeparateLines = FALSE) 
+  dyLegend(width = 600, labelsSeparateLines = FALSE) 
 it_g
 ```
 
@@ -98,7 +98,7 @@ it_g  <- dygraph(loans2, main = "") %>%
   dyEvent(-1 , "February", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   dyEvent(0 , "Lockdown begins March 15", labelLoc = "top") %>%
     dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
-  dyLegend(width = 500, labelsSeparateLines = FALSE) 
+  dyLegend(width = 650, labelsSeparateLines = FALSE) 
 it_g
 ```
 

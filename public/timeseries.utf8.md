@@ -23,34 +23,34 @@ Households are assigned the high asset category if they reported higher asset ho
 ####  {.tabset .tabset-pills}
 
 ##### All
-preserve9e226719aba78ae6
+preserve80cf0e69c7a2aab9
   
 
-  This plot aggregates income from each of the three earning sources, across all working-age household members, stacking them to add to the average earning per capita, including children, in the past 14 days. If the household does not perceive income from one or more of the sources, those data points are assigned zeros to assure representativeness for the whole population. 
+  This plot shows income from three earning sources, across all working-age household members, and the average earning per capita, including children, in the past 14 days. If the household does not perceive income from one or more of the sources, those data points are assigned zeros to assure representativeness for the whole population. 
   
 ##### High assets
-preserve2d36e0d889e0cdde
+preserve565d99b5194a6cdd
   
 
-  This plot aggregates income from each of the three earning sources, across all working-age household members, stacking them to add to the average earning per capita, including children, in the past 14 days. If the household does not perceive income from one or more of the sources, those data points are assigned zeros to assure representativeness for the whole population. 
-
+  This plot shows income from three earning sources, across all working-age household members, and the average earning per capita, including children, in the past 14 days. If the household does not perceive income from one or more of the sources, those data points are assigned zeros to assure representativeness for the whole population. 
+  
 ##### Low assets 
-preserve6dc5378ef967e51c
+preservee56f93d97ddfe227
   
 
-  This plot aggregates income from each of the three earning sources, across all working-age household members, stacking them to add to the average earning per capita, including children, in the past 14 days. If the household does not perceive income from one or more of the sources, those data points are assigned zeros to assure representativeness for the whole population.
+  This plot shows income from three earning sources, across all working-age household members, and the average earning per capita, including children, in the past 14 days. If the household does not perceive income from one or more of the sources, those data points are assigned zeros to assure representativeness for the whole population. 
   
 ##### Household with children 
-preserve2fcb5aa96da5818f
+preserve082d2015a0619720
   
 
-  This plot aggregates income from each of the three earning sources, across all working-age household members, stacking them to add to the average earning per capita, including children, in the past 14 days. If the household does not perceive income from one or more of the sources, those data points are assigned zeros to assure representativeness for the whole population.
+  This plot shows income from three earning sources, across all working-age household members, and the average earning per capita, including children, in the past 14 days. If the household does not perceive income from one or more of the sources, those data points are assigned zeros to assure representativeness for the whole population. 
   
 ##### No children
-preservece8c8a024c348134
+preserved6c27cbe9a0420ea
   
 
-  This plot aggregates income from each of the three earning sources, across all working-age household members, stacking them to add to the average earning per capita, including children, in the past 14 days. If the household does not perceive income from one or more of the sources, those data points are assigned zeros to assure representativeness for the whole population.
+  This plot shows income from three earning sources, across all working-age household members, and the average earning per capita, including children, in the past 14 days. If the household does not perceive income from one or more of the sources, those data points are assigned zeros to assure representativeness for the whole population. 
   
 ####  {}
 
@@ -64,19 +64,19 @@ preservece8c8a024c348134
 
 Hourly wages calculated by dividing total wages by total hours worked at the individual level, conditional on employment. Averages weighted by total hours worked at the individual level multiplied by household level weights. 
 
-preserved46cbafd35505f04
+preserve9705f7870f5f1e0a
 
 ##### High assets
 
 Hourly wages calculated by dividing total wages by total hours worked at the individual level, conditional on employment. Averages weighted by total hours worked at the individual level multiplied by household level weights. 
 
-preserve34ce8491f2fb8a3f
+preserve02b1431e61b9acc0
 
 ##### Low assets
 
 Hourly wages calculated by dividing total wages by total hours worked at the individual level, conditional on employment. Averages weighted by total hours worked at the individual level multiplied by household level weights. 
 
-preserveddc1797f0b282bf2
+preserve05bd14059bb45d36
 
 #### {}
 
@@ -89,23 +89,23 @@ preserveddc1797f0b282bf2
 
 ##### All
 
-preserve4c50edd5e40f5bc8
+preserve65d518960adb05a4
 
 ##### High assets
 
-preservee2650a182f1c8384
+preserve2623c3ba6c45c201
 
 ##### Low assets
 
-preserveefefcb48291531ef
+preserveb3d5119f31198ded
 
 ##### Household with children
 
-preserveaff59f4b1b763476
+preservea8a754a1c2b14377
 
 ##### No children
 
-preservecd51de2a79da6596
+preservede794d4abdadbf29
 
 #### {}
 
@@ -119,31 +119,31 @@ preservecd51de2a79da6596
 
 We ask whether in the past 14 days anyone in the household received a gift/assistance of money or goods, and its value, from (i) the government, (ii) from a non-governmental organization or community group, or (iii) from an individual politician or government official.  
 
-preserve468821a24bc2bb8b
+preservec93f32a4a47df08d
   
 ##### High assets
 
 We ask whether in the past 14 days anyone in the household received a gift/assistance of money or goods, and its value, from (i) the government, (ii) from a non-governmental organization or community group, or (iii) from an individual politician or government official.  
 
-preservec66e485af729683d
+preserveb7b16ae53fa79829
 
 ##### Low assets
 
 We ask whether in the past 14 days anyone in the household received a gift/assistance of money or goods, and its value, from (i) the government, (ii) from a non-governmental organization or community group, or (iii) from an individual politician or government official.  
 
-preserve7ce743f90ba46885
+preserve043bf7d01c78be8f
 
 ##### Household with children
 
 We ask whether in the past 14 days anyone in the household received a gift/assistance of money or goods, and its value, from (i) the government, (ii) from a non-governmental organization or community group, or (iii) from an individual politician or government official.  
 
-preserve2b3d3317fcb42e1a
+preservef50281a149727c71
 
 ##### No children
 
 We ask whether in the past 14 days anyone in the household received a gift/assistance of money or goods, and its value, from (i) the government, (ii) from a non-governmental organization or community group, or (iii) from an individual politician or government official.  
 
-preserve1980ef12113edc62
+preserveec6e9ec2c0fe972f
 
 #### {}
 
@@ -159,27 +159,27 @@ Households are assigned the high asset category if they reported higher asset ho
 
 ##### All
 
-preservedd3132880710c43e
+preserveba36750d8ef9f4bb
 Own-food consumption accounts for own agricultural and pastoral production at market value. Pre-covid average uses 2016-2017 data.
 
 ##### High assets
 
-preserveed24e7f3e9079ade
+preservea9bd3e398d7cc713
 Own-food consumption accounts for own agricultural and pastoral production at market value. Pre-covid average uses 2016-2017 data.
 
 ##### Low assets
 
-preserved8687ddcf13d737d
+preservee1b360ddde44391c
 Own-food consumption accounts for own agricultural and pastoral production at market value. Pre-covid average uses 2016-2017 data.
 
 ##### Household with children
 
-preserveab44438c0a8e7b4e
+preserveb9287cc57a1f7d06
 Own-food consumption accounts for own agricultural and pastoral production at market value. Pre-covid average uses 2016-2017 data.
 
 ##### No children
 
-preserve63f675be2e547a83
+preserve5625477561dc4d8b
 Own-food consumption accounts for own agricultural and pastoral production at market value. Pre-covid average uses 2016-2017 data.
 
 #### {}
@@ -195,27 +195,27 @@ Households are assigned the high asset category if they reported higher asset ho
 
 ##### All
 
-preserve011040a678ba23d4
+preservea0deb393a38714e9
 Pre-COVID average uses data from 2016-2017.
 
 ##### High assets
 
-preservedcee30440dde0881
+preserve076c2490ef04c0ba
 Pre-COVID average uses data from 2016-2017.
 
 ##### Low assets
 
-preservef8fd472b7160e9bc
+preserve35f3950b43ae6210
 Pre-COVID average uses data from 2016-2017.
 
 ##### Household with children
 
-preservebe7bcf13b7de2d3b
+preserveb3b5052373ef82e0
 Pre-COVID average uses data from 2016-2017.
 
 ##### No children
 
-preservec4502ebc18920916
+preservea3408a2233f92b29
 Pre-COVID average uses data from 2016-2017.
 
 #### {}
@@ -232,7 +232,7 @@ Pre-COVID average uses data from 2016-2017.
    
  
    
-preservead99e77d168c165a
+preserveaf7fa7dd1a697a19
 
 ##### High assets
 
@@ -240,7 +240,7 @@ preservead99e77d168c165a
    
  
    
-preservec73bfd4a88672c96
+preservef65a1977380d8683
 
 ##### Low assets
 
@@ -248,7 +248,7 @@ preservec73bfd4a88672c96
    
  
    
-preserveff64507ac7404c04
+preserved012b47a5251758e
 
 #### {}
      
@@ -263,26 +263,42 @@ preserveff64507ac7404c04
 We ask whether in the past 7 days, any household member experienced: (i) having to reduce the number of meals and/or the portion of each meal they would usually eat, (ii) difficulties in going to food markets due to mobility restrictions imposed by government, and (iii) difficulties in buying food due to most food markets being closed.  
     
   
-preserved93426df8bf68334
+preserve814b1d887f7425fa
 
 ##### High assets
 
 We ask whether in the past 7 days, any household member experienced: (i) having to reduce the number of meals and/or the portion of each meal they would usually eat, (ii) difficulties in going to food markets due to mobility restrictions imposed by government, and (iii) difficulties in buying food due to most food markets being closed.  
     
   
-preservec9344ea3ae4608a5
+preservea84b4f5793ccd283
 
 ##### Low assets
 
 We ask whether in the past 7 days, any household member experienced: (i) having to reduce the number of meals and/or the portion of each meal they would usually eat, (ii) difficulties in going to food markets due to mobility restrictions imposed by government, and (iii) difficulties in buying food due to most food markets being closed.  
     
   
-preservea72ca5360340bacd
+preserved38e1558fa1f0942
 
 #### {}
  
    
-***  
+*** 
+
+### Loans
+<font size="5">**Households taking a new loan for consumption**</font>   
+We ask "In the past 14 days, did anyone in this household take out a new loan for use on household consumption?"
+preserve479c9fd382b465cf
+
+<font size="5">**Type of loan taken**</font>  
+"If yes, what kind of loan?"
+preserve3bea8a14894ce6e8
+
+preservef17476eaf18867be
+  
+  These plots show the distribution of the type of loans taken over time, conditional on the household taking a loan.  
+  
+***   
+   
 ### Household enterprises  
 <font size="5">**Enterprises revenue and profits in the past 14 days**</font>
 
@@ -292,15 +308,15 @@ Households are assigned the high asset category if they reported higher asset ho
 
 ##### All
 
-preserve3ad107fe43b3c0bb
+preserve8cb20f6e80b01ba9
 
 ##### High assets
 
-preserve815f6387bc1291e5
+preserve255a02ec90cb3c6c
 
 ##### Low assets
 
-preserve56afe62dbb682f0f
+preserve2d558b7899c3eea4
 
 #### {}
   
@@ -318,31 +334,31 @@ Households are assigned the high asset category if they reported higher asset ho
 
 We ask respondents whether they have changed their behavior in any way since learning about COVID-19, and if so, how  it has changed.
 
-preservea3bb5b818226fccc
+preservec7643db4e2be9a8c
 
 ##### High assets
 
 We ask respondents whether they have changed their behavior in any way since learning about COVID-19, and if so, how  it has changed.
 
-preservea2e64bbc87b068e0
+preserve0bb269c1e151ff9f
 
 ##### Low assets
 
 We ask respondents whether they have changed their behavior in any way since learning about COVID-19, and if so, how  it has changed.
 
-preserve08cadbcce6aee6c9
+preserved58c54cca5505a33
 
 ##### Female
 
 We ask respondents whether they have changed their behavior in any way since learning about COVID-19, and if so, how  it has changed.
 
-preserve1afdff777c1959da
+preserve48ab9c2ca7bf4404
 
 ##### Male
 
 We ask respondents whether they have changed their behavior in any way since learning about COVID-19, and if so, how  it has changed.
 
-preserve14c8f1e41e18fb81
+preservee6a2e994c74835bb
 
 #### {}
     
@@ -356,31 +372,31 @@ preserve14c8f1e41e18fb81
 
 We ask respondents whether they have experienced any illnesses or symptoms of a given list in the past 14 days.  
 
-preserve02718b135063167c
+preservee460fc295a345be0
 
 ##### High assets
 
 We ask respondents whether they have experienced any illnesses or symptoms of a given list in the past 14 days.  
 
-preserve1350f87af941fa64
+preservebaee9ebbdc75544b
 
 ##### Low assets
 
 We ask respondents whether they have experienced any illnesses or symptoms of a given list in the past 14 days.  
 
-preserve5ac483dcc54ab7c4
+preserveb48f855e598ab62e
 
 ##### Female
 
 We ask respondents whether they have experienced any illnesses or symptoms of a given list in the past 14 days.  
 
-preserveb627926f0431c484
+preserve3e419d4455865a34
 
 ##### Male
 
 We ask respondents whether they have experienced any illnesses or symptoms of a given list in the past 14 days.  
 
-preserveee7bbbf40af1627d
+preservef570f18c74886fcf
 
 #### {}
 
@@ -394,31 +410,31 @@ preserveee7bbbf40af1627d
 
   We ask: "Taken together, how many people outside this household have you interacted with in-person?"   
 
-preserve6e850c6c1ac3cc83
+preservefd078191f83275e5
 
 ##### High assets
 
   We ask: "Taken together, how many people outside this household have you interacted with in-person?"   
 
-preserveacbc75a640d7bc02
+preserve8cc774250c2dcf16
 
 ##### Low assets
 
   We ask: "Taken together, how many people outside this household have you interacted with in-person?"   
 
-preserveeeeef0411a887bd1
+preserve0b5644714189f5f2
 
 ##### Female
 
   We ask: "Taken together, how many people outside this household have you interacted with in-person?"   
 
-preserve4ed0c3106a9504ce
+preserve45ecc07aae8ef121
 
 ##### Male
 
   We ask: "Taken together, how many people outside this household have you interacted with in-person?"   
 
-preserve1cedb5ea745fb92e
+preservee48befbdef15fd7d
 
 #### {}
 
@@ -459,23 +475,23 @@ Conditional on visiting location / participating in the activity. We present two
 
 ##### All
 
-preservec1e6d26f3d1ec794
+preserve054d30fd1d03e23d
 
 ##### High assets
 
-preserve5947838e3cb2543c
+preservebb617b7942802d19
 
 ##### Low assets
 
-preserve84c5b5f6fe7ba2c5
+preserveaf4711e5e8ffd351
 
 ##### Household with children
 
-preserve7568dc87f8913768
+preserved6090732514df4a0
 
 ##### No children
 
-preservee0e81804281bb6b4
+preservecf52cb85ffe4786b
 
 #### {}
 
@@ -491,31 +507,31 @@ Households are assigned the high asset category if they reported higher asset ho
 
 ##### All
 
-preservecf0417fbb73ae547
+preservec086242d161262a6
   
   This plot aggregates hours worked on each of the three sources, across all working-age household members, stacking them to add to the average weekly labor supply per household adult. If the household does not work any hours on one or more of the labor categories, those data points are assigned zeros to assure representativeness of the whole population. 
   
 ##### High assets
 
-preserveaca1b927a2a6aaf8
+preserve76a4027f6d9ef580
   
   This plot aggregates hours worked on each of the three sources, across all working-age household members, stacking them to add to the average weekly labor supply per household adult. If the household does not work any hours on one or more of the labor categories, those data points are assigned zeros to assure representativeness of the whole population. 
   
 ##### Low assets
 
-preserve4c35aa09a912f626
+preserveaa80f3314d318681
   
   This plot aggregates hours worked on each of the three sources, across all working-age household members, stacking them to add to the average weekly labor supply per household adult. If the household does not work any hours on one or more of the labor categories, those data points are assigned zeros to assure representativeness of the whole population. 
 
 ##### Household with children
 
-preserve6c1c0a50f6ba6c97
+preserve0480096f0683e58b
   
   This plot aggregates hours worked on each of the three sources, across all working-age household members, stacking them to add to the average weekly labor supply per household adult. If the household does not work any hours on one or more of the labor categories, those data points are assigned zeros to assure representativeness of the whole population. 
   
 ##### No children
 
-preserve6765eb873c032c57
+preserve3b22177ad9ea0b6d
   
   This plot aggregates hours worked on each of the three sources, across all working-age household members, stacking them to add to the average weekly labor supply per household adult. If the household does not work any hours on one or more of the labor categories, those data points are assigned zeros to assure representativeness of the whole population. 
   
@@ -534,19 +550,19 @@ Households are assigned the high asset category if they reported higher asset ho
 
 We ask what has each child been doing over the last 15 minutes, whether the child has done any learning-related activities in the past 24 hours, and if so, what kind of activity. From this question we also learn whether the child attended school.
 
-preserve53a63e338f2d518c
+preserve2a36c0a474bf8636
 
 ##### High assets
 
 We ask what has each child been doing over the last 15 minutes, whether the child has done any learning-related activities in the past 24 hours, and if so, what kind of activity. From this question we also learn whether the child attended school.
 
-preserveb8b43e7a8d374cf9
+preservee056cd8eb250f4b7
 
 ##### Low assets
 
 We ask what has each child been doing over the last 15 minutes, whether the child has done any learning-related activities in the past 24 hours, and if so, what kind of activity. From this question we also learn whether the child attended school.
 
-preserve0735bfe6acedd5f0
+preserve9d405367f4ccf47e
 
 #### {}  
    
@@ -565,21 +581,21 @@ Households are assigned the high asset category if they reported higher asset ho
 
 We ask married/cohabitant female respondents whether their husband/partner has (i) threaten to harm them or someone close to them, (ii) hit, slapped, kicked, or physically hurt them, and (iii) forced them to perform sexual acts.* 
 
-preservee2d86e7fb73ee769
+preserveae9c3c964c9195b4
   *This plot shows data only for the share of female respondents that were surveyed by a female field officer, and are currently married or living with a partner. This sub-sample accounts for ~55% of all married/cohabitant females in the study sample, and ~36% of all females.  
   
 ##### High assets
 
 We ask married/cohabitant female respondents whether their husband/partner has (i) threaten to harm them or someone close to them, (ii) hit, slapped, kicked, or physically hurt them, and (iii) forced them to perform sexual acts.* 
 
-preserve2a61fb4fd4d59d2a
+preserve7ad766cfb8a092c6
   *This plot shows data only for the share of female respondents that were surveyed by a female field officer, and are currently married or living with a partner. This sub-sample accounts for ~55% of all married/cohabitant females in the study sample, and ~36% of all females.  
   
 ##### Low assets
 
 We ask married/cohabitant female respondents whether their husband/partner has (i) threaten to harm them or someone close to them, (ii) hit, slapped, kicked, or physically hurt them, and (iii) forced them to perform sexual acts.* 
 
-preservea33e9f1830bac39c
+preservefe3586fbd924697a
   *This plot shows data only for the share of female respondents that were surveyed by a female field officer, and are currently married or living with a partner. This sub-sample accounts for ~55% of all married/cohabitant females in the study sample, and ~36% of all females.  
   
 #### {}
@@ -593,17 +609,17 @@ preservea33e9f1830bac39c
 ##### All
 
 We ask: (i) Over the past 14 days, has there been a higher than usual amount of fights with members of your household?, and (ii) In the past 14 days, did you or your partner ever beat any of the children living in this household?  
-preserve0ea92b8755d17c91
+preservec8d8ca1ed1fd2586
 
 ##### High assets
 
 We ask: (i) Over the past 14 days, has there been a higher than usual amount of fights with members of your household?, and (ii) In the past 14 days, did you or your partner ever beat any of the children living in this household?  
-preserve49db1df2423e8d23
+preservefda8efe878305396
 
 ##### Low assets
 
 We ask: (i) Over the past 14 days, has there been a higher than usual amount of fights with members of your household?, and (ii) In the past 14 days, did you or your partner ever beat any of the children living in this household?  
-preserve600ac63f8ab8db58
+preserve2db8f6146afdfa29
 
 #### {}
 
@@ -620,27 +636,27 @@ Households are assigned the high asset category if they reported higher asset ho
 ##### All
 
 How much do you trust your country’s government to take care of its citizens?  
-preserve439f2d153e8128c0
+preserve0b2c5df269e7f8c1
 
 ##### High assets
 
 How much do you trust your country’s government to take care of its citizens?  
-preserve69efd7948271cb79
+preservea6dc995e2dfee2b6
 
 ##### Low assets
 
 How much do you trust your country’s government to take care of its citizens?  
-preserve0d551d2369201c79
+preserve75776973136fb972
 
 ##### Female
 
 How much do you trust your country’s government to take care of its citizens?  
-preserved41c1035ffb9f3cd
+preserve18eb764659f2b149
 
 ##### Male
 
 How much do you trust your country’s government to take care of its citizens?  
-preserveb49c27c5d555a1db
+preserve8b6dc64dd4b0722d
 
 #### {}
    
@@ -653,27 +669,27 @@ preserveb49c27c5d555a1db
 ##### All
 
 Generally speaking, would you say that most people can be trusted or that you need to be very careful in dealing with people?  
-preserve29540163a1d02275
+preservee1568d9068197296
 
 ##### High assets
 
 Generally speaking, would you say that most people can be trusted or that you need to be very careful in dealing with people?  
-preservefcefbcc90babc4b6
+preservebbbb456c4779aad4
 
 ##### Low assets
 
 Generally speaking, would you say that most people can be trusted or that you need to be very careful in dealing with people?  
-preserveb070b3f9e6305368
+preserve0feb3703196e95c6
 
 ##### Female
 
 Generally speaking, would you say that most people can be trusted or that you need to be very careful in dealing with people?  
-preserve416811fda0062cc8
+preserve8d5c6fc721fb3ecd
 
 ##### Male
 
 Generally speaking, would you say that most people can be trusted or that you need to be very careful in dealing with people?  
-preserve34592702aee01154
+preserve0c849fc4545e9358
 
 #### {}
 
@@ -693,7 +709,7 @@ Households are assigned the high asset category if they reported higher asset ho
 
 **The Centre for Epidemiological Studies Depression Scale** (CES-D-10) is a 10-item Likert scale questionnaire assessing depressive symptoms in the past week. It includes three items on depressed affect, five items on somatic symptoms, and two on positive affect. Options for each item range from “rarely or none of the time” (score of 0) to “all of the time” (score of 3). Scoring is reversed for positive affect statements. Total scores can range from 0 to 30. **Higher scores suggest greater severity of symptoms.**  
 
-preservee096823a6175e345
+preserve96e71b4e3b20919b
 
 Pre-COVID average computed with data from 2016-2017
 
@@ -701,7 +717,7 @@ Pre-COVID average computed with data from 2016-2017
 
 **The Centre for Epidemiological Studies Depression Scale** (CES-D-10) is a 10-item Likert scale questionnaire assessing depressive symptoms in the past week. It includes three items on depressed affect, five items on somatic symptoms, and two on positive affect. Options for each item range from “rarely or none of the time” (score of 0) to “all of the time” (score of 3). Scoring is reversed for positive affect statements. Total scores can range from 0 to 30. **Higher scores suggest greater severity of symptoms.**  
 
-preserve959d2721ceda0f0f
+preserve19dedefde15f9979
 
 Pre-COVID average computed with data from 2016-2017
 
@@ -709,7 +725,7 @@ Pre-COVID average computed with data from 2016-2017
 
 **The Centre for Epidemiological Studies Depression Scale** (CES-D-10) is a 10-item Likert scale questionnaire assessing depressive symptoms in the past week. It includes three items on depressed affect, five items on somatic symptoms, and two on positive affect. Options for each item range from “rarely or none of the time” (score of 0) to “all of the time” (score of 3). Scoring is reversed for positive affect statements. Total scores can range from 0 to 30. **Higher scores suggest greater severity of symptoms.**  
 
-preserve4f903b2bb2cd359e
+preserve0870086d812d2339
 
 Pre-COVID average computed with data from 2016-2017
 
@@ -717,7 +733,7 @@ Pre-COVID average computed with data from 2016-2017
 
 **The Centre for Epidemiological Studies Depression Scale** (CES-D-10) is a 10-item Likert scale questionnaire assessing depressive symptoms in the past week. It includes three items on depressed affect, five items on somatic symptoms, and two on positive affect. Options for each item range from “rarely or none of the time” (score of 0) to “all of the time” (score of 3). Scoring is reversed for positive affect statements. Total scores can range from 0 to 30. **Higher scores suggest greater severity of symptoms.**  
 
-preservee274522fba8e4636
+preserve31984948354ff795
 
 Pre-COVID average computed with data from 2016-2017
 
@@ -725,7 +741,7 @@ Pre-COVID average computed with data from 2016-2017
 
 **The Centre for Epidemiological Studies Depression Scale** (CES-D-10) is a 10-item Likert scale questionnaire assessing depressive symptoms in the past week. It includes three items on depressed affect, five items on somatic symptoms, and two on positive affect. Options for each item range from “rarely or none of the time” (score of 0) to “all of the time” (score of 3). Scoring is reversed for positive affect statements. Total scores can range from 0 to 30. **Higher scores suggest greater severity of symptoms.**  
 
-preserve609910876e5c7044
+preserve6d7e8e56f02fea2f
 
 Pre-COVID average computed with data from 2016-2017
 
@@ -733,7 +749,7 @@ Pre-COVID average computed with data from 2016-2017
 
 **The Centre for Epidemiological Studies Depression Scale** (CES-D-10) is a 10-item Likert scale questionnaire assessing depressive symptoms in the past week. It includes three items on depressed affect, five items on somatic symptoms, and two on positive affect. Options for each item range from “rarely or none of the time” (score of 0) to “all of the time” (score of 3). Scoring is reversed for positive affect statements. Total scores can range from 0 to 30. **Higher scores suggest greater severity of symptoms.**  
 
-preserveb21063f08e06070a
+preserve6df20841224ce1e4
 
 Pre-COVID average computed with data from 2016-2017
 
@@ -741,7 +757,7 @@ Pre-COVID average computed with data from 2016-2017
 
 **The Centre for Epidemiological Studies Depression Scale** (CES-D-10) is a 10-item Likert scale questionnaire assessing depressive symptoms in the past week. It includes three items on depressed affect, five items on somatic symptoms, and two on positive affect. Options for each item range from “rarely or none of the time” (score of 0) to “all of the time” (score of 3). Scoring is reversed for positive affect statements. Total scores can range from 0 to 30. **Higher scores suggest greater severity of symptoms.**  
 
-preserve32656764b03073d3
+preserveca9f7e36e8dba6af
 
 Pre-COVID average computed with data from 2016-2017
 
@@ -754,35 +770,35 @@ We also ask questions 1-5 on core mental health from the John Hopkins Bloomberg 
 <font size="5">**Nervious, anxious or on edge**</font>  
 
 In the past 7 days, how often have you felt nervous, anxious, or on edge?  
-preservee9c5249646eb9e6e
+preserveca7ff1e945b6c3c2
    
 *** 
 <font size="5">**Depressed**</font>    
 
 In the past 7 days, how often have you felt depressed?  
 
-preserve1a52c2ea992f1381
+preserve89f801a9db3dd7a4
    
 *** 
 <font size="5">**Lonely**</font>    
 
 In the past 7 days, how often have you felt lonely?  
 
-preservef41323dc3de356d3
+preserve271df307b5fb405f
    
 *** 
 <font size="5">**Hopeful about the future**</font>  
     
 In the past 7 days, how often have you felt hopeful about the future?  
 
-preserve2a4d4fb619620476
+preserveb9dc2b26698388aa
    
 *** 
 <font size="5">**Had physical reactions due to COVID-19**</font>  
 
   In the past 7 days, how often have you had physical reactions, such as sweating, trouble breathing, nausea, or a pounding heart, when thinking about your experience (e.g., social distancing, loss of income/work, concerns about infection) with the coronavirus/COVID-19 pandemic? 
   
-preservec4a407b49f7be268
+preserve4164bdf05b624549
    
 *** 
 
@@ -790,35 +806,35 @@ preservec4a407b49f7be268
 ### Food prices
 
 <font size="5">**Animal Products**</font>  
-preservefe6ddec6dd6a66d4
+preserve88de1bbb46cbd7d3
   
 ***     
 
 <font size="5">**Fruits / Vegetables**</font>  
-preservebb243c2cf3ebcfaa
+preserve5061b27464e5bf0d
   
 ***       
 
 <font size="5">**Grains / Other**</font>  
-preserve342421ce2de5e493
+preserve95228d06dd94bc06
   
 ***    
 
 ### Other prices
 
 <font size="5">**Services**</font>  
-preservedbebc6395155dabc
+preserve9cfcc609b1831cf1
   
 ***  
 
 <font size="5">**Livestock**</font>  
-preservefc4dcc629de6ce24
+preserve9c9708ff87d1dd7d
   
   ***   
     
 
 <font size="5">**Non-food**</font>  
-preserve0840aa14cf4226d4
+preserve1b8e443d693eed35
   
 ***     
 
@@ -830,7 +846,7 @@ Eligible households are those that qualified for [GiveDirectly transfers](http:/
       
 These data comes from phone survey interviews conducted by [REMIT Kenya](http://remitkenya.co.ke/) in Siaya County, Kenya. We are collecting data for a sample of ~11,000 households in the county, which is representative of the whole population. At the same time, our weekly sampling method assures weekly representativeness of the overall sample.
 
-So far we have interviewed 8,582 households, with the following distribution per week:
+So far we have conducted 17,374 household phone surveys, with the following distribution per week:
 
 | Week	| Dates	| Number of surveys | Survey round |
 |------|:-----:|:---------:|:-------:|
@@ -850,7 +866,7 @@ So far we have interviewed 8,582 households, with the following distribution per
 | Week 18 |	2 August 2020 - 8 August 2020	| 870 |2|
 | Week 19 |	9 August 2020 - 15 August 2020	| 835 |2|
 | Week 20 |	16 August 2020 - 22 August 2020	| 886 |2|
-| Week 21 |	23 August 2020 - 29 August 2020	| 848 |2|
+| Week 21 |	23 August 2020 - 29 August 2020	| 1,042 |2|
 
 
 
