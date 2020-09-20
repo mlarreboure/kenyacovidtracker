@@ -23,31 +23,31 @@ knitr::opts_chunk$set(echo = TRUE)
 ### Bread and cereals 
 <font size="5">**Maize flour (2 kg)**</font>
   
-  ![](prices/Dots_maize.png)
+  ![](prices/CI_maize_flour.png)
 
 *** 
 
 <font size="5">**Wheat flour (2 kg)**</font>
   
-  ![](prices/Dots_wheat_flour.png)
+  ![](prices/CI_wheat_flour.png)
 
 ***   
 
 <font size="5">**Rice (1 kg)**</font>
   
-  ![](prices/Dots_rice.png)
+  ![](prices/CI_rice.png)
   
 *** 
 
 <font size="5">**White bread (400 g)**</font>
   
-  ![](prices/Dots_bread.png)
+  ![](prices/CI_bread_white.png)
 
 *** 
 
 <font size="5">**Brown bread (400 g)**</font>
   
-  ![](prices/Dots_bread_brown.png)
+  ![](prices/CI_bread_brown.png)
 
 *** 
 
@@ -55,25 +55,25 @@ knitr::opts_chunk$set(echo = TRUE)
 
 <font size="5">**Sugar (1 kg)**</font>
   
-  ![](prices/Dots_sugar.png)
+  ![](prices/CI_sugar.png)
 
 ***   
 
 <font size="5">**Cooking oil (1 litre)**</font>
   
-  ![](prices/Dots_cooking_oil.png)
+  ![](prices/CI_cooking_oil.png)
   
 ***   
 
 <font size="5">**Egg (one)**</font>
   
-  ![](prices/Dots_egg.png)
+  ![](prices/CI_egg.png)
 
 *** 
 
 <font size="5">**Banana (one)**</font>
   
-  ![](prices/Dots_banana.png)
+  ![](prices/CI_banana.png)
 
 *** 
 
@@ -111,7 +111,7 @@ So far we collected 3151 survey responses since 27th March 2020.  On average res
 | Week 34 |	19 August 2020 - 25 August 2020	| 193 |
 | Week 35 |	26 August 2020 - 1 September 2020	| 191 |
 | Week 36 |	2 September - 8 September	| 188 |
-| Week 37 |	9 August 2020 - 15 September 2020	| 201 |
+| Week 37 |	9 September 2020 - 15 September 2020	| 201 |
 *** 
 Acknowledgement:
 
