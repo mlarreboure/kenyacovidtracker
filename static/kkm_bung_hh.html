@@ -5991,94 +5991,6 @@ HTMLWidgets.widget({
 });
 
 </script>
-<script>/**
- * @license
- * Copyright 2015 Petr Shevtsov (petr.shevtsov@gmail.com)
- * MIT-licensed (http://opensource.org/licenses/MIT)
- */
-
-/*global Dygraph:false */
-/*jshint globalstrict: true */
-Dygraph.Plugins.Crosshair = (function() {
-  "use strict";
-
-  /**
-   * Creates the crosshair
-   *
-   * @constructor
-   */
-
-  var crosshair = function(opt_options) {
-    this.canvas_ = document.createElement("canvas");
-    opt_options = opt_options || {};
-    this.direction_ = opt_options.direction || null;
-  };
-
-  crosshair.prototype.toString = function() {
-    return "Crosshair Plugin";
-  };
-
-  /**
-   * @param {Dygraph} g Graph instance.
-   * @return {object.<string, function(ev)>} Mapping of event names to callbacks.
-   */
-  crosshair.prototype.activate = function(g) {
-    g.graphDiv.appendChild(this.canvas_);
-
-    return {
-      select: this.select,
-      deselect: this.deselect
-    };
-  };
-
-  crosshair.prototype.select = function(e) {
-    if (this.direction_ === null) {
-      return;
-    }
-
-    var width = e.dygraph.width_;
-    var height = e.dygraph.height_;
-    this.canvas_.width = width;
-    this.canvas_.height = height;
-    this.canvas_.style.width = width + "px";    // for IE
-    this.canvas_.style.height = height + "px";  // for IE
-
-    var ctx = this.canvas_.getContext("2d");
-    ctx.clearRect(0, 0, width, height);
-    ctx.strokeStyle = "rgba(0, 0, 0,0.3)";
-    ctx.beginPath();
-
-    var canvasx = Math.floor(e.dygraph.selPoints_[0].canvasx) + 0.5; // crisper rendering
-
-    if (this.direction_ === "vertical" || this.direction_ === "both") {
-      ctx.moveTo(canvasx, 0);
-      ctx.lineTo(canvasx, height);
-    }
-
-    if (this.direction_ === "horizontal" || this.direction_ === "both") {
-      for (var i = 0; i < e.dygraph.selPoints_.length; i++) {
-        var canvasy = Math.floor(e.dygraph.selPoints_[i].canvasy) + 0.5; // crisper rendering
-        ctx.moveTo(0, canvasy);
-        ctx.lineTo(width, canvasy);
-      }
-    }
-
-    ctx.stroke();
-    ctx.closePath();
-  };
-
-  crosshair.prototype.deselect = function(e) {
-    var ctx = this.canvas_.getContext("2d");
-    ctx.clearRect(0, 0, this.canvas_.width, this.canvas_.height);
-  };
-
-  crosshair.prototype.destroy = function() {
-    this.canvas_ = null;
-  };
-
-  return crosshair;
-})();
-</script>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -6269,202 +6181,79 @@ summary {
 <p><font size="5"><strong>Reported Symptoms, past 7 days</strong></font><br />
 We ask respondents whether they have experienced any of the following symptoms in the past 7 days.</p>
 <p><br></p>
-<p><div id="htmlwidget-d1ef3c6c65d31f9cd53d" style="width:672px;height:480px;" class="dygraphs html-widget"></div>
-<script type="application/json" data-for="htmlwidget-d1ef3c6c65d31f9cd53d">{"x":{"attrs":{"axes":{"x":{"pixelsPerLabel":100,"drawGrid":false,"drawAxis":true},"y":{"valueRange":[0,25],"drawGrid":false,"drawAxis":true}},"series":{"Fever":{"axis":"y","strokeWidth":3},"Cough":{"axis":"y","strokeWidth":3},"Unusual fatigue":{"axis":"y","strokeWidth":3},"Headache":{"axis":"y","strokeWidth":3},"Loss of smell or taste":{"axis":"y","strokeWidth":3}},"labels":["nweek","Fever","Cough","Unusual fatigue","Headache","Loss of smell or taste"],"retainDateWindow":false,"xRangePad":10,"xlabel":"Weeks","ylabel":"Percentage of respondents","legend":"auto","labelsDivWidth":550,"labelsShowZeroValues":true,"labelsSeparateLines":false,"hideOverlayOnMouseOut":true,"stackedGraph":false,"fillGraph":false,"fillAlpha":0.15,"stepPlot":false,"drawPoints":true,"pointSize":4,"drawGapEdgePoints":false,"connectSeparatedPoints":false,"strokeWidth":1,"strokeBorderColor":"white","colors":["#1B9E77","#D95F02","#7570B3","#E7298A","#66A61E"],"colorValue":0.5,"colorSaturation":1,"includeZero":true,"drawAxesAtZero":false,"logscale":false,"axisTickSize":3,"axisLineColor":"black","axisLineWidth":4,"axisLabelColor":"black","axisLabelFontSize":14,"axisLabelWidth":60,"drawGrid":true,"gridLineWidth":0.3,"rightGap":5,"digitsAfterDecimal":2,"labelsKMB":false,"labelsKMG2":false,"labelsUTC":false,"maxNumberWidth":6,"animatedZooms":false,"mobileDisableYTouch":true,"disableZoom":false},"annotations":[],"shadings":[],"events":[{"pos":8,"label":"Round 2          ","labelLoc":"top","color":"gray","strokePattern":[1,0],"axis":"x"},{"pos":15,"label":"Round 3          ","labelLoc":"top","color":"gray","strokePattern":[1,0],"axis":"x"}],"format":"numeric","data":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21],[6.32911396026611,5.88235282897949,6.1363639831543,6.69856452941895,4.0767388343811,5.97345113754272,2.94840288162231,3.86266112327576,3.44827580451965,2.99145293235779,2.34042549133301,2.95358657836914,0.583090424537659,4.18848180770874,3.55329966545105,2.1875,2.07100582122803,2.80112051963806,1.11856818199158,2.65700483322144,1.93905806541443],[2.53164553642273,5.65110540390015,8.6363639831543,5.50239229202271,5.51558780670166,5.53097343444824,3.93120384216309,4.935622215271,3.44827580451965,2.77777791023254,3.40425515174866,2.32558131217957,2.91545176506042,4.45026206970215,3.04568529129028,4.0625,2.95858001708984,1.96629226207733,3.80313205718994,4.8309178352356,2.21606636047363],[8.86075973510742,6.37254953384399,7.30593585968018,4.54545450210571,3.61445760726929,4.21286058425903,2.95566511154175,3.87096786499023,1.21703851222992,3.21888399124146,1.48936176300049,2.53164553642273,1.16959071159363,3.14136099815369,4.06091356277466,2.8125,1.18343198299408,1.40056025981903,1.78970921039581,0.968523025512695,1.66204977035522],[18.4713382720947,19.3627452850342,20.0455570220947,18.944845199585,14.6282968521118,16.8141593933105,14.7783250808716,16.3793106079102,13.4146347045898,13.2478637695312,9.16844367980957,10.3375520706177,12.8279876708984,15.4450263977051,11.92893409729,10.625,9.46745586395264,9.5238094329834,8.50111865997314,10.6280193328857,9.4182825088501],[2.53164553642273,2.45098042488098,2.50569462776184,2.63157892227173,1.43884897232056,1.54867255687714,1.22850120067596,0.643776834011078,0.405679494142532,0.854700922966003,0.639658868312836,0.421940922737122,0.874635577201843,2.3560209274292,0.761421322822571,0.937500059604645,0.887573957443237,0.840336203575134,1.12107622623444,1.21065378189087,0.277008295059204]],"plugins":{"Crosshair":{"direction":"vertical"}},"fixedtz":false,"tzone":""},"evals":[],"jsHooks":[]}</script> <br></p>
+<p><div id="htmlwidget-fcb9f3915319a00e644f" style="width:672px;height:480px;" class="dygraphs html-widget"></div>
+<script type="application/json" data-for="htmlwidget-fcb9f3915319a00e644f">{"x":{"attrs":{"axes":{"x":{"pixelsPerLabel":100,"drawGrid":false,"drawAxis":true},"y":{"valueRange":[0,30],"drawGrid":false,"drawAxis":true}},"series":{"Fever":{"axis":"y","strokeWidth":3},"Cough":{"axis":"y","strokeWidth":3},"Unusual fatigue":{"axis":"y","strokeWidth":3},"Headache":{"axis":"y","strokeWidth":3},"Loss of smell or taste":{"axis":"y","strokeWidth":3}},"labels":["nweek","Fever","Cough","Unusual fatigue","Headache","Loss of smell or taste"],"retainDateWindow":false,"xRangePad":10,"xlabel":"Weeks","ylabel":"Percentage of respondents","legend":"auto","labelsDivWidth":550,"labelsShowZeroValues":true,"labelsSeparateLines":false,"hideOverlayOnMouseOut":true,"stackedGraph":false,"fillGraph":false,"fillAlpha":0.15,"stepPlot":false,"drawPoints":true,"pointSize":4,"drawGapEdgePoints":false,"connectSeparatedPoints":false,"strokeWidth":1,"strokeBorderColor":"white","colors":["#1B9E77","#D95F02","#7570B3","#E7298A","#66A61E"],"colorValue":0.5,"colorSaturation":1,"includeZero":true,"drawAxesAtZero":false,"logscale":false,"axisTickSize":3,"axisLineColor":"black","axisLineWidth":4,"axisLabelColor":"black","axisLabelFontSize":14,"axisLabelWidth":60,"drawGrid":true,"gridLineWidth":0.3,"rightGap":5,"digitsAfterDecimal":2,"labelsKMB":false,"labelsKMG2":false,"labelsUTC":false,"maxNumberWidth":6,"animatedZooms":false,"mobileDisableYTouch":true,"disableZoom":false},"annotations":[],"shadings":[],"events":[],"format":"numeric","data":[[1,2,3,4,5,6,7,8],[6.32911396026611,5.85365867614746,6.12244892120361,6.69856452941895,4.0767388343811,5.97345113754272,2.94840288162231,4.72440958023071],[2.53164553642273,5.62347173690796,8.61677932739258,5.50239229202271,5.51558780670166,5.53097343444824,3.93120384216309,3.93700790405273],[8.86075973510742,6.34146308898926,7.28929424285889,4.54545450210571,3.61445760726929,4.21286058425903,2.95566511154175,3.55731201171875],[18.4713382720947,19.5121936798096,20,18.944845199585,14.6282968521118,16.8141593933105,14.7783250808716,14.6825399398804],[2.53164553642273,2.4390242099762,2.5,2.63157892227173,1.43884897232056,1.54867255687714,1.22850120067596,0.393700778484344]],"fixedtz":false,"tzone":""},"evals":[],"jsHooks":[]}</script> <br></p>
 <p><font size="5"><strong>Economic impacts</strong></font></p>
-<p><em>“In the past month/30 days, have you or someone in your household been forced to do any of the following to pay for food, healthcare, or other expenses?”</em> <br> <div id="htmlwidget-4d1bcd6bc63c9ec4a029" style="width:672px;height:480px;" class="dygraphs html-widget"></div>
-<script type="application/json" data-for="htmlwidget-4d1bcd6bc63c9ec4a029">{"x":{"attrs":{"axes":{"x":{"pixelsPerLabel":100,"drawGrid":false,"drawAxis":true},"y":{"valueRange":[0,60],"drawGrid":false,"drawAxis":true}},"series":{"Sell off assets":{"axis":"y","strokeWidth":3},"Deplete savings":{"axis":"y","strokeWidth":3},"Borrow money you were not certain you could pay back":{"axis":"y","strokeWidth":3},"Skip making a required payment on a loan":{"axis":"y","strokeWidth":3}},"labels":["nweek","Sell off assets","Deplete savings","Borrow money you were not certain you could pay back","Skip making a required payment on a loan"],"retainDateWindow":false,"xRangePad":10,"xlabel":"Weeks","ylabel":"Percent of respondents","legend":"auto","labelsDivWidth":550,"labelsShowZeroValues":true,"labelsSeparateLines":false,"hideOverlayOnMouseOut":true,"stackedGraph":false,"fillGraph":false,"fillAlpha":0.15,"stepPlot":false,"drawPoints":true,"pointSize":4,"drawGapEdgePoints":false,"connectSeparatedPoints":false,"strokeWidth":1,"strokeBorderColor":"white","colors":["#1B9E77","#D95F02","#7570B3","#E7298A"],"colorValue":0.5,"colorSaturation":1,"includeZero":true,"drawAxesAtZero":false,"logscale":false,"axisTickSize":3,"axisLineColor":"black","axisLineWidth":4,"axisLabelColor":"black","axisLabelFontSize":14,"axisLabelWidth":60,"drawGrid":true,"gridLineWidth":0.3,"rightGap":5,"digitsAfterDecimal":2,"labelsKMB":false,"labelsKMG2":false,"labelsUTC":false,"maxNumberWidth":6,"animatedZooms":false,"mobileDisableYTouch":true,"disableZoom":false},"annotations":[],"shadings":[],"events":[{"pos":8,"label":"Round 2          ","labelLoc":"top","color":"gray","strokePattern":[1,0],"axis":"x"},{"pos":15,"label":"Round 3          ","labelLoc":"top","color":"gray","strokePattern":[1,0],"axis":"x"}],"format":"numeric","data":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21],[35.4430389404297,36.2745094299316,41.780818939209,43.8848915100098,43.6450843811035,43.3628311157227,40.5405387878418,47.3118286132812,41.6326522827148,39.7435913085938,35.6076736450195,43.128963470459,42.9824562072754,46.7191619873047,39.6946563720703,45.9375,44.9704132080078,46.2184867858887,43.1767349243164,42.1307487487793,42.3822708129883],[47.4683570861816,43.9803466796875,40.410961151123,35.0119934082031,29.5673065185547,29.4247779846191,28.325122833252,26.4516105651855,29.1836738586426,27.3504295349121,21.3675212860107,20.7627124786377,20.4678363800049,19.9475059509277,23.4096698760986,21.25,20.7100582122803,22.1288509368896,25.7270698547363,24.2130756378174,22.1606636047363],[39.2405052185059,38.4803924560547,38.1278533935547,41.4868125915527,33.8129501342773,38.2743377685547,34.6437339782715,31.465518951416,26.7346954345703,31.905782699585,20.8955230712891,24.9471454620361,33.0409355163574,28.6089248657227,28.2442741394043,24.0625,29.5858001708984,36.6946792602539,28.4753360748291,32.9297828674316,31.5789451599121],[22.7848091125488,22.794116973877,25.5707778930664,26.4423065185547,18.5096168518066,23.6725654602051,21.3759212493896,20,15.7142858505249,22.6495723724365,15.5650320053101,15.433403968811,14.0762462615967,15.4855642318726,17.8117046356201,11.25,16.2721881866455,19.3277320861816,16.1073818206787,14.0435829162598,16.0664825439453]],"plugins":{"Crosshair":{"direction":"vertical"}},"fixedtz":false,"tzone":""},"evals":[],"jsHooks":[]}</script></p>
+<p><em>“In the past month/30 days, have you or someone in your household been forced to do any of the following to pay for food, healthcare, or other expenses?”</em> <br> <div id="htmlwidget-71b6c4d7b373871b23c0" style="width:672px;height:480px;" class="dygraphs html-widget"></div>
+<script type="application/json" data-for="htmlwidget-71b6c4d7b373871b23c0">{"x":{"attrs":{"axes":{"x":{"pixelsPerLabel":100,"drawGrid":false,"drawAxis":true},"y":{"valueRange":[0,60],"drawGrid":false,"drawAxis":true}},"series":{"Sell off assets":{"axis":"y","strokeWidth":3},"Deplete savings":{"axis":"y","strokeWidth":3},"Borrow money you were not certain you could pay back":{"axis":"y","strokeWidth":3},"Skip making a required payment on a loan":{"axis":"y","strokeWidth":3}},"labels":["nweek","Sell off assets","Deplete savings","Borrow money you were not certain you could pay back","Skip making a required payment on a loan"],"retainDateWindow":false,"xRangePad":10,"xlabel":"Weeks","ylabel":"Percent of respondents","legend":"auto","labelsDivWidth":550,"labelsShowZeroValues":true,"labelsSeparateLines":false,"hideOverlayOnMouseOut":true,"stackedGraph":false,"fillGraph":false,"fillAlpha":0.15,"stepPlot":false,"drawPoints":true,"pointSize":4,"drawGapEdgePoints":false,"connectSeparatedPoints":false,"strokeWidth":1,"strokeBorderColor":"white","colors":["#1B9E77","#D95F02","#7570B3","#E7298A"],"colorValue":0.5,"colorSaturation":1,"includeZero":true,"drawAxesAtZero":false,"logscale":false,"axisTickSize":3,"axisLineColor":"black","axisLineWidth":4,"axisLabelColor":"black","axisLabelFontSize":14,"axisLabelWidth":60,"drawGrid":true,"gridLineWidth":0.3,"rightGap":5,"digitsAfterDecimal":2,"labelsKMB":false,"labelsKMG2":false,"labelsUTC":false,"maxNumberWidth":6,"animatedZooms":false,"mobileDisableYTouch":true,"disableZoom":false},"annotations":[],"shadings":[],"events":[],"format":"numeric","data":[[1,2,3,4,5,6,7,8],[35.4430389404297,36.4303169250488,41.6856498718262,43.8848915100098,43.6450843811035,43.3628311157227,40.5405387878418,53.5433044433594],[47.4683570861816,43.8725509643555,40.318904876709,35.0119934082031,29.5673065185547,29.4247779846191,28.325122833252,29.9212608337402],[39.2405052185059,38.3863105773926,38.2687911987305,41.4868125915527,33.8129501342773,38.2743377685547,34.6437339782715,27.6679840087891],[22.7848091125488,22.7383861541748,25.5125274658203,26.4423065185547,18.5096168518066,23.6725654602051,21.3759212493896,18.5039367675781]],"fixedtz":false,"tzone":""},"evals":[],"jsHooks":[]}</script></p>
 <p><br> <font size="5"><strong>Food security</strong></font></p>
 <p><em>“In the past month/30 days, did you worry that your household would not have enough food?”</em></p>
 <p><em>“In the past month/30 days, did you or any household member have to eat a smaller meal than you felt you needed because there was not enough food?”</em></p>
 <p><em>“In the past month/30 days, did you or any household member have to eat fewer meals in a day because there was not enough food?” </em></p>
-<p><em>“In the past month/30 days, was there ever no food to eat of any kind in your house because of lack of resources to get food?”</em> <br> <br> <div id="htmlwidget-b2a059abdc0775642eb8" style="width:672px;height:480px;" class="dygraphs html-widget"></div>
-<script type="application/json" data-for="htmlwidget-b2a059abdc0775642eb8">{"x":{"attrs":{"axes":{"x":{"pixelsPerLabel":100,"drawGrid":false,"drawAxis":true},"y":{"valueRange":[0,105],"drawGrid":false,"drawAxis":true}},"series":{"Worried about running out of food":{"axis":"y","strokeWidth":3},"Ate smaller meals":{"axis":"y","strokeWidth":3},"Ate fewer meals":{"axis":"y","strokeWidth":3},"Ran out of food":{"axis":"y","strokeWidth":3}},"labels":["nweek","Worried about running out of food","Ate smaller meals","Ate fewer meals","Ran out of food"],"retainDateWindow":false,"xRangePad":50,"xlabel":"Weeks","ylabel":"Percentage of Respondents","legend":"auto","labelsDivWidth":550,"labelsShowZeroValues":true,"labelsSeparateLines":false,"hideOverlayOnMouseOut":true,"stackedGraph":false,"fillGraph":false,"fillAlpha":0.15,"stepPlot":false,"drawPoints":true,"pointSize":4,"drawGapEdgePoints":false,"connectSeparatedPoints":false,"strokeWidth":1,"strokeBorderColor":"white","colors":["#1B9E77","#D95F02","#7570B3","#E7298A"],"colorValue":0.5,"colorSaturation":1,"includeZero":true,"drawAxesAtZero":false,"logscale":false,"axisTickSize":3,"axisLineColor":"black","axisLineWidth":4,"axisLabelColor":"black","axisLabelFontSize":14,"axisLabelWidth":60,"drawGrid":true,"gridLineWidth":0.3,"rightGap":5,"digitsAfterDecimal":2,"labelsKMB":false,"labelsKMG2":false,"labelsUTC":false,"maxNumberWidth":6,"animatedZooms":false,"mobileDisableYTouch":true,"disableZoom":false},"annotations":[],"shadings":[],"events":[{"pos":8,"label":"Round 2          ","labelLoc":"top","color":"gray","strokePattern":[1,0],"axis":"x"},{"pos":15,"label":"Round 3          ","labelLoc":"top","color":"gray","strokePattern":[1,0],"axis":"x"}],"format":"numeric","data":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21],[78.4810104370117,80.6372528076172,77.8538818359375,80.3357315063477,78.1774597167969,76.1061935424805,73.6453170776367,66.881721496582,65.3061218261719,68.5897445678711,59.4882736206055,62.5792808532715,64.9122848510742,63.2545928955078,62.8498725891113,64.0625,60.3550300598145,63.5854377746582,62.3318367004395,65.8595657348633,63.9889183044434],[73.417724609375,77.2058868408203,67.4259643554688,72.4220657348633,70.5036010742188,69.4690322875977,65.8476638793945,57.4193534851074,56.5306129455566,58.760684967041,48.0769233703613,52.8541221618652,57.0175399780273,53.2808418273926,47.5826988220215,56.25,49.4082832336426,52.1008415222168,51.0067100524902,53.5108985900879,50.4155082702637],[74.0506362915039,72.5490188598633,67.6537551879883,73.8609161376953,69.7841720581055,67.6991195678711,62.653564453125,53.5483894348145,54.4897956848145,57.0512847900391,45.5128173828125,49.0486259460449,52.9239768981934,50.131233215332,45.0381660461426,52.1875038146973,49.7041435241699,50.7002830505371,48.7695770263672,46.2469711303711,46.2603874206543],[46.2025299072266,56.3725471496582,51.7084312438965,49.1606712341309,50.3597145080566,47.5663719177246,35.3808326721191,35.9139785766602,34.8979606628418,32.0512847900391,26.2820510864258,29.1754760742188,32.7485389709473,32.2834625244141,27.9898223876953,35.9375,35.5029602050781,37.5350151062012,32.2147636413574,26.6990299224854,31.5789451599121]],"plugins":{"Crosshair":{"direction":"vertical"}},"fixedtz":false,"tzone":""},"evals":[],"jsHooks":[]}</script> <br> <font size="5"><strong>Approval of government policies</strong></font></p>
+<p><em>“In the past month/30 days, was there ever no food to eat of any kind in your house because of lack of resources to get food?”</em> <br> <br> <div id="htmlwidget-b7f735fb47950507b545" style="width:672px;height:480px;" class="dygraphs html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b7f735fb47950507b545">{"x":{"attrs":{"axes":{"x":{"pixelsPerLabel":100,"drawGrid":false,"drawAxis":true},"y":{"valueRange":[0,105],"drawGrid":false,"drawAxis":true}},"series":{"Worried about running out of food":{"axis":"y","strokeWidth":3},"Ate smaller meals":{"axis":"y","strokeWidth":3},"Ate fewer meals":{"axis":"y","strokeWidth":3},"Ran out of food":{"axis":"y","strokeWidth":3}},"labels":["nweek","Worried about running out of food","Ate smaller meals","Ate fewer meals","Ran out of food"],"retainDateWindow":false,"xRangePad":50,"xlabel":"Weeks","ylabel":"Percentage of Respondents","legend":"auto","labelsDivWidth":550,"labelsShowZeroValues":true,"labelsSeparateLines":false,"hideOverlayOnMouseOut":true,"stackedGraph":false,"fillGraph":false,"fillAlpha":0.15,"stepPlot":false,"drawPoints":true,"pointSize":4,"drawGapEdgePoints":false,"connectSeparatedPoints":false,"strokeWidth":1,"strokeBorderColor":"white","colors":["#1B9E77","#D95F02","#7570B3","#E7298A"],"colorValue":0.5,"colorSaturation":1,"includeZero":true,"drawAxesAtZero":false,"logscale":false,"axisTickSize":3,"axisLineColor":"black","axisLineWidth":4,"axisLabelColor":"black","axisLabelFontSize":14,"axisLabelWidth":60,"drawGrid":true,"gridLineWidth":0.3,"rightGap":5,"digitsAfterDecimal":2,"labelsKMB":false,"labelsKMG2":false,"labelsUTC":false,"maxNumberWidth":6,"animatedZooms":false,"mobileDisableYTouch":true,"disableZoom":false},"annotations":[],"shadings":[],"events":[],"format":"numeric","data":[[1,2,3,4,5,6,7,8],[78.4810104370117,80.6845932006836,77.9043273925781,80.3357315063477,78.1774597167969,76.1061935424805,73.6453170776367,67.7165298461914],[73.417724609375,77.2616119384766,67.2727279663086,72.4220657348633,70.5036010742188,69.4690322875977,65.8476638793945,56.6929168701172],[74.0506362915039,72.6161346435547,67.7272720336914,73.8609161376953,69.7841720581055,67.6991195678711,62.653564453125,51.5748023986816],[46.2025299072266,56.4792175292969,51.5909080505371,49.1606712341309,50.3597145080566,47.5663719177246,35.3808326721191,33.8582649230957]],"fixedtz":false,"tzone":""},"evals":[],"jsHooks":[]}</script> <br> <font size="5"><strong>Approval of government policies</strong></font></p>
 <p><em>“Do you approve of the government’s decision to permit all domestic travel, including in and out of Nairobi, Mombasa county, and Mandera county?”</em></p>
 <p><em>“Do you approve of the government’s decision to keep schools closed until January 2021?”</em></p>
 <p><em>“Do you approve of the nationwide nightly curfew?”</em> <br> <br></p>
-<p><div id="htmlwidget-78c0f387ef5af660a9f8" style="width:672px;height:480px;" class="dygraphs html-widget"></div>
-<script type="application/json" data-for="htmlwidget-78c0f387ef5af660a9f8">{"x":{"attrs":{"axes":{"x":{"pixelsPerLabel":100,"drawGrid":false,"drawAxis":true},"y":{"valueRange":[0,105],"drawGrid":false,"drawAxis":true}},"series":{"Domestic travel":{"axis":"y","strokeWidth":3},"Schools closed until January 2021":{"axis":"y","strokeWidth":3},"Nightly curfew":{"axis":"y","strokeWidth":3}},"labels":["nweek","Domestic travel","Schools closed until January 2021","Nightly curfew"],"retainDateWindow":false,"xRangePad":50,"xlabel":"Weeks","ylabel":"Percentage of Respondents","legend":"auto","labelsDivWidth":550,"labelsShowZeroValues":true,"labelsSeparateLines":false,"hideOverlayOnMouseOut":true,"stackedGraph":false,"fillGraph":false,"fillAlpha":0.15,"stepPlot":false,"drawPoints":true,"pointSize":4,"drawGapEdgePoints":false,"connectSeparatedPoints":false,"strokeWidth":1,"strokeBorderColor":"white","colors":["#1B9E77","#D95F02","#7570B3"],"colorValue":0.5,"colorSaturation":1,"includeZero":true,"drawAxesAtZero":false,"logscale":false,"axisTickSize":3,"axisLineColor":"black","axisLineWidth":4,"axisLabelColor":"black","axisLabelFontSize":14,"axisLabelWidth":60,"drawGrid":true,"gridLineWidth":0.3,"rightGap":5,"digitsAfterDecimal":2,"labelsKMB":false,"labelsKMG2":false,"labelsUTC":false,"maxNumberWidth":6,"animatedZooms":false,"mobileDisableYTouch":true,"disableZoom":false},"annotations":[],"shadings":[],"events":[{"pos":8,"label":"Round 2          ","labelLoc":"top","color":"gray","strokePattern":[1,0],"axis":"x"},{"pos":15,"label":"Round 3          ","labelLoc":"top","color":"gray","strokePattern":[1,0],"axis":"x"}],"format":"numeric","data":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21],[null,null,23.0769233703613,22.1686744689941,18.75,23.1111106872559,24.9382724761963,32.5379600524902,30.8793449401855,39.1025619506836,37.6873664855957,45.2431297302246,47.9532165527344,53.8057746887207,57.7608184814453,61.25,63.6094703674316,55.1820755004883,53.6912727355957,45.036319732666,44.8753471374512],[null,null,69.8717956542969,73.0769195556641,77.4580383300781,72.8888854980469,73.2186737060547,68.682502746582,64.2126770019531,59.8290634155273,62.0469093322754,61.3107795715332,63.4502944946289,64.3044586181641,61.0687026977539,58.4905700683594,null,null,null,null,null],[null,null,89.1025695800781,90.3846130371094,89.4484405517578,88.7168197631836,89.4348907470703,87.2844848632812,89.5918350219727,88.0341873168945,89.3390197753906,84.7780075073242,91.2280654907227,88.9763793945312,82.9516525268555,85,92.011833190918,86.2745132446289,81.4317626953125,78.692497253418,83.3795013427734]],"plugins":{"Crosshair":{"direction":"vertical"}},"fixedtz":false,"tzone":""},"evals":[],"jsHooks":[]}</script> <br> <br></p>
+<p><div id="htmlwidget-97fd66e0de2ee6ddb8ef" style="width:672px;height:480px;" class="dygraphs html-widget"></div>
+<script type="application/json" data-for="htmlwidget-97fd66e0de2ee6ddb8ef">{"x":{"attrs":{"axes":{"x":{"pixelsPerLabel":100,"drawGrid":false,"drawAxis":true},"y":{"valueRange":[0,105],"drawGrid":false,"drawAxis":true}},"series":{"Domestic travel":{"axis":"y","strokeWidth":3},"Schools closed until January 2021":{"axis":"y","strokeWidth":3},"Nightly curfew":{"axis":"y","strokeWidth":3}},"labels":["nweek","Domestic travel","Schools closed until January 2021","Nightly curfew"],"retainDateWindow":false,"xRangePad":50,"xlabel":"Weeks","ylabel":"Percentage of Respondents","legend":"auto","labelsDivWidth":550,"labelsShowZeroValues":true,"labelsSeparateLines":false,"hideOverlayOnMouseOut":true,"stackedGraph":false,"fillGraph":false,"fillAlpha":0.15,"stepPlot":false,"drawPoints":true,"pointSize":4,"drawGapEdgePoints":false,"connectSeparatedPoints":false,"strokeWidth":1,"strokeBorderColor":"white","colors":["#1B9E77","#D95F02","#7570B3"],"colorValue":0.5,"colorSaturation":1,"includeZero":true,"drawAxesAtZero":false,"logscale":false,"axisTickSize":3,"axisLineColor":"black","axisLineWidth":4,"axisLabelColor":"black","axisLabelFontSize":14,"axisLabelWidth":60,"drawGrid":true,"gridLineWidth":0.3,"rightGap":5,"digitsAfterDecimal":2,"labelsKMB":false,"labelsKMG2":false,"labelsUTC":false,"maxNumberWidth":6,"animatedZooms":false,"mobileDisableYTouch":true,"disableZoom":false},"annotations":[],"shadings":[],"events":[],"format":"numeric","data":[[1,2,3,4,5,6,7,8],[null,null,23.0769233703613,22.1686744689941,18.75,23.1111106872559,24.9382724761963,30.7086620330811],[null,null,69.8717956542969,73.0769195556641,77.4580383300781,72.8888854980469,73.2186737060547,73.2283477783203],[null,null,89.1025695800781,90.3846130371094,89.4484405517578,88.7168197631836,89.4348907470703,88.9763793945312]],"fixedtz":false,"tzone":""},"evals":[],"jsHooks":[]}</script> <br> <br></p>
 <p>This data comes from phone surveys collected by Vyxer REMIT Kenya in partnership with Tufts University. Please contact <a href="mailto:julie.powers@tufts.edu" class="email">julie.powers@tufts.edu</a> and <a href="mailto:amy.pickering@tufts.edu" class="email">amy.pickering@tufts.edu</a> with any questions.</p>
 <p><em>Study area:</em> Villages are enrolled that are located in Bungoma or Kakamega counties and were previously enrolled in WASH Benefits Kenya (W, WSH, WSHN, AC, PC arms only).</p>
 <p><em>Eligibility:</em> Respondents are eligible if they are women 50 years of age or younger, have had a child since January 1, 2008, and live in an eligible village.</p>
 <p><em>Study design:</em> Respondents were visited in person by our team for another study, between July 2019 and March 2020 (when data collection was halted due to COVID-19). During this time, we censused 575 out of 730 eligible villages, and enrolled and surveyed 34,098 eligible women. We are following up with a subset of these women by phone. The final sample size for this phone survey will depend on the trajectory of COVID-19 in the study area and funding constraints. We have divided the respondents who provided a phone number (N = 29,301) into seven random survey rounds of equal size. Each survey round will have the same proportion of respondents from each geographic block. Respondents selected are geographically representative for each survey round, but are not geographically representative on a weekly basis. For this reason, weekly data should be interpreted with caution. We attempt to contact each respondent five times.</p>
-<p><em>Sample size to date:</em> We have attempted to contact all respondents in survey rounds 1 and 2. We have interviewed 8,554 respondents to-date, from survey rounds 1, 2, and 3. Our response rate (number of surveys completed/number of respondents we have attempted to contact) is 68%. <br></p>
+<p><em>Sample size to date:</em> We have attempted to contact all respondents in survey round 1. We have interviewed 2,958 respondents to-date, all from survey round 1. Our response rate (number of surveys completed/number of respondents we have attempted to contact) is 71%. <br></p>
 <table>
 <thead>
 <tr class="header">
 <th>Week</th>
 <th align="center">Dates</th>
 <th align="center">Number of surveys</th>
-<th align="center">Survey Round</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>Week 1</td>
 <td align="center">June 21, 2020 - June 27, 2020</td>
-<td align="center">159</td>
-<td align="center">1</td>
+<td align="center">158</td>
 </tr>
 <tr class="even">
 <td>Week 2</td>
 <td align="center">June 28, 2020 - July 4, 2020</td>
-<td align="center">413</td>
-<td align="center">1</td>
+<td align="center">411</td>
 </tr>
 <tr class="odd">
 <td>Week 3</td>
 <td align="center">July 5, 2020 - July 11, 2020</td>
-<td align="center">444</td>
-<td align="center">1</td>
+<td align="center">441</td>
 </tr>
 <tr class="even">
 <td>Week 4</td>
 <td align="center">July 12, 2020 - July 18, 2020</td>
-<td align="center">419</td>
-<td align="center">1</td>
+<td align="center">418</td>
 </tr>
 <tr class="odd">
 <td>Week 5</td>
 <td align="center">July 19, 2020 - July 25, 2020</td>
 <td align="center">417</td>
-<td align="center">1</td>
 </tr>
 <tr class="even">
 <td>Week 6</td>
 <td align="center">Juy 26, 2020 - August 1, 2020</td>
 <td align="center">452</td>
-<td align="center">1</td>
 </tr>
 <tr class="odd">
 <td>Week 7</td>
 <td align="center">August 2, 2020 - August 8, 2020</td>
-<td align="center">408</td>
-<td align="center">1</td>
+<td align="center">407</td>
 </tr>
 <tr class="even">
 <td>Week 8</td>
-<td align="center">August 9, 2020 - August 12, 2020</td>
-<td align="center">255</td>
-<td align="center">1</td>
+<td align="center">August 9, 2020 - August 15, 2020</td>
+<td align="center">254</td>
 </tr>
 </tbody>
 </table>
-<table>
-<thead>
-<tr class="header">
-<th>Week</th>
-<th align="center">Dates</th>
-<th align="center">Number of surveys</th>
-<th align="center">Survey Round</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Week 8</td>
-<td align="center">August 13, 2020 - August 15, 2020</td>
-<td align="center">213</td>
-<td align="center">2</td>
-</tr>
-<tr class="even">
-<td>Week 9</td>
-<td align="center">August 16, 2020 - August 22, 2020</td>
-<td align="center">493</td>
-<td align="center">2</td>
-</tr>
-<tr class="odd">
-<td>Week 10</td>
-<td align="center">August 23, 2020 - August 29, 2020</td>
-<td align="center">469</td>
-<td align="center">2</td>
-</tr>
-<tr class="even">
-<td>Week 11</td>
-<td align="center">August 30, 2020 - September 5, 2020</td>
-<td align="center">474</td>
-<td align="center">2</td>
-</tr>
-<tr class="odd">
-<td>Week 12</td>
-<td align="center">September 6, 2020 - September 12, 2020</td>
-<td align="center">475</td>
-<td align="center">2</td>
-</tr>
-<tr class="even">
-<td>Week 13</td>
-<td align="center">September 13, 2020 - September 19, 2020</td>
-<td align="center">344</td>
-<td align="center">2</td>
-</tr>
-<tr class="odd">
-<td>Week 14</td>
-<td align="center">September 20, 2020 - September 26, 2020</td>
-<td align="center">384</td>
-<td align="center">2</td>
-</tr>
-<tr class="even">
-<td>Week 15</td>
-<td align="center">September 27, 2020 - September 28, 2020</td>
-<td align="center">47</td>
-<td align="center">2</td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr class="header">
-<th>Week</th>
-<th align="center">Dates</th>
-<th align="center">Number of surveys</th>
-<th align="center">Survey Round</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Week 15</td>
-<td align="center">September 29, 2020 - October 3, 2020</td>
-<td align="center">349</td>
-<td align="center">3</td>
-</tr>
-<tr class="even">
-<td>Week 16</td>
-<td align="center">October 4, 2020 - October 10, 2020</td>
-<td align="center">320</td>
-<td align="center">3</td>
-</tr>
-<tr class="odd">
-<td>Week 17</td>
-<td align="center">October 11, 2020 - October 17, 2020</td>
-<td align="center">340</td>
-<td align="center">3</td>
-</tr>
-<tr class="even">
-<td>Week 18</td>
-<td align="center">October 18, 2020 - October 24, 2020</td>
-<td align="center">357</td>
-<td align="center">3</td>
-</tr>
-<tr class="odd">
-<td>Week 19</td>
-<td align="center">October 25, 2020 - October 31, 2020</td>
-<td align="center">448</td>
-<td align="center">3</td>
-</tr>
-<tr class="even">
-<td>Week 20</td>
-<td align="center">November 1, 2020 - November 7, 2020</td>
-<td align="center">414</td>
-<td align="center">3</td>
-</tr>
-<tr class="odd">
-<td>Week 21</td>
-<td align="center">November 8, 2020 - November 14, 2020</td>
-<td align="center">361</td>
-<td align="center">3</td>
-</tr>
-</tbody>
-</table>
-<p>Updated: November 17, 2020</p>
+<p>Updated: August 18, 2020</p>
 
 
 
