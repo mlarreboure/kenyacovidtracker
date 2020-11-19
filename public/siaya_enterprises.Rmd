@@ -67,7 +67,7 @@ mob <- ent_weekly[mob]
 
 presAnnotation <- function(dygraph, x, text) {
   dygraph %>%
-    dyAnnotation(x, text, attachAtBottom = TRUE, width = 60, height = 25)
+    dyAnnotation(x, text, attachAtBottom = TRUE, width = 70, height = 25)
 }
 
 ##### Create dataframe with retrospective data on profits and revenues
@@ -132,8 +132,8 @@ tmp[tmp$week == 3.5,"i1_wins"] = rev_prof_s[15,"i1_wins"]
 tmp <- rbind(tmp, rev_prof_s[19,])
 tmp <- rbind(tmp,(rev_prof_s[20,]+rev_prof_s[21,])/2)
 tmp <- rbind(tmp,(rev_prof_s[22,]+rev_prof_s[23,])/2)
-tmp <- rbind(tmp, rev_prof_s[24,]) # if end week is odd, average end week with previous week and append empty row.
-rev_prof_s <- tmp                  # if end week is even, append data of last row (no average) and append empty row.
+tmp <- rbind(tmp, rev_prof_s[24:25,]) # if end week is odd, average end week with previous week and append empty row.
+rev_prof_s <- tmp                     # if end week is even, append data of last row (no average) and append empty row.
 
 
 ############## Create DF for Investment / Wages ################
@@ -298,7 +298,7 @@ layoffs$Month <- factor(layoffs$Month, levels = c("January", "February", "March"
    dyEvent(-13.1 , "February", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
    dyEvent(-7 , "Lockdown begins", labelLoc = "top") %>%
   presAnnotation("1", text = "May 10") %>%
-  presAnnotation("7", text = "June 27") %>%
+    presAnnotation("15", text = "August 23") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
 op_g
 ```
@@ -328,7 +328,7 @@ February, March and April data points assume that no business that closed down u
    dyEvent(-13.1 , "February", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
    dyEvent(-7 , "Lockdown begins", labelLoc = "top") %>%
   presAnnotation("1", text = "May 10") %>%
-  presAnnotation("7", text = "June 27") %>%
+  presAnnotation("15", text = "August 23") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
 op_hrs_g
 ```
@@ -405,7 +405,7 @@ e_g
   dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set1"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "May 10") %>%
-  presAnnotation("6", text = "June 20") %>%
+  presAnnotation("15", text = "August 23") %>%
 #  presAnnotation("-10", text = "February") %>%
   dyEvent(-1 , "February", labelLoc = "bottom", color = "gray", strokePattern = "solid") %>%
     dyEvent(-0.5 , "Lockdown begins March 15", labelLoc = "bottom") %>%
@@ -427,7 +427,7 @@ inv_g
   dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "May 10") %>%
-  presAnnotation("7", text = "June 27") %>%
+  presAnnotation("15", text = "August 23") %>%
   presAnnotation("-10", text = "February") %>%
     dyEvent(-1 , "February", labelLoc = "bottom", color = "gray", strokePattern = "solid") %>%
     dyEvent(-0.5 , "Lockdown begins March 15", labelLoc = "bottom") %>%
@@ -457,7 +457,7 @@ How has COVID-19 affected this business?*
   dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set1")) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "May 10") %>%
-  presAnnotation("7", text = "June 27") %>%
+  presAnnotation("15", text = "August 23") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
 ecov_g
 ```
@@ -481,7 +481,7 @@ ecov_g
   dyEvent(12.3 , "August", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   dyEvent(8.3 , "July", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   presAnnotation("1", text = "May 10") %>%
-  presAnnotation("7", text = "June 27") %>%
+  presAnnotation("15", text = "August 23") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
 cust_g
 ```
@@ -509,7 +509,7 @@ Percentage of enterprises that reported a change in their business model since M
   dyEvent(12.3 , "August", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   dyEvent(8.3 , "July", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   presAnnotation("1", text = "May 10") %>%
-  presAnnotation("7", text = "June 27") %>%
+  presAnnotation("15", text = "August 23") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
 bm_g
 ```
@@ -531,7 +531,7 @@ bm_g
   dyEvent(12.3 , "August", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   dyEvent(8.3 , "July", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   presAnnotation("1", text = "May 10") %>%
-  presAnnotation("7", text = "June 27") %>%
+  presAnnotation("15", text = "August 23") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
 wfh_g
 ```
@@ -557,7 +557,7 @@ Percentage of firms accepting mobile payments and their share among firms that a
   dyEvent(12.3 , "August", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   dyEvent(8.3 , "July", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
   presAnnotation("1", text = "May 10") %>%
-  presAnnotation("7", text = "June 27") %>%
+  presAnnotation("15", text = "August 23") %>%
   dyHighlight(highlightSeriesOpts = list(strokeWidth = 3))
 mob_g
 ```
@@ -579,7 +579,7 @@ ggplot(layoffs, aes(Month, Frequency)) + geom_col(aes(fill = Status)) + ylab("% 
       
 These data comes from phone survey interviews conducted by [REMIT Kenya](http://remitkenya.co.ke/) in Siaya County, Kenya. We are collecting data for a sample of ~5,000 enterprises in the county, which is representative of the whole population of enterprises. At the same time, our weekly sampling method assures weekly representativeness of the overall sample.
 
-So far we have interviewed 3,041 enterprises, with the following distribution per week:
+So far we have conducted 8,252 surveys with enterprises, with the following distribution per week:
 
 | Week	| Dates	| Number of surveys | Round |
 |------|:-----:|:---------:|:-----:|
@@ -589,9 +589,12 @@ So far we have interviewed 3,041 enterprises, with the following distribution pe
 | Week 4 |	31 May 2020 - 06 June 2020	| 732 |1|
 | Week 5 |	07 June 2020 - 13 June 2020	| 885 |1|
 | Week 6 | 14 June 2020 - 20 June 2020 | 1216 |1|
-| Week 9 | 5 July 2020 - 11 July 2020 | 570 |2|
-| Week 10 | 12 July 2020 - 18 July 2020 | 609 |2|
-| Week 11 | 19 July 2020 - 25 July 2020 | 552 |2|
-| Week 12 | 26 July 2020 - 01 August 2020 | 601 |2|
+| Week 9 | 5 July 2020 - 11 July 2020 | 569 |2|
+| Week 10 | 12 July 2020 - 18 July 2020 | 608 |2|
+| Week 11 | 19 July 2020 - 25 July 2020 | 550 |2|
+| Week 12 | 26 July 2020 - 01 August 2020 | 615 |2|
+| Week 13 | 02 August 2020 - 08 August 2020 | 637 |2|
+| Week 14 | 09 August 2020 - 15 August 2020 | 618 |2|
+| Week 15 | 16 August 2020 - 23 August 2020 | 406 |2|
 
 

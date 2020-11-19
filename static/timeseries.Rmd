@@ -20,8 +20,8 @@ library(ggplot2)
 library(rjson) #reading shapefiles for heatmaps
 library(plotly) #interactive visualization
 
-end_week = "18"
-end_survey = "August 8"
+end_week = "21"
+end_survey = "August 29"
 
 ## Importing Data ##
 #covid_weekly <- read_dta("~/Dropbox (Princeton)/GE_Endline2/covid19/data/COVID_AllHHs_outcomes_weekly.dta")
@@ -114,15 +114,16 @@ ckn6 <- covid_weekly[ckn6]
 c <- c("week", "c1a_wins", "c1b_wins", "c3_wins") #, "c3_wins", "c4_wins"
 c <- covid_weekly[c]
 
-i <- c("week", "i1_wins", "i2_wins" , "i3_wins") #, "i4_wins", "i5_wins", "i6_wins"  , "i7_wins"
+i <- c("week", "i4_wins" , "i2_wins", "i3_wins", "i1_wins") #, "i4_wins", "i5_wins", "i6_wins"  , "i7_wins"
 i <- covid_weekly[!(covid_weekly$week %in% c(9,10)),i]
 i1_feb <- weighted.mean(covid_hh$i1_feb_wins,covid_hh$hh_weight,na.rm = TRUE)
 i2_feb <- weighted.mean(covid_hh$i2_feb_wins,covid_hh$hh_weight,na.rm = TRUE)
 i3_feb <- weighted.mean(covid_hh$i3_feb_wins,covid_hh$hh_weight,na.rm = TRUE)
-i <- rbind(c(-1, i1_feb, i2_feb, i3_feb), i)
-i <- rbind(c(-2,NA,NA,NA), i)
+i4_feb <- weighted.mean(covid_hh$i4_feb_wins,covid_hh$hh_weight,na.rm = TRUE)
+i <- rbind(c(-1, i4_feb, i3_feb, i2_feb, i1_feb ), i)
+i <- rbind(c(-2,NA,NA,NA,NA), i)
 
-i_e <- c("week", "i2_wins", "i3_wins", "i1_wins")
+i_e <- c("week", "i4_wins" , "i2_wins", "i3_wins", "i1_wins")
 i_e <- covid_weekly_e[!(covid_weekly_e$week %in% c(9,10)),i_e]
 i1_feb_e <- weighted.mean(covid_hh[covid_hh$high_assets_bl == 1,]$i1_feb_wins,
                           covid_hh[covid_hh$high_assets_bl == 1,]$hh_weight,
@@ -133,10 +134,13 @@ i2_feb_e <- weighted.mean(covid_hh[covid_hh$high_assets_bl == 1,]$i2_feb_wins,
 i3_feb_e <- weighted.mean(covid_hh[covid_hh$high_assets_bl == 1,]$i3_feb_wins,
                           covid_hh[covid_hh$high_assets_bl == 1,]$hh_weight,
                           na.rm = TRUE)
-i_e <- rbind(c(-1, i1_feb_e, i2_feb_e, i3_feb_e), i_e)
-i_e <- rbind(c(-2,NA,NA,NA), i_e)
+i4_feb_e <- weighted.mean(covid_hh[covid_hh$high_assets_bl == 1,]$i4_feb_wins,
+                          covid_hh[covid_hh$high_assets_bl == 1,]$hh_weight,
+                          na.rm = TRUE)
+i_e <- rbind(c(-1, i4_feb_e, i3_feb_e, i2_feb_e, i1_feb_e), i_e)
+i_e <- rbind(c(-2,NA,NA,NA,NA), i_e)
 
-i_i <- c("week", "i2_wins", "i3_wins", "i1_wins")
+i_i <- c("week", "i4_wins" , "i2_wins", "i3_wins", "i1_wins")
 i_i <- covid_weekly_i[!(covid_weekly_i$week %in% c(9,10)),i_i]
 i1_feb_i <- weighted.mean(covid_hh[covid_hh$high_assets_bl == 0,]$i1_feb_wins,
                           covid_hh[covid_hh$high_assets_bl == 0,]$hh_weight,
@@ -147,11 +151,14 @@ i2_feb_i <- weighted.mean(covid_hh[covid_hh$high_assets_bl == 0,]$i2_feb_wins,
 i3_feb_i <- weighted.mean(covid_hh[covid_hh$high_assets_bl == 0,]$i3_feb_wins,
                           covid_hh[covid_hh$high_assets_bl == 0,]$hh_weight,
                           na.rm = TRUE)
-i_i <- rbind(c(-1, i1_feb_i, i2_feb_i, i3_feb_i), i_i)
-i_i <- rbind(c(-2,NA,NA,NA), i_i)
+i4_feb_i <- weighted.mean(covid_hh[covid_hh$high_assets_bl == 0,]$i4_feb_wins,
+                          covid_hh[covid_hh$high_assets_bl == 0,]$hh_weight,
+                          na.rm = TRUE)
+i_i <- rbind(c(-1, i4_feb_i, i3_feb_i, i2_feb_i, i1_feb_i), i_i)
+i_i <- rbind(c(-2,NA,NA,NA,NA), i_i)
 
 # Has child:
-i_c <- c("week", "i2_wins", "i3_wins", "i1_wins")
+i_c <- c("week", "i4_wins" , "i2_wins", "i3_wins", "i1_wins")
 i_c <- covid_weekly_c[!(covid_weekly_c$week %in% c(9,10)),i_c] 
 i1_feb_c <- weighted.mean(covid_hh[covid_hh$child_hh == 1,]$i1_feb_wins,
                           covid_hh[covid_hh$child_hh == 1,]$hh_weight,
@@ -162,11 +169,14 @@ i2_feb_c <- weighted.mean(covid_hh[covid_hh$child_hh == 1,]$i2_feb_wins,
 i3_feb_c <- weighted.mean(covid_hh[covid_hh$child_hh == 1,]$i3_feb_wins,
                           covid_hh[covid_hh$child_hh == 1,]$hh_weight,
                           na.rm = TRUE)
-i_c <- rbind(c(-1, i1_feb_c, i2_feb_c, i3_feb_c), i_c)
-i_c <- rbind(c(-2,NA,NA,NA), i_c)
+i4_feb_c <- weighted.mean(covid_hh[covid_hh$child_hh == 1,]$i4_feb_wins,
+                          covid_hh[covid_hh$child_hh == 1,]$hh_weight,
+                          na.rm = TRUE)
+i_c <- rbind(c(-1, i4_feb_c, i3_feb_c, i2_feb_c, i1_feb_c), i_c)
+i_c <- rbind(c(-2,NA,NA,NA,NA), i_c)
 
 # No child:
-i_nc <- c("week", "i2_wins", "i3_wins", "i1_wins")
+i_nc <- c("week", "i4_wins" , "i2_wins", "i3_wins", "i1_wins")
 i_nc <- covid_weekly_nc[!(covid_weekly_nc$week %in% c(9,10)),i_nc] 
 i1_feb_nc <- weighted.mean(covid_hh[covid_hh$child_hh == 0,]$i1_feb_wins,
                           covid_hh[covid_hh$child_hh == 0,]$hh_weight,
@@ -177,8 +187,11 @@ i2_feb_nc <- weighted.mean(covid_hh[covid_hh$child_hh == 0,]$i2_feb_wins,
 i3_feb_nc <- weighted.mean(covid_hh[covid_hh$child_hh == 0,]$i3_feb_wins,
                           covid_hh[covid_hh$child_hh == 0,]$hh_weight,
                           na.rm = TRUE)
-i_nc <- rbind(c(-1, i1_feb_nc, i2_feb_nc, i3_feb_nc), i_nc)
-i_nc <- rbind(c(-2,NA,NA,NA), i_nc)
+i4_feb_nc <- weighted.mean(covid_hh[covid_hh$child_hh == 0,]$i4_feb_wins,
+                          covid_hh[covid_hh$child_hh == 0,]$hh_weight,
+                          na.rm = TRUE)
+i_nc <- rbind(c(-1, i4_feb_nc, i3_feb_nc, i2_feb_nc, i1_feb_nc), i_nc)
+i_nc <- rbind(c(-2,NA,NA,NA,NA), i_nc)
 
 d <- c("week", "i7_wins", "dissaved") 
 d <- covid_weekly[d]
@@ -256,6 +269,19 @@ ch <- covid_weekly[ch]
 
 l <- c("week", "l1_wins", "l2_wins", "l3_wins")
 l <- covid_weekly[l]
+
+#Loans
+
+loans <- c("week", "loantype_1", "loantype_2" , "loantype_3", "loantype_4", "loantype_5" , "loantype_6")
+loans <- covid_weekly[loans]
+
+loans1 <- c("week", "loantype_1" , "loantype_3" , "loantype_6")
+loans1 <- covid_weekly[loans1]
+loans2 <- c("week", "loantype_2", "loantype_4", "loantype_5")
+loans2 <- covid_weekly[loans2]
+
+tookloan <- c("week", "tookloan_0", "tookloan_1")
+tookloan <- covid_weekly[tookloan]
 
 # Enterprises
 e <- c("week", "e3_wins", "e4_wins")
@@ -365,7 +391,7 @@ mh5 <- covid_weekly[mh5]
 
 presAnnotation <- function(dygraph, x, text) {
   dygraph %>%
-    dyAnnotation(x, text, attachAtBottom = TRUE, width = 60, height = 25)
+    dyAnnotation(x, text, attachAtBottom = TRUE, width = 70, height = 25)
 }
 
 ```
@@ -383,14 +409,15 @@ Households are assigned the high asset category if they reported higher asset ho
 ##### All
 ``` {r income}
   i_g <- dygraph(i, main = "") %>%
+  dySeries("i4_wins", strokeWidth = 4, label = "Total earnings") %>%
   dySeries("i3_wins", strokeWidth = 4, label = "Wage earnings") %>%
   dySeries("i2_wins", strokeWidth = 4, label = "Self-employment earnings") %>%
   dySeries("i1_wins", strokeWidth = 4, label = "Agricultural earnings") %>%
   #  dySeries("i7_wins", strokeWidth = 4, label = "Dissaving") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "USD, PPP", drawGrid = FALSE, valueRange = c(0, 2.8)) %>% 
+  dyAxis("y", label = "USD, PPP", drawGrid = FALSE, valueRange = c(0, 7)) %>% 
   dyLegend(width = 250, labelsSeparateLines = TRUE) %>%
-  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = FALSE) %>%
+  dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
   presAnnotation(end_week, text = end_survey) %>%
@@ -402,19 +429,20 @@ i_g
 ```
   
 
-  This plot aggregates income from each of the three earning sources, across all working-age household members, stacking them to add to the average earning per capita, including children, in the past 14 days. If the household does not perceive income from one or more of the sources, those data points are assigned zeros to assure representativeness for the whole population. 
+  This plot shows income from three earning sources, across all working-age household members, and the average earning per capita, including children, in the past 14 days. If the household does not perceive income from one or more of the sources, those data points are assigned zeros to assure representativeness for the whole population. 
   
 ##### High assets
 ``` {r}
   i_g <- dygraph(i_e, main = "") %>%
+  dySeries("i4_wins", strokeWidth = 4, label = "Total earnings") %>%
   dySeries("i3_wins", strokeWidth = 4, label = "Wage earnings") %>%
   dySeries("i2_wins", strokeWidth = 4, label = "Self-employment earnings") %>%
   dySeries("i1_wins", strokeWidth = 4, label = "Agricultural earnings") %>%
   #  dySeries("i7_wins", strokeWidth = 4, label = "Dissaving") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "USD, PPP", drawGrid = FALSE, valueRange = c(0, 2.8)) %>% 
+  dyAxis("y", label = "USD, PPP", drawGrid = FALSE, valueRange = c(0, 7)) %>% 
   dyLegend(width = 250, labelsSeparateLines = TRUE) %>%
-  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = FALSE) %>%
+  dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
   presAnnotation(end_week, text = end_survey) %>%
@@ -426,19 +454,20 @@ i_g
 ```
   
 
-  This plot aggregates income from each of the three earning sources, across all working-age household members, stacking them to add to the average earning per capita, including children, in the past 14 days. If the household does not perceive income from one or more of the sources, those data points are assigned zeros to assure representativeness for the whole population. 
-
+  This plot shows income from three earning sources, across all working-age household members, and the average earning per capita, including children, in the past 14 days. If the household does not perceive income from one or more of the sources, those data points are assigned zeros to assure representativeness for the whole population. 
+  
 ##### Low assets 
 ``` {r}
   i_g <- dygraph(i_i, main = "") %>%
+  dySeries("i4_wins", strokeWidth = 4, label = "Total earnings") %>%
   dySeries("i3_wins", strokeWidth = 4, label = "Wage earnings") %>%
   dySeries("i2_wins", strokeWidth = 4, label = "Self-employment earnings") %>%
   dySeries("i1_wins", strokeWidth = 4, label = "Agricultural earnings") %>%
   #  dySeries("i7_wins", strokeWidth = 4, label = "Dissaving") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "USD, PPP", drawGrid = FALSE, valueRange = c(0, 2.8)) %>% 
+  dyAxis("y", label = "USD, PPP", drawGrid = FALSE, valueRange = c(0, 7)) %>% 
   dyLegend(width = 250, labelsSeparateLines = TRUE) %>%
-  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = FALSE) %>%
+  dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
   presAnnotation(end_week, text = end_survey) %>%
@@ -450,19 +479,20 @@ i_g
 ```
   
 
-  This plot aggregates income from each of the three earning sources, across all working-age household members, stacking them to add to the average earning per capita, including children, in the past 14 days. If the household does not perceive income from one or more of the sources, those data points are assigned zeros to assure representativeness for the whole population.
+  This plot shows income from three earning sources, across all working-age household members, and the average earning per capita, including children, in the past 14 days. If the household does not perceive income from one or more of the sources, those data points are assigned zeros to assure representativeness for the whole population. 
   
 ##### Household with children 
 ``` {r}
   i_g <- dygraph(i_c, main = "") %>%
+  dySeries("i4_wins", strokeWidth = 4, label = "Total earnings") %>%
   dySeries("i3_wins", strokeWidth = 4, label = "Wage earnings") %>%
   dySeries("i2_wins", strokeWidth = 4, label = "Self-employment earnings") %>%
   dySeries("i1_wins", strokeWidth = 4, label = "Agricultural earnings") %>%
   #  dySeries("i7_wins", strokeWidth = 4, label = "Dissaving") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "USD, PPP", drawGrid = FALSE, valueRange = c(0, 2.8)) %>% 
+  dyAxis("y", label = "USD, PPP", drawGrid = FALSE, valueRange = c(0, 7)) %>% 
   dyLegend(width = 250, labelsSeparateLines = TRUE) %>%
-  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = FALSE) %>%
+  dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
   presAnnotation(end_week, text = end_survey) %>%
@@ -474,19 +504,20 @@ i_g
 ```
   
 
-  This plot aggregates income from each of the three earning sources, across all working-age household members, stacking them to add to the average earning per capita, including children, in the past 14 days. If the household does not perceive income from one or more of the sources, those data points are assigned zeros to assure representativeness for the whole population.
+  This plot shows income from three earning sources, across all working-age household members, and the average earning per capita, including children, in the past 14 days. If the household does not perceive income from one or more of the sources, those data points are assigned zeros to assure representativeness for the whole population. 
   
 ##### No children
 ``` {r}
   i_g <- dygraph(i_nc, main = "") %>%
+  dySeries("i4_wins", strokeWidth = 4, label = "Total earnings") %>%
   dySeries("i3_wins", strokeWidth = 4, label = "Wage earnings") %>%
   dySeries("i2_wins", strokeWidth = 4, label = "Self-employment earnings") %>%
   dySeries("i1_wins", strokeWidth = 4, label = "Agricultural earnings") %>%
   #  dySeries("i7_wins", strokeWidth = 4, label = "Dissaving") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "USD, PPP", drawGrid = FALSE, valueRange = c(0, 2.8)) %>% 
+  dyAxis("y", label = "USD, PPP", drawGrid = FALSE, valueRange = c(0, 7)) %>% 
   dyLegend(width = 250, labelsSeparateLines = TRUE) %>%
-  dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = FALSE) %>%
+  dyOptions(stackedGraph = FALSE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
   presAnnotation(end_week, text = end_survey) %>%
@@ -498,7 +529,7 @@ i_g
 ```
   
 
-  This plot aggregates income from each of the three earning sources, across all working-age household members, stacking them to add to the average earning per capita, including children, in the past 14 days. If the household does not perceive income from one or more of the sources, those data points are assigned zeros to assure representativeness for the whole population.
+  This plot shows income from three earning sources, across all working-age household members, and the average earning per capita, including children, in the past 14 days. If the household does not perceive income from one or more of the sources, those data points are assigned zeros to assure representativeness for the whole population. 
   
 ####  {}
 
@@ -594,7 +625,7 @@ d_g  <- dygraph(d, main = "") %>%
   dySeries("dissaved", strokeWidth = 4, label = "% of sample that dissaved", axis = "y2") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
   dyAxis("y", drawGrid = FALSE , label = "USD, PPP", valueRange = c(-0.5,4.5)) %>% 
-  dyAxis("y2", drawGrid=FALSE, label = "Percentage", valueRange = c(0,30)) %>%
+  dyAxis("y2", drawGrid=FALSE, label = "Percentage", valueRange = c(0,35)) %>%
   dyOptions(axisLineWidth = 4,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
@@ -615,7 +646,7 @@ d_g  <- dygraph(d_l, main = "") %>%
   dySeries("dissaved", strokeWidth = 4, label = "% of sample that dissaved", axis = "y2") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
   dyAxis("y", drawGrid = FALSE , label = "USD, PPP", valueRange = c(-0.5,4.5)) %>% 
-  dyAxis("y2", drawGrid=FALSE, label = "Percentage", valueRange = c(0,30)) %>%
+  dyAxis("y2", drawGrid=FALSE, label = "Percentage", valueRange = c(0,35)) %>%
   dyOptions(axisLineWidth = 4,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
@@ -636,7 +667,7 @@ d_g  <- dygraph(d_h, main = "") %>%
   dySeries("dissaved", strokeWidth = 4, label = "% of sample that dissaved", axis = "y2") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
   dyAxis("y", drawGrid = FALSE , label = "USD, PPP", valueRange = c(-0.5,4.5)) %>% 
-  dyAxis("y2", drawGrid=FALSE, label = "Percentage", valueRange = c(0,30)) %>%
+  dyAxis("y2", drawGrid=FALSE, label = "Percentage", valueRange = c(0,35)) %>%
   dyOptions(axisLineWidth = 4,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
@@ -657,7 +688,7 @@ d_g  <- dygraph(d_c, main = "") %>%
   dySeries("dissaved", strokeWidth = 4, label = "% of sample that dissaved", axis = "y2") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
   dyAxis("y", drawGrid = FALSE , label = "USD, PPP", valueRange = c(-0.5,4.5)) %>% 
-  dyAxis("y2", drawGrid=FALSE, label = "Percentage", valueRange = c(0,30)) %>%
+  dyAxis("y2", drawGrid=FALSE, label = "Percentage", valueRange = c(0,35)) %>%
   dyOptions(axisLineWidth = 4,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
@@ -678,7 +709,7 @@ d_g  <- dygraph(d_nc, main = "") %>%
   dySeries("dissaved", strokeWidth = 4, label = "% of sample that dissaved", axis = "y2") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
   dyAxis("y", drawGrid = FALSE , label = "USD, PPP", valueRange = c(-0.5,4.5)) %>% 
-  dyAxis("y2", drawGrid=FALSE, label = "Percentage", valueRange = c(0,30)) %>%
+  dyAxis("y2", drawGrid=FALSE, label = "Percentage", valueRange = c(0,35)) %>%
   dyOptions(axisLineWidth = 4,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = TRUE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
@@ -1266,7 +1297,73 @@ f1a_g
 #### {}
  
    
-***  
+*** 
+
+### Loans
+<font size="5">**Households taking a new loan for consumption**</font>   
+We ask "In the past 14 days, did anyone in this household take out a new loan for use on household consumption?"
+```{r tookloan}
+it_g  <- dygraph(tookloan, main = "") %>%
+  dySeries("tookloan_0", strokeWidth = 4, label = "No") %>%
+  dySeries("tookloan_1", strokeWidth = 4, label = "Yes") %>%  
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", drawGrid = FALSE , label = "Percentage of sample", valueRange = c(0, 110)) %>% 
+  dyOptions(stackedGraph =TRUE , axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(6, "Set2"), connectSeparatedPoints = FALSE) %>%
+    dyCrosshair(direction = "vertical") %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation(end_week, text = end_survey) %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
+  dyEvent(-1 , "February", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyEvent(0 , "Lockdown begins March 15", labelLoc = "top") %>%
+    dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyLegend(width = 100, labelsSeparateLines = FALSE) 
+it_g
+```
+
+<font size="5">**Type of loan taken**</font>  
+"If yes, what kind of loan?"
+```{r loans1}
+it_g  <- dygraph(loans1, main = "") %>%
+  dySeries("loantype_1", strokeWidth = 4, label = "Loan from a friend / relative") %>%
+  dySeries("loantype_3", strokeWidth = 4, label = "Mobile lending") %>%
+  dySeries("loantype_6", strokeWidth = 4, label = "Merry-go-round / ROSCA") %>%
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", drawGrid = FALSE , label = "Percentage of all loans taken") %>% 
+  dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(6, "Set1"), connectSeparatedPoints = FALSE) %>%
+    dyCrosshair(direction = "vertical") %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation(end_week, text = end_survey) %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
+  dyEvent(-1 , "February", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyEvent(0 , "Lockdown begins March 15", labelLoc = "top") %>%
+    dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyLegend(width = 500, labelsSeparateLines = FALSE) 
+it_g
+```
+
+```{r loans2}
+it_g  <- dygraph(loans2, main = "") %>%
+  dySeries("loantype_2", strokeWidth = 4, label = "Commercial bank / commercial lender") %>%
+  dySeries("loantype_4", strokeWidth = 4, label = "Money lender / shylock") %>%  
+  dySeries("loantype_5", strokeWidth = 4, label = "SACCO") %>% 
+  dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
+  dyAxis("y", drawGrid = FALSE , label = "Percentage of all loans taken") %>% 
+  dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(6, "Set2"), connectSeparatedPoints = FALSE) %>%
+    dyCrosshair(direction = "vertical") %>%
+  presAnnotation("1", text = "April 11") %>%
+  presAnnotation(end_week, text = end_survey) %>%
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) %>%
+  dyEvent(-1 , "February", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyEvent(0 , "Lockdown begins March 15", labelLoc = "top") %>%
+    dyEvent(11 , "Round 2 of Survey", labelLoc = "bottom", strokePattern = "solid", color = "gray") %>%
+  dyLegend(width = 500, labelsSeparateLines = FALSE) 
+it_g
+```
+  
+  These plots show the distribution of the type of loans taken over time, conditional on the household taking a loan.  
+  
+***   
+   
 ### Household enterprises  
 <font size="5">**Enterprises revenue and profits in the past 14 days**</font>
 
@@ -1281,7 +1378,7 @@ e_g  <- dygraph(e, main = "") %>%
   dySeries("e3_wins", strokeWidth = 4, label = "Total enterprise revenue") %>%
   dySeries("e4_wins", strokeWidth = 4, label = "Total enterprise profits") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", drawGrid = FALSE , label = "USD, PPP", valueRange = c(0, 85)) %>% 
+  dyAxis("y", drawGrid = FALSE , label = "USD, PPP", valueRange = c(0, 100)) %>% 
   dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
@@ -1301,7 +1398,7 @@ e_g  <- dygraph(e_e, main = "") %>%
   dySeries("e3_wins", strokeWidth = 4, label = "Total enterprise revenue") %>%
   dySeries("e4_wins", strokeWidth = 4, label = "Total enterprise profits") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", drawGrid = FALSE , label = "USD, PPP", valueRange = c(0, 85)) %>% 
+  dyAxis("y", drawGrid = FALSE , label = "USD, PPP", valueRange = c(0, 100)) %>% 
   dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
@@ -1321,7 +1418,7 @@ e_g  <- dygraph(e_i, main = "") %>%
   dySeries("e3_wins", strokeWidth = 4, label = "Total enterprise revenue") %>%
   dySeries("e4_wins", strokeWidth = 4, label = "Total enterprise profits") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", drawGrid = FALSE , label = "USD, PPP", valueRange = c(0, 85)) %>% 
+  dyAxis("y", drawGrid = FALSE , label = "USD, PPP", valueRange = c(0, 100)) %>% 
   dyOptions(axisLineWidth = 4, includeZero = TRUE,drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set1"), connectSeparatedPoints = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
@@ -1605,7 +1702,7 @@ net5_g  <- dygraph(net5, main = "") %>%
   dySeries("net5_last7_wins", strokeWidth = 4, label = "In the past 7 days") %>%
   dySeries("net5_today_wins", strokeWidth = 4, label = "Today") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", drawGrid = FALSE, label = "Number of people", valueRange = c(0, 35)) %>% 
+  dyAxis("y", drawGrid = FALSE, label = "Number of people", valueRange = c(0, 40)) %>% 
   dyLegend(width = 500) %>%
      dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
@@ -1627,7 +1724,7 @@ net5_g  <- dygraph(net5_e, main = "") %>%
   dySeries("net5_last7_wins", strokeWidth = 4, label = "In the past 7 days") %>%
   dySeries("net5_today_wins", strokeWidth = 4, label = "Today") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", drawGrid = FALSE, label = "Number of people", valueRange = c(0, 35)) %>% 
+  dyAxis("y", drawGrid = FALSE, label = "Number of people", valueRange = c(0, 40)) %>% 
   dyLegend(width = 500) %>%
      dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
@@ -1649,7 +1746,7 @@ net5_g  <- dygraph(net5_i, main = "") %>%
   dySeries("net5_last7_wins", strokeWidth = 4, label = "In the past 7 days") %>%
   dySeries("net5_today_wins", strokeWidth = 4, label = "Today") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", drawGrid = FALSE, label = "Number of people", valueRange = c(0, 35)) %>% 
+  dyAxis("y", drawGrid = FALSE, label = "Number of people", valueRange = c(0, 40)) %>% 
   dyLegend(width = 500) %>%
      dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
@@ -1671,7 +1768,7 @@ net5_g  <- dygraph(net5_f, main = "") %>%
   dySeries("net5_last7_wins", strokeWidth = 4, label = "In the past 7 days") %>%
   dySeries("net5_today_wins", strokeWidth = 4, label = "Today") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", drawGrid = FALSE, label = "Number of people", valueRange = c(0, 35)) %>% 
+  dyAxis("y", drawGrid = FALSE, label = "Number of people", valueRange = c(0, 40)) %>% 
   dyLegend(width = 500) %>%
      dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
@@ -1693,7 +1790,7 @@ net5_g  <- dygraph(net5_m, main = "") %>%
   dySeries("net5_last7_wins", strokeWidth = 4, label = "In the past 7 days") %>%
   dySeries("net5_today_wins", strokeWidth = 4, label = "Today") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", drawGrid = FALSE, label = "Number of people", valueRange = c(0, 35)) %>% 
+  dyAxis("y", drawGrid = FALSE, label = "Number of people", valueRange = c(0, 40)) %>% 
   dyLegend(width = 500) %>%
      dyCrosshair(direction = "vertical") %>%
   presAnnotation("1", text = "April 11") %>%
@@ -1936,7 +2033,7 @@ l_g <- dygraph(l, main = "", group = "Siaya County Sample") %>%
   dySeries("l3_wins", strokeWidth = 4, label = "Wage labor supply") %>%
   dySeries("l2_wins", strokeWidth = 4, label = "Own enterprise labor supply") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "Hours per adult household member", drawGrid = FALSE, valueRange = c(0, 26)) %>% 
+  dyAxis("y", label = "Hours per adult household member", drawGrid = FALSE, valueRange = c(0, 35)) %>% 
   dyLegend(width = 550 , labelsSeparateLines = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2"), connectSeparatedPoints = TRUE) %>%
@@ -1960,7 +2057,7 @@ l_g <- dygraph(l_e, main = "", group = "Siaya County Sample") %>%
   dySeries("l3_wins", strokeWidth = 4, label = "Wage labor supply") %>%
   dySeries("l2_wins", strokeWidth = 4, label = "Own enterprise labor supply") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "Hours per adult household member", drawGrid = FALSE, valueRange = c(0, 26)) %>% 
+  dyAxis("y", label = "Hours per adult household member", drawGrid = FALSE, valueRange = c(0, 35)) %>% 
   dyLegend(width = 550 , labelsSeparateLines = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2"), connectSeparatedPoints = TRUE) %>%
@@ -1984,7 +2081,7 @@ l_g <- dygraph(l_i, main = "", group = "Siaya County Sample") %>%
   dySeries("l3_wins", strokeWidth = 4, label = "Wage labor supply") %>%
   dySeries("l2_wins", strokeWidth = 4, label = "Own enterprise labor supply") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "Hours per adult household member", drawGrid = FALSE, valueRange = c(0, 26)) %>% 
+  dyAxis("y", label = "Hours per adult household member", drawGrid = FALSE, valueRange = c(0, 35)) %>% 
   dyLegend(width = 550 , labelsSeparateLines = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2"), connectSeparatedPoints = TRUE) %>%
@@ -2008,7 +2105,7 @@ l_g <- dygraph(l_c, main = "", group = "Siaya County Sample") %>%
   dySeries("l3_wins", strokeWidth = 4, label = "Wage labor supply") %>%
   dySeries("l2_wins", strokeWidth = 4, label = "Own enterprise labor supply") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "Hours per adult household member", drawGrid = FALSE, valueRange = c(0, 26)) %>% 
+  dyAxis("y", label = "Hours per adult household member", drawGrid = FALSE, valueRange = c(0, 35)) %>% 
   dyLegend(width = 550 , labelsSeparateLines = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2"), connectSeparatedPoints = TRUE) %>%
@@ -2032,7 +2129,7 @@ l_g <- dygraph(l_nc, main = "", group = "Siaya County Sample") %>%
   dySeries("l3_wins", strokeWidth = 4, label = "Wage labor supply") %>%
   dySeries("l2_wins", strokeWidth = 4, label = "Own enterprise labor supply") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "Hours per adult household member", drawGrid = FALSE, valueRange = c(0, 26)) %>% 
+  dyAxis("y", label = "Hours per adult household member", drawGrid = FALSE, valueRange = c(0, 35)) %>% 
   dyLegend(width = 550 , labelsSeparateLines = FALSE) %>%
     dyCrosshair(direction = "vertical") %>%
   dyOptions(stackedGraph = TRUE, includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Set2"), connectSeparatedPoints = TRUE) %>%
@@ -2146,7 +2243,7 @@ gv_g  <- dygraph(gv, main = "", group = "Siaya County Sample") %>%
   dySeries("gv2", strokeWidth = 4, label = "Physically hurt them") %>%
   dySeries("gv3", strokeWidth = 4, label = "Forced them to perform sexual acts") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", drawGrid = FALSE, label = "Percentage of married/cohabitant females", valueRange = c(0, 16)) %>% 
+  dyAxis("y", drawGrid = FALSE, label = "Percentage of married/cohabitant females", valueRange = c(0, 20)) %>% 
      dyCrosshair(direction = "vertical") %>%
  dyLegend(width = 580) %>%
   presAnnotation("1", text = "April 11") %>%
@@ -2169,7 +2266,7 @@ gv_g  <- dygraph(gv_e, main = "", group = "Siaya County Sample") %>%
   dySeries("gv2", strokeWidth = 4, label = "Physically hurt them") %>%
   dySeries("gv3", strokeWidth = 4, label = "Forced them to perform sexual acts") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", drawGrid = FALSE, label = "Percentage of married/cohabitant females", valueRange = c(0, 16)) %>% 
+  dyAxis("y", drawGrid = FALSE, label = "Percentage of married/cohabitant females", valueRange = c(0, 20)) %>% 
      dyCrosshair(direction = "vertical") %>%
  dyLegend(width = 580) %>%
   presAnnotation("1", text = "April 11") %>%
@@ -2192,7 +2289,7 @@ gv_g  <- dygraph(gv_i, main = "", group = "Siaya County Sample") %>%
   dySeries("gv2", strokeWidth = 4, label = "Physically hurt them") %>%
   dySeries("gv3", strokeWidth = 4, label = "Forced them to perform sexual acts") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", drawGrid = FALSE, label = "Percentage of married/cohabitant females", valueRange = c(0, 16)) %>% 
+  dyAxis("y", drawGrid = FALSE, label = "Percentage of married/cohabitant females", valueRange = c(20)) %>% 
      dyCrosshair(direction = "vertical") %>%
  dyLegend(width = 580) %>%
   presAnnotation("1", text = "April 11") %>%
@@ -2931,7 +3028,7 @@ ps_g <- dygraph(ps, main = "", group = "Siaya County Sample") %>%
   dySeries("mean_price_111", strokeWidth = 4, label = "Fixing a small hole at a tailor (1)") %>%
   dySeries("mean_price_113", strokeWidth = 4, label = "Grinding 1kg of maize") %>%
   dyAxis("x", pixelsPerLabel = 50 , drawGrid = FALSE, label = "Weeks") %>% #grid
-  dyAxis("y", label = "Percentage relative to first week", drawGrid = FALSE, valueRange = c(50, 150)) %>% 
+  dyAxis("y", label = "Percentage relative to first week", drawGrid = FALSE, valueRange = c(35, 155)) %>% 
   dyLegend(width = 250 , labelsSeparateLines = TRUE) %>%
     dyCrosshair(direction = "vertical") %>%
   dyOptions(includeZero = TRUE, axisLineWidth = 4, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Set2"), connectSeparatedPoints = TRUE) %>%
@@ -3001,7 +3098,7 @@ Eligible households are those that qualified for [GiveDirectly transfers](http:/
       
 These data comes from phone survey interviews conducted by [REMIT Kenya](http://remitkenya.co.ke/) in Siaya County, Kenya. We are collecting data for a sample of ~11,000 households in the county, which is representative of the whole population. At the same time, our weekly sampling method assures weekly representativeness of the overall sample.
 
-So far we have interviewed 8,582 households, with the following distribution per week:
+So far we have conducted 17,374 household phone surveys, with the following distribution per week:
 
 | Week	| Dates	| Number of surveys | Survey round |
 |------|:-----:|:---------:|:-------:|
@@ -3017,7 +3114,11 @@ So far we have interviewed 8,582 households, with the following distribution per
 | Week 14 |	5 July 2020 - 11 July 2020	| 1087 |2|
 | Week 15 |	12 July 2020 - 18 July 2020	| 611 |2|
 | Week 16 |	19 July 2020 - 25 July 2020	| 889 |2|
-| Week 17 |	26 July 2020 - 1 August 2020	| 814 |2|
+| Week 17 |	26 July 2020 - 1 August 2020	| 820 |2|
+| Week 18 |	2 August 2020 - 8 August 2020	| 870 |2|
+| Week 19 |	9 August 2020 - 15 August 2020	| 835 |2|
+| Week 20 |	16 August 2020 - 22 August 2020	| 886 |2|
+| Week 21 |	23 August 2020 - 29 August 2020	| 1,042 |2|
 
 
 

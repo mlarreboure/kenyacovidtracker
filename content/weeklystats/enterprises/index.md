@@ -1,6 +1,6 @@
 ---
 title: Enterprise Survey - Siaya County
-summary: Descriptive statistics for enterprises in Siaya County.
+summary: Time series showing enterprises outcomes in Siaya County during the COVID-19 pandemic.
 tags:
 - Siaya
 date: "2020-06-15T00:00:00Z"
