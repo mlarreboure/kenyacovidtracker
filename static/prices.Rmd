@@ -90,7 +90,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 We rely on a quick-response online survey to track product prices and availability of selected essential consumer products across Kenya. The data are collected with the help of volunteers, mainly university students and affiliates of NGOs, who record information through an online form on their smartphone - either when or after visiting a shop in-person or getting deliveries. Embedding the survey into day-to-day activities of respondents helps us to address concerns about initiating or prolonging human interactions that would not occur otherwise. The geographic distribution of the survey responses correlates strongly with population density and covers 40 out of 47 counties. Regions of the country with good mobile network coverage are over-represented in our sample. Counties in the North of Kenya are under-represented. About 30% of the respondents shop at supermarkets, close to 40% at general shops, 15% at kibandas, 7% at roadside stalls, 6% at open air markets and the remaining 2% on online platforms. 
 
-So far we collected 4,330 survey responses since 27th March 2020.  On average respondents record prices of 4-5 items per survey. 
+So far we collected 4,838 survey responses since 27th March 2020.  On average respondents record prices of 4-5 items per survey. 
 
 *The data is sparse in the early weeks of the data collection, which needs to be taken into account for the interpretation of the price dispersion in those week. With the support of numerous partners we were able to expand our network of volunteers over time.
 
@@ -123,10 +123,13 @@ So far we collected 4,330 survey responses since 27th March 2020.  On average re
 | Week 37 |	9 September 2020 - 15 September 2020	| 203 |
 | Week 38 |	16 September 2020 - 22 September 2020	| 187 |
 | Week 39 |	23 September 2020 - 29 September 2020	| 200 |
-| Week 40 |	30 September 2020 - 6 October 2020	| 209 |
-| Week 41 |	7 October 2020 - 13 October 2020	| 185 |
-| Week 42 |	14 October 2020 - 20 October 2020	| 193 |
-| Week 43 |	21 October 2020 - 27 October 2020	| 180 |
+| Week 40 |	30 September 2020 - 6 October 2020	| 212 |
+| Week 41 |	7 October 2020 - 13 October 2020	| 186 |
+| Week 42 |	14 October 2020 - 20 October 2020	| 194 |
+| Week 43 |	21 October 2020 - 27 October 2020	| 186 |
+| Week 44 |	28 October 2020 - 3 November 2020	| 163 |
+| Week 45 |	4 November 2020 - 10 November 2020	| 181 |
+| Week 46 |	11 November 2020 - 17 November 2020	| 167 |
 *** 
 Acknowledgement:
 
