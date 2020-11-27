@@ -29,5 +29,5 @@
 [[redirects]]
   from = "/RRPS"
   to = "https://www.worldbank.org/en/country/kenya/brief/monitoring-covid-19-impact-on-households-and-firms-in-kenya"
-  status = 200
+  status = 301
   force = true
