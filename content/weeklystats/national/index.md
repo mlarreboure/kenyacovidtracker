@@ -6,7 +6,7 @@ tags:
 date: "2020-05-15T00:00:00Z"
 
 # Optional external URL for project (replaces project detail page).
-external_link: "https://www.worldbank.org/en/country/kenya/brief/monitoring-covid-19-impact-on-households-and-firms-in-kenya"
+external_link: "/RRPS"
 
 image:
   caption: 
