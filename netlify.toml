@@ -24,3 +24,10 @@
   for = "index.xml"
   [headers.values]
     Content-Type = "application/rss+xml"
+
+## This rule redirects to an external API, signing requests with a secret
+[[redirects]]
+  from = "/RRPS"
+  to = "https://www.worldbank.org/en/country/kenya/brief/monitoring-covid-19-impact-on-households-and-firms-in-kenya"
+  status = 200
+  force = true
