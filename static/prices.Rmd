@@ -72,15 +72,19 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ***   
 
-<font size="5">**Milk (500 ml)**</font>
-  
-  ![](prices/CI_milk.png)
+### Animal products
 
-***   
+
 
 <font size="5">**Egg (one)**</font>
   
   ![](prices/CI_egg.png)
+
+***   
+
+<font size="5">**Milk (500 ml)**</font>
+  
+  ![](prices/CI_milk.png)
 
 
 *** 
