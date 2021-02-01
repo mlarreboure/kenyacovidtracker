@@ -112,9 +112,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## {}
 
-We rely on a quick-response online survey to track product prices and availability of selected essential consumer products across Kenya. The data are collected with the help of volunteers, mainly university students and affiliates of NGOs, who record information through an online form on their smartphone - either when or after visiting a shop in-person or getting deliveries. Embedding the survey into day-to-day activities of respondents helps us to address concerns about initiating or prolonging human interactions that would not occur otherwise. The geographic distribution of the survey responses correlates strongly with population density and covers 42 out of 47 counties. Regions of the country with good mobile network coverage are over-represented in our sample. Counties in the North of Kenya are under-represented. About 30% of the respondents shop at supermarkets, close to 40% at general shops, 15% at kibandas, 7% at roadside stalls, 6% at open air markets and the remaining 2% on online platforms. 
+We rely on a quick-response online survey to track product prices and availability of selected essential consumer products across Kenya. The data are collected with the help of volunteers, mainly university students and affiliates of NGOs, who record information through an online form on their smartphone - either when or after visiting a shop in-person or getting deliveries. Embedding the survey into day-to-day activities of respondents helps us to address concerns about initiating or prolonging human interactions that would not occur otherwise. The geographic distribution of the survey responses correlates strongly with population density and covers 43 out of 47 counties. Regions of the country with good mobile network coverage are over-represented in our sample. Counties in the North of Kenya are under-represented. About 30% of the respondents shop at supermarkets, close to 40% at general shops, 15% at kibandas, 7% at roadside stalls, 6% at open air markets and the remaining 2% on online platforms. 
 
-So far we collected 5,855 survey responses since 27th March 2020.  On average respondents record prices of 4-5 items per survey. 
+So far we collected 6,601 survey responses since 27th March 2020.  On average respondents record prices of 4-5 items per survey. 
 
 *The data is sparse in the early weeks of the data collection, which needs to be taken into account for the interpretation of the price dispersion in those week. With the support of numerous partners we were able to expand our network of volunteers over time.
 
@@ -160,9 +160,14 @@ So far we collected 5,855 survey responses since 27th March 2020.  On average re
 | Week 49 |	3 December  - 8 December 	| 175 |
 | Week 50 |	9 December  - 15 December 	| 154 |
 | Week 51 |	16 December  - 22 December 	| 155 |
-| Week 52 |	23 December  - 31 December 	| 194 |
+| Week 52 |	23 December  - 31 December 	| 193 |
+|2021|
+| Week 1 |	1 January  - 7 January 	| 151 |
+| Week 2 |	8 January  - 14 January 	| 155 |
+| Week 3 |	15 January  - 21 January 	| 175 |
+| Week 4 |	22 January  - 28 January 	| 172 |
 
-Last updated on 2nd January 2021.
+Last updated on 1st February 2021.
 
 *** 
 Acknowledgement:
