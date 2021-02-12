@@ -4,7 +4,7 @@ summary: Time series on the economic well-being of KLPS respondents in Kenya dur
 date: '2020-07-15T00:00:00Z'
 tags: 
 - KLPS
-external_link: "Outcome_batch_publc.html"
+external_link: "klps_public.html"
 image:
   caption: null
   focal_point: Smart
