@@ -4,9 +4,6 @@ output:
   html_document:
     theme: paper
     toc: FALSE
-    includes:
-      before_body: header.html
----
 
 ---
 Julie E. Powers^1^, Cecilia Nekesa^2^, Blastus Bwire^2^, Carolyne Nekesa^2^, Amy J. Pickering^1^
@@ -25,7 +22,7 @@ library(RColorBrewer)
 
 
 # Import data
-phone_weekly <- read_dta("C:\\Users\\Julie Powers\\Box\\Pickering_projects\\Pickering_chlorine_mortality\\Phone survey results to share\\phonesurvey_outcomes_weekly_means_11172020.dta")
+phone_weekly <- read_dta("C:\\Users\\Julie Powers\\Box\\Pickering_projects\\Pickering_chlorine_mortality\\Phone survey results to share\\phonesurvey_outcomes_weekly_means_02172021.dta")
 
 phone_weekly
 
@@ -48,11 +45,12 @@ symptomsgraph <- dygraph(symptoms) %>%
   dySeries("respfatigue_7d", strokeWidth = 3, label = "Unusual fatigue") %>%
   dySeries("respheadache_7d", strokeWidth = 3, label = "Headache") %>%
   dySeries("resptaste_7d", strokeWidth = 3, label = "Loss of smell or taste") %>%
-  dyAxis("x", label = "Weeks", pixelsPerLabel = 100, rangePad = 10, drawGrid = FALSE) %>% 
+  dyAxis("x", label = "Weeks", pixelsPerLabel = 100, rangePad = 10, drawGrid = FALSE ) %>% 
   dyAxis("y", label = "Percentage of respondents", valueRange = c(0,25), drawGrid = FALSE) %>%
   dyLegend(labelsSeparateLines = FALSE, width = 550) %>%
   dyEvent(8 , "Round 2          ", labelLoc = "top", strokePattern = "solid", color = "gray") %>%
   dyEvent(15 , "Round 3          ", labelLoc = "top", strokePattern = "solid", color = "gray") %>%
+  dyEvent(22 , "Round 4          ", labelLoc = "top", strokePattern = "solid", color = "gray") %>%
   dyCrosshair(direction = "vertical") %>%
   dyOptions(axisLineWidth = 4, includeZero = TRUE, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(5, "Dark2"))
   
@@ -79,6 +77,7 @@ econgraph <- dygraph(econ) %>%
   dyLegend(width = 550) %>%
   dyEvent(8 , "Round 2          ", labelLoc = "top", strokePattern = "solid", color = "gray") %>%
   dyEvent(15 , "Round 3          ", labelLoc = "top", strokePattern = "solid", color = "gray") %>%
+  dyEvent(22 , "Round 4          ", labelLoc = "top", strokePattern = "solid", color = "gray") %>%
     dyCrosshair(direction = "vertical") %>%
   dyOptions(axisLineWidth = 4, includeZero = TRUE, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Dark2"))
   
@@ -111,7 +110,8 @@ foodgraph <- dygraph(food) %>%
   dyLegend(labelsSeparateLines = FALSE , width = 550) %>%
   dyEvent(8 , "Round 2          ", labelLoc = "top", strokePattern = "solid", color = "gray") %>%
   dyEvent(15 , "Round 3          ", labelLoc = "top", strokePattern = "solid", color = "gray") %>%
-    dyCrosshair(direction = "vertical") %>%
+  dyEvent(22 , "Round 4          ", labelLoc = "top", strokePattern = "solid", color = "gray") %>%
+  dyCrosshair(direction = "vertical") %>%
   dyOptions(axisLineWidth = 4, includeZero = TRUE, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(4, "Dark2"))
 
 foodgraph
@@ -141,7 +141,8 @@ approvegraph <- dygraph(approve) %>%
   dyLegend(labelsSeparateLines = FALSE , width = 550) %>%
   dyEvent(8 , "Round 2          ", labelLoc = "top", strokePattern = "solid", color = "gray") %>%
   dyEvent(15 , "Round 3          ", labelLoc = "top", strokePattern = "solid", color = "gray") %>%
-    dyCrosshair(direction = "vertical") %>%
+    dyEvent(22 , "Round 4          ", labelLoc = "top", strokePattern = "solid", color = "gray") %>%
+ dyCrosshair(direction = "vertical") %>%
   dyOptions(axisLineWidth = 4, includeZero = TRUE, drawPoints = TRUE, pointSize = 4, colors = RColorBrewer::brewer.pal(3, "Dark2"))
 
   
@@ -150,7 +151,7 @@ approvegraph
 <br>
 <br>
 
-This data comes from phone surveys collected by Vyxer REMIT Kenya in partnership with Tufts University. Please contact julie.powers@tufts.edu and amy.pickering@tufts.edu with any questions.
+This data comes from phone surveys collected by Vyxer REMIT Kenya in partnership with Tufts University. Please contact julie_powers@berkeley.edu and pickering@berkeley.edu with any questions.
 
 _Study area:_ Villages are enrolled that are located in Bungoma or Kakamega counties and were previously enrolled in WASH Benefits Kenya (W, WSH, WSHN, AC, PC arms only). 
 
@@ -158,16 +159,16 @@ _Eligibility:_ Respondents are eligible if they are women 50 years of age or you
 
 _Study design:_ Respondents were visited in person by our team for another study, between July 2019 and March 2020 (when data collection was halted due to COVID-19). During this time, we censused 575 out of 730 eligible villages, and enrolled and surveyed 34,098 eligible women. We are following up with a subset of these women by phone. The final sample size for this phone survey will depend on the trajectory of COVID-19 in the study area and funding constraints. We have divided the respondents who provided a phone number (N = 29,301) into seven random survey rounds of equal size. Each survey round will have the same proportion of respondents from each geographic block. Respondents selected are geographically representative for each survey round, but are not geographically representative on a weekly basis. For this reason, weekly data should be interpreted with caution. We attempt to contact each respondent five times.
 
-_Sample size to date:_  We have attempted to contact all respondents in survey rounds 1 and 2. We have interviewed 8,554 respondents to-date, from survey rounds 1, 2, and 3. Our response rate (number of surveys completed/number of respondents we have attempted to contact) is 68%.
+_Sample size to date:_  We have attempted to contact all respondents in survey rounds 1, 2, and 3. We have interviewed 10,504 respondents to-date, from survey rounds 1, 2, 3, and 4. Our response rate (number of surveys completed/number of respondents we have attempted to contact) is 68%.
 <br>
 
 | Week	| Dates	| Number of surveys | Survey Round |
 |------|:-----:|:---------:| :---------:|
 | Week 1 |	June 21, 2020 - June 27, 2020	| 159 | 1 |
-| Week 2 |	June 28, 2020 - July 4, 2020	| 413 | 1 |
-| Week 3 |	July 5, 2020 - July 11, 2020 	| 444 | 1 |
+| Week 2 |	June 28, 2020 - July 4, 2020	| 415 | 1 |
+| Week 3 |	July 5, 2020 - July 11, 2020 	| 445 | 1 |
 | Week 4 |	July 12, 2020 - July 18, 2020	| 419 | 1 |
-| Week 5 |	July 19, 2020 - July 25, 2020	| 417 | 1 |
+| Week 5 |	July 19, 2020 - July 25, 2020	| 418 | 1 |
 | Week 6 | Juy 26, 2020 - August 1, 2020 | 452 | 1 |
 | Week 7 | August 2, 2020 - August 8, 2020 | 408| 1 |
 | Week 8 | August 9, 2020 - August 12, 2020 | 255 | 1 |
@@ -177,7 +178,7 @@ _Sample size to date:_  We have attempted to contact all respondents in survey r
 | Week 8 | August 13, 2020 - August 15, 2020 | 213 | 2 |
 | Week 9 | August 16, 2020 - August 22, 2020 | 493 | 2 |       
 | Week 10 | August 23, 2020 - August 29, 2020 | 469 | 2 |      
-| Week 11 | August 30, 2020 - September 5, 2020 | 474 | 2 |     
+| Week 11 | August 30, 2020 - September 5, 2020 | 475 | 2 |     
 | Week 12 | September 6, 2020 - September 12, 2020 | 475 | 2 |      
 | Week 13 | September 13, 2020 - September 19, 2020 | 344 | 2 |      
 | Week 14 | September 20, 2020 - September 26, 2020 | 384 | 2 | 
@@ -191,7 +192,19 @@ _Sample size to date:_  We have attempted to contact all respondents in survey r
 | Week 18 | October 18, 2020 - October 24, 2020 | 357 | 3 |        
 | Week 19 | October 25, 2020 - October 31, 2020 | 448 | 3 |       
 | Week 20 | November 1, 2020 - November 7, 2020 | 414 | 3 |       
-| Week 21 | November 8, 2020 - November 14, 2020 | 361 | 3 |   
+| Week 21 | November 8, 2020 - November 14, 2020 | 384 | 3 |   
+| Week 22 | November 15, 2020 -November 19, 2020 | 253 | 3 |
+
+| Week	| Dates	| Number of surveys | Survey Round |
+|------|:-----:|:---------:| :---------:|
+| Week 22 | November 20, 2020 -November 21, 2020 | 57 | 4 |
+| Week 23 | November 22, 2020 - November 28, 2020 | 371 | 4 | 
+| Week 24 | November 29, 2020 - December 5, 2020 | 408 | 4 |        
+| Week 25 | December 6, 2020 - December 12, 2020 | 399 | 4 |      
+| Week 26 | December 13, 2020 - December 19, 2020 | 415 | 4 |        
+| Week 27 | December 20, 2020 - December 22, 2020 | 117 | 4 |       
 
 
-Updated: November 17, 2020
+
+
+Updated: February 17, 2021
